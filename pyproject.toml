@@ -6,13 +6,50 @@ build-backend = "setuptools.build_meta"
 name = "tllib"
 version = "0.1.0"
 description = "A domain-oriented Python library."
-readme = "README.md"
+readme = "docs/README.md"
 requires-python = ">=3.10"
 dependencies = []
+
+[dependency-groups]
+dev = [
+	"mypy>=1.13",
+	"pytest>=8.0",
+	"pytest-cov>=5.0",
+	"ruff>=0.9",
+]
 
 [tool.setuptools.packages.find]
 where = ["src"]
 
 [tool.pytest.ini_options]
 testpaths = ["tests"]
-addopts = "-ra"
+addopts = "-ra --cov=tllib --cov-report=term-missing --cov-fail-under=80"
+
+[tool.coverage.run]
+branch = true
+source = ["src/tllib"]
+omit = ["src/tllib/specs/__main__.py"]
+
+[tool.coverage.report]
+exclude_also = [
+	"if TYPE_CHECKING:",
+	"raise NotImplementedError",
+]
+
+[tool.ruff]
+line-length = 88
+target-version = "py310"
+src = ["src", "tests"]
+extend-exclude = ["README.md", "pytest-of-*"]
+
+[tool.ruff.lint]
+select = ["E", "F", "I", "UP", "B"]
+
+[tool.ruff.lint.isort]
+known-first-party = ["tllib"]
+
+[tool.mypy]
+python_version = "3.10"
+files = ["src", "tests"]
+strict = true
+warn_unused_configs = true
