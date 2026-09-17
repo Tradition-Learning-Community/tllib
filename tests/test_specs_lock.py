@@ -2,6 +2,7 @@
 
 import json
 from pathlib import Path
+from typing import cast
 
 import pytest
 
@@ -19,9 +20,9 @@ def patch_git_value(monkeypatch: pytest.MonkeyPatch) -> None:
 
     def fake_git_value(_specs_root: Path, *arguments: str) -> str:
         if arguments == ("remote", "get-url", "origin"):
-            return lock_payload["repository"]
+            return cast(str, lock_payload["repository"])
         if arguments == ("rev-parse", "HEAD"):
-            return lock_payload["sha"]
+            return cast(str, lock_payload["sha"])
         raise AssertionError(f"Unexpected git arguments: {arguments}")
 
     monkeypatch.setattr("tllib.specs.lock._git_value", fake_git_value)
