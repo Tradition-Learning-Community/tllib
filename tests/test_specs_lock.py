@@ -28,6 +28,19 @@ def patch_git_value(monkeypatch: pytest.MonkeyPatch) -> None:
     monkeypatch.setattr("tllib.specs.lock._git_value", fake_git_value)
 
 
+@pytest.fixture
+def patch_catalog(monkeypatch: pytest.MonkeyPatch) -> None:
+    catalog_bytes = json.dumps({"model_version": "1.0.0"}).encode("utf-8")
+    original_read_bytes = Path.read_bytes
+
+    def fake_read_bytes(path: Path) -> bytes:
+        if path.name == "catalog.json":
+            return catalog_bytes
+        return original_read_bytes(path)
+
+    monkeypatch.setattr(Path, "read_bytes", fake_read_bytes)
+
+
 def test_valid_specification_lock_and_public_info(patch_git_value: None) -> None:
     lock = load_lock(LOCK_PATH, SPECS_ROOT)
 
@@ -36,7 +49,7 @@ def test_valid_specification_lock_and_public_info(patch_git_value: None) -> None
 
 
 def test_divergent_fingerprint_is_rejected(
-    tmp_path: Path, patch_git_value: None
+    tmp_path: Path, patch_git_value: None, patch_catalog: None
 ) -> None:
     payload = json.loads(LOCK_PATH.read_text(encoding="utf-8"))
     payload["fingerprint"] = "sha256:" + "0" * 64
@@ -125,7 +138,11 @@ def test_invalid_lock_formats_are_rejected(
     ],
 )
 def test_lock_metadata_divergence_is_rejected(
-    tmp_path: Path, field: str, message: str, patch_git_value: None
+    tmp_path: Path,
+    field: str,
+    message: str,
+    patch_git_value: None,
+    patch_catalog: None,
 ) -> None:
     payload = json.loads(LOCK_PATH.read_text(encoding="utf-8"))
     payload[field] = {
