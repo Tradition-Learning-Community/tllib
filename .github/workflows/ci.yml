@@ -18,6 +18,13 @@ jobs:
       - name: Check out repository
         uses: actions/checkout@v4
 
+      - name: Check out specification repository
+        shell: bash
+        run: |
+          SPECS_SHA="$(python -c 'import json; print(json.load(open("specs.lock.json", encoding="utf-8"))["sha"])')"
+          git clone https://github.com/skylore300-hash/tllib-specs.git ../tllib-specs
+          git -C ../tllib-specs checkout "$SPECS_SHA"
+
       - name: Install uv
         uses: astral-sh/setup-uv@v7
         with:
