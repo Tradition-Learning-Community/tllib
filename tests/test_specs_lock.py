@@ -15,17 +15,10 @@ SPECS_ROOT = REPOSITORY_ROOT.parent / "tllib-specs"
 
 
 @pytest.fixture
-def patch_git_value(monkeypatch: pytest.MonkeyPatch) -> None:
-    lock_payload = json.loads(LOCK_PATH.read_text(encoding="utf-8"))
-
-    def fake_git_value(_specs_root: Path, *arguments: str) -> str:
-        if arguments == ("remote", "get-url", "origin"):
-            return cast(str, lock_payload["repository"])
-        if arguments == ("rev-parse", "HEAD"):
-            return cast(str, lock_payload["sha"])
-        raise AssertionError(f"Unexpected git arguments: {arguments}")
-
-    monkeypatch.setattr("tllib.specs.lock._git_value", fake_git_value)
+def lock_payload(specs_git_values: dict[str, str]) -> dict[str, str]:
+    payload = cast(dict[str, str], json.loads(LOCK_PATH.read_text(encoding="utf-8")))
+    payload.update(specs_git_values)
+    return payload
 
 
 @pytest.fixture
@@ -41,20 +34,31 @@ def patch_catalog(monkeypatch: pytest.MonkeyPatch) -> None:
     monkeypatch.setattr(Path, "read_bytes", fake_read_bytes)
 
 
-def test_valid_specification_lock_and_public_info(patch_git_value: None) -> None:
-    lock = load_lock(LOCK_PATH, SPECS_ROOT)
+def test_valid_specification_lock_and_public_info(
+    tmp_path: Path,
+    lock_payload: dict[str, str],
+    monkeypatch: pytest.MonkeyPatch,
+    patch_specs_git: None,
+) -> None:
+    lock_path = tmp_path / "specs.lock.json"
+    lock_path.write_text(json.dumps(lock_payload), encoding="utf-8")
+    monkeypatch.setattr("tllib.specs.lock._default_lock_path", lambda: lock_path)
+    monkeypatch.setattr("tllib.specs.lock._default_specs_root", lambda _path: SPECS_ROOT)
+    lock = load_lock(lock_path, SPECS_ROOT)
 
     assert lock.version == "1.0.0"
     assert tllib.specification_info() == lock.as_dict()
 
 
 def test_divergent_fingerprint_is_rejected(
-    tmp_path: Path, patch_git_value: None, patch_catalog: None
+    tmp_path: Path,
+    lock_payload: dict[str, str],
+    patch_specs_git: None,
+    patch_catalog: None,
 ) -> None:
-    payload = json.loads(LOCK_PATH.read_text(encoding="utf-8"))
-    payload["fingerprint"] = "sha256:" + "0" * 64
+    lock_payload["fingerprint"] = "sha256:" + "0" * 64
     divergent_lock = tmp_path / "specs.lock.json"
-    divergent_lock.write_text(json.dumps(payload), encoding="utf-8")
+    divergent_lock.write_text(json.dumps(lock_payload), encoding="utf-8")
 
     with pytest.raises(
         SpecificationLockError,
@@ -141,17 +145,17 @@ def test_lock_metadata_divergence_is_rejected(
     tmp_path: Path,
     field: str,
     message: str,
-    patch_git_value: None,
+    lock_payload: dict[str, str],
+    patch_specs_git: None,
     patch_catalog: None,
 ) -> None:
-    payload = json.loads(LOCK_PATH.read_text(encoding="utf-8"))
-    payload[field] = {
+    lock_payload[field] = {
         "repository": "https://example.invalid/specs.git",
         "sha": "0" * 40,
         "version": "0.0.0",
     }[field]
     lock_path = tmp_path / "specs.lock.json"
-    lock_path.write_text(json.dumps(payload), encoding="utf-8")
+    lock_path.write_text(json.dumps(lock_payload), encoding="utf-8")
 
     with pytest.raises(SpecificationLockError, match=message):
         load_lock(lock_path, SPECS_ROOT)
