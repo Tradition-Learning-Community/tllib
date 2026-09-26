@@ -1,5 +1,8 @@
 """Tests for shared tllib primitives."""
 
+import json
+from pathlib import Path
+
 import pytest
 
 import tllib
@@ -14,7 +17,6 @@ from tllib.core import (
     to_canonical_json,
 )
 from tllib.domains.master.models import Master
-from tllib.specs.lock import EXPECTED_REPOSITORY
 
 
 def test_identifiers_and_versions_are_immutable_and_hashable() -> None:
@@ -92,16 +94,19 @@ def test_result_invariants_are_enforced(
 
 
 def test_domain_and_public_package_remain_compatible(
+    tmp_path: Path,
     monkeypatch: pytest.MonkeyPatch,
+    specs_git_values: dict[str, str],
+    specs_catalog_values: dict[str, str],
+    patch_specs_git: None,
+    patch_specs_catalog: None,
 ) -> None:
-    def fake_git_value(_specs_root: object, *arguments: str) -> str:
-        if arguments == ("remote", "get-url", "origin"):
-            return EXPECTED_REPOSITORY
-        if arguments == ("rev-parse", "HEAD"):
-            return "2e68998af49315b16abbab068368bbacc10d453d"
-        raise AssertionError(f"Unexpected git arguments: {arguments}")
-
-    monkeypatch.setattr("tllib.specs.lock._git_value", fake_git_value)
+    lock_path = tmp_path / "specs.lock.json"
+    lock_path.write_text(
+        json.dumps({**specs_git_values, **specs_catalog_values, "date": "2026-09-11"}),
+        encoding="utf-8",
+    )
+    monkeypatch.setattr("tllib.specs.lock._default_lock_path", lambda: lock_path)
 
     assert Master("Ada").name == "Ada"
     assert "repository" in tllib.specification_info()
