@@ -42,9 +42,8 @@ def test_valid_specification_lock_and_public_info(
 ) -> None:
     lock_path = tmp_path / "specs.lock.json"
     lock_path.write_text(json.dumps(lock_payload), encoding="utf-8")
-    monkeypatch.setattr(
-        "tllib.specs.lock._default_lock_path", lambda: lock_path
-    )
+    default_lock_path = "tllib.specs.lock._default_lock_path"
+    monkeypatch.setattr(default_lock_path, lambda: lock_path)
     monkeypatch.setattr(
         "tllib.specs.lock._default_specs_root", lambda _path: SPECS_ROOT
     )
