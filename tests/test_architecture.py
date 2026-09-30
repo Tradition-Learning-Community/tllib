@@ -5,6 +5,7 @@ from pathlib import Path
 
 import pytest
 
+from tests.fakes.master import InMemoryMasterProvider
 from tllib.domains.master.errors import MasterError
 from tllib.domains.master.models import Master
 from tllib.domains.master.operations import list_masters
@@ -72,11 +73,6 @@ def test_architecture_rule_rejects_an_infrastructure_import(tmp_path: Path) -> N
     module.write_text("import sqlalchemy\n", encoding="utf-8")
 
     assert _forbidden_imports(module) == ["sqlalchemy"]
-
-
-class InMemoryMasterProvider:
-    def list_masters(self) -> list[Master]:
-        return [Master(name="Ada")]
 
 
 def test_list_masters_delegates_to_the_port() -> None:
