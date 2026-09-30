@@ -122,9 +122,11 @@ def invoke_provider(
     """
     if provider is None:
         raise ProviderRequiredError(capability)
-    if not isinstance(timeout_seconds, (int, float)) or isinstance(
-        timeout_seconds, bool
-    ) or timeout_seconds <= 0:
+    if (
+        not isinstance(timeout_seconds, (int, float))
+        or isinstance(timeout_seconds, bool)
+        or timeout_seconds <= 0
+    ):
         raise ValueError("timeout_seconds must be a positive number")
     if capability not in provider.capabilities:
         raise ProviderIncompatibleError(capability)
