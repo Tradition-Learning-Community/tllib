@@ -28,6 +28,14 @@ def _bindings_by_feature(
             )
         if binding.feature_id in result:
             raise ValueError(f"Duplicate implementation binding: {binding.feature_id}")
+        handoff = next(
+            item for item in handoffs if item.feature_id == binding.feature_id
+        )
+        if binding.domain is not None and binding.domain != handoff.domain:
+            raise ValueError(
+                f"Implementation binding domain diverges for {binding.feature_id}: "
+                f"expected {handoff.domain}, observed {binding.domain}"
+            )
         result[binding.feature_id] = binding
     return result
 
@@ -41,7 +49,9 @@ def build_report(
     scenarios: list[dict[str, object]] = []
     counts: Counter[str] = Counter()
     unqualified = sorted(
-        handoff.feature_id\n        for handoff in handoffs\n        if handoff.feature_id not in by_feature
+        handoff.feature_id
+        for handoff in handoffs
+        if handoff.feature_id not in by_feature
     )
     for handoff in handoffs:
         binding = by_feature.get(handoff.feature_id)
@@ -69,6 +79,8 @@ def build_report(
             scenarios.append(
                 {
                     "feature_id": scenario.feature_id,
+                    "domain": handoff.domain,
+                    "package_version": handoff.package_version,
                     "scenario_id": scenario.scenario_id,
                     "operation_id": scenario.operation_id,
                     "category": scenario.category,

@@ -65,6 +65,7 @@ class ImplementationBinding:
     target: str
     covered_scenario_ids: frozenset[str] = frozenset()
     blocked_reason: str | None = None
+    domain: str | None = None
 
     def __post_init__(self) -> None:
         if not self.feature_id or not self.target:

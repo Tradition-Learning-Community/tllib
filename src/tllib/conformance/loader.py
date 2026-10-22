@@ -115,7 +115,9 @@ def _declared_files(
     if len(declared) != len(set(declared)):
         raise HandoffLoadError(f"Duplicate declared file: {package}")
     if not _REQUIRED_PACKAGE_FILES.issubset(declared):
-        raise HandoffLoadError(\n            f"Required handoff files are missing from manifest: {package}"\n        )
+        raise HandoffLoadError(
+            f"Required handoff files are missing from manifest: {package}"
+        )
     actual: set[str] = set()
     for item in package.iterdir():
         safe = _safe_child(root, item)
@@ -191,10 +193,14 @@ def load_handoffs(handoff_root: Path) -> tuple[FeatureHandoff, ...]:
 
     features_root = _safe_child(root, root / "features")
     if not features_root.is_dir():
-        raise HandoffLoadError(\n            f"Handoff features directory is missing: {features_root}"\n        )
+        raise HandoffLoadError(
+            f"Handoff features directory is missing: {features_root}"
+        )
 
     entries = _catalog_entries(root)
-    expected_ids = tuple(\n        _string(entry.get("feature_id"), "feature_id") for entry in entries\n    )
+    expected_ids = tuple(
+        _string(entry.get("feature_id"), "feature_id") for entry in entries
+    )
     observed_ids = tuple(
         sorted(
             item.name
@@ -265,7 +271,11 @@ def load_handoffs(handoff_root: Path) -> tuple[FeatureHandoff, ...]:
             "shared_dependencies": sorted(
                 dependencies,
                 key=lambda item: (
-                    (\n                        str(item.get("shared_contract_id"))\n                        if isinstance(item, dict)\n                        else ""\n                    ),
+                    (
+                        str(item.get("shared_contract_id"))
+                        if isinstance(item, dict)
+                        else ""
+                    ),
                     str(item.get("version")) if isinstance(item, dict) else "",
                 ),
             ),
@@ -290,8 +300,12 @@ def load_handoffs(handoff_root: Path) -> tuple[FeatureHandoff, ...]:
 
         tests = acceptance.get("tests")
         if not isinstance(tests, list):
-            raise HandoffLoadError(\n                f"Acceptance tests must be a list: {acceptance_path}"\n            )
-        scenarios = tuple(\n            _scenario(feature_id, test, acceptance_path) for test in tests\n        )
+            raise HandoffLoadError(
+                f"Acceptance tests must be a list: {acceptance_path}"
+            )
+        scenarios = tuple(
+            _scenario(feature_id, test, acceptance_path) for test in tests
+        )
         for scenario in scenarios:
             if scenario.scenario_id in seen_scenarios:
                 raise HandoffLoadError(
@@ -321,13 +335,8 @@ def load_handoffs(handoff_root: Path) -> tuple[FeatureHandoff, ...]:
     return tuple(handoffs)
 
 
-def load_bindings(path: Path) -> tuple[ImplementationBinding, ...]:
-    """Load explicit runtime qualification decisions from a JSON file."""
-    try:
-        value = json.loads(path.read_text(encoding="utf-8"))
-    except (OSError, json.JSONDecodeError) as exc:
-        raise HandoffLoadError(f"Unable to load bindings: {path}") from exc
-    data = _object(value, "Bindings")
+def _binding_rows(value: object, label: str) -> tuple[ImplementationBinding, ...]:
+    data = _object(value, label)
     rows = data.get("bindings")
     if not isinstance(rows, list):
         raise HandoffLoadError("Bindings file must contain a bindings list")
@@ -351,3 +360,91 @@ def load_bindings(path: Path) -> tuple[ImplementationBinding, ...]:
             )
         )
     return tuple(bindings)
+
+
+def _domain_bindings(
+    value: object,
+    path: Path,
+    specification_sha: str | None,
+) -> tuple[ImplementationBinding, ...]:
+    data = _object(value, f"Domain support file {path}")
+    required = {
+        "schema_version",
+        "specification_sha",
+        "domain",
+        "feature_ids",
+        "target",
+        "blocked_reason",
+    }
+    if set(data) != required:
+        raise HandoffLoadError(
+            f"Domain support file has unexpected fields: {path}"
+        )
+    if data.get("schema_version") != "1.0":
+        raise HandoffLoadError(f"Unsupported support schema: {path}")
+    support_sha = _string(
+        data.get("specification_sha"), f"specification_sha in {path}"
+    )
+    if specification_sha is not None and support_sha != specification_sha:
+        raise HandoffLoadError(
+            f"Support snapshot diverges in {path}: "
+            f"expected {specification_sha}, observed {support_sha}"
+        )
+    domain = _string(data.get("domain"), f"domain in {path}")
+    feature_ids = data.get("feature_ids")
+    if not isinstance(feature_ids, list) or not feature_ids or not all(
+        isinstance(item, str) and item for item in feature_ids
+    ):
+        raise HandoffLoadError(f"feature_ids must be a non-empty string list: {path}")
+    if len(feature_ids) != len(set(feature_ids)):
+        raise HandoffLoadError(f"Duplicate feature ID in support file: {path}")
+    target = _string(data.get("target"), f"target in {path}")
+    blocked = _string(data.get("blocked_reason"), f"blocked_reason in {path}")
+    return tuple(
+        ImplementationBinding(
+            feature_id=feature_id,
+            target=f"{target}:{domain}",
+            blocked_reason=blocked,
+            domain=domain,
+        )
+        for feature_id in feature_ids
+    )
+
+
+def load_bindings(
+    path: Path,
+    *,
+    specification_sha: str | None = None,
+) -> tuple[ImplementationBinding, ...]:
+    """Load explicit runtime qualification decisions from a file or directory."""
+    if path.is_dir():
+        files = sorted(path.glob("*.json"))
+        if not files:
+            raise HandoffLoadError(f"No domain support files found: {path}")
+        bindings: list[ImplementationBinding] = []
+        for file_path in files:
+            if file_path.is_symlink():
+                raise HandoffLoadError(
+                    f"Symbolic support files are not allowed: {file_path}"
+                )
+            try:
+                value = json.loads(file_path.read_text(encoding="utf-8"))
+            except (OSError, json.JSONDecodeError) as exc:
+                raise HandoffLoadError(
+                    f"Unable to load bindings: {file_path}"
+                ) from exc
+            bindings.extend(
+                _domain_bindings(value, file_path, specification_sha)
+            )
+        identifiers = [binding.feature_id for binding in bindings]
+        if len(identifiers) != len(set(identifiers)):
+            raise HandoffLoadError(
+                "Runtime support contains duplicate feature identities"
+            )
+        return tuple(bindings)
+
+    try:
+        value = json.loads(path.read_text(encoding="utf-8"))
+    except (OSError, json.JSONDecodeError) as exc:
+        raise HandoffLoadError(f"Unable to load bindings: {path}") from exc
+    return _binding_rows(value, str(path))

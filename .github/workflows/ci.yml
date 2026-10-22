@@ -68,5 +68,14 @@ jobs:
       - name: Test
         run: uv run pytest
 
+      - name: Check pinned catalog qualification
+        env:
+          TLLIB_SPECS_ROOT: ${{ github.workspace }}/tllib-specs
+        run: >-
+          uv run python -m tllib.conformance
+          --handoff tllib-specs/handoff
+          --bindings conformance/domains
+          --report build/coverage.json
+
       - name: Build package
         run: uv build

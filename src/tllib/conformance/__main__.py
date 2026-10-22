@@ -8,6 +8,8 @@ import sys
 from collections.abc import Sequence
 from pathlib import Path
 
+from tllib.specs.lock import load_lock
+
 from .loader import HandoffLoadError, load_bindings, load_handoffs
 from .report import build_report, write_report
 
@@ -36,7 +38,7 @@ def main(arguments: Sequence[str] | None = None) -> int:
     parser.add_argument(
         "--bindings",
         type=Path,
-        help="Explicit JSON qualification decisions for runtime features.",
+        help="JSON file or directory with explicit runtime qualification decisions.",
     )
     parser.add_argument(
         "--allow-unqualified",
@@ -46,7 +48,13 @@ def main(arguments: Sequence[str] | None = None) -> int:
     options = parser.parse_args(arguments)
     try:
         handoffs = load_handoffs(options.handoff)
-        bindings = load_bindings(options.bindings) if options.bindings else ()
+        bindings = ()
+        if options.bindings:
+            specification_sha = load_lock().sha
+            bindings = load_bindings(
+                options.bindings,
+                specification_sha=specification_sha,
+            )
         report = build_report(handoffs, bindings)
         write_report(report, options.report)
     except (HandoffLoadError, OSError, ValueError) as exc:

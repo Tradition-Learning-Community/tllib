@@ -270,4 +270,29 @@ def test_bindings_file_makes_qualification_explicit(tmp_path: Path) -> None:
     bindings = load_bindings(bindings_path)
     report = build_report(load_handoffs(root), bindings)
 
-    assert report["summary"]["unqualified_feature_count"] == 0
+    summary = report["summary"]
+    assert isinstance(summary, dict)
+    assert summary["unqualified_feature_count"] == 0
+
+
+def test_domain_support_directory_is_snapshot_bound(tmp_path: Path) -> None:
+    support = tmp_path / "domains"
+    support.mkdir()
+    payload = {
+        "schema_version": "1.0",
+        "specification_sha": "a" * 40,
+        "domain": "master",
+        "feature_ids": ["TLC-FC-00-MASTER-001"],
+        "target": "unimplemented",
+        "blocked_reason": "not implemented",
+    }
+    (support / "master.json").write_text(
+        json.dumps(payload), encoding="utf-8"
+    )
+
+    bindings = load_bindings(support, specification_sha="a" * 40)
+    assert bindings[0].feature_id == "TLC-FC-00-MASTER-001"
+    assert bindings[0].domain == "master"
+
+    with pytest.raises(HandoffLoadError, match="snapshot diverges"):
+        load_bindings(support, specification_sha="b" * 40)
