@@ -1,0 +1,19 @@
+{
+  "schema_version": "1.0",
+  "specification_sha": "07439babd59c657354e3200ed24c55e2e3eeb72c",
+  "domain": "virtues",
+  "feature_ids": [
+    "TLC-FC-10-VIRTUES-001",
+    "TLC-FC-10-VIRTUES-002",
+    "TLC-FC-10-VIRTUES-005",
+    "TLC-FC-10-VIRTUES-006",
+    "TLC-FC-10-VIRTUES-007",
+    "TLC-FC-10-VIRTUES-008",
+    "TLC-FC-10-VIRTUES-009",
+    "TLC-FC-10-VIRTUES-010",
+    "TLC-FC-10-VIRTUES-011",
+    "TLC-FC-10-VIRTUES-014"
+  ],
+  "target": "unimplemented",
+  "blocked_reason": "Not implemented in tllib at this revision."
+}

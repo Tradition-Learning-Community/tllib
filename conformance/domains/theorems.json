@@ -1,0 +1,18 @@
+{
+  "schema_version": "1.0",
+  "specification_sha": "07439babd59c657354e3200ed24c55e2e3eeb72c",
+  "domain": "theorems",
+  "feature_ids": [
+    "TLC-FC-06-THEOREMS-001",
+    "TLC-FC-06-THEOREMS-002",
+    "TLC-FC-06-THEOREMS-003",
+    "TLC-FC-06-THEOREMS-004",
+    "TLC-FC-06-THEOREMS-005",
+    "TLC-FC-06-THEOREMS-006",
+    "TLC-FC-06-THEOREMS-007",
+    "TLC-FC-06-THEOREMS-008",
+    "TLC-FC-06-THEOREMS-009"
+  ],
+  "target": "unimplemented",
+  "blocked_reason": "Not implemented in tllib at this revision."
+}

@@ -1,0 +1,23 @@
+{
+  "schema_version": "1.0",
+  "specification_sha": "07439babd59c657354e3200ed24c55e2e3eeb72c",
+  "domain": "values",
+  "feature_ids": [
+    "TLC-FC-09-VALUES-001",
+    "TLC-FC-09-VALUES-003",
+    "TLC-FC-09-VALUES-004",
+    "TLC-FC-09-VALUES-005",
+    "TLC-FC-09-VALUES-006",
+    "TLC-FC-09-VALUES-007",
+    "TLC-FC-09-VALUES-008",
+    "TLC-FC-09-VALUES-009",
+    "TLC-FC-09-VALUES-010",
+    "TLC-FC-09-VALUES-011",
+    "TLC-FC-09-VALUES-012",
+    "TLC-FC-09-VALUES-013",
+    "TLC-FC-09-VALUES-014",
+    "TLC-FC-09-VALUES-018"
+  ],
+  "target": "unimplemented",
+  "blocked_reason": "Not implemented in tllib at this revision."
+}
