@@ -1,0 +1,20 @@
+{
+  "schema_version": "1.0",
+  "specification_sha": "07439babd59c657354e3200ed24c55e2e3eeb72c",
+  "domain": "huit-dimensions",
+  "feature_ids": [
+    "TLC-FC-03-HUIT-DIMENSIONS-DE-TL-001",
+    "TLC-FC-03-HUIT-DIMENSIONS-DE-TL-002",
+    "TLC-FC-03-HUIT-DIMENSIONS-DE-TL-005",
+    "TLC-FC-03-HUIT-DIMENSIONS-DE-TL-006",
+    "TLC-FC-03-HUIT-DIMENSIONS-DE-TL-007",
+    "TLC-FC-03-HUIT-DIMENSIONS-DE-TL-008",
+    "TLC-FC-03-HUIT-DIMENSIONS-DE-TL-009",
+    "TLC-FC-03-HUIT-DIMENSIONS-DE-TL-010",
+    "TLC-FC-03-HUIT-DIMENSIONS-DE-TL-011",
+    "TLC-FC-03-HUIT-DIMENSIONS-DE-TL-012",
+    "TLC-FC-03-HUIT-DIMENSIONS-DE-TL-013"
+  ],
+  "target": "unimplemented",
+  "blocked_reason": "Not implemented in tllib at this revision."
+}

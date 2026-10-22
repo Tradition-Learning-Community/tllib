@@ -1,0 +1,27 @@
+{
+  "schema_version": "1.0",
+  "specification_sha": "07439babd59c657354e3200ed24c55e2e3eeb72c",
+  "domain": "fairness",
+  "feature_ids": [
+    "TLC-FC-21-FAIRNESS-001",
+    "TLC-FC-21-FAIRNESS-002",
+    "TLC-FC-21-FAIRNESS-003",
+    "TLC-FC-21-FAIRNESS-004",
+    "TLC-FC-21-FAIRNESS-005",
+    "TLC-FC-21-FAIRNESS-006",
+    "TLC-FC-21-FAIRNESS-007",
+    "TLC-FC-21-FAIRNESS-008",
+    "TLC-FC-21-FAIRNESS-009",
+    "TLC-FC-21-FAIRNESS-010",
+    "TLC-FC-21-FAIRNESS-011",
+    "TLC-FC-21-FAIRNESS-012",
+    "TLC-FC-21-FAIRNESS-013",
+    "TLC-FC-21-FAIRNESS-014",
+    "TLC-FC-21-FAIRNESS-015",
+    "TLC-FC-21-FAIRNESS-016",
+    "TLC-FC-21-FAIRNESS-017",
+    "TLC-FC-21-FAIRNESS-018"
+  ],
+  "target": "unimplemented",
+  "blocked_reason": "Not implemented in tllib at this revision."
+}

@@ -1,0 +1,29 @@
+{
+  "schema_version": "1.0",
+  "specification_sha": "07439babd59c657354e3200ed24c55e2e3eeb72c",
+  "domain": "evaluation",
+  "feature_ids": [
+    "TLC-FC-18-EVALUATION-001",
+    "TLC-FC-18-EVALUATION-002",
+    "TLC-FC-18-EVALUATION-003",
+    "TLC-FC-18-EVALUATION-004",
+    "TLC-FC-18-EVALUATION-005",
+    "TLC-FC-18-EVALUATION-006",
+    "TLC-FC-18-EVALUATION-007",
+    "TLC-FC-18-EVALUATION-008",
+    "TLC-FC-18-EVALUATION-009",
+    "TLC-FC-18-EVALUATION-010",
+    "TLC-FC-18-EVALUATION-011",
+    "TLC-FC-18-EVALUATION-012",
+    "TLC-FC-18-EVALUATION-013",
+    "TLC-FC-18-EVALUATION-014",
+    "TLC-FC-18-EVALUATION-015",
+    "TLC-FC-18-EVALUATION-016",
+    "TLC-FC-18-EVALUATION-017",
+    "TLC-FC-18-EVALUATION-018",
+    "TLC-FC-18-EVALUATION-019",
+    "TLC-FC-18-EVALUATION-020"
+  ],
+  "target": "unimplemented",
+  "blocked_reason": "Not implemented in tllib at this revision."
+}
