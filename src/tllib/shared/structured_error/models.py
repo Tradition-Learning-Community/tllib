@@ -8,6 +8,7 @@ from .._base import (
     ContractValidationError,
     reject_cycles,
     require_enum,
+    require_feature_id,
     require_identifier,
     require_string,
 )
@@ -64,7 +65,7 @@ class StructuredError(ContractModel):
         for field in ("category", "condition"):
             require_string(value[field], field)
         if "feature_id" in value:
-            require_identifier(value["feature_id"], "feature_id")
+            require_feature_id(value["feature_id"], "feature_id")
         require_enum(value["recoverability"], "recoverability", _RECOVERABILITY)
         require_enum(value["public_result"], "public_result", _PUBLIC_RESULT)
         require_enum(value["failure_atomicity"], "failure_atomicity", _ATOMICITY)

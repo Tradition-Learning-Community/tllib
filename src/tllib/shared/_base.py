@@ -9,7 +9,7 @@ from dataclasses import dataclass
 from types import MappingProxyType
 from typing import Any, ClassVar, TypeVar, cast
 
-_IDENTIFIER = re.compile(r"^[A-Za-z0-9][A-Za-z0-9._-]*$")
+_IDENTIFIER = re.compile(r"^[A-Za-z0-9][A-Za-z0-9._-]*$")\n_FEATURE_ID = re.compile(r"^TLC-FC-[0-9]{2}-[A-Z][A-Z0-9-]*-[0-9]{3}$")
 
 
 def freeze(value: Any) -> Any:
@@ -88,7 +88,7 @@ def require_identifier(value: Any, field: str) -> None:
         raise ContractValidationError(f"{field} is not a valid identifier")
 
 
-def require_enum(value: Any, field: str, allowed: frozenset[str]) -> None:
+def require_feature_id(value: Any, field: str = "feature_id") -> None:\n    require_string(value, field)\n    if _FEATURE_ID.fullmatch(value) is None:\n        raise ContractValidationError(f"{field} is not a canonical TLC-FC identifier")\n\n\ndef require_enum(value: Any, field: str, allowed: frozenset[str]) -> None:
     require_string(value, field)
     if value not in allowed:
         raise ContractValidationError(f"{field} must be one of {sorted(allowed)}")

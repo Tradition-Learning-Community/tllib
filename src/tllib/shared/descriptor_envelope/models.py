@@ -7,10 +7,11 @@ from .._base import (
     ContractModel,
     ContractValidationError,
     reject_cycles,
-    require_identifier,
+    require_feature_id,
     require_list,
     require_string,
 )
+from ..unresolved_item.models import UnresolvedItem
 
 
 class DescriptorEnvelope(ContractModel):
@@ -31,10 +32,17 @@ class DescriptorEnvelope(ContractModel):
     def from_mapping(cls, value: Mapping[str, Any]) -> "DescriptorEnvelope":
         reject_cycles(value)
         super().from_mapping(value)
-        require_identifier(value["feature_id"], "feature_id")
+        require_feature_id(value["feature_id"], "feature_id")
         require_string(value["representation"], "representation")
-        require_list(value["references"], "references")
+        if not isinstance(value["references"], (Mapping, list, tuple)):
+            raise ContractValidationError(
+                "references must preserve a collection carrier"
+            )
         require_list(value["unresolved"], "unresolved")
+        for item in value["unresolved"]:
+            if not isinstance(item, Mapping):
+                raise ContractValidationError("unresolved entries must be objects")
+            UnresolvedItem.from_mapping(item)
         require_list(value["dependencies"], "dependencies")
         if not isinstance(value["provenance"], Mapping):
             raise ContractValidationError("provenance must be an object")

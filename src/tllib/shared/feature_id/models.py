@@ -3,11 +3,7 @@
 from collections.abc import Mapping
 from typing import Any
 
-from .._base import (
-    ContractModel,
-    reject_cycles,
-    require_identifier,
-)
+from .._base import ContractModel, reject_cycles, require_feature_id
 
 
 class FeatureIdentifier(ContractModel):
@@ -18,7 +14,7 @@ class FeatureIdentifier(ContractModel):
     def from_mapping(cls, value: Mapping[str, Any]) -> "FeatureIdentifier":
         reject_cycles(value)
         super().from_mapping(value)
-        require_identifier(value["value"], "value")
+        require_feature_id(value["value"], "value")
         return cls(value)
 
 
