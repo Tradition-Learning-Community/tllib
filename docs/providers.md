@@ -1,18 +1,22 @@
-# Injection explicite de fournisseur
+# Injection explicite de fournisseurs
 
-Les opérations qui nécessitent une ressource externe reçoivent toujours leur
-fournisseur en argument. `tllib` ne recherche ni fournisseur global, ni
-adaptateur par défaut, et ne retourne jamais de valeur de repli.
+Les capacités conditionnelles utilisent exclusivement des fournisseurs injectés
+par l'application. tllib ne découvre aucun fournisseur, n'effectue aucun appel
+réseau caché et ne fournit aucune valeur scientifique de repli.
 
-1. L'application construit un adaptateur qui implémente `Provider`.
-2. L'adaptateur déclare précisément ses `capabilities`.
-3. L'application l'injecte dans l'opération avec le type d'entrée, le type de
-   sortie et un délai positif obligatoires.
-4. L'opération appelle `invoke_provider`; elle traite les erreurs explicites
-   (`ProviderRequiredError`, incompatibilité, timeout, exception et résultat
-   invalide) plutôt que de poursuivre avec un comportement implicite.
+## Contrat
+
+Un Provider déclare explicitement ses CapabilityId et reçoit un
+ProviderCallContext contenant :
+
+- le délai demandé ;
+- le FeatureId lorsqu'il est connu ;
+- un jeton d'annulation coopératif optionnel.
+
+Les entrées sont validées avant l'appel et les sorties avant leur utilisation.
 
 ```python
+from tllib import FeatureId
 from tllib.providers import CapabilityId, invoke_provider
 
 result = invoke_provider(
@@ -22,9 +26,15 @@ result = invoke_provider(
     input_type=str,
     result_type=Master,
     timeout_seconds=2.0,
+    feature_id=FeatureId("TLC-FC-00-MASTER-001"),
 )
 ```
 
-Le fournisseur doit respecter le délai transmis et lever `TimeoutError` quand
-il expire. Les doubles de fournisseurs sont réservés à `tests/fakes/`; ils ne
-font pas partie du paquet d'exécution.
+## Registre
+
+ProviderRegistry est volontairement explicite. Un provider doit être enregistré
+par l'application et deux providers ne peuvent pas revendiquer silencieusement
+la même capacité.
+
+Les doubles de tests restent sous tests/fakes et ne font pas partie du paquet
+runtime.

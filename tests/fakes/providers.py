@@ -3,7 +3,10 @@
 from collections.abc import Collection
 from typing import Generic, TypeVar
 
-from tllib.providers.provider import CapabilityId
+from tllib.providers.provider import (
+    CapabilityId,
+    ProviderCallContext,
+)
 
 InputT = TypeVar("InputT")
 OutputT = TypeVar("OutputT")
@@ -21,10 +24,16 @@ class FakeProvider(Generic[InputT, OutputT]):
         self.capabilities = capabilities
         self.result = result
         self.exception = exception
+        self.last_context: ProviderCallContext | None = None
 
     def provide(
-        self, capability: CapabilityId, value: InputT, *, timeout_seconds: float
+        self,
+        capability: CapabilityId,
+        value: InputT,
+        *,
+        context: ProviderCallContext,
     ) -> OutputT | None:
+        self.last_context = context
         if self.exception is not None:
             raise self.exception
         return self.result
