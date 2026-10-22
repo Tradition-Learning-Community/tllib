@@ -179,7 +179,7 @@ class ProviderRegistry(Generic[RegistryInputT, RegistryOutputT]):
         if not capabilities:
             raise ValueError("Provider must declare at least one capability")
         duplicate = next(
-            (capability for capability in capabilities if capability in self._providers),
+            (\n                capability\n                for capability in capabilities\n                if capability in self._providers\n            ),
             None,
         )
         if duplicate is not None:

@@ -41,7 +41,7 @@ def build_report(
     scenarios: list[dict[str, object]] = []
     counts: Counter[str] = Counter()
     unqualified = sorted(
-        handoff.feature_id for handoff in handoffs if handoff.feature_id not in by_feature
+        handoff.feature_id\n        for handoff in handoffs\n        if handoff.feature_id not in by_feature
     )
     for handoff in handoffs:
         binding = by_feature.get(handoff.feature_id)

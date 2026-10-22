@@ -115,7 +115,7 @@ def _declared_files(
     if len(declared) != len(set(declared)):
         raise HandoffLoadError(f"Duplicate declared file: {package}")
     if not _REQUIRED_PACKAGE_FILES.issubset(declared):
-        raise HandoffLoadError(f"Required handoff files are missing from manifest: {package}")
+        raise HandoffLoadError(\n            f"Required handoff files are missing from manifest: {package}"\n        )
     actual: set[str] = set()
     for item in package.iterdir():
         safe = _safe_child(root, item)
@@ -191,10 +191,10 @@ def load_handoffs(handoff_root: Path) -> tuple[FeatureHandoff, ...]:
 
     features_root = _safe_child(root, root / "features")
     if not features_root.is_dir():
-        raise HandoffLoadError(f"Handoff features directory is missing: {features_root}")
+        raise HandoffLoadError(\n            f"Handoff features directory is missing: {features_root}"\n        )
 
     entries = _catalog_entries(root)
-    expected_ids = tuple(_string(entry.get("feature_id"), "feature_id") for entry in entries)
+    expected_ids = tuple(\n        _string(entry.get("feature_id"), "feature_id") for entry in entries\n    )
     observed_ids = tuple(
         sorted(
             item.name
@@ -265,7 +265,7 @@ def load_handoffs(handoff_root: Path) -> tuple[FeatureHandoff, ...]:
             "shared_dependencies": sorted(
                 dependencies,
                 key=lambda item: (
-                    str(item.get("shared_contract_id")) if isinstance(item, dict) else "",
+                    (\n                        str(item.get("shared_contract_id"))\n                        if isinstance(item, dict)\n                        else ""\n                    ),
                     str(item.get("version")) if isinstance(item, dict) else "",
                 ),
             ),
@@ -290,8 +290,8 @@ def load_handoffs(handoff_root: Path) -> tuple[FeatureHandoff, ...]:
 
         tests = acceptance.get("tests")
         if not isinstance(tests, list):
-            raise HandoffLoadError(f"Acceptance tests must be a list: {acceptance_path}")
-        scenarios = tuple(_scenario(feature_id, test, acceptance_path) for test in tests)
+            raise HandoffLoadError(\n                f"Acceptance tests must be a list: {acceptance_path}"\n            )
+        scenarios = tuple(\n            _scenario(feature_id, test, acceptance_path) for test in tests\n        )
         for scenario in scenarios:
             if scenario.scenario_id in seen_scenarios:
                 raise HandoffLoadError(
