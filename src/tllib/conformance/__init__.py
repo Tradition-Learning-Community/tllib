@@ -1,6 +1,6 @@
 """Feature Handoff Package conformance reporting."""
 
-from .loader import HandoffLoadError, load_handoffs
+from .loader import HandoffLoadError, load_bindings, load_handoffs
 from .model import AcceptanceScenario, ImplementationBinding
 from .report import build_report, write_report
 
@@ -9,6 +9,7 @@ __all__ = [
     "HandoffLoadError",
     "ImplementationBinding",
     "build_report",
+    "load_bindings",
     "load_handoffs",
     "write_report",
 ]

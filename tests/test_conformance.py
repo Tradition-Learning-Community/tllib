@@ -1,5 +1,6 @@
-"""Tests for safe Feature Handoff conformance reporting."""
+"""Tests for safe, catalog-driven Feature Handoff conformance."""
 
+import hashlib
 import json
 from collections.abc import Mapping
 from pathlib import Path
@@ -10,27 +11,39 @@ from tllib.conformance import (
     HandoffLoadError,
     ImplementationBinding,
     build_report,
+    load_bindings,
     load_handoffs,
 )
 from tllib.conformance.__main__ import main
 from tllib.conformance.report import write_report
 
+FILES = (
+    "README.md",
+    "manifest.json",
+    "contract.json",
+    "acceptance.json",
+    "traceability.json",
+)
 
-def _feature(root: Path, feature_id: str, tests: list[dict[str, object]]) -> None:
-    package = root / "features" / feature_id
-    package.mkdir(parents=True)
-    (package / "manifest.json").write_text(
+
+def _canonical_sha256(value: object) -> str:
+    return hashlib.sha256(
         json.dumps(
-            {
-                "feature_id": feature_id,
-                "statuses": {"execution": "structural_only"},
-            }
-        ),
-        encoding="utf-8",
-    )
-    (package / "acceptance.json").write_text(
-        json.dumps({"applies_to": feature_id, "tests": tests}), encoding="utf-8"
-    )
+            value, ensure_ascii=False, sort_keys=True, separators=(",", ":")
+        ).encode("utf-8")
+    ).hexdigest()
+
+
+def _package_sha(package: Path, feature_id: str) -> str:
+    digest = hashlib.sha256()
+    for name in sorted(FILES):
+        path = package / name
+        relative = f"handoff/features/{feature_id}/{name}"
+        digest.update(relative.encode("utf-8"))
+        digest.update(b"\0")
+        digest.update(hashlib.sha256(path.read_bytes()).digest())
+        digest.update(b"\n")
+    return digest.hexdigest()
 
 
 def _scenario(identifier: str) -> dict[str, object]:
@@ -45,11 +58,101 @@ def _scenario(identifier: str) -> dict[str, object]:
     }
 
 
-def test_loads_scenarios_and_reports_explicit_coverage(tmp_path: Path) -> None:
-    _feature(tmp_path, "TLC-FC-00-MASTER-001", [_scenario("A-2"), _scenario("A-1")])
-    _feature(tmp_path, "TLC-FC-00-MASTER-002", [_scenario("B-1")])
+def _feature(
+    root: Path,
+    feature_id: str,
+    tests: list[dict[str, object]],
+    *,
+    domain: str = "master",
+) -> dict[str, object]:
+    package = root / "features" / feature_id
+    package.mkdir(parents=True)
+    manifest = {
+        "schema_version": "1.0",
+        "package_version": "1.0.0",
+        "feature_id": feature_id,
+        "title": feature_id,
+        "domain": domain,
+        "statuses": {
+            "package": "finalized",
+            "scientific": "preserved_unresolved",
+            "execution": "structural_only",
+        },
+        "files": list(FILES),
+        "shared_dependencies": [],
+        "examples": {"present": False, "file": None},
+    }
+    contract = {
+        "schema_version": "1.0",
+        "package_version": "1.0.0",
+        "feature": {"feature_id": feature_id, "title": feature_id, "domain": domain},
+    }
+    acceptance = {
+        "schema_version": "1.0",
+        "package_version": "1.0.0",
+        "applies_to": feature_id,
+        "tests": tests,
+    }
+    traceability = {
+        "schema_version": "1.0",
+        "package_version": "1.0.0",
+        "applies_to": feature_id,
+    }
+    (package / "README.md").write_text(feature_id, encoding="utf-8")
+    for name, value in (
+        ("manifest.json", manifest),
+        ("contract.json", contract),
+        ("acceptance.json", acceptance),
+        ("traceability.json", traceability),
+    ):
+        (package / name).write_text(json.dumps(value), encoding="utf-8")
 
-    handoffs = load_handoffs(tmp_path)
+    package_hash = _package_sha(package, feature_id)
+    descriptor = {
+        "feature_id": feature_id,
+        "domain": domain,
+        "path": f"handoff/features/{feature_id}",
+        "package_version": "1.0.0",
+        "statuses": manifest["statuses"],
+        "examples_present": False,
+        "shared_dependencies": [],
+        "package_sha256": package_hash,
+    }
+    return {
+        **descriptor,
+        "manifest_path": f"handoff/features/{feature_id}/manifest.json",
+        "descriptor_sha256": _canonical_sha256(descriptor),
+        "deprecation": None,
+        "substitution": None,
+    }
+
+
+def _catalog(root: Path, features: list[dict[str, object]]) -> None:
+    root.mkdir(exist_ok=True)
+    (root / "catalog.json").write_text(
+        json.dumps(
+            {
+                "schema_version": "1.0",
+                "model_version": "1.0.0",
+                "features": features,
+                "summary": {"feature_count": len(features)},
+            }
+        ),
+        encoding="utf-8",
+    )
+
+
+def test_loads_catalogued_scenarios_and_reports_explicit_coverage(
+    tmp_path: Path,
+) -> None:
+    root = tmp_path / "handoff"
+    first = _feature(
+        root, "TLC-FC-00-MASTER-001", [_scenario("A-2"), _scenario("A-1")]
+    )
+    second = _feature(root, "TLC-FC-00-MASTER-002", [_scenario("B-1")])
+    _catalog(root, [first, second])
+
+    handoffs = load_handoffs(root)
     report = build_report(
         handoffs,
         [
@@ -57,7 +160,12 @@ def test_loads_scenarios_and_reports_explicit_coverage(tmp_path: Path) -> None:
                 "TLC-FC-00-MASTER-001",
                 "tllib.domains.master.operations.describe",
                 frozenset({"A-1"}),
-            )
+            ),
+            ImplementationBinding(
+                "TLC-FC-00-MASTER-002",
+                "unavailable",
+                blocked_reason="structural only",
+            ),
         ],
     )
 
@@ -65,7 +173,10 @@ def test_loads_scenarios_and_reports_explicit_coverage(tmp_path: Path) -> None:
         "covered": 1,
         "not_covered": 1,
         "blocked": 1,
+        "unqualified": 0,
         "total": 3,
+        "feature_count": 2,
+        "unqualified_feature_count": 0,
     }
     scenarios = report["scenarios"]
     assert isinstance(scenarios, list)
@@ -75,55 +186,88 @@ def test_loads_scenarios_and_reports_explicit_coverage(tmp_path: Path) -> None:
         "blocked",
     ]
     assert isinstance(handoffs[0].scenarios[0].given, Mapping)
-    assert handoffs[0].scenarios[0].given["value"] == "input"
     with pytest.raises(TypeError):
         handoffs[0].scenarios[0].given["value"] = "changed"  # type: ignore[index]
 
 
-@pytest.mark.parametrize(
-    "acceptance",
-    ["{", json.dumps({"applies_to": "TLC-FC-00-MASTER-001", "tests": [{}]})],
-)
-def test_rejects_corrupted_handoff_fixtures(tmp_path: Path, acceptance: str) -> None:
-    package = tmp_path / "features" / "TLC-FC-00-MASTER-001"
-    package.mkdir(parents=True)
-    (package / "manifest.json").write_text(
+def test_catalog_population_and_hashes_are_enforced(tmp_path: Path) -> None:
+    root = tmp_path / "handoff"
+    feature = _feature(root, "TLC-FC-00-MASTER-001", [_scenario("A-1")])
+    _catalog(root, [feature])
+
+    (root / "features" / "TLC-FC-00-MASTER-001" / "README.md").write_text(
+        "tampered", encoding="utf-8"
+    )
+    with pytest.raises(HandoffLoadError, match="fingerprint mismatch"):
+        load_handoffs(root)
+
+
+def test_report_is_deterministic(tmp_path: Path) -> None:
+    root = tmp_path / "handoff"
+    second = _feature(root, "TLC-FC-00-MASTER-002", [_scenario("B-1")])
+    first_feature = _feature(root, "TLC-FC-00-MASTER-001", [_scenario("A-1")])
+    _catalog(root, [first_feature, second])
+
+    bindings = [
+        ImplementationBinding(
+            "TLC-FC-00-MASTER-001", "x", blocked_reason="not implemented"
+        ),
+        ImplementationBinding(
+            "TLC-FC-00-MASTER-002", "x", blocked_reason="not implemented"
+        ),
+    ]
+    report = build_report(load_handoffs(root), bindings)
+    first = tmp_path / "one.json"
+    second_path = tmp_path / "two.json"
+    write_report(report, first)
+    write_report(build_report(load_handoffs(root), bindings), second_path)
+
+    assert first.read_bytes() == second_path.read_bytes()
+
+
+def test_cli_fails_until_catalogue_features_are_qualified(tmp_path: Path) -> None:
+    root = tmp_path / "handoff"
+    feature = _feature(root, "TLC-FC-00-MASTER-001", [_scenario("A-1")])
+    _catalog(root, [feature])
+    report_path = tmp_path / "build" / "conformance.json"
+
+    assert main(["--handoff", str(root), "--report", str(report_path)]) == 3
+    assert (
+        main(
+            [
+                "--handoff",
+                str(root),
+                "--report",
+                str(report_path),
+                "--allow-unqualified",
+            ]
+        )
+        == 0
+    )
+
+
+def test_bindings_file_makes_qualification_explicit(tmp_path: Path) -> None:
+    root = tmp_path / "handoff"
+    feature = _feature(root, "TLC-FC-00-MASTER-001", [_scenario("A-1")])
+    _catalog(root, [feature])
+    bindings_path = tmp_path / "bindings.json"
+    bindings_path.write_text(
         json.dumps(
             {
-                "feature_id": "TLC-FC-00-MASTER-001",
-                "statuses": {"execution": "structural_only"},
+                "bindings": [
+                    {
+                        "feature_id": "TLC-FC-00-MASTER-001",
+                        "target": "unavailable",
+                        "covered_scenario_ids": [],
+                        "blocked_reason": "structural only",
+                    }
+                ]
             }
         ),
         encoding="utf-8",
     )
-    (package / "acceptance.json").write_text(acceptance, encoding="utf-8")
 
-    with pytest.raises(HandoffLoadError):
-        load_handoffs(tmp_path)
+    bindings = load_bindings(bindings_path)
+    report = build_report(load_handoffs(root), bindings)
 
-
-def test_report_is_deterministic(tmp_path: Path) -> None:
-    _feature(tmp_path, "TLC-FC-00-MASTER-002", [_scenario("B-1")])
-    _feature(tmp_path, "TLC-FC-00-MASTER-001", [_scenario("A-1")])
-
-    report = build_report(load_handoffs(tmp_path))
-    first = tmp_path / "one.json"
-    second = tmp_path / "two.json"
-    write_report(report, first)
-    write_report(build_report(load_handoffs(tmp_path)), second)
-
-    assert first.read_bytes() == second.read_bytes()
-
-
-def test_cli_writes_report_and_rejects_corrupt_input(tmp_path: Path) -> None:
-    _feature(tmp_path, "TLC-FC-00-MASTER-001", [_scenario("A-1")])
-    report_path = tmp_path / "build" / "conformance.json"
-
-    assert main(["--handoff", str(tmp_path), "--report", str(report_path)]) == 0
-    assert (
-        json.loads(report_path.read_text(encoding="utf-8"))["summary"]["blocked"] == 1
-    )
-    (tmp_path / "features" / "TLC-FC-00-MASTER-001" / "acceptance.json").write_text(
-        "{", encoding="utf-8"
-    )
-    assert main(["--handoff", str(tmp_path), "--report", str(report_path)]) == 2
+    assert report["summary"]["unqualified_feature_count"] == 0

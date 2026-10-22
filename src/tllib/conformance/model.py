@@ -1,4 +1,4 @@
-"""Immutable models for Feature Handoff acceptance scenarios."""
+"""Immutable models for Feature Handoff conformance."""
 
 from __future__ import annotations
 
@@ -45,10 +45,15 @@ class AcceptanceScenario:
 
 @dataclass(frozen=True, slots=True)
 class FeatureHandoff:
-    """Validated feature handoff metadata and its acceptance scenarios."""
+    """Validated implementation-facing data for one catalogued feature."""
 
     feature_id: str
+    domain: str
+    package_version: str
+    scientific_status: str
     execution_status: str
+    contract: FrozenValue
+    traceability: FrozenValue
     scenarios: tuple[AcceptanceScenario, ...]
 
 

@@ -12,6 +12,7 @@ from .model import FeatureHandoff, ImplementationBinding
 _STATUS_COVERED = "covered"
 _STATUS_NOT_COVERED = "not_covered"
 _STATUS_BLOCKED = "blocked"
+_STATUS_UNQUALIFIED = "unqualified"
 
 
 def _bindings_by_feature(
@@ -35,17 +36,20 @@ def build_report(
     handoffs: tuple[FeatureHandoff, ...],
     bindings: Iterable[ImplementationBinding] = (),
 ) -> dict[str, object]:
-    """Build a stable report; coverage requires an explicit TLC-FC binding."""
+    """Build a stable report from explicit TLC-FC qualification decisions."""
     by_feature = _bindings_by_feature(bindings, handoffs)
     scenarios: list[dict[str, object]] = []
     counts: Counter[str] = Counter()
+    unqualified = sorted(
+        handoff.feature_id for handoff in handoffs if handoff.feature_id not in by_feature
+    )
     for handoff in handoffs:
         binding = by_feature.get(handoff.feature_id)
         for scenario in handoff.scenarios:
             if binding is None:
-                status = _STATUS_BLOCKED
+                status = _STATUS_UNQUALIFIED
                 implementation: str | None = None
-                justification = "No TLC-FC implementation is registered."
+                justification = "No explicit runtime qualification exists."
             elif binding.blocked_reason is not None:
                 status = _STATUS_BLOCKED
                 implementation = binding.target
@@ -68,6 +72,7 @@ def build_report(
                     "scenario_id": scenario.scenario_id,
                     "operation_id": scenario.operation_id,
                     "category": scenario.category,
+                    "scientific_status": handoff.scientific_status,
                     "execution_status": handoff.execution_status,
                     "implementation": implementation,
                     "status": status,
@@ -80,8 +85,12 @@ def build_report(
             "covered": counts[_STATUS_COVERED],
             "not_covered": counts[_STATUS_NOT_COVERED],
             "blocked": counts[_STATUS_BLOCKED],
+            "unqualified": counts[_STATUS_UNQUALIFIED],
             "total": len(scenarios),
+            "feature_count": len(handoffs),
+            "unqualified_feature_count": len(unqualified),
         },
+        "unqualified_feature_ids": unqualified,
         "scenarios": scenarios,
     }
 

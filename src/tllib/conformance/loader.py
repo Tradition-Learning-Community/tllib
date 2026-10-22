@@ -1,14 +1,27 @@
-"""Safe loader for Feature Handoff Package acceptance files."""
+"""Safe, catalog-driven loader for Feature Handoff Packages."""
 
 from __future__ import annotations
 
+import hashlib
 import json
 from collections.abc import Mapping
 from pathlib import Path
 
-from .model import AcceptanceScenario, FeatureHandoff, freeze_json
+from .model import (
+    AcceptanceScenario,
+    FeatureHandoff,
+    ImplementationBinding,
+    freeze_json,
+)
 
-_MAX_FILE_BYTES = 1_000_000
+_MAX_FILE_BYTES = 2_000_000
+_REQUIRED_PACKAGE_FILES = {
+    "README.md",
+    "manifest.json",
+    "contract.json",
+    "acceptance.json",
+    "traceability.json",
+}
 _REQUIRED_SCENARIO_FIELDS = {
     "test_id",
     "applies_to",
@@ -20,11 +33,10 @@ _REQUIRED_SCENARIO_FIELDS = {
 
 
 class HandoffLoadError(ValueError):
-    """Raised when a handoff input is unsafe or does not have the required shape."""
+    """Raised when a handoff input is unsafe or inconsistent with the catalog."""
 
 
 def _safe_child(root: Path, child: Path) -> Path:
-    """Resolve a direct child without permitting link or traversal escapes."""
     if child.is_symlink():
         raise HandoffLoadError(f"Symbolic links are not allowed: {child}")
     try:
@@ -63,6 +75,61 @@ def _string(value: object, label: str) -> str:
     return value
 
 
+def _sha256(path: Path) -> str:
+    return hashlib.sha256(path.read_bytes()).hexdigest()
+
+
+def _aggregate_package_hash(
+    handoff_root: Path, package: Path, declared: tuple[str, ...]
+) -> str:
+    digest = hashlib.sha256()
+    for name in sorted(declared):
+        path = _safe_child(handoff_root, package / name)
+        relative = (
+            Path("handoff") / "features" / package.name / name
+        ).as_posix()
+        digest.update(relative.encode("utf-8"))
+        digest.update(b"\0")
+        digest.update(hashlib.sha256(path.read_bytes()).digest())
+        digest.update(b"\n")
+    return digest.hexdigest()
+
+
+def _canonical_sha256(value: object) -> str:
+    rendered = json.dumps(
+        value, ensure_ascii=False, sort_keys=True, separators=(",", ":")
+    ).encode("utf-8")
+    return hashlib.sha256(rendered).hexdigest()
+
+
+def _declared_files(
+    root: Path, package: Path, manifest: Mapping[str, object]
+) -> tuple[str, ...]:
+    value = manifest.get("files")
+    if not isinstance(value, list) or not value or not all(
+        isinstance(item, str) and item and "/" not in item and "\\" not in item
+        for item in value
+    ):
+        raise HandoffLoadError(f"Invalid declared file list: {package}")
+    declared = tuple(value)
+    if len(declared) != len(set(declared)):
+        raise HandoffLoadError(f"Duplicate declared file: {package}")
+    if not _REQUIRED_PACKAGE_FILES.issubset(declared):
+        raise HandoffLoadError(f"Required handoff files are missing from manifest: {package}")
+    actual: set[str] = set()
+    for item in package.iterdir():
+        safe = _safe_child(root, item)
+        if safe.is_dir():
+            raise HandoffLoadError(f"Feature package contains a directory: {item}")
+        actual.add(item.name)
+    if actual != set(declared):
+        raise HandoffLoadError(
+            f"Declared files differ from package files for {package.name}: "
+            f"declared={sorted(declared)}, observed={sorted(actual)}"
+        )
+    return declared
+
+
 def _scenario(feature_id: str, value: object, path: Path) -> AcceptanceScenario:
     data = _object(value, f"Scenario in {path}")
     if not _REQUIRED_SCENARIO_FIELDS.issubset(data):
@@ -93,53 +160,194 @@ def _scenario(feature_id: str, value: object, path: Path) -> AcceptanceScenario:
     )
 
 
+def _catalog_entries(root: Path) -> tuple[Mapping[str, object], ...]:
+    catalog_path = root / "catalog.json"
+    catalog = _object(_read_json(catalog_path, root), str(catalog_path))
+    if catalog.get("schema_version") != "1.0":
+        raise HandoffLoadError("Unsupported global catalog schema_version")
+    if catalog.get("model_version") != "1.0.0":
+        raise HandoffLoadError("Unsupported global catalog model_version")
+    features = catalog.get("features")
+    if not isinstance(features, list) or not features:
+        raise HandoffLoadError("Global catalog features must be a non-empty list")
+    entries = tuple(_object(item, "Catalog feature") for item in features)
+    ids = [_string(entry.get("feature_id"), "Catalog feature_id") for entry in entries]
+    if len(ids) != len(set(ids)):
+        raise HandoffLoadError("Global catalog contains duplicate feature identities")
+    summary = _object(catalog.get("summary"), "Catalog summary")
+    if summary.get("feature_count") != len(entries):
+        raise HandoffLoadError("Catalog summary feature_count diverges")
+    return entries
+
+
 def load_handoffs(handoff_root: Path) -> tuple[FeatureHandoff, ...]:
-    """Load direct feature packages from a trusted handoff root safely."""
+    """Load exactly the feature population declared by handoff/catalog.json."""
     if handoff_root.is_symlink():
         raise HandoffLoadError(f"Symbolic links are not allowed: {handoff_root}")
     try:
         root = handoff_root.resolve(strict=True)
     except FileNotFoundError as exc:
         raise HandoffLoadError(f"Handoff root does not exist: {handoff_root}") from exc
-    features = root / "features"
-    features = _safe_child(root, features)
-    if not features.is_dir():
-        raise HandoffLoadError(f"Handoff features directory is missing: {features}")
+
+    features_root = _safe_child(root, root / "features")
+    if not features_root.is_dir():
+        raise HandoffLoadError(f"Handoff features directory is missing: {features_root}")
+
+    entries = _catalog_entries(root)
+    expected_ids = tuple(_string(entry.get("feature_id"), "feature_id") for entry in entries)
+    observed_ids = tuple(
+        sorted(
+            item.name
+            for item in features_root.iterdir()
+            if _safe_child(root, item).is_dir()
+        )
+    )
+    if set(observed_ids) != set(expected_ids):
+        raise HandoffLoadError(
+            "Catalog and physical feature population diverge: "
+            f"catalog={sorted(expected_ids)}, observed={list(observed_ids)}"
+        )
 
     handoffs: list[FeatureHandoff] = []
     seen_scenarios: set[str] = set()
-    for package in sorted(features.iterdir(), key=lambda item: item.name):
-        package = _safe_child(root, package)
-        if not package.is_dir():
-            raise HandoffLoadError(f"Feature package must be a directory: {package}")
-        acceptance_path = package / "acceptance.json"
+    for entry in entries:
+        feature_id = _string(entry.get("feature_id"), "Catalog feature_id")
+        domain = _string(entry.get("domain"), f"Catalog domain for {feature_id}")
+        expected_path = f"handoff/features/{feature_id}"
+        if entry.get("path") != expected_path:
+            raise HandoffLoadError(f"Unexpected package path for {feature_id}")
+        if entry.get("manifest_path") != f"{expected_path}/manifest.json":
+            raise HandoffLoadError(f"Unexpected manifest path for {feature_id}")
+
+        package = _safe_child(root, features_root / feature_id)
         manifest_path = package / "manifest.json"
-        acceptance = _object(_read_json(acceptance_path, root), str(acceptance_path))
+        contract_path = package / "contract.json"
+        acceptance_path = package / "acceptance.json"
+        traceability_path = package / "traceability.json"
+
         manifest = _object(_read_json(manifest_path, root), str(manifest_path))
-        feature_id = package.name
-        if _string(acceptance.get("applies_to"), str(acceptance_path)) != feature_id:
-            raise HandoffLoadError(
-                f"Acceptance feature identity mismatch: {acceptance_path}"
-            )
-        if _string(manifest.get("feature_id"), str(manifest_path)) != feature_id:
-            raise HandoffLoadError(
-                f"Manifest feature identity mismatch: {manifest_path}"
-            )
+        contract = _object(_read_json(contract_path, root), str(contract_path))
+        acceptance = _object(_read_json(acceptance_path, root), str(acceptance_path))
+        traceability = _object(
+            _read_json(traceability_path, root), str(traceability_path)
+        )
+
+        if manifest.get("feature_id") != feature_id or manifest.get("domain") != domain:
+            raise HandoffLoadError(f"Manifest identity mismatch: {feature_id}")
+        package_version = _string(
+            manifest.get("package_version"), f"Package version for {feature_id}"
+        )
+        if entry.get("package_version") != package_version:
+            raise HandoffLoadError(f"Package version mismatch: {feature_id}")
         statuses = _object(manifest.get("statuses"), str(manifest_path))
+        if entry.get("statuses") != statuses:
+            raise HandoffLoadError(f"Catalog statuses diverge: {feature_id}")
+        scientific_status = _string(statuses.get("scientific"), str(manifest_path))
         execution_status = _string(statuses.get("execution"), str(manifest_path))
+
+        declared = _declared_files(root, package, manifest)
+        package_hash = _aggregate_package_hash(root, package, declared)
+        if entry.get("package_sha256") != package_hash:
+            raise HandoffLoadError(f"Package fingerprint mismatch: {feature_id}")
+
+        dependencies = manifest.get("shared_dependencies")
+        if not isinstance(dependencies, list):
+            raise HandoffLoadError(f"shared_dependencies must be a list: {feature_id}")
+        descriptor = {
+            "feature_id": feature_id,
+            "domain": domain,
+            "path": expected_path,
+            "package_version": package_version,
+            "statuses": dict(statuses),
+            "examples_present": bool(
+                _object(manifest.get("examples"), str(manifest_path)).get("present")
+            ),
+            "shared_dependencies": sorted(
+                dependencies,
+                key=lambda item: (
+                    str(item.get("shared_contract_id")) if isinstance(item, dict) else "",
+                    str(item.get("version")) if isinstance(item, dict) else "",
+                ),
+            ),
+            "package_sha256": package_hash,
+        }
+        if entry.get("descriptor_sha256") != _canonical_sha256(descriptor):
+            raise HandoffLoadError(f"Descriptor fingerprint mismatch: {feature_id}")
+
+        contract_feature = _object(contract.get("feature"), str(contract_path))
+        if contract_feature.get("feature_id") != feature_id:
+            raise HandoffLoadError(f"Contract identity mismatch: {feature_id}")
+        if contract.get("package_version") != package_version:
+            raise HandoffLoadError(f"Contract version mismatch: {feature_id}")
+        if acceptance.get("applies_to") != feature_id:
+            raise HandoffLoadError(f"Acceptance identity mismatch: {feature_id}")
+        if acceptance.get("package_version") != package_version:
+            raise HandoffLoadError(f"Acceptance version mismatch: {feature_id}")
+        if traceability.get("applies_to") != feature_id:
+            raise HandoffLoadError(f"Traceability identity mismatch: {feature_id}")
+        if traceability.get("package_version") != package_version:
+            raise HandoffLoadError(f"Traceability version mismatch: {feature_id}")
+
         tests = acceptance.get("tests")
         if not isinstance(tests, list):
-            raise HandoffLoadError(
-                f"Acceptance tests must be a list: {acceptance_path}"
-            )
-        scenarios = tuple(
-            _scenario(feature_id, test, acceptance_path) for test in tests
-        )
+            raise HandoffLoadError(f"Acceptance tests must be a list: {acceptance_path}")
+        scenarios = tuple(_scenario(feature_id, test, acceptance_path) for test in tests)
         for scenario in scenarios:
             if scenario.scenario_id in seen_scenarios:
                 raise HandoffLoadError(
                     f"Duplicate acceptance scenario ID: {scenario.scenario_id}"
                 )
             seen_scenarios.add(scenario.scenario_id)
-        handoffs.append(FeatureHandoff(feature_id, execution_status, scenarios))
+
+        try:
+            frozen_contract = freeze_json(dict(contract))
+            frozen_traceability = freeze_json(dict(traceability))
+        except ValueError as exc:
+            raise HandoffLoadError(
+                f"Contract or traceability is not JSON-compatible: {feature_id}"
+            ) from exc
+        handoffs.append(
+            FeatureHandoff(
+                feature_id=feature_id,
+                domain=domain,
+                package_version=package_version,
+                scientific_status=scientific_status,
+                execution_status=execution_status,
+                contract=frozen_contract,
+                traceability=frozen_traceability,
+                scenarios=scenarios,
+            )
+        )
     return tuple(handoffs)
+
+
+def load_bindings(path: Path) -> tuple[ImplementationBinding, ...]:
+    """Load explicit runtime qualification decisions from a JSON file."""
+    try:
+        value = json.loads(path.read_text(encoding="utf-8"))
+    except (OSError, json.JSONDecodeError) as exc:
+        raise HandoffLoadError(f"Unable to load bindings: {path}") from exc
+    data = _object(value, "Bindings")
+    rows = data.get("bindings")
+    if not isinstance(rows, list):
+        raise HandoffLoadError("Bindings file must contain a bindings list")
+    bindings: list[ImplementationBinding] = []
+    for raw in rows:
+        row = _object(raw, "Binding")
+        covered = row.get("covered_scenario_ids", [])
+        if not isinstance(covered, list) or not all(
+            isinstance(item, str) and item for item in covered
+        ):
+            raise HandoffLoadError("covered_scenario_ids must be a string list")
+        blocked = row.get("blocked_reason")
+        if blocked is not None and not isinstance(blocked, str):
+            raise HandoffLoadError("blocked_reason must be a string or null")
+        bindings.append(
+            ImplementationBinding(
+                feature_id=_string(row.get("feature_id"), "Binding feature_id"),
+                target=_string(row.get("target"), "Binding target"),
+                covered_scenario_ids=frozenset(covered),
+                blocked_reason=blocked,
+            )
+        )
+    return tuple(bindings)
