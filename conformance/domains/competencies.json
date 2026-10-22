@@ -1,0 +1,22 @@
+{
+  "schema_version": "1.0",
+  "specification_sha": "07439babd59c657354e3200ed24c55e2e3eeb72c",
+  "domain": "competencies",
+  "feature_ids": [
+    "TLC-FC-12-COMPETENCIES-001",
+    "TLC-FC-12-COMPETENCIES-002",
+    "TLC-FC-12-COMPETENCIES-004",
+    "TLC-FC-12-COMPETENCIES-005",
+    "TLC-FC-12-COMPETENCIES-006",
+    "TLC-FC-12-COMPETENCIES-007",
+    "TLC-FC-12-COMPETENCIES-008",
+    "TLC-FC-12-COMPETENCIES-009",
+    "TLC-FC-12-COMPETENCIES-010",
+    "TLC-FC-12-COMPETENCIES-011",
+    "TLC-FC-12-COMPETENCIES-012",
+    "TLC-FC-12-COMPETENCIES-013",
+    "TLC-FC-12-COMPETENCIES-016"
+  ],
+  "target": "unimplemented",
+  "blocked_reason": "Not implemented in tllib at this revision."
+}

@@ -1,0 +1,17 @@
+{
+  "schema_version": "1.0",
+  "specification_sha": "07439babd59c657354e3200ed24c55e2e3eeb72c",
+  "domain": "culture",
+  "feature_ids": [
+    "TLC-FC-25-CULTURE-001",
+    "TLC-FC-25-CULTURE-002",
+    "TLC-FC-25-CULTURE-003",
+    "TLC-FC-25-CULTURE-004",
+    "TLC-FC-25-CULTURE-005",
+    "TLC-FC-25-CULTURE-006",
+    "TLC-FC-25-CULTURE-007",
+    "TLC-FC-25-CULTURE-008"
+  ],
+  "target": "unimplemented",
+  "blocked_reason": "Not implemented in tllib at this revision."
+}

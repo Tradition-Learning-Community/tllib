@@ -1,0 +1,21 @@
+{
+  "schema_version": "1.0",
+  "specification_sha": "07439babd59c657354e3200ed24c55e2e3eeb72c",
+  "domain": "context",
+  "feature_ids": [
+    "TLC-FC-24-CONTEXT-001",
+    "TLC-FC-24-CONTEXT-002",
+    "TLC-FC-24-CONTEXT-003",
+    "TLC-FC-24-CONTEXT-004",
+    "TLC-FC-24-CONTEXT-005",
+    "TLC-FC-24-CONTEXT-006",
+    "TLC-FC-24-CONTEXT-007",
+    "TLC-FC-24-CONTEXT-008",
+    "TLC-FC-24-CONTEXT-009",
+    "TLC-FC-24-CONTEXT-010",
+    "TLC-FC-24-CONTEXT-011",
+    "TLC-FC-24-CONTEXT-012"
+  ],
+  "target": "unimplemented",
+  "blocked_reason": "Not implemented in tllib at this revision."
+}

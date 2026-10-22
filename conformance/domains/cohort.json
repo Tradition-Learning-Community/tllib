@@ -1,0 +1,26 @@
+{
+  "schema_version": "1.0",
+  "specification_sha": "07439babd59c657354e3200ed24c55e2e3eeb72c",
+  "domain": "cohort",
+  "feature_ids": [
+    "TLC-FC-16-COHORT-001",
+    "TLC-FC-16-COHORT-002",
+    "TLC-FC-16-COHORT-003",
+    "TLC-FC-16-COHORT-004",
+    "TLC-FC-16-COHORT-005",
+    "TLC-FC-16-COHORT-006",
+    "TLC-FC-16-COHORT-007",
+    "TLC-FC-16-COHORT-008",
+    "TLC-FC-16-COHORT-009",
+    "TLC-FC-16-COHORT-010",
+    "TLC-FC-16-COHORT-011",
+    "TLC-FC-16-COHORT-012",
+    "TLC-FC-16-COHORT-013",
+    "TLC-FC-16-COHORT-014",
+    "TLC-FC-16-COHORT-015",
+    "TLC-FC-16-COHORT-016",
+    "TLC-FC-16-COHORT-017"
+  ],
+  "target": "unimplemented",
+  "blocked_reason": "Not implemented in tllib at this revision."
+}

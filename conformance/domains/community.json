@@ -1,0 +1,17 @@
+{
+  "schema_version": "1.0",
+  "specification_sha": "07439babd59c657354e3200ed24c55e2e3eeb72c",
+  "domain": "community",
+  "feature_ids": [
+    "TLC-FC-02-COMMUNITY-001",
+    "TLC-FC-02-COMMUNITY-003",
+    "TLC-FC-02-COMMUNITY-004",
+    "TLC-FC-02-COMMUNITY-005",
+    "TLC-FC-02-COMMUNITY-006",
+    "TLC-FC-02-COMMUNITY-007",
+    "TLC-FC-02-COMMUNITY-008",
+    "TLC-FC-02-COMMUNITY-009"
+  ],
+  "target": "unimplemented",
+  "blocked_reason": "Not implemented in tllib at this revision."
+}
