@@ -18,6 +18,27 @@ jobs:
       - name: Check out repository
         uses: actions/checkout@v4
 
+      - name: Read pinned specs SHA
+        id: specs
+        shell: bash
+        run: |
+          python - <<'PY'
+          import json
+          import os
+          from pathlib import Path
+
+          lock = json.loads(Path("specs.lock.json").read_text(encoding="utf-8"))
+          with open(os.environ["GITHUB_OUTPUT"], "a", encoding="utf-8") as stream:
+              stream.write(f"sha={lock['sha']}\n")
+          PY
+
+      - name: Check out pinned specifications
+        uses: actions/checkout@v4
+        with:
+          repository: Tradition-Learning-Community/tllib-specs
+          ref: ${{ steps.specs.outputs.sha }}
+          path: tllib-specs
+
       - name: Install uv
         uses: astral-sh/setup-uv@v7
         with:
@@ -26,6 +47,14 @@ jobs:
 
       - name: Install dependencies
         run: uv sync --locked --dev
+
+      - name: Verify specification lock
+        env:
+          TLLIB_SPECS_ROOT: ${{ github.workspace }}/tllib-specs
+        run: uv run python -m tllib.specs verify
+
+      - name: Smoke import
+        run: uv run python -c "import tllib"
 
       - name: Lint
         run: uv run ruff check .
@@ -38,3 +67,6 @@ jobs:
 
       - name: Test
         run: uv run pytest
+
+      - name: Build package
+        run: uv build

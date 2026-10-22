@@ -4,6 +4,7 @@ from __future__ import annotations
 
 import hashlib
 import json
+import os
 import subprocess
 from dataclasses import asdict, dataclass
 from datetime import date
@@ -11,7 +12,9 @@ from pathlib import Path
 
 LOCK_FILENAME = "specs.lock.json"
 CATALOG_RELATIVE_PATH = Path("handoff") / "catalog.json"
-EXPECTED_REPOSITORY = "https://github.com/skylore300-hash/tllib-specs.git"
+EXPECTED_REPOSITORY = (
+    "https://github.com/Tradition-Learning-Community/tllib-specs.git"
+)
 SHA256_PREFIX = "sha256:"
 
 
@@ -39,7 +42,22 @@ def _default_lock_path() -> Path:
 
 
 def _default_specs_root(lock_path: Path) -> Path:
-    return lock_path.parent.parent / "tllib-specs"
+    override = os.environ.get("TLLIB_SPECS_ROOT")
+    if override:
+        return Path(override)
+    sibling = lock_path.parent.parent / "tllib-specs"
+    if sibling.exists():
+        return sibling
+    return lock_path.parent / "tllib-specs"
+
+
+def _normalize_repository(value: str) -> str:
+    normalized = value.strip().rstrip("/")
+    if normalized.startswith("git@github.com:"):
+        normalized = "https://github.com/" + normalized.removeprefix("git@github.com:")
+    if normalized.endswith(".git"):
+        normalized = normalized[:-4]
+    return normalized
 
 
 def _read_lock(lock_path: Path) -> SpecificationLock:
@@ -63,6 +81,12 @@ def _read_lock(lock_path: Path) -> SpecificationLock:
         )
 
     lock = SpecificationLock(**payload)
+    if _normalize_repository(lock.repository) != _normalize_repository(
+        EXPECTED_REPOSITORY
+    ):
+        raise SpecificationLockError(
+            "Lock repository must reference the canonical tllib-specs repository"
+        )
     if len(lock.sha) != 40 or any(
         character not in "0123456789abcdef" for character in lock.sha
     ):
@@ -123,7 +147,7 @@ def verify_lock(
     ).resolve()
 
     repository = _git_value(resolved_specs_root, "remote", "get-url", "origin")
-    if repository != lock.repository or repository != EXPECTED_REPOSITORY:
+    if _normalize_repository(repository) != _normalize_repository(lock.repository):
         raise SpecificationLockError(
             f"Specification repository diverges: expected {lock.repository}, "
             f"got {repository}"
@@ -151,5 +175,6 @@ def load_lock(
     lock_path: Path | None = None,
     specs_root: Path | None = None,
 ) -> SpecificationLock:
-    """Load and validate the default or explicitly supplied specification lock."""
-    return verify_lock(lock_path=lock_path, specs_root=specs_root)
+    """Load and validate specification metadata without changing upstream state."""
+    resolved_lock_path = (lock_path or _default_lock_path()).resolve()
+    return _read_lock(resolved_lock_path)
