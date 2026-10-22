@@ -113,14 +113,29 @@ def _git_value(specs_root: Path, *arguments: str) -> str:
     return result.stdout.strip()
 
 
-def _catalog_version_and_fingerprint(specs_root: Path) -> tuple[str, str]:
-    catalog_path = specs_root / CATALOG_RELATIVE_PATH
+def _git_bytes(specs_root: Path, *arguments: str) -> bytes:
     try:
-        catalog_bytes = catalog_path.read_bytes()
-        catalog = json.loads(catalog_bytes.decode("utf-8"))
-    except (FileNotFoundError, UnicodeDecodeError, json.JSONDecodeError) as exc:
+        result = subprocess.run(
+            ["git", "-C", str(specs_root), *arguments],
+            check=True,
+            capture_output=True,
+        )
+    except (FileNotFoundError, subprocess.CalledProcessError) as exc:
         raise SpecificationLockError(
-            f"Unable to read specification catalog: {catalog_path}"
+            f"Unable to inspect specification repository: {specs_root}"
+        ) from exc
+    return result.stdout
+
+
+def _catalog_version_and_fingerprint(specs_root: Path) -> tuple[str, str]:
+    try:
+        catalog_bytes = _git_bytes(
+            specs_root, "show", f"HEAD:{CATALOG_RELATIVE_PATH.as_posix()}"
+        )
+        catalog = json.loads(catalog_bytes.decode("utf-8"))
+    except (UnicodeDecodeError, json.JSONDecodeError) as exc:
+        raise SpecificationLockError(
+            "Unable to read handoff/catalog.json from the pinned Git commit"
         ) from exc
     version = catalog.get("model_version") if isinstance(catalog, dict) else None
     if not isinstance(version, str):
@@ -167,7 +182,8 @@ def verify_lock(
         )
     if fingerprint != lock.fingerprint:
         raise SpecificationLockError(
-            "Specification fingerprint diverges from handoff/catalog.json"
+            "Specification fingerprint diverges from handoff/catalog.json: "
+            f"expected {lock.fingerprint}, observed {fingerprint}"
         )
     return lock
 

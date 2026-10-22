@@ -43,7 +43,7 @@ exclude_also = [
 line-length = 88
 target-version = "py310"
 src = ["src", "tests"]
-extend-exclude = ["README.md", "pytest-of-*"]
+extend-exclude = ["README.md", "pytest-of-*", "tllib-specs"]
 
 [tool.ruff.lint]
 select = ["E", "F", "I", "UP", "B"]
