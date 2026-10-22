@@ -1,5 +1,20 @@
-"""Public package for tllib."""
+"""Public API for tllib."""
 
+from .core import (
+    DomainId,
+    ExecutionStatus,
+    FeatureId,
+    FeatureNotExecutableError,
+    InvariantViolationError,
+    ProviderRequiredError,
+    Result,
+    ScientificStatus,
+    TLCError,
+    TllibError,
+    ValidationError,
+    Version,
+    VersionIncompatibleError,
+)
 from .specs.lock import load_lock
 
 
@@ -8,4 +23,19 @@ def specification_info() -> dict[str, str]:
     return load_lock().as_dict()
 
 
-__all__ = ["domains", "specification_info"]
+__all__ = [
+    "DomainId",
+    "ExecutionStatus",
+    "FeatureId",
+    "FeatureNotExecutableError",
+    "InvariantViolationError",
+    "ProviderRequiredError",
+    "Result",
+    "ScientificStatus",
+    "TLCError",
+    "TllibError",
+    "ValidationError",
+    "Version",
+    "VersionIncompatibleError",
+    "specification_info",
+]

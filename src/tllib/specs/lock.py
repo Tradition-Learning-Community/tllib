@@ -81,12 +81,6 @@ def _read_lock(lock_path: Path) -> SpecificationLock:
         )
 
     lock = SpecificationLock(**payload)
-    if _normalize_repository(lock.repository) != _normalize_repository(
-        EXPECTED_REPOSITORY
-    ):
-        raise SpecificationLockError(
-            "Lock repository must reference the canonical tllib-specs repository"
-        )
     if len(lock.sha) != 40 or any(
         character not in "0123456789abcdef" for character in lock.sha
     ):
@@ -142,6 +136,13 @@ def verify_lock(
     """Load the lock and verify it against the checked-out specifications."""
     resolved_lock_path = (lock_path or _default_lock_path()).resolve()
     lock = _read_lock(resolved_lock_path)
+    if _normalize_repository(lock.repository) != _normalize_repository(
+        EXPECTED_REPOSITORY
+    ):
+        raise SpecificationLockError(
+            f"Specification repository diverges: expected {EXPECTED_REPOSITORY}, "
+            f"got {lock.repository}"
+        )
     resolved_specs_root = (
         specs_root or _default_specs_root(resolved_lock_path)
     ).resolve()
@@ -175,6 +176,5 @@ def load_lock(
     lock_path: Path | None = None,
     specs_root: Path | None = None,
 ) -> SpecificationLock:
-    """Load and validate specification metadata without changing upstream state."""
-    resolved_lock_path = (lock_path or _default_lock_path()).resolve()
-    return _read_lock(resolved_lock_path)
+    """Load and verify the default or explicitly supplied specification lock."""
+    return verify_lock(lock_path=lock_path, specs_root=specs_root)

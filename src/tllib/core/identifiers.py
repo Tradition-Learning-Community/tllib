@@ -6,7 +6,9 @@ import re
 from dataclasses import dataclass
 
 _IDENTIFIER_PATTERN = re.compile(r"^[A-Za-z0-9][A-Za-z0-9._-]*$")
-_VERSION_PATTERN = re.compile(r"^(0|[1-9]\d*)\.(0|[1-9]\d*)\.(0|[1-9]\d*)$")
+_FEATURE_ID_PATTERN = re.compile(r"^TLC-FC-[0-9]{2}-[A-Z][A-Z0-9-]*-[0-9]{3}$")
+_DOMAIN_ID_PATTERN = re.compile(r"^[a-z0-9]+(?:-[a-z0-9]+)*$")
+_VERSION_PATTERN = re.compile(r"^(0|[1-9]\\d*)\\.(0|[1-9]\\d*)\\.(0|[1-9]\\d*)$")
 
 
 @dataclass(frozen=True, slots=True)
@@ -20,6 +22,38 @@ class Identifier:
             self.value
         ):
             raise ValueError("Identifier must match [A-Za-z0-9][A-Za-z0-9._-]*")
+
+    def __str__(self) -> str:
+        return self.value
+
+
+@dataclass(frozen=True, slots=True)
+class FeatureId:
+    """A validated TLC feature identity."""
+
+    value: str
+
+    def __post_init__(self) -> None:
+        if not isinstance(self.value, str) or not _FEATURE_ID_PATTERN.fullmatch(
+            self.value
+        ):
+            raise ValueError("FeatureId must be a canonical TLC-FC identifier")
+
+    def __str__(self) -> str:
+        return self.value
+
+
+@dataclass(frozen=True, slots=True)
+class DomainId:
+    """A canonical lower-case domain slug."""
+
+    value: str
+
+    def __post_init__(self) -> None:
+        if not isinstance(self.value, str) or not _DOMAIN_ID_PATTERN.fullmatch(
+            self.value
+        ):
+            raise ValueError("DomainId must be a lower-case slug")
 
     def __str__(self) -> str:
         return self.value
@@ -42,7 +76,7 @@ class Version:
 
     @classmethod
     def parse(cls, value: str) -> Version:
-        """Parse a strict ``major.minor.patch`` version."""
+        """Parse a strict major.minor.patch version."""
         if not isinstance(value, str):
             raise ValueError("Version must be a string")
         match = _VERSION_PATTERN.fullmatch(value)
