@@ -9,7 +9,7 @@ from .structured_error import StructuredError
 from .traceability import Traceability
 from .unresolved_item import UnresolvedItem
 
-PINNED_SPECS_SHA = "2e68998af49315b16abbab068368bbacc10d453d"
+PINNED_SPECS_SHA = "07439babd59c657354e3200ed24c55e2e3eeb72c"
 
 __all__ = [
     "DescriptorEnvelope",
