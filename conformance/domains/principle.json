@@ -1,0 +1,19 @@
+{
+  "schema_version": "1.0",
+  "specification_sha": "07439babd59c657354e3200ed24c55e2e3eeb72c",
+  "domain": "principle",
+  "feature_ids": [
+    "TLC-FC-08-PRINCIPLE-001",
+    "TLC-FC-08-PRINCIPLE-002",
+    "TLC-FC-08-PRINCIPLE-003",
+    "TLC-FC-08-PRINCIPLE-004",
+    "TLC-FC-08-PRINCIPLE-005",
+    "TLC-FC-08-PRINCIPLE-006",
+    "TLC-FC-08-PRINCIPLE-007",
+    "TLC-FC-08-PRINCIPLE-008",
+    "TLC-FC-08-PRINCIPLE-010",
+    "TLC-FC-08-PRINCIPLE-011"
+  ],
+  "target": "unimplemented",
+  "blocked_reason": "Not implemented in tllib at this revision."
+}

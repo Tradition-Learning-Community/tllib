@@ -1,0 +1,29 @@
+{
+  "schema_version": "1.0",
+  "specification_sha": "07439babd59c657354e3200ed24c55e2e3eeb72c",
+  "domain": "regulation",
+  "feature_ids": [
+    "TLC-FC-19-REGULATION-001",
+    "TLC-FC-19-REGULATION-002",
+    "TLC-FC-19-REGULATION-003",
+    "TLC-FC-19-REGULATION-004",
+    "TLC-FC-19-REGULATION-005",
+    "TLC-FC-19-REGULATION-006",
+    "TLC-FC-19-REGULATION-007",
+    "TLC-FC-19-REGULATION-008",
+    "TLC-FC-19-REGULATION-009",
+    "TLC-FC-19-REGULATION-010",
+    "TLC-FC-19-REGULATION-011",
+    "TLC-FC-19-REGULATION-012",
+    "TLC-FC-19-REGULATION-013",
+    "TLC-FC-19-REGULATION-014",
+    "TLC-FC-19-REGULATION-015",
+    "TLC-FC-19-REGULATION-016",
+    "TLC-FC-19-REGULATION-017",
+    "TLC-FC-19-REGULATION-018",
+    "TLC-FC-19-REGULATION-019",
+    "TLC-FC-19-REGULATION-020"
+  ],
+  "target": "unimplemented",
+  "blocked_reason": "Not implemented in tllib at this revision."
+}

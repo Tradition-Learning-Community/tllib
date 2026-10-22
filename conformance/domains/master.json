@@ -1,0 +1,25 @@
+{
+  "schema_version": "1.0",
+  "specification_sha": "07439babd59c657354e3200ed24c55e2e3eeb72c",
+  "domain": "master",
+  "feature_ids": [
+    "TLC-FC-00-MASTER-001",
+    "TLC-FC-00-MASTER-002",
+    "TLC-FC-00-MASTER-003",
+    "TLC-FC-00-MASTER-004",
+    "TLC-FC-00-MASTER-005",
+    "TLC-FC-00-MASTER-006",
+    "TLC-FC-00-MASTER-007",
+    "TLC-FC-00-MASTER-008",
+    "TLC-FC-00-MASTER-009",
+    "TLC-FC-00-MASTER-010",
+    "TLC-FC-00-MASTER-011",
+    "TLC-FC-00-MASTER-012",
+    "TLC-FC-00-MASTER-013",
+    "TLC-FC-00-MASTER-014",
+    "TLC-FC-00-MASTER-015",
+    "TLC-FC-00-MASTER-016"
+  ],
+  "target": "unimplemented",
+  "blocked_reason": "Not implemented in tllib at this revision."
+}

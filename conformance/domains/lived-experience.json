@@ -1,0 +1,21 @@
+{
+  "schema_version": "1.0",
+  "specification_sha": "07439babd59c657354e3200ed24c55e2e3eeb72c",
+  "domain": "lived-experience",
+  "feature_ids": [
+    "TLC-FC-14-LIVED-EXPERIENCE-001",
+    "TLC-FC-14-LIVED-EXPERIENCE-002",
+    "TLC-FC-14-LIVED-EXPERIENCE-004",
+    "TLC-FC-14-LIVED-EXPERIENCE-005",
+    "TLC-FC-14-LIVED-EXPERIENCE-006",
+    "TLC-FC-14-LIVED-EXPERIENCE-007",
+    "TLC-FC-14-LIVED-EXPERIENCE-008",
+    "TLC-FC-14-LIVED-EXPERIENCE-009",
+    "TLC-FC-14-LIVED-EXPERIENCE-010",
+    "TLC-FC-14-LIVED-EXPERIENCE-011",
+    "TLC-FC-14-LIVED-EXPERIENCE-012",
+    "TLC-FC-14-LIVED-EXPERIENCE-013"
+  ],
+  "target": "unimplemented",
+  "blocked_reason": "Not implemented in tllib at this revision."
+}

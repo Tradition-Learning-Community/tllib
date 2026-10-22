@@ -1,0 +1,15 @@
+{
+  "schema_version": "1.0",
+  "specification_sha": "07439babd59c657354e3200ed24c55e2e3eeb72c",
+  "domain": "message",
+  "feature_ids": [
+    "TLC-FC-07-MESSAGE-001",
+    "TLC-FC-07-MESSAGE-002",
+    "TLC-FC-07-MESSAGE-003",
+    "TLC-FC-07-MESSAGE-004",
+    "TLC-FC-07-MESSAGE-005",
+    "TLC-FC-07-MESSAGE-006"
+  ],
+  "target": "unimplemented",
+  "blocked_reason": "Not implemented in tllib at this revision."
+}
