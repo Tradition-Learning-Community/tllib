@@ -1,0 +1,5 @@
+cmake_minimum_required(VERSION 3.27)
+project(tllib_external_consumer LANGUAGES CXX)
+find_package(tllib CONFIG REQUIRED)
+add_executable(tllib_external_consumer main.cpp)
+target_link_libraries(tllib_external_consumer PRIVATE tllib::core)
