@@ -17,10 +17,20 @@ Références : #259, #238, #239, #256, #257, #258, #242.
 - `ExecutionContext` inclut, selon besoin, un token de cancellation
   coopérative, un executor explicite, des options et des capabilities
   liées à l'appel ; ne pas exposer des champs non nécessaires.
-- Cancellation : points sûrs déclarés, pas de mutation partielle visible
-  lorsque l'opération garantit l'atomicité. Erreur structurée `cancelled`
-  distincte d'échec de validation et de timeout ; ne jamais convertir
-  une cancellation en valeur scientifique.
+- Cancellation : chaque opération déclare ses **points sûrs** et sa
+  stratégie de mutation. Si elle promet l'atomicité, annuler implique
+  rollback complet ou absence de commit visible. Si elle **n'est pas
+  atomique**, elle doit exposer de manière stable les effets effectivement
+  validés (identités/étapes/état observable) et un protocole de reprise
+  ou de réconciliation permettant d'éviter les duplications au retry.
+  Un simple `cancelled` silencieux après effets partiels est interdit.
+  Lorsque l'état des effets externes ne peut être connu, signaler
+  explicitement un résultat `outcome_indeterminate` / état à réconcilier,
+  et interdire le retry aveugle ; ne pas inventer un résultat scientifique.
+  S'il est impossible d'assurer l'une de ces garanties, désactiver la
+  cancellation pour la section critique et documenter le comportement.
+  Les erreurs de cancellation restent distinctes de validation/timeout
+  et préservent provenance, feature ID et conséquences observables.
 - Les callbacks providers ne sont invoqués ni en tenant des verrous
   internes arbitraires ni après expiration de leurs owners ; les contrats
   précisent synchronie, réentrance, erreurs et responsabilités.

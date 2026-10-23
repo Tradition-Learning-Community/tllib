@@ -22,6 +22,10 @@ Les politiques de préparation sont proposées à l'adoption :
 
 Contributions publiques courtoises, critiques techniques argumentées, aucune attaque personnelle, respect de la confidentialité des signalements de sécurité. En cas de comportement inapproprié ou de conflit d'intérêts, solliciter une revue indépendante par les mainteneurs désignés par l'ASBL. La discussion scientifique doit rester fondée sur les preuves et la traçabilité.
 
+## Signaler un problème sans contribuer de code
+
+Le formulaire **Défaut logiciel tllib** permet de signaler un bogue autonome dans ce dépôt, sans epic ou issue parent. Pour un problème scientifique normatif, utiliser les formulaires de `tllib-specs`. Une vulnérabilité exploitable est signalée selon [SECURITY.md](SECURITY.md), pas en issue publique.
+
 ## Avant toute contribution
 
 1. Lire [le contrat produit](docs/v1/PRODUCT-CONTRACT.md), #52 et les ADR.
