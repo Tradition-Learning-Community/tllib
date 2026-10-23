@@ -1,0 +1,17 @@
+tllib — Tradition Learning reference software library
+Copyright 2026 Tradition Learning Community ASBL
+
+The tllib project is maintained and governed by Tradition Learning Community
+ASBL and distributed under the Apache License, Version 2.0.
+
+Copyright in independently authored contributions remains with the respective
+contributors unless validly transferred by a separate written agreement.
+Distribution and incorporation are governed by the applicable open-source
+license; the project's stewardship is not an automatic transfer of copyright.
+
+Tradition Learning scientific specifications are maintained separately in
+tllib-specs under the Apache License, Version 2.0. This statement does not
+replace or modify any notices required by those specifications or by third
+party components that may be integrated in the future.
+
+Apache License 2.0: https://www.apache.org/licenses/LICENSE-2.0

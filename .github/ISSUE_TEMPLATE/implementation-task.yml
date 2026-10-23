@@ -1,0 +1,51 @@
+name: "Tâche logicielle V1"
+description: "Tâche autonome d'implémentation, outillage ou QA sous l'autorité de tllib"
+title: "[Task V1] "
+labels: []
+body:
+  - type: markdown
+    attributes:
+      value: "Référence : docs/v1/READINESS-AND-GOVERNANCE.md. Licence Apache-2.0 et DCO v1.1. Ne pas créer de décision scientifique ici."
+  - type: input
+    id: parent
+    attributes:
+      label: "Epic / dépendances"
+      description: "Numéros d'issues liés et ordre logique"
+      placeholder: "#52, dépend de #..."
+    validations:
+      required: true
+  - type: textarea
+    id: scope
+    attributes:
+      label: "Objectif et périmètre autonome"
+      description: "Quoi faire, quoi ne pas faire, interfaces imposées"
+    validations:
+      required: true
+  - type: textarea
+    id: normative
+    attributes:
+      label: "Provenance specs et TLC-FC (si applicables)"
+      description: "SHA complet tllib-specs, IDs et contract/acceptance ; sinon expliquer non applicable"
+    validations:
+      required: true
+  - type: textarea
+    id: acceptance
+    attributes:
+      label: "Critères de fermeture et preuves"
+      description: "Cas positifs et négatifs, commandes/tests et artefacts attendus"
+    validations:
+      required: true
+  - type: textarea
+    id: risk
+    attributes:
+      label: "Ownership, déterminisme, précision, sécurité, compatibilité"
+      description: "Risques concernés, sans inventer de science"
+  - type: checkboxes
+    id: authority
+    attributes:
+      label: "Autorité et statut"
+      options:
+        - label: "Le problème est logiciel ; une question scientifique éventuelle a sa propre issue dans tllib-specs"
+          required: true
+        - label: "Ce ticket n'est pas marqué ready sans toutes ses dépendances et décisions gelées"
+          required: true

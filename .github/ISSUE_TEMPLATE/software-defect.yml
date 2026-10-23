@@ -1,0 +1,44 @@
+name: "Défaut logiciel tllib"
+description: "Signaler un bug logiciel, documentaire, de build ou d'outil dans tllib sans issue parent préalable"
+title: "[Bug] "
+labels: []
+body:
+  - type: markdown
+    attributes:
+      value: "Pour un défaut scientifique normatif, ouvrir une issue dans tllib-specs. Pour une faille de sécurité exploitable, NE PAS divulguer ici : consulter SECURITY.md et privilégier un rapport privé."
+  - type: textarea
+    id: observed
+    attributes:
+      label: "Comportement observé"
+      description: "Erreur, impact et résultat réel ; ne joindre aucun secret"
+    validations:
+      required: true
+  - type: textarea
+    id: expected
+    attributes:
+      label: "Comportement attendu"
+      description: "Contrat ou comportement documenté, avec références si disponibles"
+    validations:
+      required: true
+  - type: textarea
+    id: reproduce
+    attributes:
+      label: "Reproduction minimale"
+      description: "Étapes, commande, entrée non sensible et sortie observée"
+    validations:
+      required: true
+  - type: input
+    id: version
+    attributes:
+      label: "Version/commit de tllib et environnement (si applicables)"
+      placeholder: "SHA, système, compilateur, CPython ou non applicable"
+  - type: input
+    id: specs
+    attributes:
+      label: "Snapshot tllib-specs / TLC-FC (si applicables)"
+      placeholder: "SHA complet, identifiant ou non applicable"
+  - type: textarea
+    id: additional
+    attributes:
+      label: "Logs expurgés et informations utiles (facultatif)"
+      description: "Ne pas publier de données confidentielles ou d'exploit exploitable"
