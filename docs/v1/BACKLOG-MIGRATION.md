@@ -5,37 +5,46 @@
 Un problème possède une seule issue autoritaire.
 
 - questions scientifiques/normatives : `tllib-specs` ;
-- architecture, runtime, bindings, packaging et domaines implémentés :
-  `tllib`.
+- architecture, runtime, bindings, packaging, domaines et lots d'implémentation : `tllib`.
 
-## tllib-specs
+## État atteint
 
-- conserver l'historique de publication/handoff déjà terminé ;
-- #206 est superseded par l'epic V1 autoritaire dans `tllib` ;
-- #207–#214 doivent être remplacées par les issues de fondation correspondantes
-  dans `tllib`, puis fermées comme superseded ;
-- #179–#204 et #215–#224 doivent renvoyer vers les 36 epics domaine de
-  `tllib`, puis être fermées comme superseded ;
-- #230 doit être superseded par le guide contributeur de `tllib` ;
-- toute nouvelle ambiguïté scientifique reste ou est créée dans
-  `tllib-specs`.
+### tllib-specs
 
-## tllib
+Les anciennes issues d'implémentation ont été fermées comme superseded :
 
-- #1–#9 restent dans l'historique ; ne pas les rouvrir pour réécrire l'histoire ;
-- #10–#14 sont réécrites pour C++ + Python ;
-- #15–#50 restent les 36 epics domaine ;
-- #51 devient le guide multi-voie contributeur ;
-- #52 devient l'epic autoritaire V1 complète ;
-- #53–#230 gardent les TLC-FC et les liens de snapshot mais reçoivent le nouveau
-  template end-to-end ;
-- #231 reste un blocker d'implémentation lié à une issue normative créée dans
-  `tllib-specs`.
+- #206–#214 : fondation/architecture/packaging/documentation tllib ;
+- #179–#204 et #215–#224 : 36 domaines ;
+- #230 : guide contributeur tllib.
 
-## Anti-duplication
+Elles restent dans l'historique avec des liens vers leurs remplacements dans tllib.
+
+Le dépôt conserve les vraies questions normatives. Exemple actuel :
+- tllib-specs#231 — clarifier les entrées de TLC-FC-30-EXPANSION-014.
+
+### tllib
+
+- #1–#9 restent dans l'historique et ne définissent plus l'architecture V1 ;
+- #10–#14 sont réalignées C++ + Python ;
+- #15–#50 sont les 36 epics domaine autoritaires ;
+- #51 est le guide contributeur multi-profils ;
+- #52 est l'epic autoritaire V1 complète ;
+- #53–#230 sont les 178 lots TLC-FC migrés vers le template V1 end-to-end ;
+- #231 est un blocker d'implémentation lié à tllib-specs#231 ;
+- #234–#244 sont les fondations techniques autonomes V1.
+
+## Règle anti-duplication
 
 Avant toute nouvelle issue :
+
 1. identifier le dépôt autoritaire ;
 2. chercher une issue existante ;
-3. lier un blocker au lieu de recopier le problème ;
-4. garder une seule checklist d'acceptation autoritaire.
+3. lier un blocker au lieu de recopier un problème ;
+4. garder une seule checklist d'acceptation autoritaire ;
+5. ne jamais résoudre une ambiguïté scientifique dans tllib.
+
+## Règle de synchronisation
+
+Une évolution de tllib-specs passe par #244 puis #240.
+
+Un nouveau domaine ou TLC-FC reste un gap tant qu'une décision explicite n'existe pas dans tllib. Aucun support implicite n'est autorisé.
