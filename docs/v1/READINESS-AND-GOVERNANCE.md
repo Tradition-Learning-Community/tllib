@@ -1,7 +1,7 @@
 # V1 — Gouvernance des issues et ouverture aux contributeurs
 
 Statut : **politique proposée pour revue** (PR de préparation, sans implémentation).
-Autorité : tllib pour le travail logiciel ; tllib-specs pour les décisions scientifiques.
+Autorité de gouvernance du projet : **Tradition Learning Community ASBL** (voir `GOVERNANCE.md`). tllib reste autoritaire pour le logiciel, tllib-specs pour les décisions scientifiques. Contributions sous Apache-2.0 avec DCO 1.1, droits des auteurs préservés (voir `LICENSE`, `NOTICE`, `DCO`).
 Le document ne prétend pas que les gates techniques ont déjà été exécutés.
 
 ## Taxonomie minimale
@@ -20,6 +20,10 @@ Milestone recommandé : `V1 — preparation` pour les décisions/fondations
 et `V1 — implementation` pour domaines/lots, sous réserve de disponibilité
 de milestones dans GitHub. Les epics regroupent les issues, pas de travail
 en doublon.
+
+## Licence et contribution
+
+L'association détient la responsabilité du projet et de ses publications. Elle n'acquiert pas automatiquement les droits d'auteur de toutes les contributions ; toute cession exige un accord distinct. Le prérequis de publication d'une licence valide est suivi par #263. Avant de marquer une contribution externe prête, `LICENSE`, `NOTICE`, `DCO`, `GOVERNANCE.md` doivent être intégrés sur `main`. Ce préalable juridique est **distinct** des gates de CMake, des labels et de conformité scientifique.
 
 ## Contrat d'une issue prête
 

@@ -26,6 +26,7 @@ critères d'acceptation.
 | #13 | SECURITY-QUALITY-COMPATIBILITY | threat model et tests négatifs |
 | #51 | READINESS-AND-GOVERNANCE + CONTRIBUTING | parcours clonable/PR template |
 | #261 | READINESS-AND-GOVERNANCE | labels/milestones/gates **appliqués** |
+| #263 | LICENSE + NOTICE + DCO + GOVERNANCE + LICENSE-GATE | fichiers fusionnés sur main, licence projet publiée et règles de contribution vérifiées |
 
 ## Ordre d'exécution sans implémenter les domaines
 

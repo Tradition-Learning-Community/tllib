@@ -1,3 +1,11 @@
+## Licence et provenance
+
+- [ ] Je soumets ma contribution sous la licence Apache-2.0 de `tllib` et respecte les licences des tiers.
+- [ ] Chaque commit que j'ai personnellement créé porte mon `Signed-off-by` DCO v1.1 (`git commit -s`), ou j'ai indiqué les raisons et actions correctives nécessaires.
+- [ ] Je n'affirme pas transférer les droits d'auteur d'autres personnes à l'ASBL.
+
+Références : [LICENSE](../LICENSE) · [DCO](../DCO) · [GOVERNANCE](../GOVERNANCE.md).
+
 ## Issue autoritaire et périmètre
 
 Closes # (uniquement si les critères sont tous réellement satisfaits)

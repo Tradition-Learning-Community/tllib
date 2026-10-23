@@ -5,7 +5,7 @@ labels: []
 body:
   - type: markdown
     attributes:
-      value: "Référence : docs/v1/READINESS-AND-GOVERNANCE.md. Ne pas créer de décision scientifique ici."
+      value: "Référence : docs/v1/READINESS-AND-GOVERNANCE.md. Licence Apache-2.0 et DCO v1.1. Ne pas créer de décision scientifique ici."
   - type: input
     id: parent
     attributes:

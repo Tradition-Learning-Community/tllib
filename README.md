@@ -1,12 +1,18 @@
 # tllib
 
-`tllib` est l'implémentation logicielle de référence de **Tradition Learning**.
+**tllib** est la bibliothèque logicielle scientifique open source de **Tradition Learning**, portée, maintenue et gouvernée par **Tradition Learning Community ASBL**.
+
+**Licence : [Apache-2.0](LICENSE)** · **[Gouvernance](GOVERNANCE.md)** · **[Contributions](CONTRIBUTING.md)** · **[DCO](DCO)** · **[Sécurité](SECURITY.md)**
 
 > **État actuel : pré-implémentation V1.**
 >
 > L'architecture est définie et le backlog est réaligné. L'ancien prototype
 > Python-first a été retiré afin qu'il ne soit pas confondu avec l'architecture
 > V1. Le runtime C++/API Python n'est pas encore implémenté.
+
+## Projet communautaire
+
+Les scientifiques, mathématiciens, ingénieurs et développeurs peuvent contribuer sous les règles de [CONTRIBUTING.md](CONTRIBUTING.md). L'ASBL administre le projet et coordonne les versions ; chaque auteur conserve les droits sur sa contribution sauf cession écrite distincte. Le dépôt est sous Apache-2.0, qui ne transfère pas automatiquement le copyright des contributeurs. Voir [NOTICE](NOTICE) et [GOVERNANCE.md](GOVERNANCE.md). Aucun CLA ni transfert général de droits n'est exigé ; les contributions utilisent le [DCO 1.1](DCO).
 
 ## Autorité des dépôts
 
