@@ -64,4 +64,7 @@ Voir [plan du backlog](docs/v1/ISSUE-PLAN.md).
 
 Le premier squelette suivait une hypothèse Python-first remplacée.
 Il a été retiré pour éviter deux architectures concurrentes ; l'historique
-Git conserve ce travail. Le premier squelette natif relève de #246 et #234.
+Git conserve ce travail. Le premier squelette natif minimal (CMake/C++20/CTest et export CMake)
+a été fusionné par PR #266 ; la véritable API C++, le runtime,
+les providers et les bindings Python restent à implémenter.
+Voir [le smoke test de fondation](docs/v1/FOUNDATION-BUILD-SMOKE.md).

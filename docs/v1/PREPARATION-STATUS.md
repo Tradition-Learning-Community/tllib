@@ -9,14 +9,14 @@ critères d'acceptation.
 | --- | --- | --- |
 | #260 | PLATFORM-2027 ; Tier 1/Tier 2 cibles | support validé par builds + wheels |
 | #247 | DEPENDENCIES-BUILD-POLICY | inventaire des dépendances retenues |
-| #246 | DEPENDENCIES-BUILD-POLICY | CMake/presets/configure/build |
+| #246 | DEPENDENCIES-BUILD-POLICY + FOUNDATION-BUILD-SMOKE | socle CMake/presets exécuté Linux/GCC ; compléter cibles et plateforme visées |
 | #259 | CONCURRENCY-PYTHON-API | tests race, cancellation, providers |
 | #256 | CONCURRENCY-PYTHON-API : nanobind candidat | spike comparatif nanobind/pybind11 mesuré |
 | #250 | ARRAYS-NUMERICS-CONTRACT | inventaire tracé 36/36 et TLC-FC |
 | #251 | ARRAYS-NUMERICS-CONTRACT | types natifs/tests ownership/layout |
 | #253 | ARRAYS-NUMERICS-CONTRACT | sélection fondée sur #250 et mesures |
-| #248 | DEPENDENCIES-BUILD-POLICY | export et consommateur find_package |
-| #249 | SECURITY-QUALITY-COMPATIBILITY | CTest, format, analyse appliqués |
+| #248 | DEPENDENCIES-BUILD-POLICY + FOUNDATION-BUILD-SMOKE | export/consommateur CMake Linux prouvés ; politiques de version et tests de cibles réelles restants |
+| #249 | SECURITY-QUALITY-COMPATIBILITY + FOUNDATION-BUILD-SMOKE | CTest minimal 1/1 réussi Linux ; format/analyse statique et tests natifs réels à ajouter |
 | #254 | SPECS-LOCK-AND-CONFORMANCE | lock + vérif réelle/offline/négative |
 | #255 | SPECS-LOCK-AND-CONFORMANCE | specgen exécuté deux fois, identité |
 | #258 | CONCURRENCY-PYTHON-API | API/stubs/parité sur objets natifs |
