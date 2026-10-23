@@ -1,0 +1,43 @@
+name: "Blocage d'implémentation dû aux specs"
+description: "Créer un lien ciblé vers la question scientifique autoritaire dans tllib-specs"
+title: "[Blocker specs] "
+labels: []
+body:
+  - type: markdown
+    attributes:
+      value: "La décision scientifique elle-même doit être déposée dans tllib-specs. Ce ticket tllib décrit seulement le périmètre logiciel bloqué."
+  - type: input
+    id: upstream
+    attributes:
+      label: "Issue scientifique tllib-specs autoritaire"
+      placeholder: "https://github.com/Tradition-Learning-Community/tllib-specs/issues/..."
+    validations:
+      required: true
+  - type: input
+    id: feature
+    attributes:
+      label: "TLC-FC exact"
+      placeholder: "TLC-FC-..."
+    validations:
+      required: true
+  - type: input
+    id: affected
+    attributes:
+      label: "Issue domaine/lot impactée"
+      placeholder: "#... / #..."
+    validations:
+      required: true
+  - type: textarea
+    id: ambiguity
+    attributes:
+      label: "Ambiguïté contractuelle observable"
+      description: "Extrait référencé contract/acceptance, sans proposer une sémantique inventée"
+    validations:
+      required: true
+  - type: textarea
+    id: resume
+    attributes:
+      label: "Preuves requises pour reprise"
+      description: "Nouveau snapshot certifié, diff #244, verrou #254, conformance #241"
+    validations:
+      required: true

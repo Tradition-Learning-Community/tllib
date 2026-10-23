@@ -1,0 +1,8 @@
+blank_issues_enabled: false
+contact_links:
+  - name: "Question, défaut ou décision scientifique normative"
+    url: "https://github.com/Tradition-Learning-Community/tllib-specs/issues/new/choose"
+    about: "Les contrats scientifiques, erreurs normatives et ambiguïtés vivent dans tllib-specs."
+  - name: "Consulter le parcours des contributeurs"
+    url: "https://github.com/Tradition-Learning-Community/tllib/blob/main/CONTRIBUTING.md"
+    about: "Lire les règles avant de proposer une tâche tllib."
