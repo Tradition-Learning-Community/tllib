@@ -70,8 +70,12 @@ scientifique Python alternatif.
 
 ## Exécuter les tests
 
-**Il n'existe actuellement pas encore de configuration native CMake,
-de wheels ni de suite CTest exécutables**. Les commandes futures
-seront publiées et validées par #246/#249/#257 ; les inventer ici
-induirait le contributeur en erreur. Les tests documentaires peuvent
-être revus sans démarrer une CI de compilation.
+Le **socle de build C++20** et son test CTest sont disponibles (PR #266).
+Depuis un checkout propre avec CMake >= 3.27, Ninja et GCC/Clang
+ou compilateur supportant C++20 : `cmake --preset dev`,
+`cmake --build --preset dev`, `ctest --preset dev`.
+Un exemple de consommateur installé figure dans
+[FOUNDATION-BUILD-SMOKE](docs/v1/FOUNDATION-BUILD-SMOKE.md).
+Il ne démontre **pas** l'implémentation du runtime, des domaines ou
+des bindings Python, et les wheels restent inexistantes.
+L'ensemble des contrôles supplémentaires (#249/#257/#243) reste ouvert.
