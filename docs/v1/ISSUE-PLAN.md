@@ -1,100 +1,77 @@
 # Plan V1 — groupes de travail autonomes
 
-## EPIC 0 — Architecture et gouvernance
-- A0.1 Adopter contrat produit + ADR.
-- A0.2 Migrer le backlog sans doublons.
-- A0.3 Réinitialiser l'arbre de tllib après validation des ADR.
+## Epic autoritaire
 
-## EPIC 1 — Toolchain et build natif
-- A1.1 CMake + presets + C++20.
-- A1.2 Politique de dépendances.
-- A1.3 Installation/export C++.
-- A1.4 clang-format/clang-tidy/warnings.
+- #52 — V1 complète : runtime C++20 + API Python + conformité au snapshot entier.
 
-## EPIC 2 — Primitives fondamentales
-- A2.1 FeatureId/DomainId/versions/fingerprints.
-- A2.2 statuts scientifique/exécution.
-- A2.3 Error + Result.
-- A2.4 sérialisation canonique.
+## Architecture et gouvernance
 
-## EPIC 3 — Mémoire, arrays et numérique
-- A3.1 inventaire des besoins des 36 domaines.
-- A3.2 ArrayView/dtype/shape/strides/device.
-- A3.3 ownership outputs/buffers.
-- A3.4 sélection de backends numériques.
-- A3.5 interop NumPy zero-copy.
-- A3.6 DLPack.
+- #233 — architecture V1 et ADR.
+- #234 — reset du dépôt sur la structure native C++20 + Python.
 
-## EPIC 4 — Runtime, shared contracts et providers
-- A4.1 8 shared contracts C++.
-- A4.2 runtime feature registry.
-- A4.3 dispatcher.
-- A4.4 ExecutionContext.
-- A4.5 provider interface + registry.
-- A4.6 provider adapter Python.
+## Fondations techniques
 
-## EPIC 5 — Specs, codegen et conformité
-- A5.1 specs.lock V1.
-- A5.2 verifier de snapshot.
-- A5.3 specgen déterministe.
-- A5.4 generated artifact policy.
-- A5.5 loader/conformance model.
-- A5.6 coverage report complet.
-- A5.7 diff/migration de snapshots.
+- #235 — primitives/API C++ fondamentales.
+- #236 — mémoire, ArrayView, numérique et zéro-copie.
+- #237 — 8 contrats structurels partagés en C++.
+- #238 — runtime registry, dispatcher et ExecutionContext.
+- #239 — providers natifs et adaptation Python.
+- #240 — specs.lock, vérification et specgen.
+- #241 — conformité catalogue-complet et coverage.
+- #242 — bindings/API Python.
+- #243 — CI progressive et impact-aware.
+- #244 — diff/synchronisation des snapshots tllib-specs.
 
-## EPIC 6 — Bindings et API Python
-- A6.1 spike nanobind vs pybind11.
-- A6.2 skeleton package Python.
-- A6.3 mapping primitives C++ -> Python.
-- A6.4 design API Python.
-- A6.5 typing/stubs.
-- A6.6 parity harness.
+## Travaux transversaux
 
-## EPIC 7 — Sécurité, qualité et performance
-- A7.1 threat model.
-- A7.2 ASan/UBSan ; TSan si pertinent.
-- A7.3 fuzzing.
-- A7.4 benchmark harness.
-- A7.5 performance budgets fondés sur mesures.
-- A7.6 dépendances/SBOM/licences.
+- #10 — documentation C++/Python/domaines.
+- #11 — packaging/release natif + Python.
+- #12 — performance native + coût bindings.
+- #13 — sécurité runtime/specs/providers/supply chain.
+- #14 — compatibilité SemVer/API/ABI/Python/specs.
+- #51 — parcours contributeurs C++, Python, tooling, docs et conformité.
 
-## EPIC 8 — CI/CD impact-aware
-- A8.1 graph d'impact fichiers -> targets -> TLC-FC.
-- A8.2 PR Fast.
-- A8.3 PR Native.
-- A8.4 main validation.
-- A8.5 nightly.
-- A8.6 sccache/caches sûrs.
-- A8.7 release workflow.
+## 36 domaines
 
-## EPIC 9 — Packaging et compatibilité
-- A9.1 SemVer + compatibilité specs/runtime.
-- A9.2 politique API C++.
-- A9.3 ABI/plugin boundary.
-- A9.4 compatibilité Python.
-- A9.5 wheels multi-plateformes.
-- A9.6 artifacts natifs.
+Les issues #15–#50 restent les epics de domaine autoritaires.
 
-## EPIC 10 — Documentation
-- A10.1 guide développeur C++.
-- A10.2 guide contributeur Python/tooling.
-- A10.3 architecture + ADR.
-- A10.4 API docs C++.
-- A10.5 API docs Python.
-- A10.6 matrice de support générée.
+Chaque domaine :
+- découvre sa population dynamiquement depuis le catalogue du snapshot verrouillé ;
+- couvre 100 % de ses TLC-FC ;
+- utilise les fondations communes ;
+- ne crée aucune architecture locale provisoire.
 
-## EPIC 11 — 36 domaines
+Aucun domaine n'est une mini-release. Les 36 convergent vers la même V1.
 
-Les 36 epics actuels sont conservés. Chaque domaine couvre toute sa population
-du snapshot cible. Les lots TLC-FC existants restent les unités de découpage,
-mais sont réalisés selon le nouveau template C++/Python/conformance.
+## Lots TLC-FC
 
-## EPIC 12 — V1 Release Gate
+Les 178 issues #53–#230 restent les unités de contribution autonomes.
+
+Elles ont été migrées vers un contrat V1 commun :
+- IDs résolus depuis les catalogues du snapshot certifié ;
+- executable -> implémentation C++ de référence ;
+- conditionally_executable -> provider commun #239 ;
+- structural_only/unresolved -> représentation fidèle sans fausse exécution ;
+- conformance #241 ;
+- binding/parité Python #242 lorsque applicable.
+
+Le découpage des lots est conservé ; les anciennes recettes Python-first ne sont plus autoritaires.
+
+## Blockers normatifs
+
+- #231 — blocker runtime pour TLC-FC-30-EXPANSION-014.
+- la décision normative autoritaire vit dans tllib-specs#231.
+
+Toute ambiguïté future suit le même modèle : issue normative dans tllib-specs, blocker ciblé dans tllib.
+
+## V1 Release Gate
+
+La release est autorisée seulement si #52 et docs/v1/DEFINITION-OF-DONE.md sont satisfaits sur le même commit tllib et le même snapshot tllib-specs :
 - catalogue complet ;
 - executable gate ;
-- conditional gate ;
+- conditional/provider gate ;
 - structural/unresolved gate ;
-- C++ API gate ;
-- Python API gate ;
+- API C++ gate ;
+- API Python/parity gate ;
 - security/performance gate ;
-- reproducible release.
+- packaging/release reproductible.
