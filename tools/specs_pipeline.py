@@ -362,7 +362,7 @@ def generated(lock: dict, index: dict) -> dict[str, bytes]:
         ""
     ]).encode("utf-8")
     return {"generated/specs/feature_index.json": canonical(data),
-            "generated/specs/feature_metadata.hpp": header}
+            "include/tllib/generated/feature_metadata.hpp": header}
 
 def write_generated(outputs: dict[str, bytes], root: Path, check: bool) -> None:
     for relative, contents in sorted(outputs.items()):
