@@ -5,6 +5,8 @@
 #include <array>
 #include <string_view>
 namespace tllib::generated {
+inline constexpr std::string_view specs_commit = "07439babd59c657354e3200ed24c55e2e3eeb72c";
+inline constexpr std::string_view catalog_sha256 = "61ad981d2d65500af2b18aae659867dfa7e738a6cf1a0f8737956eae1624ee88";
 struct FeatureMetadata {
   std::string_view feature_id, domain, package_status, scientific_status, execution_status;
 };
