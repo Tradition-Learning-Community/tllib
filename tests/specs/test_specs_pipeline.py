@@ -197,6 +197,46 @@ class SyntheticCase(unittest.TestCase):
         self.assertEqual(report["summary"]["invalid"], 1)
         self.assertEqual(report["diagnostics"][0]["code"], "MISSING_ACCEPTANCE_PROOF")
 
+    def test_trusted_ctest_evidence_required_for_structural_claim(self):
+        lock, index = self.validate()
+        artifact = self.tllib / "tests" / "feature_acceptance.cpp"
+        artifact.parent.mkdir(parents=True, exist_ok=True)
+        artifact.write_text("// Owned by tllib, not by tllib-specs\n", encoding="utf-8")
+        junit = self.tllib / "ctest-results.xml"
+        junit.write_text('<testsuite><testcase name="structural-fixture" /></testsuite>', encoding="utf-8")
+        proof = {"test_id": "MASTER-001-A01", "result": "passed",
+                 "artifact": "tests/feature_acceptance.cpp", "ctest_name": "structural-fixture"}
+        write_json(self.decisions_path, {
+            "schema_version": "1.0", "specs_commit": self.commit,
+            "features": [{"feature_id": FID, "disposition": "structural",
+                          "reason": "Verified structural acceptance only.", "evidence": [proof]}],
+        })
+        missing, _, state = pipeline.report(lock, index, self.decisions_path, False)
+        self.assertEqual(state, 1)
+        self.assertEqual(missing["diagnostics"][0]["code"], "MISSING_ACCEPTANCE_PROOF")
+        accepted, _, state = pipeline.report(lock, index, self.decisions_path, True, junit)
+        self.assertEqual(state, 0)
+        self.assertEqual(accepted["summary"]["structural"], 1)
+        junit.write_text('<testsuite><testcase name="structural-fixture"><failure /></testcase></testsuite>',
+                         encoding="utf-8")
+        rejected, _, state = pipeline.report(lock, index, self.decisions_path, True, junit)
+        self.assertEqual(state, 1)
+        self.assertEqual(rejected["summary"]["invalid"], 1)
+        junit.write_text('<!DOCTYPE foo><testsuite />', encoding="utf-8")
+        self.check_error("INVALID_TEST_RESULTS",
+                         lambda: pipeline.report(lock, index, self.decisions_path, False, junit))
+
+    def test_explicit_invalid_decision_cannot_pass_gate(self):
+        lock, index = self.validate()
+        write_json(self.decisions_path, {
+            "schema_version": "1.0", "specs_commit": self.commit,
+            "features": [{"feature_id": FID, "disposition": "invalid",
+                          "reason": "Unresolved invalid runtime state.", "evidence": []}],
+        })
+        report, _, result = pipeline.report(lock, index, self.decisions_path, False)
+        self.assertEqual(result, 1)
+        self.assertEqual(report["diagnostics"][0]["code"], "INVALID_DECISION")
+
     def test_manifest_status_and_shared_cycle_detected(self):
         lock, handoff, catalog = pipeline.verify_lock(self.lock_path, self.specs)
         altered = json.loads(json.dumps(catalog))
