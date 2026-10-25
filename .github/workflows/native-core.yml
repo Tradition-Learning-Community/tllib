@@ -1,0 +1,28 @@
+name: Native core C++20
+on:
+  pull_request:
+    paths:
+      - 'include/tllib/**'
+      - 'tests/**'
+      - 'CMakeLists.txt'
+      - '.github/workflows/native-core.yml'
+  push:
+    branches: [main]
+    paths:
+      - 'include/tllib/**'
+      - 'tests/**'
+      - 'CMakeLists.txt'
+      - '.github/workflows/native-core.yml'
+permissions:
+  contents: read
+jobs:
+  cpp20-smoke:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Configure
+        run: cmake -S . -B build/native-core -DBUILD_TESTING=ON
+      - name: Build
+        run: cmake --build build/native-core --parallel 2
+      - name: Test
+        run: ctest --test-dir build/native-core --output-on-failure
