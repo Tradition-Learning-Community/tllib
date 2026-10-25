@@ -1,0 +1,61 @@
+name: Pinned specs and catalogue conformance
+on:
+  pull_request:
+    paths:
+      - 'specs.lock.json'
+      - 'tools/specs_pipeline.py'
+      - 'tests/specs/**'
+      - 'conformance/**'
+      - 'generated/specs/**'
+      - '.github/workflows/pinned-specs.yml'
+  push:
+    branches: [main]
+    paths:
+      - 'specs.lock.json'
+      - 'tools/specs_pipeline.py'
+      - 'tests/specs/**'
+      - 'conformance/**'
+      - 'generated/specs/**'
+      - '.github/workflows/pinned-specs.yml'
+permissions:
+  contents: read
+jobs:
+  verify-handoff:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout tllib
+        uses: actions/checkout@v5
+      - name: Checkout the explicitly pinned tllib-specs snapshot
+        uses: actions/checkout@v5
+        with:
+          repository: Tradition-Learning-Community/tllib-specs
+          ref: 07439babd59c657354e3200ed24c55e2e3eeb72c
+          path: pinned-specs
+          persist-credentials: false
+      - name: Validate offline lock and complete handoff
+        run: python3 tools/specs_pipeline.py verify --specs pinned-specs
+      - name: Check checked-in generated structural files for zero drift
+        run: python3 tools/specs_pipeline.py check-generated --specs pinned-specs
+      - name: Create deterministic coverage reports and enforce complete decisions
+        run: python3 tools/specs_pipeline.py report --specs pinned-specs --output build/specs-report
+      - name: Verify two independent generations are byte-identical
+        run: |
+          mkdir -p "$RUNNER_TEMP/gen1" "$RUNNER_TEMP/gen2"
+          python3 tools/specs_pipeline.py generate --specs pinned-specs --root "$GITHUB_WORKSPACE" > /dev/null
+          python3 tools/specs_pipeline.py check-generated --specs pinned-specs
+          python3 tools/specs_pipeline.py report --specs pinned-specs --output "$RUNNER_TEMP/gen1"
+          python3 tools/specs_pipeline.py report --specs pinned-specs --output "$RUNNER_TEMP/gen2"
+          cmp "$RUNNER_TEMP/gen1/coverage.json" "$RUNNER_TEMP/gen2/coverage.json"
+          cmp "$RUNNER_TEMP/gen1/coverage.md" "$RUNNER_TEMP/gen2/coverage.md"
+          git diff --exit-code -- generated/specs/
+      - name: Run negative and synthetic pipeline tests
+        run: python3 -m unittest discover -s tests/specs -p 'test_*.py' -v
+      - name: Publish machine-readable and human-readable coverage
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: pinned-specs-coverage
+          path: |
+            build/specs-report/coverage.json
+            build/specs-report/coverage.md
+          if-no-files-found: ignore
