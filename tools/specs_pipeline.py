@@ -307,8 +307,8 @@ def validate_catalog(lock: dict, handoff: Handoff, catalog: dict) -> dict:
                    for d in manifest.get("shared_dependencies", [])]
         cat_dep_ids = [(d.get("shared_contract_id"), d.get("version"))
                        for d in entry.get("shared_dependencies", [])]
-        require(dep_ids == cat_dep_ids and all(cid in shared_by_id and version == "1.0.0"
-                    for cid, version in dep_ids),
+        require(sorted(dep_ids) == sorted(cat_dep_ids) and len(set(dep_ids)) == len(dep_ids) and
+                all(cid in shared_by_id and version == "1.0.0" for cid, version in dep_ids),
                 "UNKNOWN_DEPENDENCY", base, cat_dep_ids, dep_ids)
         tests = acceptance_doc.get("tests")
         require(isinstance(tests, list), "INVALID_ACCEPTANCE", base, "test list", tests)
@@ -466,8 +466,8 @@ def report(lock: dict, index: dict, decisions_path: Path, enforce_release: bool)
     lines = [
         "# tllib V1 catalogue conformance",
         "",
-        f"Specs commit: \`{lock['commit']}\`",
-        f"Catalogue SHA-256: \`{lock['catalog_sha256']}\`",
+        f"Specs commit: `{lock['commit']}`",
+        f"Catalogue SHA-256: `{lock['catalog_sha256']}`",
         f"Features: **{len(coverage)}**; explicit decisions: **{len(decisions)}**;",
         f"Decision gate: **{machine['gate']}**; release gate: **{'on' if enforce_release else 'off'}**",
         "",
