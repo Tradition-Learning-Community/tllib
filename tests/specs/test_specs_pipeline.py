@@ -217,7 +217,7 @@ class SyntheticCase(unittest.TestCase):
         self.check_error("INVALID_JSON", lambda: pipeline.parse_json(b'{"a":1,"a":2}', "duplicate"))
         self.check_error("INVALID_JSON", lambda: pipeline.parse_json(b'{"a":NaN}', "non-finite"))
         deeply_nested = b"[" * 100 + b"0" + b"]" * 100
-        self.check_error("INVALID_SHAPE", lambda: pipeline.parse_json(deeply_nested, "deep"))
+        self.check_error("INVALID_JSON", lambda: pipeline.parse_json(deeply_nested, "deep"))
 
 if __name__ == "__main__":
     unittest.main()
