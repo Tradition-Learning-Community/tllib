@@ -1,12 +1,15 @@
 #include <tllib/shared/contracts.hpp>
 #include <cassert>
 #include <string>
+#include <unordered_set>
 #include <type_traits>
 #include <utility>
 using namespace tllib;
 int main() {
   auto fid=core::FeatureId::parse("TLC-FC-00-MASTER-005");
   assert(fid && fid.value_if()->str()=="TLC-FC-00-MASTER-005");
+  std::unordered_set<core::FeatureId> ids;ids.insert(*fid.value_if());
+  ids.insert(*core::FeatureId::parse("TLC-FC-00-MASTER-005").value_if());assert(ids.size()==1);
   assert(!core::FeatureId::parse("tlc-fc-00-master-005"));
   assert(!core::FeatureId::parse("TLC-FC-00--MASTER-005"));
   assert(!core::FeatureId::parse("TLC-FC-00-MASTER-5"));
