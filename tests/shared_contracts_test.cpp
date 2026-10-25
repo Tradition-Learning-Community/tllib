@@ -65,7 +65,11 @@ int main() {
   shared::StructuredError err{"MASTER_REFERENCE_SET_MISMATCH","invalid_input","reference set mismatch",fid.value_if()?std::optional<core::FeatureId>(*fid.value_if()):std::nullopt,
     shared::Recoverability::recoverable,shared::PublicResult::no_partial_result,shared::FailureAtomicity::no_observable_partial_result,{{"count","1"}}};
   assert(shared::validate(err));assert(err.canonical()==err.canonical());
-  shared::Traceability tr;tr.categories[0].push_back(ref);assert(shared::validate(tr));
+  const auto normalized=shared::to_core_error(err);
+  assert(normalized.stable_code=="MASTER_REFERENCE_SET_MISMATCH" && normalized.feature_id==fid.value_if()->str());
+  assert(normalized.context.at("count")=="1");
+  shared::Traceability tr;assert(shared::validate(tr));
+  tr.categories[0].push_back(ref);assert(shared::validate(tr));
   assert(tr.resolves([](std::string_view p){return p=="maths/00-master/master.md";}));
   assert(!tr.resolves([](std::string_view){return false;}));
   tr.categories[0].push_back(ref);assert(!shared::validate(tr));tr.categories[0].pop_back();
@@ -84,4 +88,9 @@ int main() {
   assert(shared::wire::decode(err.canonical(),"TLC-HC-STRUCTURED-ERROR"));
   assert(shared::wire::decode(tr.canonical(),"TLC-HC-TRACEABILITY"));
   assert(shared::wire::decode(result.value_if()->canonical(),"TLC-HC-DESCRIPTOR-ENVELOPE"));
+  const auto canonical_result=result.value_if()->canonical();
+  auto rerendered=shared::wire::roundtrip(canonical_result,"TLC-HC-DESCRIPTOR-ENVELOPE");
+  assert(rerendered && *rerendered.value_if()==canonical_result);
+  const auto opaque_copy=shared::wire::roundtrip(opaque.canonical(),"TLC-HC-OPAQUE-VALUE");
+  assert(opaque_copy && *opaque_copy.value_if()==opaque.canonical());
 }
