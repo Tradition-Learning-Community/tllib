@@ -1,0 +1,281 @@
+#include <tllib/runtime/registry.hpp>
+#include <atomic>
+#include <cassert>
+#include <chrono>
+#include <future>
+#include <memory>
+#include <stdexcept>
+#include <string>
+#include <thread>
+using namespace tllib;
+using namespace std::chrono_literals;
+
+static core::FeatureId feature(const char* id) {auto r=core::FeatureId::parse(id);assert(r);return *r.value_if();}
+static core::DomainId domain(const char* id) {auto r=core::DomainId::parse(id);assert(r);return *r.value_if();}
+static core::Fingerprint snapshot(){auto r=core::Fingerprint::parse(std::string(40,'a'));assert(r);return *r.value_if();}
+static providers::CapabilityId capability(const char* id){auto r=providers::CapabilityId::parse(id);assert(r);return *r.value_if();}
+static bool is_error(const auto& r,std::string_view code){return !r && r.error_if() && r.error_if()->stable_code && *r.error_if()->stable_code==code;}
+
+class FakeProvider final : public providers::Provider {
+ public:
+  enum Mode {ok, invalid, throws, cancel_after};
+  explicit FakeProvider(Mode mode=ok,runtime::CancellationSource* cancellation=nullptr)
+    :mode_(mode),source_(cancellation){}
+  core::Result<providers::ProviderResponse> invoke(const providers::ProviderRequest& r,
+      const runtime::ExecutionContext&) const override {
+    ++calls;
+    if(mode_==throws)throw std::runtime_error("secret provider failure");
+    if(mode_==cancel_after && source_)source_->request_stop();
+    return providers::ProviderResponse{mode_==invalid?"wrong.contract":"fixture.output",r.payload=="in"?"provider_out":"unexpected"};
+  }
+  mutable std::atomic<int> calls{0};
+ private:
+  Mode mode_;
+  runtime::CancellationSource* source_;
+};
+class EchoHandler final : public runtime::FeatureHandler {
+ public:
+  core::Result<std::string> execute(const runtime::Invocation&,runtime::ProviderAccess&,
+      const runtime::ExecutionContext&) const override {return std::string("out");}
+};
+class ConditionalHandler final : public runtime::FeatureHandler {
+ public:
+  explicit ConditionalHandler(bool use=true):use_(use){}
+  core::Result<std::string> execute(const runtime::Invocation& request,runtime::ProviderAccess& p,
+      const runtime::ExecutionContext&) const override {
+    if(!use_)return std::string("out");
+    auto x=p.invoke(capability("fixture.cap"),request.payload);
+    if(!x)return *x.error_if();
+    return x.value_if()->payload=="provider_out"?core::Result<std::string>(std::string("out")):
+      core::Result<std::string>(core::invalid("Invalid mock content"));
+  }
+ private:
+  bool use_;
+};
+static providers::ProviderRegistration provider_registration(std::shared_ptr<const providers::Provider> impl,
+    core::Version ver={1,0,0}) {
+  return {{capability("fixture.cap"),ver,"fixture.mock","fixture.input","fixture.output","test fixture",false},
+    std::move(impl),[](std::string_view s){return s=="in";},[](std::string_view s){return s=="provider_out";}};
+}
+static runtime::FeatureImplementation feature_impl(const char* name,core::ExecutionStatus status,
+    std::shared_ptr<const runtime::FeatureHandler> handler={}) {
+  auto f=runtime::FeatureImplementation{feature(name),domain("cohort"),{1,0,0},snapshot(),
+    status,"handoff/features/fixture/contract.json","fixture.op",{},{},std::move(handler),
+    [](std::string_view s){return s=="in";},[](std::string_view s){return s=="out";},false};
+  f.package_status=core::PackageStatus::finalized;
+  f.scientific_status=core::ScientificStatus::partially_defined;
+  if(status==core::ExecutionStatus::conditionally_executable)
+    f.capabilities.push_back({capability("fixture.cap"),{1,0,0},"fixture.input","fixture.output"});
+  return f;
+}
+int main() {
+  assert(!providers::CapabilityId::parse(""));
+  assert(!providers::CapabilityId::parse("leading blank"));
+  const auto fid=feature("TLC-FC-16-COHORT-002");
+  auto req=runtime::Invocation{fid,"fixture.op","in","correlation"};
+  auto fake=std::make_shared<FakeProvider>();
+  providers::ProviderRegistry::Builder pb;
+  auto reg=provider_registration(fake);
+  assert(pb.add(reg));
+  assert(is_error(pb.add(reg),"DUPLICATE_PROVIDER"));
+  auto providers_result=pb.freeze();
+  assert(providers_result);
+  assert(is_error(pb.freeze(),"PROVIDER_REGISTRY_FROZEN"));
+  auto& pr=*providers_result.value_if();
+  runtime::ExecutionContext ctx{};
+  providers::ProviderRequest direct{fid,capability("fixture.cap"),"fixture.op","fixture.input","in",snapshot().str(),"corr"};
+  assert(pr.find(capability("fixture.cap")));
+  auto first=pr.invoke(direct,{1,0,0},ctx);
+  assert(first && first.value_if()->payload=="provider_out");
+  assert(fake->calls==1);
+  assert(is_error(pr.invoke(direct,{2,0,0},ctx),"PROVIDER_INCOMPATIBLE"));
+  auto wrong=direct;wrong.payload="bad";
+  assert(is_error(pr.invoke(wrong,{1,0,0},ctx),"INVALID_PROVIDER_INPUT"));
+  assert(fake->calls==1);
+  auto absent=direct;absent.capability=capability("missing.cap");
+  assert(is_error(pr.invoke(absent,{1,0,0},ctx),"PROVIDER_REQUIRED"));
+  ctx.deadline=std::chrono::steady_clock::now()-1ms;
+  assert(is_error(pr.invoke(direct,{1,0,0},ctx),"TIMEOUT"));
+  ctx.deadline.reset();
+  runtime::CancellationSource cancellation;
+  ctx.cancellation=cancellation.token();
+  cancellation.request_stop();
+  assert(is_error(pr.invoke(direct,{1,0,0},ctx),"CANCELLED"));
+  ctx.cancellation={};
+
+  providers::ProviderRegistry::Builder broken_builder;
+  assert(broken_builder.add(provider_registration(std::make_shared<FakeProvider>(FakeProvider::invalid))));
+  auto broken=broken_builder.freeze();
+  assert(is_error(broken.value_if()->invoke(direct,{1,0,0},ctx),"INVALID_PROVIDER_OUTPUT"));
+  providers::ProviderRegistry::Builder throws_builder;
+  assert(throws_builder.add(provider_registration(std::make_shared<FakeProvider>(FakeProvider::throws))));
+  auto thrown=throws_builder.freeze();
+  auto thrown_result=thrown.value_if()->invoke(direct,{1,0,0},ctx);
+  assert(is_error(thrown_result,"OUTCOME_INDETERMINATE"));
+  assert(thrown_result.error_if()->message.find("secret")==std::string::npos);
+
+  runtime::CancellationSource during;
+  providers::ProviderRegistry::Builder cancellation_builder;
+  assert(cancellation_builder.add(provider_registration(
+    std::make_shared<FakeProvider>(FakeProvider::cancel_after,&during))));
+  auto cancelled_provider=cancellation_builder.freeze();
+  runtime::ExecutionContext cc{};cc.cancellation=during.token();
+  assert(is_error(cancelled_provider.value_if()->invoke(direct,{1,0,0},cc),"OUTCOME_INDETERMINATE"));
+
+  runtime::FeatureRegistry::Builder rb(snapshot());
+  auto structural=feature_impl("TLC-FC-16-COHORT-001",core::ExecutionStatus::structural_only);
+  auto unstated=structural;unstated.scientific_status.reset();
+  assert(is_error(rb.add(unstated),"INVALID_FEATURE_DESCRIPTOR"));
+  auto invalid_enum=structural;invalid_enum.execution_status=static_cast<core::ExecutionStatus>(99);
+  assert(is_error(rb.add(invalid_enum),"INVALID_FEATURE_DESCRIPTOR"));
+  assert(rb.add(structural));
+  assert(is_error(rb.add(structural),"DUPLICATE_FEATURE"));
+  assert(is_error(rb.add(feature_impl("TLC-FC-16-COHORT-003",core::ExecutionStatus::conditionally_executable)),"INVALID_FEATURE_DESCRIPTOR"));
+  assert(rb.add(feature_impl("TLC-FC-16-COHORT-002",core::ExecutionStatus::conditionally_executable,std::make_shared<ConditionalHandler>())));
+  auto plain=feature_impl("TLC-FC-16-COHORT-004",core::ExecutionStatus::executable,std::make_shared<EchoHandler>());
+  assert(rb.add(plain));
+  auto bad_spec=feature_impl("TLC-FC-16-COHORT-005",core::ExecutionStatus::executable,std::make_shared<EchoHandler>());
+  auto fp=core::Fingerprint::parse(std::string(40,'b'));assert(fp);
+  bad_spec.specs_fingerprint=*fp.value_if();
+  assert(is_error(rb.add(bad_spec),"INCOMPATIBLE_SPECS"));
+  auto registry=rb.freeze();assert(registry);
+  assert(registry.value_if()->size()==3);
+  assert(is_error(rb.freeze(),"REGISTRY_FROZEN"));
+  runtime::Invocation unknown{feature("TLC-FC-16-COHORT-030"),"fixture.op","in","corr"};
+  assert(is_error(registry.value_if()->dispatch(unknown,pr,ctx),"FEATURE_NOT_REGISTERED"));
+  runtime::Invocation struc{structural.id,"fixture.op","in","corr"};
+  assert(is_error(registry.value_if()->dispatch(struc,pr,ctx),"STRUCTURAL_ONLY"));
+  auto executed=registry.value_if()->dispatch(req,pr,ctx);
+  assert(executed && *executed.value_if()=="out" && fake->calls==2);
+  auto ignored=req;ignored.operation_id="unknown.operation";
+  assert(is_error(registry.value_if()->dispatch(ignored,pr,ctx),"UNSUPPORTED_OPERATION"));
+  ignored=req;ignored.payload="wrong";
+  assert(is_error(registry.value_if()->dispatch(ignored,pr,ctx),"INVALID_FEATURE_INPUT"));
+  providers::ProviderRegistry::Builder empty_builder;
+  auto empty=empty_builder.freeze();
+  assert(is_error(registry.value_if()->dispatch(req,*empty.value_if(),ctx),"PROVIDER_REQUIRED"));
+  auto plain_request=runtime::Invocation{plain.id,"fixture.op","in","corr"};
+  assert(registry.value_if()->dispatch(plain_request,*empty.value_if(),ctx));
+  // A conditionally executable feature may depend on validated inputs alone.
+  auto locally_conditional=feature_impl("TLC-FC-16-COHORT-013",
+    core::ExecutionStatus::conditionally_executable,std::make_shared<EchoHandler>());
+  locally_conditional.capabilities.clear();
+  runtime::FeatureRegistry::Builder local_builder(snapshot());
+  assert(local_builder.add(locally_conditional));
+  auto local_registry=local_builder.freeze();
+  runtime::Invocation local_request{locally_conditional.id,"fixture.op","in","corr"};
+  assert(local_registry.value_if()->dispatch(local_request,*empty.value_if(),ctx));
+  local_request.payload="wrong";
+  assert(is_error(local_registry.value_if()->dispatch(local_request,*empty.value_if(),ctx),"INVALID_FEATURE_INPUT"));
+  auto wrong_output=feature_impl("TLC-FC-16-COHORT-006",core::ExecutionStatus::executable,std::make_shared<EchoHandler>());
+  wrong_output.output_validator=[](std::string_view){return false;};
+  runtime::FeatureRegistry::Builder bad_output_builder(snapshot());assert(bad_output_builder.add(wrong_output));
+  auto bad_output_registry=bad_output_builder.freeze();
+  runtime::Invocation bad_output_req{wrong_output.id,"fixture.op","in","corr"};
+  assert(is_error(bad_output_registry.value_if()->dispatch(bad_output_req,pr,ctx),"INVALID_FEATURE_OUTPUT"));
+  auto skip=feature_impl("TLC-FC-16-COHORT-007",core::ExecutionStatus::conditionally_executable,std::make_shared<ConditionalHandler>(false));
+  runtime::FeatureRegistry::Builder skip_builder(snapshot());assert(skip_builder.add(skip));
+  auto skip_registry=skip_builder.freeze();
+  runtime::Invocation skip_request{skip.id,"fixture.op","in","corr"};
+  assert(is_error(skip_registry.value_if()->dispatch(skip_request,pr,ctx),"PROVIDER_NOT_INVOKED"));
+
+  auto dep=feature_impl("TLC-FC-16-COHORT-008",core::ExecutionStatus::executable,std::make_shared<EchoHandler>());
+  dep.dependencies.push_back(feature("TLC-FC-16-COHORT-009"));
+  runtime::FeatureRegistry::Builder missing_builder(snapshot());assert(missing_builder.add(dep));
+  assert(is_error(missing_builder.freeze(),"UNKNOWN_DEPENDENCY"));
+  auto dep2=feature_impl("TLC-FC-16-COHORT-009",core::ExecutionStatus::executable,std::make_shared<EchoHandler>());
+  dep2.dependencies.push_back(dep.id);
+  assert(missing_builder.add(dep2));
+  assert(is_error(missing_builder.freeze(),"CYCLIC_DEPENDENCY"));
+
+  // Concurrent calls to a provider not declared thread-safe are rejected before invoking it.
+  class BlockingProvider final : public providers::Provider {
+   public:
+    BlockingProvider(std::promise<void>& signal,std::shared_future<void> release)
+      :signal_(signal),release_(std::move(release)){}
+    core::Result<providers::ProviderResponse> invoke(const providers::ProviderRequest&,
+        const runtime::ExecutionContext&) const override {
+      signal_.set_value();release_.wait();
+      return providers::ProviderResponse{"fixture.output","provider_out"};
+    }
+   private:
+    std::promise<void>& signal_;
+    std::shared_future<void> release_;
+  };
+  std::promise<void> entered,leave;
+  auto released=leave.get_future().share();
+  providers::ProviderRegistry::Builder concurrent_builder;
+  assert(concurrent_builder.add(provider_registration(std::make_shared<BlockingProvider>(entered,released))));
+  auto concurrent_provider=concurrent_builder.freeze();assert(concurrent_provider);
+  std::thread running([&]{
+    auto response=concurrent_provider.value_if()->invoke(direct,{1,0,0},ctx);
+    assert(response && response.value_if()->payload=="provider_out");
+  });
+  assert(entered.get_future().wait_for(2s)==std::future_status::ready);
+  assert(is_error(concurrent_provider.value_if()->invoke(direct,{1,0,0},ctx),"PROVIDER_BUSY"));
+  leave.set_value();running.join();
+  // The frozen registry owns providers independently of the caller's pointer.
+  std::weak_ptr<const providers::Provider> weak_owner;
+  {
+    auto own=std::make_shared<FakeProvider>();
+    weak_owner=own;
+    providers::ProviderRegistry::Builder owner_builder;
+    assert(owner_builder.add(provider_registration(own)));
+    own.reset();
+    assert(!weak_owner.expired());
+    auto owned=owner_builder.freeze();
+    assert(owned && owned.value_if()->invoke(direct,{1,0,0},ctx));
+  }
+  assert(weak_owner.expired());
+
+  // Registration of a whole domain is atomic even if its second feature fails.
+  runtime::FeatureRegistry::Builder domain_builder(snapshot());
+  auto first_domain_feature=feature_impl("TLC-FC-16-COHORT-010",
+    core::ExecutionStatus::executable,std::make_shared<EchoHandler>());
+  auto second_domain_feature=feature_impl("TLC-FC-16-COHORT-011",
+    core::ExecutionStatus::executable,std::make_shared<EchoHandler>());
+  second_domain_feature.scientific_status.reset();
+  runtime::DomainImplementation batch{domain("cohort"),
+    {first_domain_feature,second_domain_feature}};
+  assert(is_error(domain_builder.add(std::move(batch)),"INVALID_FEATURE_DESCRIPTOR"));
+  auto empty_domain=domain_builder.freeze();assert(empty_domain && empty_domain.value_if()->size()==0);
+
+  // Feature callbacks are never invoked concurrently unless explicitly opted in.
+  class BlockingHandler final : public runtime::FeatureHandler {
+   public:
+    BlockingHandler(std::promise<void>& signal,std::shared_future<void> release)
+      :signal_(signal),release_(std::move(release)){}
+    core::Result<std::string> execute(const runtime::Invocation&,
+      runtime::ProviderAccess&,const runtime::ExecutionContext&) const override {
+      signal_.set_value();release_.wait();return std::string("out");
+    }
+   private:
+    std::promise<void>& signal_;
+    std::shared_future<void> release_;
+  };
+  std::promise<void> feature_entered,feature_leave;
+  runtime::FeatureRegistry::Builder busy_builder(snapshot());
+  auto busy_feature=feature_impl("TLC-FC-16-COHORT-012",core::ExecutionStatus::executable,
+    std::make_shared<BlockingHandler>(feature_entered,feature_leave.get_future().share()));
+  assert(busy_builder.add(busy_feature));
+  auto busy_registry=busy_builder.freeze();assert(busy_registry);
+  runtime::Invocation busy_req{busy_feature.id,"fixture.op","in","corr"};
+  std::thread busy_thread([&] {
+    auto answer=busy_registry.value_if()->dispatch(busy_req,pr,ctx);
+    assert(answer && *answer.value_if()=="out");
+  });
+  assert(feature_entered.get_future().wait_for(2s)==std::future_status::ready);
+  assert(is_error(busy_registry.value_if()->dispatch(busy_req,pr,ctx),"FEATURE_BUSY"));
+  feature_leave.set_value();busy_thread.join();
+
+  runtime::CancellationSource before_feature;
+  runtime::ExecutionContext cancelled_feature{};
+  cancelled_feature.cancellation=before_feature.token();
+  before_feature.request_stop();
+  assert(is_error(registry.value_if()->dispatch(plain_request,pr,cancelled_feature),"CANCELLED"));
+
+  // Frozen registry is shareable for independent, non-concurrent calls.
+  assert(registry.value_if()->dispatch(plain_request,pr,ctx));
+  // In-process callbacks never run under a mutex, and non-concurrent providers reject overlap.
+  assert(!ctx.cancellation.stop_requested());
+}
