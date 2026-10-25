@@ -3,6 +3,7 @@ on:
   pull_request:
     paths:
       - 'include/tllib/**'
+      - 'bindings/python/**'
       - 'tests/**'
       - 'CMakeLists.txt'
       - '.github/workflows/native-core.yml'
@@ -32,3 +33,17 @@ jobs:
           cmake -S tests/consumer -B build/consumer -DCMAKE_PREFIX_PATH="$RUNNER_TEMP/tllib-install"
           cmake --build build/consumer --parallel 2
           build/consumer/tllib_external_consumer
+
+  python-provider-bridge:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v5
+      - uses: actions/setup-python@v6
+        with:
+          python-version: '3.12'
+      - name: Configure optional Python bridge
+        run: cmake -S . -B build/python-provider -DBUILD_TESTING=ON -DTLLIB_BUILD_PYTHON_PROVIDER_BRIDGE=ON
+      - name: Build native Python adapter
+        run: cmake --build build/python-provider --parallel 2
+      - name: Python-to-C++ provider integration
+        run: ctest --test-dir build/python-provider --output-on-failure
