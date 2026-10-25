@@ -1,8 +1,6 @@
 #pragma once
-
 #include <string_view>
-
 namespace tllib {
-// Build infrastructure marker only; no scientific runtime is implemented.
-inline constexpr std::string_view foundation_status = "pre-implementation";
+// Native structural foundation present; scientific runtime and domains are not implemented.
+inline constexpr std::string_view foundation_status = "native-core-v1";
 }
