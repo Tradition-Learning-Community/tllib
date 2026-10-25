@@ -1,6 +1,7 @@
 #pragma once
 #include <tllib/core/result.hpp>
 #include <array>
+#include <functional>
 #include <limits>
 #include <string>
 #include <string_view>
@@ -98,3 +99,19 @@ inline Result<ExecutionStatus> parse_execution_status(std::string_view s) {
   return invalid("Unknown execution status");
 }
 } // namespace tllib::core
+namespace std {
+template <> struct hash<tllib::core::FeatureId> {
+  size_t operator()(const tllib::core::FeatureId& v) const noexcept {return hash<string_view>{}(v.str());}
+};
+template <> struct hash<tllib::core::DomainId> {
+  size_t operator()(const tllib::core::DomainId& v) const noexcept {return hash<string_view>{}(v.str());}
+};
+template <> struct hash<tllib::core::Fingerprint> {
+  size_t operator()(const tllib::core::Fingerprint& v) const noexcept {return hash<string_view>{}(v.str());}
+};
+template <> struct hash<tllib::core::Version> {
+  size_t operator()(const tllib::core::Version& v) const noexcept {
+    return hash<unsigned>{}(v.major) ^ (hash<unsigned>{}(v.minor)<<1) ^ (hash<unsigned>{}(v.patch)<<2);
+  }
+};
+} // namespace std
