@@ -22,7 +22,7 @@ Les appels sont **synchrones** et ne créent aucun thread, pool, singleton, glob
 
 1. Créer un `ProviderRegistry::Builder`, enregistrer des `ProviderRegistration` avec identités de capability explicites, une version d'interface, contrats input/output, un objet `Provider` propriétaire et les deux validateurs, puis `freeze()`.
 2. Créer un `FeatureRegistry::Builder(snapshot_fingerprint)`, enregistrer chaque `FeatureImplementation` avec ID, domaine, version package, fingerprint du snapshot, statuts package/scientifique/exécution, provenance, opération, dépendances et éventuel handler ; puis `freeze()`.
-3. `FeatureRegistry::dispatch(invocation, providers, execution_context)` ne trouve que les fonctionnalités explicitement enregistrées. Les fonctionnalités structural_only / unsupported sont refusées ; les conditionnelles exigent des capabilities déclarées et un appel effectif via `ProviderAccess`.
+3. `FeatureRegistry::dispatch(invocation, providers, execution_context)` ne trouve que les fonctionnalités explicitement enregistrées. Les fonctionnalités structural_only / unsupported sont refusées. Une fonctionnalité conditionnelle ne requiert un provider que si son contrat l'exige et que des capabilities ont été **explicitement déclarées** ; pour ces capabilities, un appel effectif via `ProviderAccess` est obligatoire. Une fonctionnalité conditionnelle fondée uniquement sur des préconditions d'entrée peut fonctionner sans provider inventé.
 4. Pour chaque opération, les validateurs d'entrée et de sortie sont **obligatoires** sur les capacités et features exécutables. Ils sont fournis par l'implémentation conforme au contrat de la fonctionnalité, pas inventés par le runtime.
 5. Le snapshot est contrôlé à l'inscription ; aucune fonctionnalité de tllib-specs n'est supportée automatiquement.
 
@@ -32,7 +32,7 @@ Les appels sont **synchrones** et ne créent aucun thread, pool, singleton, glob
 - Après un callback de provider ou d'implémentation : cancellation/expiration est `OUTCOME_INDETERMINATE` car des effets peuvent déjà avoir eu lieu. Aucun retry automatique ; réconciliation requise. Un deadline **ne préempte pas** un callback bloquant ; seul un provider coopératif peut honorer un budget en cours d'appel.
 - Provider manquant/incompatible : `PROVIDER_REQUIRED` / `PROVIDER_INCOMPATIBLE`. Entrée/sortie invalide : `INVALID_PROVIDER_INPUT` / `INVALID_PROVIDER_OUTPUT`. Exception de callback : `OUTCOME_INDETERMINATE`, sans exposer de texte d'exception sensible.
 - Les erreurs sont des `Result<T>` sans sortie partielle, avec TLC-FC, fingerprint specs, correlation_id et `stable_code`. Le registre ne met pas en cache de valeur fictive ou de résultat non validé.
-- Une exécution conditionnelle ne peut pas retourner un succès si elle n'a pas invoqué chaque capability déclarée.
+- Une exécution conditionnelle avec capabilities déclarées ne peut pas retourner un succès si elle n'a pas invoqué chacune de ces capabilities ; sans capability, l'exécution reste soumise aux validateurs de préconditions et de sortie.
 - Toute dépendance TLC-FC doit être inscrite ; l'absence, les doublons et les cycles sont rejetés avant gel. Le runtime ne crée aucun comportement inter-domaines ni ordre scientifique par défaut.
 
 ## Python et limites
