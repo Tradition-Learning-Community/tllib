@@ -75,9 +75,8 @@ class ProviderRegistry {
          d.provenance.empty() || !registration.implementation || !registration.input_validator || !registration.output_validator)
         return failure("INVALID_PROVIDER_DESCRIPTOR","Provider requires identity, contracts, provenance, ownership and validators");
       if(slots_.contains(d.capability.str()))return failure("DUPLICATE_PROVIDER","Capability already registered");
-      slots_.emplace(d.capability.str(),Slot{std::move(registration),{}});
-      // Slot::active must never be null.
-      slots_.at(d.capability.str()).active=std::make_shared<std::atomic_flag>();
+      const std::string key=d.capability.str();
+      slots_.emplace(key,Slot{std::move(registration),std::make_shared<std::atomic_flag>()});
       return true;
     }
     core::Result<ProviderRegistry> freeze() {
