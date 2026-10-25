@@ -7,6 +7,7 @@ on:
       - 'tests/specs/**'
       - 'conformance/**'
       - 'generated/specs/**'
+      - 'include/tllib/generated/**'
       - '.github/workflows/pinned-specs.yml'
   push:
     branches: [main]
@@ -41,13 +42,18 @@ jobs:
       - name: Verify two independent generations are byte-identical
         run: |
           mkdir -p "$RUNNER_TEMP/gen1" "$RUNNER_TEMP/gen2"
-          python3 tools/specs_pipeline.py generate --specs pinned-specs --root "$GITHUB_WORKSPACE" > /dev/null
-          python3 tools/specs_pipeline.py check-generated --specs pinned-specs
+          cp specs.lock.json "$RUNNER_TEMP/gen1/specs.lock.json"
+          cp specs.lock.json "$RUNNER_TEMP/gen2/specs.lock.json"
+          python3 tools/specs_pipeline.py generate --specs pinned-specs --root "$RUNNER_TEMP/gen1"
+          python3 tools/specs_pipeline.py generate --specs pinned-specs --root "$RUNNER_TEMP/gen2"
+          cmp "$RUNNER_TEMP/gen1/generated/specs/feature_index.json" "$RUNNER_TEMP/gen2/generated/specs/feature_index.json"
+          cmp "$RUNNER_TEMP/gen1/include/tllib/generated/feature_metadata.hpp" "$RUNNER_TEMP/gen2/include/tllib/generated/feature_metadata.hpp"
+          cmp "$RUNNER_TEMP/gen1/generated/specs/feature_index.json" generated/specs/feature_index.json
+          cmp "$RUNNER_TEMP/gen1/include/tllib/generated/feature_metadata.hpp" include/tllib/generated/feature_metadata.hpp
           python3 tools/specs_pipeline.py report --specs pinned-specs --output "$RUNNER_TEMP/gen1"
           python3 tools/specs_pipeline.py report --specs pinned-specs --output "$RUNNER_TEMP/gen2"
           cmp "$RUNNER_TEMP/gen1/coverage.json" "$RUNNER_TEMP/gen2/coverage.json"
           cmp "$RUNNER_TEMP/gen1/coverage.md" "$RUNNER_TEMP/gen2/coverage.md"
-          git diff --exit-code -- generated/specs/
       - name: Run negative and synthetic pipeline tests
         run: python3 -m unittest discover -s tests/specs -p 'test_*.py' -v
       - name: Publish machine-readable and human-readable coverage
