@@ -11,6 +11,7 @@
 #include <string>
 #include <string_view>
 #include <utility>
+#include <variant>
 #include <vector>
 namespace tllib::shared {
 using core::Error;
@@ -110,7 +111,7 @@ inline std::string_view name(CollectionKind kind) {
 }
 struct ReferenceCollection {
   CollectionKind kind{CollectionKind::sequence};
-  std::vector<ScientificReference> members;
+  std::vector<std::variant<std::string,ScientificReference>> members;
   std::vector<std::string> keys; // map/ordered_map entry keys, in member order
   std::size_t minimum{0};
   std::optional<std::size_t> maximum;
@@ -130,10 +131,17 @@ struct ReferenceCollection {
     constexpr std::array<std::string_view,5> duplications={"forbidden","allowed","significant","implementation_defined","not_applicable"};
     auto in=[](std::string_view value,const auto& values){return std::find(values.begin(),values.end(),value)!=values.end();};
     if(!in(membership,memberships) || !in(ordering,orderings) || !in(duplicates,duplications))return invalid("Invalid collection semantics");
-    for(const auto& m:members) if(auto e=m.validate()) return e;
+    for(const auto& m:members) {
+      if(const auto* r=std::get_if<ScientificReference>(&m)) {if(auto e=r->validate())return e;}
+      else if(std::get<std::string>(m).empty())return invalid("Empty reference identity");
+    }
     if(kind==CollectionKind::set || kind==CollectionKind::ordered_set || duplicates=="forbidden") {
       std::set<std::string> seen;
-      for(const auto& m:members) if(!seen.insert(m.canonical()).second) return invalid("Duplicate reference");
+      for(const auto& m:members) {
+        const auto key=std::holds_alternative<std::string>(m)?
+          "identity:"+std::get<std::string>(m):"provenance:"+std::get<ScientificReference>(m).canonical();
+        if(!seen.insert(key).second)return invalid("Duplicate reference");
+      }
     }
     return {};
   }
@@ -141,7 +149,13 @@ struct ReferenceCollection {
     wire::Writer w("TLC-HC-REFERENCE-COLLECTION");w.add(name(kind));w.add(minimum);
     w.add(maximum?"1":"0");if(maximum)w.add(*maximum);
     w.add(membership);w.add(ordering);w.add(duplicates);w.optional(key_contract);w.optional(value_contract);
-    w.add(keys.size());for(const auto& key:keys)w.add(key);w.sequence(members);return w.data;
+    w.add(keys.size());for(const auto& key:keys)w.add(key);
+    w.add(members.size());for(const auto& m:members){
+      const bool identity=std::holds_alternative<std::string>(m);
+      w.add(identity?"identity":"provenance");
+      w.add(identity?std::get<std::string>(m):std::get<ScientificReference>(m).canonical());
+    }
+    return w.data;
   }
 };
 enum class UnresolvedStatus {preserved_unresolved,external_provider_required};
