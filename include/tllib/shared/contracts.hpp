@@ -240,11 +240,13 @@ struct DescriptorEnvelope {
   std::vector<UnresolvedItem> unresolved;
   std::vector<std::string> dependencies;
   Traceability provenance;
-  core::ScientificStatus scientific_status{core::ScientificStatus::partially_defined};
-  core::ExecutionStatus execution_status{core::ExecutionStatus::structural_only};
+  std::optional<core::PackageStatus> package_status{};
+  std::optional<core::ScientificStatus> scientific_status{};
+  std::optional<core::ExecutionStatus> execution_status{};
   [[nodiscard]] std::optional<Error> validate() const {
     if(representation.empty())return invalid("Missing representation");
-    if(static_cast<unsigned>(scientific_status)>4 || static_cast<unsigned>(execution_status)>3)return invalid("Invalid descriptor status");
+    if((package_status && static_cast<unsigned>(*package_status)>5) || (scientific_status && static_cast<unsigned>(*scientific_status)>4) ||
+       (execution_status && static_cast<unsigned>(*execution_status)>3))return invalid("Invalid descriptor status");
     for(const auto& [label,collection]:references){if(label.empty())return invalid("Empty reference label");if(auto e=collection.validate())return e;}
     std::set<std::string> seen;
     for(const auto& item:unresolved){if(auto e=item.validate())return e;if(!seen.insert(item.unresolved_id).second)return invalid("Duplicate unresolved identity");}
@@ -255,7 +257,11 @@ struct DescriptorEnvelope {
     wire::Writer w("TLC-HC-DESCRIPTOR-ENVELOPE");w.add(feature_id.str());w.add(representation);
     w.add(references.size());for(const auto& [key,value]:references){w.add(key);w.add(value.canonical());}
     w.sequence(unresolved);w.add(dependencies.size());for(const auto& d:dependencies)w.add(d);
-    w.add(provenance.canonical());w.add(static_cast<std::size_t>(scientific_status));w.add(static_cast<std::size_t>(execution_status));return w.data;
+    w.add(provenance.canonical());
+    w.add(package_status?"1":"0");if(package_status)w.add(static_cast<std::size_t>(*package_status));
+    w.add(scientific_status?"1":"0");if(scientific_status)w.add(static_cast<std::size_t>(*scientific_status));
+    w.add(execution_status?"1":"0");if(execution_status)w.add(static_cast<std::size_t>(*execution_status));
+    return w.data;
   }
 };
 template<class T> [[nodiscard]] Result<T> validate(T value) {
