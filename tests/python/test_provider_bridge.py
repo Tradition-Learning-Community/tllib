@@ -242,11 +242,13 @@ class NativeProviderTests(unittest.TestCase):
         seen = []
         registry = ProviderRegistry([registration(lambda *args: seen.append(1))])
         invalid = ProviderRequest(**{**vars(REQUEST), "feature_id": "invalid"})
-        with self.assertRaises(TllibError):
+        with self.assertRaises(TllibError) as invalid_feature:
             registry.invoke(invalid)
+        self.assertEqual(invalid_feature.exception.code, "INVALID_IDENTIFIER")
         invalid = ProviderRequest(**{**vars(REQUEST), "specs_fingerprint": "invalid"})
-        with self.assertRaises(TllibError):
+        with self.assertRaises(TllibError) as invalid_fingerprint:
             registry.invoke(invalid)
+        self.assertEqual(invalid_fingerprint.exception.code, "INVALID_IDENTIFIER")
         self.assertEqual(seen, [])
 
     def test_no_implicit_autoregistration(self):
