@@ -1,0 +1,46 @@
+from typing import Callable, Iterable, TypeAlias
+from dataclasses import dataclass
+
+TllibError: type[Exception]
+ProviderCallback: TypeAlias = Callable[[str, str, bytes, str, str], tuple[str, bytes]]
+PayloadValidator: TypeAlias = Callable[[bytes], bool]
+
+@dataclass(frozen=True)
+class ProviderRegistration:
+    capability_id: str
+    interface_version: str
+    provider_id: str
+    input_contract: str
+    output_contract: str
+    provenance: str
+    callback: ProviderCallback
+    validate_input: PayloadValidator
+    validate_output: PayloadValidator
+    concurrent_safe: bool = ...
+
+@dataclass(frozen=True)
+class ProviderRequest:
+    feature_id: str
+    capability_id: str
+    operation_id: str
+    input_contract: str
+    payload: bytes
+    specs_fingerprint: str
+    correlation_id: str
+    interface_version: str
+
+@dataclass(frozen=True)
+class ProviderResponse:
+    output_contract: str
+    payload: bytes
+
+class CancellationSource:
+    def __init__(self) -> None: ...
+    def request_stop(self) -> bool: ...
+
+class ProviderRegistry:
+    def __init__(self, registrations: Iterable[ProviderRegistration]) -> None: ...
+    def invoke(
+        self, request: ProviderRequest, *, cancellation: CancellationSource | None = ...,
+        timeout_ms: int | None = ...
+    ) -> ProviderResponse: ...

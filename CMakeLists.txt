@@ -60,3 +60,33 @@ if(BUILD_TESTING)
   endif()
   add_test(NAME tllib_runtime_provider_test COMMAND tllib_runtime_provider_test)
 endif()
+
+# Narrow CPython provider port bridge. No nanobind/pybind11 decision (#256).
+option(TLLIB_BUILD_PYTHON_PROVIDER_BRIDGE "Build opt-in Python provider adapter" OFF)
+if(TLLIB_BUILD_PYTHON_PROVIDER_BRIDGE)
+  find_package(Python3 3.9 REQUIRED COMPONENTS Interpreter Development.Module)
+  Python3_add_library(_native MODULE bindings/python/native/provider_bridge.cpp WITH_SOABI)
+  target_link_libraries(_native PRIVATE tllib::core Python3::Module)
+  target_compile_features(_native PRIVATE cxx_std_20)
+  if(MSVC)
+    target_compile_options(_native PRIVATE /W4 /WX)
+  else()
+    target_compile_options(_native PRIVATE -Wall -Wextra -Wpedantic -Werror)
+  endif()
+  set_target_properties(_native PROPERTIES
+    LIBRARY_OUTPUT_DIRECTORY "${CMAKE_CURRENT_BINARY_DIR}/python/tllib")
+  file(MAKE_DIRECTORY "${CMAKE_CURRENT_BINARY_DIR}/python/tllib")
+  foreach(_file IN ITEMS __init__.py __init__.pyi py.typed)
+    configure_file(
+      "${CMAKE_CURRENT_SOURCE_DIR}/bindings/python/tllib/${_file}"
+      "${CMAKE_CURRENT_BINARY_DIR}/python/tllib/${_file}" COPYONLY)
+  endforeach()
+  if(BUILD_TESTING)
+    add_test(NAME tllib_python_provider_bridge
+      COMMAND "${Python3_EXECUTABLE}" -m unittest discover
+        -s "${CMAKE_CURRENT_SOURCE_DIR}/tests/python"
+        -p "test_provider_bridge.py" -v)
+    set_tests_properties(tllib_python_provider_bridge PROPERTIES
+      ENVIRONMENT "PYTHONPATH=${CMAKE_CURRENT_BINARY_DIR}/python")
+  endif()
+endif()

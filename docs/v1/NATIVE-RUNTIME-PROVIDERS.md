@@ -37,7 +37,7 @@ Les appels sont **synchrones** et ne créent aucun thread, pool, singleton, glob
 
 ## Python et limites
 
-Le port `Provider` est indépendant de Python. Une adaptation Python ultérieure devra conserver son objet callback, acquérir le GIL, convertir les erreurs sans fuite d'exception C++ et respecter les durées de vie. Ce binding effectif dépend des travaux #256/#257/#258 : **il n'est pas implémenté par cette PR**. Il n'existe aucun provider externe concret, aucune découverte automatique ni fallback.
+Le port `Provider` est indépendant de Python. Un [pont optionnel CPython vers le registre natif](PYTHON-PROVIDER-BRIDGE.md) est désormais implémenté et testé dans `bindings/python/`, avec rétention des callbacks, libération/reprise du GIL, erreurs structurées et cancellation. Ce pont limité ne préjuge **pas** du binder complet #256, des wheels #257 ni de la parité globale #258. Il n'existe aucun provider externe concret, aucune découverte automatique ni fallback.
 
 Le contrat de types pour les identités de capabilities est opaque et explicite, jamais fabriqué depuis un nom de domaine. Le [catalogue des frontières](PROVIDER-BOUNDARY-INVENTORY.md) compte 694 fonctionnalités et leurs statuts sans leur assigner de provider par magie.
 
