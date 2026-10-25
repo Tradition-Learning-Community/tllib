@@ -1,0 +1,4170 @@
+{
+  "schema_version": "1.0",
+  "specs_commit": "07439babd59c657354e3200ed24c55e2e3eeb72c",
+  "features": [
+    {
+      "feature_id": "TLC-FC-00-MASTER-001",
+      "disposition": "unimplemented",
+      "reason": "No feature-specific implementation or acceptance proof has been delivered in tllib; catalog metadata alone is not support.",
+      "evidence": []
+    },
+    {
+      "feature_id": "TLC-FC-00-MASTER-002",
+      "disposition": "unimplemented",
+      "reason": "No feature-specific implementation or acceptance proof has been delivered in tllib; catalog metadata alone is not support.",
+      "evidence": []
+    },
+    {
+      "feature_id": "TLC-FC-00-MASTER-003",
+      "disposition": "unimplemented",
+      "reason": "No feature-specific implementation or acceptance proof has been delivered in tllib; catalog metadata alone is not support.",
+      "evidence": []
+    },
+    {
+      "feature_id": "TLC-FC-00-MASTER-004",
+      "disposition": "unimplemented",
+      "reason": "No feature-specific implementation or acceptance proof has been delivered in tllib; catalog metadata alone is not support.",
+      "evidence": []
+    },
+    {
+      "feature_id": "TLC-FC-00-MASTER-005",
+      "disposition": "unimplemented",
+      "reason": "No feature-specific implementation or acceptance proof has been delivered in tllib; catalog metadata alone is not support.",
+      "evidence": []
+    },
+    {
+      "feature_id": "TLC-FC-00-MASTER-006",
+      "disposition": "unimplemented",
+      "reason": "No feature-specific implementation or acceptance proof has been delivered in tllib; catalog metadata alone is not support.",
+      "evidence": []
+    },
+    {
+      "feature_id": "TLC-FC-00-MASTER-007",
+      "disposition": "unimplemented",
+      "reason": "No feature-specific implementation or acceptance proof has been delivered in tllib; catalog metadata alone is not support.",
+      "evidence": []
+    },
+    {
+      "feature_id": "TLC-FC-00-MASTER-008",
+      "disposition": "unimplemented",
+      "reason": "No feature-specific implementation or acceptance proof has been delivered in tllib; catalog metadata alone is not support.",
+      "evidence": []
+    },
+    {
+      "feature_id": "TLC-FC-00-MASTER-009",
+      "disposition": "unimplemented",
+      "reason": "No feature-specific implementation or acceptance proof has been delivered in tllib; catalog metadata alone is not support.",
+      "evidence": []
+    },
+    {
+      "feature_id": "TLC-FC-00-MASTER-010",
+      "disposition": "unimplemented",
+      "reason": "No feature-specific implementation or acceptance proof has been delivered in tllib; catalog metadata alone is not support.",
+      "evidence": []
+    },
+    {
+      "feature_id": "TLC-FC-00-MASTER-011",
+      "disposition": "unimplemented",
+      "reason": "No feature-specific implementation or acceptance proof has been delivered in tllib; catalog metadata alone is not support.",
+      "evidence": []
+    },
+    {
+      "feature_id": "TLC-FC-00-MASTER-012",
+      "disposition": "unimplemented",
+      "reason": "No feature-specific implementation or acceptance proof has been delivered in tllib; catalog metadata alone is not support.",
+      "evidence": []
+    },
+    {
+      "feature_id": "TLC-FC-00-MASTER-013",
+      "disposition": "unimplemented",
+      "reason": "No feature-specific implementation or acceptance proof has been delivered in tllib; catalog metadata alone is not support.",
+      "evidence": []
+    },
+    {
+      "feature_id": "TLC-FC-00-MASTER-014",
+      "disposition": "unimplemented",
+      "reason": "No feature-specific implementation or acceptance proof has been delivered in tllib; catalog metadata alone is not support.",
+      "evidence": []
+    },
+    {
+      "feature_id": "TLC-FC-00-MASTER-015",
+      "disposition": "unimplemented",
+      "reason": "No feature-specific implementation or acceptance proof has been delivered in tllib; catalog metadata alone is not support.",
+      "evidence": []
+    },
+    {
+      "feature_id": "TLC-FC-00-MASTER-016",
+      "disposition": "unimplemented",
+      "reason": "No feature-specific implementation or acceptance proof has been delivered in tllib; catalog metadata alone is not support.",
+      "evidence": []
+    },
+    {
+      "feature_id": "TLC-FC-01-DISCIPLE-001",
+      "disposition": "unimplemented",
+      "reason": "No feature-specific implementation or acceptance proof has been delivered in tllib; catalog metadata alone is not support.",
+      "evidence": []
+    },
+    {
+      "feature_id": "TLC-FC-01-DISCIPLE-002",
+      "disposition": "unimplemented",
+      "reason": "No feature-specific implementation or acceptance proof has been delivered in tllib; catalog metadata alone is not support.",
+      "evidence": []
+    },
+    {
+      "feature_id": "TLC-FC-01-DISCIPLE-003",
+      "disposition": "unimplemented",
+      "reason": "No feature-specific implementation or acceptance proof has been delivered in tllib; catalog metadata alone is not support.",
+      "evidence": []
+    },
+    {
+      "feature_id": "TLC-FC-01-DISCIPLE-004",
+      "disposition": "unimplemented",
+      "reason": "No feature-specific implementation or acceptance proof has been delivered in tllib; catalog metadata alone is not support.",
+      "evidence": []
+    },
+    {
+      "feature_id": "TLC-FC-01-DISCIPLE-005",
+      "disposition": "unimplemented",
+      "reason": "No feature-specific implementation or acceptance proof has been delivered in tllib; catalog metadata alone is not support.",
+      "evidence": []
+    },
+    {
+      "feature_id": "TLC-FC-01-DISCIPLE-006",
+      "disposition": "unimplemented",
+      "reason": "No feature-specific implementation or acceptance proof has been delivered in tllib; catalog metadata alone is not support.",
+      "evidence": []
+    },
+    {
+      "feature_id": "TLC-FC-01-DISCIPLE-007",
+      "disposition": "unimplemented",
+      "reason": "No feature-specific implementation or acceptance proof has been delivered in tllib; catalog metadata alone is not support.",
+      "evidence": []
+    },
+    {
+      "feature_id": "TLC-FC-01-DISCIPLE-008",
+      "disposition": "unimplemented",
+      "reason": "No feature-specific implementation or acceptance proof has been delivered in tllib; catalog metadata alone is not support.",
+      "evidence": []
+    },
+    {
+      "feature_id": "TLC-FC-01-DISCIPLE-009",
+      "disposition": "unimplemented",
+      "reason": "No feature-specific implementation or acceptance proof has been delivered in tllib; catalog metadata alone is not support.",
+      "evidence": []
+    },
+    {
+      "feature_id": "TLC-FC-01-DISCIPLE-010",
+      "disposition": "unimplemented",
+      "reason": "No feature-specific implementation or acceptance proof has been delivered in tllib; catalog metadata alone is not support.",
+      "evidence": []
+    },
+    {
+      "feature_id": "TLC-FC-02-COMMUNITY-001",
+      "disposition": "unimplemented",
+      "reason": "No feature-specific implementation or acceptance proof has been delivered in tllib; catalog metadata alone is not support.",
+      "evidence": []
+    },
+    {
+      "feature_id": "TLC-FC-02-COMMUNITY-003",
+      "disposition": "unimplemented",
+      "reason": "No feature-specific implementation or acceptance proof has been delivered in tllib; catalog metadata alone is not support.",
+      "evidence": []
+    },
+    {
+      "feature_id": "TLC-FC-02-COMMUNITY-004",
+      "disposition": "unimplemented",
+      "reason": "No feature-specific implementation or acceptance proof has been delivered in tllib; catalog metadata alone is not support.",
+      "evidence": []
+    },
+    {
+      "feature_id": "TLC-FC-02-COMMUNITY-005",
+      "disposition": "unimplemented",
+      "reason": "No feature-specific implementation or acceptance proof has been delivered in tllib; catalog metadata alone is not support.",
+      "evidence": []
+    },
+    {
+      "feature_id": "TLC-FC-02-COMMUNITY-006",
+      "disposition": "unimplemented",
+      "reason": "No feature-specific implementation or acceptance proof has been delivered in tllib; catalog metadata alone is not support.",
+      "evidence": []
+    },
+    {
+      "feature_id": "TLC-FC-02-COMMUNITY-007",
+      "disposition": "unimplemented",
+      "reason": "No feature-specific implementation or acceptance proof has been delivered in tllib; catalog metadata alone is not support.",
+      "evidence": []
+    },
+    {
+      "feature_id": "TLC-FC-02-COMMUNITY-008",
+      "disposition": "unimplemented",
+      "reason": "No feature-specific implementation or acceptance proof has been delivered in tllib; catalog metadata alone is not support.",
+      "evidence": []
+    },
+    {
+      "feature_id": "TLC-FC-02-COMMUNITY-009",
+      "disposition": "unimplemented",
+      "reason": "No feature-specific implementation or acceptance proof has been delivered in tllib; catalog metadata alone is not support.",
+      "evidence": []
+    },
+    {
+      "feature_id": "TLC-FC-03-HUIT-DIMENSIONS-DE-TL-001",
+      "disposition": "unimplemented",
+      "reason": "No feature-specific implementation or acceptance proof has been delivered in tllib; catalog metadata alone is not support.",
+      "evidence": []
+    },
+    {
+      "feature_id": "TLC-FC-03-HUIT-DIMENSIONS-DE-TL-002",
+      "disposition": "unimplemented",
+      "reason": "No feature-specific implementation or acceptance proof has been delivered in tllib; catalog metadata alone is not support.",
+      "evidence": []
+    },
+    {
+      "feature_id": "TLC-FC-03-HUIT-DIMENSIONS-DE-TL-005",
+      "disposition": "unimplemented",
+      "reason": "No feature-specific implementation or acceptance proof has been delivered in tllib; catalog metadata alone is not support.",
+      "evidence": []
+    },
+    {
+      "feature_id": "TLC-FC-03-HUIT-DIMENSIONS-DE-TL-006",
+      "disposition": "unimplemented",
+      "reason": "No feature-specific implementation or acceptance proof has been delivered in tllib; catalog metadata alone is not support.",
+      "evidence": []
+    },
+    {
+      "feature_id": "TLC-FC-03-HUIT-DIMENSIONS-DE-TL-007",
+      "disposition": "unimplemented",
+      "reason": "No feature-specific implementation or acceptance proof has been delivered in tllib; catalog metadata alone is not support.",
+      "evidence": []
+    },
+    {
+      "feature_id": "TLC-FC-03-HUIT-DIMENSIONS-DE-TL-008",
+      "disposition": "unimplemented",
+      "reason": "No feature-specific implementation or acceptance proof has been delivered in tllib; catalog metadata alone is not support.",
+      "evidence": []
+    },
+    {
+      "feature_id": "TLC-FC-03-HUIT-DIMENSIONS-DE-TL-009",
+      "disposition": "unimplemented",
+      "reason": "No feature-specific implementation or acceptance proof has been delivered in tllib; catalog metadata alone is not support.",
+      "evidence": []
+    },
+    {
+      "feature_id": "TLC-FC-03-HUIT-DIMENSIONS-DE-TL-010",
+      "disposition": "unimplemented",
+      "reason": "No feature-specific implementation or acceptance proof has been delivered in tllib; catalog metadata alone is not support.",
+      "evidence": []
+    },
+    {
+      "feature_id": "TLC-FC-03-HUIT-DIMENSIONS-DE-TL-011",
+      "disposition": "unimplemented",
+      "reason": "No feature-specific implementation or acceptance proof has been delivered in tllib; catalog metadata alone is not support.",
+      "evidence": []
+    },
+    {
+      "feature_id": "TLC-FC-03-HUIT-DIMENSIONS-DE-TL-012",
+      "disposition": "unimplemented",
+      "reason": "No feature-specific implementation or acceptance proof has been delivered in tllib; catalog metadata alone is not support.",
+      "evidence": []
+    },
+    {
+      "feature_id": "TLC-FC-03-HUIT-DIMENSIONS-DE-TL-013",
+      "disposition": "unimplemented",
+      "reason": "No feature-specific implementation or acceptance proof has been delivered in tllib; catalog metadata alone is not support.",
+      "evidence": []
+    },
+    {
+      "feature_id": "TLC-FC-04-INVARIANTS-001",
+      "disposition": "unimplemented",
+      "reason": "No feature-specific implementation or acceptance proof has been delivered in tllib; catalog metadata alone is not support.",
+      "evidence": []
+    },
+    {
+      "feature_id": "TLC-FC-04-INVARIANTS-002",
+      "disposition": "unimplemented",
+      "reason": "No feature-specific implementation or acceptance proof has been delivered in tllib; catalog metadata alone is not support.",
+      "evidence": []
+    },
+    {
+      "feature_id": "TLC-FC-04-INVARIANTS-003",
+      "disposition": "unimplemented",
+      "reason": "No feature-specific implementation or acceptance proof has been delivered in tllib; catalog metadata alone is not support.",
+      "evidence": []
+    },
+    {
+      "feature_id": "TLC-FC-04-INVARIANTS-004",
+      "disposition": "unimplemented",
+      "reason": "No feature-specific implementation or acceptance proof has been delivered in tllib; catalog metadata alone is not support.",
+      "evidence": []
+    },
+    {
+      "feature_id": "TLC-FC-04-INVARIANTS-005",
+      "disposition": "unimplemented",
+      "reason": "No feature-specific implementation or acceptance proof has been delivered in tllib; catalog metadata alone is not support.",
+      "evidence": []
+    },
+    {
+      "feature_id": "TLC-FC-04-INVARIANTS-006",
+      "disposition": "unimplemented",
+      "reason": "No feature-specific implementation or acceptance proof has been delivered in tllib; catalog metadata alone is not support.",
+      "evidence": []
+    },
+    {
+      "feature_id": "TLC-FC-04-INVARIANTS-007",
+      "disposition": "unimplemented",
+      "reason": "No feature-specific implementation or acceptance proof has been delivered in tllib; catalog metadata alone is not support.",
+      "evidence": []
+    },
+    {
+      "feature_id": "TLC-FC-04-INVARIANTS-008",
+      "disposition": "unimplemented",
+      "reason": "No feature-specific implementation or acceptance proof has been delivered in tllib; catalog metadata alone is not support.",
+      "evidence": []
+    },
+    {
+      "feature_id": "TLC-FC-04-INVARIANTS-009",
+      "disposition": "unimplemented",
+      "reason": "No feature-specific implementation or acceptance proof has been delivered in tllib; catalog metadata alone is not support.",
+      "evidence": []
+    },
+    {
+      "feature_id": "TLC-FC-04-INVARIANTS-010",
+      "disposition": "unimplemented",
+      "reason": "No feature-specific implementation or acceptance proof has been delivered in tllib; catalog metadata alone is not support.",
+      "evidence": []
+    },
+    {
+      "feature_id": "TLC-FC-05-DYNAMICS-001",
+      "disposition": "unimplemented",
+      "reason": "No feature-specific implementation or acceptance proof has been delivered in tllib; catalog metadata alone is not support.",
+      "evidence": []
+    },
+    {
+      "feature_id": "TLC-FC-05-DYNAMICS-002",
+      "disposition": "unimplemented",
+      "reason": "No feature-specific implementation or acceptance proof has been delivered in tllib; catalog metadata alone is not support.",
+      "evidence": []
+    },
+    {
+      "feature_id": "TLC-FC-05-DYNAMICS-003",
+      "disposition": "unimplemented",
+      "reason": "No feature-specific implementation or acceptance proof has been delivered in tllib; catalog metadata alone is not support.",
+      "evidence": []
+    },
+    {
+      "feature_id": "TLC-FC-05-DYNAMICS-004",
+      "disposition": "unimplemented",
+      "reason": "No feature-specific implementation or acceptance proof has been delivered in tllib; catalog metadata alone is not support.",
+      "evidence": []
+    },
+    {
+      "feature_id": "TLC-FC-05-DYNAMICS-005",
+      "disposition": "unimplemented",
+      "reason": "No feature-specific implementation or acceptance proof has been delivered in tllib; catalog metadata alone is not support.",
+      "evidence": []
+    },
+    {
+      "feature_id": "TLC-FC-05-DYNAMICS-006",
+      "disposition": "unimplemented",
+      "reason": "No feature-specific implementation or acceptance proof has been delivered in tllib; catalog metadata alone is not support.",
+      "evidence": []
+    },
+    {
+      "feature_id": "TLC-FC-05-DYNAMICS-007",
+      "disposition": "unimplemented",
+      "reason": "No feature-specific implementation or acceptance proof has been delivered in tllib; catalog metadata alone is not support.",
+      "evidence": []
+    },
+    {
+      "feature_id": "TLC-FC-06-THEOREMS-001",
+      "disposition": "unimplemented",
+      "reason": "No feature-specific implementation or acceptance proof has been delivered in tllib; catalog metadata alone is not support.",
+      "evidence": []
+    },
+    {
+      "feature_id": "TLC-FC-06-THEOREMS-002",
+      "disposition": "unimplemented",
+      "reason": "No feature-specific implementation or acceptance proof has been delivered in tllib; catalog metadata alone is not support.",
+      "evidence": []
+    },
+    {
+      "feature_id": "TLC-FC-06-THEOREMS-003",
+      "disposition": "unimplemented",
+      "reason": "No feature-specific implementation or acceptance proof has been delivered in tllib; catalog metadata alone is not support.",
+      "evidence": []
+    },
+    {
+      "feature_id": "TLC-FC-06-THEOREMS-004",
+      "disposition": "unimplemented",
+      "reason": "No feature-specific implementation or acceptance proof has been delivered in tllib; catalog metadata alone is not support.",
+      "evidence": []
+    },
+    {
+      "feature_id": "TLC-FC-06-THEOREMS-005",
+      "disposition": "unimplemented",
+      "reason": "No feature-specific implementation or acceptance proof has been delivered in tllib; catalog metadata alone is not support.",
+      "evidence": []
+    },
+    {
+      "feature_id": "TLC-FC-06-THEOREMS-006",
+      "disposition": "unimplemented",
+      "reason": "No feature-specific implementation or acceptance proof has been delivered in tllib; catalog metadata alone is not support.",
+      "evidence": []
+    },
+    {
+      "feature_id": "TLC-FC-06-THEOREMS-007",
+      "disposition": "unimplemented",
+      "reason": "No feature-specific implementation or acceptance proof has been delivered in tllib; catalog metadata alone is not support.",
+      "evidence": []
+    },
+    {
+      "feature_id": "TLC-FC-06-THEOREMS-008",
+      "disposition": "unimplemented",
+      "reason": "No feature-specific implementation or acceptance proof has been delivered in tllib; catalog metadata alone is not support.",
+      "evidence": []
+    },
+    {
+      "feature_id": "TLC-FC-06-THEOREMS-009",
+      "disposition": "unimplemented",
+      "reason": "No feature-specific implementation or acceptance proof has been delivered in tllib; catalog metadata alone is not support.",
+      "evidence": []
+    },
+    {
+      "feature_id": "TLC-FC-07-MESSAGE-001",
+      "disposition": "unimplemented",
+      "reason": "No feature-specific implementation or acceptance proof has been delivered in tllib; catalog metadata alone is not support.",
+      "evidence": []
+    },
+    {
+      "feature_id": "TLC-FC-07-MESSAGE-002",
+      "disposition": "unimplemented",
+      "reason": "No feature-specific implementation or acceptance proof has been delivered in tllib; catalog metadata alone is not support.",
+      "evidence": []
+    },
+    {
+      "feature_id": "TLC-FC-07-MESSAGE-003",
+      "disposition": "unimplemented",
+      "reason": "No feature-specific implementation or acceptance proof has been delivered in tllib; catalog metadata alone is not support.",
+      "evidence": []
+    },
+    {
+      "feature_id": "TLC-FC-07-MESSAGE-004",
+      "disposition": "unimplemented",
+      "reason": "No feature-specific implementation or acceptance proof has been delivered in tllib; catalog metadata alone is not support.",
+      "evidence": []
+    },
+    {
+      "feature_id": "TLC-FC-07-MESSAGE-005",
+      "disposition": "unimplemented",
+      "reason": "No feature-specific implementation or acceptance proof has been delivered in tllib; catalog metadata alone is not support.",
+      "evidence": []
+    },
+    {
+      "feature_id": "TLC-FC-07-MESSAGE-006",
+      "disposition": "unimplemented",
+      "reason": "No feature-specific implementation or acceptance proof has been delivered in tllib; catalog metadata alone is not support.",
+      "evidence": []
+    },
+    {
+      "feature_id": "TLC-FC-08-PRINCIPLE-001",
+      "disposition": "unimplemented",
+      "reason": "No feature-specific implementation or acceptance proof has been delivered in tllib; catalog metadata alone is not support.",
+      "evidence": []
+    },
+    {
+      "feature_id": "TLC-FC-08-PRINCIPLE-002",
+      "disposition": "unimplemented",
+      "reason": "No feature-specific implementation or acceptance proof has been delivered in tllib; catalog metadata alone is not support.",
+      "evidence": []
+    },
+    {
+      "feature_id": "TLC-FC-08-PRINCIPLE-003",
+      "disposition": "unimplemented",
+      "reason": "No feature-specific implementation or acceptance proof has been delivered in tllib; catalog metadata alone is not support.",
+      "evidence": []
+    },
+    {
+      "feature_id": "TLC-FC-08-PRINCIPLE-004",
+      "disposition": "unimplemented",
+      "reason": "No feature-specific implementation or acceptance proof has been delivered in tllib; catalog metadata alone is not support.",
+      "evidence": []
+    },
+    {
+      "feature_id": "TLC-FC-08-PRINCIPLE-005",
+      "disposition": "unimplemented",
+      "reason": "No feature-specific implementation or acceptance proof has been delivered in tllib; catalog metadata alone is not support.",
+      "evidence": []
+    },
+    {
+      "feature_id": "TLC-FC-08-PRINCIPLE-006",
+      "disposition": "unimplemented",
+      "reason": "No feature-specific implementation or acceptance proof has been delivered in tllib; catalog metadata alone is not support.",
+      "evidence": []
+    },
+    {
+      "feature_id": "TLC-FC-08-PRINCIPLE-007",
+      "disposition": "unimplemented",
+      "reason": "No feature-specific implementation or acceptance proof has been delivered in tllib; catalog metadata alone is not support.",
+      "evidence": []
+    },
+    {
+      "feature_id": "TLC-FC-08-PRINCIPLE-008",
+      "disposition": "unimplemented",
+      "reason": "No feature-specific implementation or acceptance proof has been delivered in tllib; catalog metadata alone is not support.",
+      "evidence": []
+    },
+    {
+      "feature_id": "TLC-FC-08-PRINCIPLE-010",
+      "disposition": "unimplemented",
+      "reason": "No feature-specific implementation or acceptance proof has been delivered in tllib; catalog metadata alone is not support.",
+      "evidence": []
+    },
+    {
+      "feature_id": "TLC-FC-08-PRINCIPLE-011",
+      "disposition": "unimplemented",
+      "reason": "No feature-specific implementation or acceptance proof has been delivered in tllib; catalog metadata alone is not support.",
+      "evidence": []
+    },
+    {
+      "feature_id": "TLC-FC-09-VALUES-001",
+      "disposition": "unimplemented",
+      "reason": "No feature-specific implementation or acceptance proof has been delivered in tllib; catalog metadata alone is not support.",
+      "evidence": []
+    },
+    {
+      "feature_id": "TLC-FC-09-VALUES-003",
+      "disposition": "unimplemented",
+      "reason": "No feature-specific implementation or acceptance proof has been delivered in tllib; catalog metadata alone is not support.",
+      "evidence": []
+    },
+    {
+      "feature_id": "TLC-FC-09-VALUES-004",
+      "disposition": "unimplemented",
+      "reason": "No feature-specific implementation or acceptance proof has been delivered in tllib; catalog metadata alone is not support.",
+      "evidence": []
+    },
+    {
+      "feature_id": "TLC-FC-09-VALUES-005",
+      "disposition": "unimplemented",
+      "reason": "No feature-specific implementation or acceptance proof has been delivered in tllib; catalog metadata alone is not support.",
+      "evidence": []
+    },
+    {
+      "feature_id": "TLC-FC-09-VALUES-006",
+      "disposition": "unimplemented",
+      "reason": "No feature-specific implementation or acceptance proof has been delivered in tllib; catalog metadata alone is not support.",
+      "evidence": []
+    },
+    {
+      "feature_id": "TLC-FC-09-VALUES-007",
+      "disposition": "unimplemented",
+      "reason": "No feature-specific implementation or acceptance proof has been delivered in tllib; catalog metadata alone is not support.",
+      "evidence": []
+    },
+    {
+      "feature_id": "TLC-FC-09-VALUES-008",
+      "disposition": "unimplemented",
+      "reason": "No feature-specific implementation or acceptance proof has been delivered in tllib; catalog metadata alone is not support.",
+      "evidence": []
+    },
+    {
+      "feature_id": "TLC-FC-09-VALUES-009",
+      "disposition": "unimplemented",
+      "reason": "No feature-specific implementation or acceptance proof has been delivered in tllib; catalog metadata alone is not support.",
+      "evidence": []
+    },
+    {
+      "feature_id": "TLC-FC-09-VALUES-010",
+      "disposition": "unimplemented",
+      "reason": "No feature-specific implementation or acceptance proof has been delivered in tllib; catalog metadata alone is not support.",
+      "evidence": []
+    },
+    {
+      "feature_id": "TLC-FC-09-VALUES-011",
+      "disposition": "unimplemented",
+      "reason": "No feature-specific implementation or acceptance proof has been delivered in tllib; catalog metadata alone is not support.",
+      "evidence": []
+    },
+    {
+      "feature_id": "TLC-FC-09-VALUES-012",
+      "disposition": "unimplemented",
+      "reason": "No feature-specific implementation or acceptance proof has been delivered in tllib; catalog metadata alone is not support.",
+      "evidence": []
+    },
+    {
+      "feature_id": "TLC-FC-09-VALUES-013",
+      "disposition": "unimplemented",
+      "reason": "No feature-specific implementation or acceptance proof has been delivered in tllib; catalog metadata alone is not support.",
+      "evidence": []
+    },
+    {
+      "feature_id": "TLC-FC-09-VALUES-014",
+      "disposition": "unimplemented",
+      "reason": "No feature-specific implementation or acceptance proof has been delivered in tllib; catalog metadata alone is not support.",
+      "evidence": []
+    },
+    {
+      "feature_id": "TLC-FC-09-VALUES-018",
+      "disposition": "unimplemented",
+      "reason": "No feature-specific implementation or acceptance proof has been delivered in tllib; catalog metadata alone is not support.",
+      "evidence": []
+    },
+    {
+      "feature_id": "TLC-FC-10-VIRTUES-001",
+      "disposition": "unimplemented",
+      "reason": "No feature-specific implementation or acceptance proof has been delivered in tllib; catalog metadata alone is not support.",
+      "evidence": []
+    },
+    {
+      "feature_id": "TLC-FC-10-VIRTUES-002",
+      "disposition": "unimplemented",
+      "reason": "No feature-specific implementation or acceptance proof has been delivered in tllib; catalog metadata alone is not support.",
+      "evidence": []
+    },
+    {
+      "feature_id": "TLC-FC-10-VIRTUES-005",
+      "disposition": "unimplemented",
+      "reason": "No feature-specific implementation or acceptance proof has been delivered in tllib; catalog metadata alone is not support.",
+      "evidence": []
+    },
+    {
+      "feature_id": "TLC-FC-10-VIRTUES-006",
+      "disposition": "unimplemented",
+      "reason": "No feature-specific implementation or acceptance proof has been delivered in tllib; catalog metadata alone is not support.",
+      "evidence": []
+    },
+    {
+      "feature_id": "TLC-FC-10-VIRTUES-007",
+      "disposition": "unimplemented",
+      "reason": "No feature-specific implementation or acceptance proof has been delivered in tllib; catalog metadata alone is not support.",
+      "evidence": []
+    },
+    {
+      "feature_id": "TLC-FC-10-VIRTUES-008",
+      "disposition": "unimplemented",
+      "reason": "No feature-specific implementation or acceptance proof has been delivered in tllib; catalog metadata alone is not support.",
+      "evidence": []
+    },
+    {
+      "feature_id": "TLC-FC-10-VIRTUES-009",
+      "disposition": "unimplemented",
+      "reason": "No feature-specific implementation or acceptance proof has been delivered in tllib; catalog metadata alone is not support.",
+      "evidence": []
+    },
+    {
+      "feature_id": "TLC-FC-10-VIRTUES-010",
+      "disposition": "unimplemented",
+      "reason": "No feature-specific implementation or acceptance proof has been delivered in tllib; catalog metadata alone is not support.",
+      "evidence": []
+    },
+    {
+      "feature_id": "TLC-FC-10-VIRTUES-011",
+      "disposition": "unimplemented",
+      "reason": "No feature-specific implementation or acceptance proof has been delivered in tllib; catalog metadata alone is not support.",
+      "evidence": []
+    },
+    {
+      "feature_id": "TLC-FC-10-VIRTUES-014",
+      "disposition": "unimplemented",
+      "reason": "No feature-specific implementation or acceptance proof has been delivered in tllib; catalog metadata alone is not support.",
+      "evidence": []
+    },
+    {
+      "feature_id": "TLC-FC-11-CAPACITIES-001",
+      "disposition": "unimplemented",
+      "reason": "No feature-specific implementation or acceptance proof has been delivered in tllib; catalog metadata alone is not support.",
+      "evidence": []
+    },
+    {
+      "feature_id": "TLC-FC-11-CAPACITIES-002",
+      "disposition": "unimplemented",
+      "reason": "No feature-specific implementation or acceptance proof has been delivered in tllib; catalog metadata alone is not support.",
+      "evidence": []
+    },
+    {
+      "feature_id": "TLC-FC-11-CAPACITIES-003",
+      "disposition": "unimplemented",
+      "reason": "No feature-specific implementation or acceptance proof has been delivered in tllib; catalog metadata alone is not support.",
+      "evidence": []
+    },
+    {
+      "feature_id": "TLC-FC-11-CAPACITIES-005",
+      "disposition": "unimplemented",
+      "reason": "No feature-specific implementation or acceptance proof has been delivered in tllib; catalog metadata alone is not support.",
+      "evidence": []
+    },
+    {
+      "feature_id": "TLC-FC-11-CAPACITIES-006",
+      "disposition": "unimplemented",
+      "reason": "No feature-specific implementation or acceptance proof has been delivered in tllib; catalog metadata alone is not support.",
+      "evidence": []
+    },
+    {
+      "feature_id": "TLC-FC-11-CAPACITIES-007",
+      "disposition": "unimplemented",
+      "reason": "No feature-specific implementation or acceptance proof has been delivered in tllib; catalog metadata alone is not support.",
+      "evidence": []
+    },
+    {
+      "feature_id": "TLC-FC-11-CAPACITIES-008",
+      "disposition": "unimplemented",
+      "reason": "No feature-specific implementation or acceptance proof has been delivered in tllib; catalog metadata alone is not support.",
+      "evidence": []
+    },
+    {
+      "feature_id": "TLC-FC-11-CAPACITIES-009",
+      "disposition": "unimplemented",
+      "reason": "No feature-specific implementation or acceptance proof has been delivered in tllib; catalog metadata alone is not support.",
+      "evidence": []
+    },
+    {
+      "feature_id": "TLC-FC-11-CAPACITIES-010",
+      "disposition": "unimplemented",
+      "reason": "No feature-specific implementation or acceptance proof has been delivered in tllib; catalog metadata alone is not support.",
+      "evidence": []
+    },
+    {
+      "feature_id": "TLC-FC-11-CAPACITIES-011",
+      "disposition": "unimplemented",
+      "reason": "No feature-specific implementation or acceptance proof has been delivered in tllib; catalog metadata alone is not support.",
+      "evidence": []
+    },
+    {
+      "feature_id": "TLC-FC-11-CAPACITIES-012",
+      "disposition": "unimplemented",
+      "reason": "No feature-specific implementation or acceptance proof has been delivered in tllib; catalog metadata alone is not support.",
+      "evidence": []
+    },
+    {
+      "feature_id": "TLC-FC-11-CAPACITIES-013",
+      "disposition": "unimplemented",
+      "reason": "No feature-specific implementation or acceptance proof has been delivered in tllib; catalog metadata alone is not support.",
+      "evidence": []
+    },
+    {
+      "feature_id": "TLC-FC-11-CAPACITIES-014",
+      "disposition": "unimplemented",
+      "reason": "No feature-specific implementation or acceptance proof has been delivered in tllib; catalog metadata alone is not support.",
+      "evidence": []
+    },
+    {
+      "feature_id": "TLC-FC-11-CAPACITIES-015",
+      "disposition": "unimplemented",
+      "reason": "No feature-specific implementation or acceptance proof has been delivered in tllib; catalog metadata alone is not support.",
+      "evidence": []
+    },
+    {
+      "feature_id": "TLC-FC-11-CAPACITIES-018",
+      "disposition": "unimplemented",
+      "reason": "No feature-specific implementation or acceptance proof has been delivered in tllib; catalog metadata alone is not support.",
+      "evidence": []
+    },
+    {
+      "feature_id": "TLC-FC-12-COMPETENCIES-001",
+      "disposition": "unimplemented",
+      "reason": "No feature-specific implementation or acceptance proof has been delivered in tllib; catalog metadata alone is not support.",
+      "evidence": []
+    },
+    {
+      "feature_id": "TLC-FC-12-COMPETENCIES-002",
+      "disposition": "unimplemented",
+      "reason": "No feature-specific implementation or acceptance proof has been delivered in tllib; catalog metadata alone is not support.",
+      "evidence": []
+    },
+    {
+      "feature_id": "TLC-FC-12-COMPETENCIES-004",
+      "disposition": "unimplemented",
+      "reason": "No feature-specific implementation or acceptance proof has been delivered in tllib; catalog metadata alone is not support.",
+      "evidence": []
+    },
+    {
+      "feature_id": "TLC-FC-12-COMPETENCIES-005",
+      "disposition": "unimplemented",
+      "reason": "No feature-specific implementation or acceptance proof has been delivered in tllib; catalog metadata alone is not support.",
+      "evidence": []
+    },
+    {
+      "feature_id": "TLC-FC-12-COMPETENCIES-006",
+      "disposition": "unimplemented",
+      "reason": "No feature-specific implementation or acceptance proof has been delivered in tllib; catalog metadata alone is not support.",
+      "evidence": []
+    },
+    {
+      "feature_id": "TLC-FC-12-COMPETENCIES-007",
+      "disposition": "unimplemented",
+      "reason": "No feature-specific implementation or acceptance proof has been delivered in tllib; catalog metadata alone is not support.",
+      "evidence": []
+    },
+    {
+      "feature_id": "TLC-FC-12-COMPETENCIES-008",
+      "disposition": "unimplemented",
+      "reason": "No feature-specific implementation or acceptance proof has been delivered in tllib; catalog metadata alone is not support.",
+      "evidence": []
+    },
+    {
+      "feature_id": "TLC-FC-12-COMPETENCIES-009",
+      "disposition": "unimplemented",
+      "reason": "No feature-specific implementation or acceptance proof has been delivered in tllib; catalog metadata alone is not support.",
+      "evidence": []
+    },
+    {
+      "feature_id": "TLC-FC-12-COMPETENCIES-010",
+      "disposition": "unimplemented",
+      "reason": "No feature-specific implementation or acceptance proof has been delivered in tllib; catalog metadata alone is not support.",
+      "evidence": []
+    },
+    {
+      "feature_id": "TLC-FC-12-COMPETENCIES-011",
+      "disposition": "unimplemented",
+      "reason": "No feature-specific implementation or acceptance proof has been delivered in tllib; catalog metadata alone is not support.",
+      "evidence": []
+    },
+    {
+      "feature_id": "TLC-FC-12-COMPETENCIES-012",
+      "disposition": "unimplemented",
+      "reason": "No feature-specific implementation or acceptance proof has been delivered in tllib; catalog metadata alone is not support.",
+      "evidence": []
+    },
+    {
+      "feature_id": "TLC-FC-12-COMPETENCIES-013",
+      "disposition": "unimplemented",
+      "reason": "No feature-specific implementation or acceptance proof has been delivered in tllib; catalog metadata alone is not support.",
+      "evidence": []
+    },
+    {
+      "feature_id": "TLC-FC-12-COMPETENCIES-016",
+      "disposition": "unimplemented",
+      "reason": "No feature-specific implementation or acceptance proof has been delivered in tllib; catalog metadata alone is not support.",
+      "evidence": []
+    },
+    {
+      "feature_id": "TLC-FC-13-PRACTICE-001",
+      "disposition": "unimplemented",
+      "reason": "No feature-specific implementation or acceptance proof has been delivered in tllib; catalog metadata alone is not support.",
+      "evidence": []
+    },
+    {
+      "feature_id": "TLC-FC-13-PRACTICE-003",
+      "disposition": "unimplemented",
+      "reason": "No feature-specific implementation or acceptance proof has been delivered in tllib; catalog metadata alone is not support.",
+      "evidence": []
+    },
+    {
+      "feature_id": "TLC-FC-13-PRACTICE-004",
+      "disposition": "unimplemented",
+      "reason": "No feature-specific implementation or acceptance proof has been delivered in tllib; catalog metadata alone is not support.",
+      "evidence": []
+    },
+    {
+      "feature_id": "TLC-FC-13-PRACTICE-005",
+      "disposition": "unimplemented",
+      "reason": "No feature-specific implementation or acceptance proof has been delivered in tllib; catalog metadata alone is not support.",
+      "evidence": []
+    },
+    {
+      "feature_id": "TLC-FC-13-PRACTICE-006",
+      "disposition": "unimplemented",
+      "reason": "No feature-specific implementation or acceptance proof has been delivered in tllib; catalog metadata alone is not support.",
+      "evidence": []
+    },
+    {
+      "feature_id": "TLC-FC-13-PRACTICE-007",
+      "disposition": "unimplemented",
+      "reason": "No feature-specific implementation or acceptance proof has been delivered in tllib; catalog metadata alone is not support.",
+      "evidence": []
+    },
+    {
+      "feature_id": "TLC-FC-13-PRACTICE-008",
+      "disposition": "unimplemented",
+      "reason": "No feature-specific implementation or acceptance proof has been delivered in tllib; catalog metadata alone is not support.",
+      "evidence": []
+    },
+    {
+      "feature_id": "TLC-FC-13-PRACTICE-009",
+      "disposition": "unimplemented",
+      "reason": "No feature-specific implementation or acceptance proof has been delivered in tllib; catalog metadata alone is not support.",
+      "evidence": []
+    },
+    {
+      "feature_id": "TLC-FC-13-PRACTICE-010",
+      "disposition": "unimplemented",
+      "reason": "No feature-specific implementation or acceptance proof has been delivered in tllib; catalog metadata alone is not support.",
+      "evidence": []
+    },
+    {
+      "feature_id": "TLC-FC-13-PRACTICE-012",
+      "disposition": "unimplemented",
+      "reason": "No feature-specific implementation or acceptance proof has been delivered in tllib; catalog metadata alone is not support.",
+      "evidence": []
+    },
+    {
+      "feature_id": "TLC-FC-14-LIVED-EXPERIENCE-001",
+      "disposition": "unimplemented",
+      "reason": "No feature-specific implementation or acceptance proof has been delivered in tllib; catalog metadata alone is not support.",
+      "evidence": []
+    },
+    {
+      "feature_id": "TLC-FC-14-LIVED-EXPERIENCE-002",
+      "disposition": "unimplemented",
+      "reason": "No feature-specific implementation or acceptance proof has been delivered in tllib; catalog metadata alone is not support.",
+      "evidence": []
+    },
+    {
+      "feature_id": "TLC-FC-14-LIVED-EXPERIENCE-004",
+      "disposition": "unimplemented",
+      "reason": "No feature-specific implementation or acceptance proof has been delivered in tllib; catalog metadata alone is not support.",
+      "evidence": []
+    },
+    {
+      "feature_id": "TLC-FC-14-LIVED-EXPERIENCE-005",
+      "disposition": "unimplemented",
+      "reason": "No feature-specific implementation or acceptance proof has been delivered in tllib; catalog metadata alone is not support.",
+      "evidence": []
+    },
+    {
+      "feature_id": "TLC-FC-14-LIVED-EXPERIENCE-006",
+      "disposition": "unimplemented",
+      "reason": "No feature-specific implementation or acceptance proof has been delivered in tllib; catalog metadata alone is not support.",
+      "evidence": []
+    },
+    {
+      "feature_id": "TLC-FC-14-LIVED-EXPERIENCE-007",
+      "disposition": "unimplemented",
+      "reason": "No feature-specific implementation or acceptance proof has been delivered in tllib; catalog metadata alone is not support.",
+      "evidence": []
+    },
+    {
+      "feature_id": "TLC-FC-14-LIVED-EXPERIENCE-008",
+      "disposition": "unimplemented",
+      "reason": "No feature-specific implementation or acceptance proof has been delivered in tllib; catalog metadata alone is not support.",
+      "evidence": []
+    },
+    {
+      "feature_id": "TLC-FC-14-LIVED-EXPERIENCE-009",
+      "disposition": "unimplemented",
+      "reason": "No feature-specific implementation or acceptance proof has been delivered in tllib; catalog metadata alone is not support.",
+      "evidence": []
+    },
+    {
+      "feature_id": "TLC-FC-14-LIVED-EXPERIENCE-010",
+      "disposition": "unimplemented",
+      "reason": "No feature-specific implementation or acceptance proof has been delivered in tllib; catalog metadata alone is not support.",
+      "evidence": []
+    },
+    {
+      "feature_id": "TLC-FC-14-LIVED-EXPERIENCE-011",
+      "disposition": "unimplemented",
+      "reason": "No feature-specific implementation or acceptance proof has been delivered in tllib; catalog metadata alone is not support.",
+      "evidence": []
+    },
+    {
+      "feature_id": "TLC-FC-14-LIVED-EXPERIENCE-012",
+      "disposition": "unimplemented",
+      "reason": "No feature-specific implementation or acceptance proof has been delivered in tllib; catalog metadata alone is not support.",
+      "evidence": []
+    },
+    {
+      "feature_id": "TLC-FC-14-LIVED-EXPERIENCE-013",
+      "disposition": "unimplemented",
+      "reason": "No feature-specific implementation or acceptance proof has been delivered in tllib; catalog metadata alone is not support.",
+      "evidence": []
+    },
+    {
+      "feature_id": "TLC-FC-15-RELATIONS-002",
+      "disposition": "unimplemented",
+      "reason": "No feature-specific implementation or acceptance proof has been delivered in tllib; catalog metadata alone is not support.",
+      "evidence": []
+    },
+    {
+      "feature_id": "TLC-FC-15-RELATIONS-003",
+      "disposition": "unimplemented",
+      "reason": "No feature-specific implementation or acceptance proof has been delivered in tllib; catalog metadata alone is not support.",
+      "evidence": []
+    },
+    {
+      "feature_id": "TLC-FC-15-RELATIONS-004",
+      "disposition": "unimplemented",
+      "reason": "No feature-specific implementation or acceptance proof has been delivered in tllib; catalog metadata alone is not support.",
+      "evidence": []
+    },
+    {
+      "feature_id": "TLC-FC-15-RELATIONS-007",
+      "disposition": "unimplemented",
+      "reason": "No feature-specific implementation or acceptance proof has been delivered in tllib; catalog metadata alone is not support.",
+      "evidence": []
+    },
+    {
+      "feature_id": "TLC-FC-15-RELATIONS-008",
+      "disposition": "unimplemented",
+      "reason": "No feature-specific implementation or acceptance proof has been delivered in tllib; catalog metadata alone is not support.",
+      "evidence": []
+    },
+    {
+      "feature_id": "TLC-FC-16-COHORT-001",
+      "disposition": "unimplemented",
+      "reason": "No feature-specific implementation or acceptance proof has been delivered in tllib; catalog metadata alone is not support.",
+      "evidence": []
+    },
+    {
+      "feature_id": "TLC-FC-16-COHORT-002",
+      "disposition": "unimplemented",
+      "reason": "No feature-specific implementation or acceptance proof has been delivered in tllib; catalog metadata alone is not support.",
+      "evidence": []
+    },
+    {
+      "feature_id": "TLC-FC-16-COHORT-003",
+      "disposition": "unimplemented",
+      "reason": "No feature-specific implementation or acceptance proof has been delivered in tllib; catalog metadata alone is not support.",
+      "evidence": []
+    },
+    {
+      "feature_id": "TLC-FC-16-COHORT-004",
+      "disposition": "unimplemented",
+      "reason": "No feature-specific implementation or acceptance proof has been delivered in tllib; catalog metadata alone is not support.",
+      "evidence": []
+    },
+    {
+      "feature_id": "TLC-FC-16-COHORT-005",
+      "disposition": "unimplemented",
+      "reason": "No feature-specific implementation or acceptance proof has been delivered in tllib; catalog metadata alone is not support.",
+      "evidence": []
+    },
+    {
+      "feature_id": "TLC-FC-16-COHORT-006",
+      "disposition": "unimplemented",
+      "reason": "No feature-specific implementation or acceptance proof has been delivered in tllib; catalog metadata alone is not support.",
+      "evidence": []
+    },
+    {
+      "feature_id": "TLC-FC-16-COHORT-007",
+      "disposition": "unimplemented",
+      "reason": "No feature-specific implementation or acceptance proof has been delivered in tllib; catalog metadata alone is not support.",
+      "evidence": []
+    },
+    {
+      "feature_id": "TLC-FC-16-COHORT-008",
+      "disposition": "unimplemented",
+      "reason": "No feature-specific implementation or acceptance proof has been delivered in tllib; catalog metadata alone is not support.",
+      "evidence": []
+    },
+    {
+      "feature_id": "TLC-FC-16-COHORT-009",
+      "disposition": "unimplemented",
+      "reason": "No feature-specific implementation or acceptance proof has been delivered in tllib; catalog metadata alone is not support.",
+      "evidence": []
+    },
+    {
+      "feature_id": "TLC-FC-16-COHORT-010",
+      "disposition": "unimplemented",
+      "reason": "No feature-specific implementation or acceptance proof has been delivered in tllib; catalog metadata alone is not support.",
+      "evidence": []
+    },
+    {
+      "feature_id": "TLC-FC-16-COHORT-011",
+      "disposition": "unimplemented",
+      "reason": "No feature-specific implementation or acceptance proof has been delivered in tllib; catalog metadata alone is not support.",
+      "evidence": []
+    },
+    {
+      "feature_id": "TLC-FC-16-COHORT-012",
+      "disposition": "unimplemented",
+      "reason": "No feature-specific implementation or acceptance proof has been delivered in tllib; catalog metadata alone is not support.",
+      "evidence": []
+    },
+    {
+      "feature_id": "TLC-FC-16-COHORT-013",
+      "disposition": "unimplemented",
+      "reason": "No feature-specific implementation or acceptance proof has been delivered in tllib; catalog metadata alone is not support.",
+      "evidence": []
+    },
+    {
+      "feature_id": "TLC-FC-16-COHORT-014",
+      "disposition": "unimplemented",
+      "reason": "No feature-specific implementation or acceptance proof has been delivered in tllib; catalog metadata alone is not support.",
+      "evidence": []
+    },
+    {
+      "feature_id": "TLC-FC-16-COHORT-015",
+      "disposition": "unimplemented",
+      "reason": "No feature-specific implementation or acceptance proof has been delivered in tllib; catalog metadata alone is not support.",
+      "evidence": []
+    },
+    {
+      "feature_id": "TLC-FC-16-COHORT-016",
+      "disposition": "unimplemented",
+      "reason": "No feature-specific implementation or acceptance proof has been delivered in tllib; catalog metadata alone is not support.",
+      "evidence": []
+    },
+    {
+      "feature_id": "TLC-FC-16-COHORT-017",
+      "disposition": "unimplemented",
+      "reason": "No feature-specific implementation or acceptance proof has been delivered in tllib; catalog metadata alone is not support.",
+      "evidence": []
+    },
+    {
+      "feature_id": "TLC-FC-17-CASCADE-TRANSMISSION-001",
+      "disposition": "unimplemented",
+      "reason": "No feature-specific implementation or acceptance proof has been delivered in tllib; catalog metadata alone is not support.",
+      "evidence": []
+    },
+    {
+      "feature_id": "TLC-FC-17-CASCADE-TRANSMISSION-002",
+      "disposition": "unimplemented",
+      "reason": "No feature-specific implementation or acceptance proof has been delivered in tllib; catalog metadata alone is not support.",
+      "evidence": []
+    },
+    {
+      "feature_id": "TLC-FC-17-CASCADE-TRANSMISSION-003",
+      "disposition": "unimplemented",
+      "reason": "No feature-specific implementation or acceptance proof has been delivered in tllib; catalog metadata alone is not support.",
+      "evidence": []
+    },
+    {
+      "feature_id": "TLC-FC-17-CASCADE-TRANSMISSION-004",
+      "disposition": "unimplemented",
+      "reason": "No feature-specific implementation or acceptance proof has been delivered in tllib; catalog metadata alone is not support.",
+      "evidence": []
+    },
+    {
+      "feature_id": "TLC-FC-17-CASCADE-TRANSMISSION-005",
+      "disposition": "unimplemented",
+      "reason": "No feature-specific implementation or acceptance proof has been delivered in tllib; catalog metadata alone is not support.",
+      "evidence": []
+    },
+    {
+      "feature_id": "TLC-FC-17-CASCADE-TRANSMISSION-006",
+      "disposition": "unimplemented",
+      "reason": "No feature-specific implementation or acceptance proof has been delivered in tllib; catalog metadata alone is not support.",
+      "evidence": []
+    },
+    {
+      "feature_id": "TLC-FC-17-CASCADE-TRANSMISSION-007",
+      "disposition": "unimplemented",
+      "reason": "No feature-specific implementation or acceptance proof has been delivered in tllib; catalog metadata alone is not support.",
+      "evidence": []
+    },
+    {
+      "feature_id": "TLC-FC-17-CASCADE-TRANSMISSION-008",
+      "disposition": "unimplemented",
+      "reason": "No feature-specific implementation or acceptance proof has been delivered in tllib; catalog metadata alone is not support.",
+      "evidence": []
+    },
+    {
+      "feature_id": "TLC-FC-17-CASCADE-TRANSMISSION-009",
+      "disposition": "unimplemented",
+      "reason": "No feature-specific implementation or acceptance proof has been delivered in tllib; catalog metadata alone is not support.",
+      "evidence": []
+    },
+    {
+      "feature_id": "TLC-FC-17-CASCADE-TRANSMISSION-010",
+      "disposition": "unimplemented",
+      "reason": "No feature-specific implementation or acceptance proof has been delivered in tllib; catalog metadata alone is not support.",
+      "evidence": []
+    },
+    {
+      "feature_id": "TLC-FC-17-CASCADE-TRANSMISSION-011",
+      "disposition": "unimplemented",
+      "reason": "No feature-specific implementation or acceptance proof has been delivered in tllib; catalog metadata alone is not support.",
+      "evidence": []
+    },
+    {
+      "feature_id": "TLC-FC-17-CASCADE-TRANSMISSION-012",
+      "disposition": "unimplemented",
+      "reason": "No feature-specific implementation or acceptance proof has been delivered in tllib; catalog metadata alone is not support.",
+      "evidence": []
+    },
+    {
+      "feature_id": "TLC-FC-17-CASCADE-TRANSMISSION-013",
+      "disposition": "unimplemented",
+      "reason": "No feature-specific implementation or acceptance proof has been delivered in tllib; catalog metadata alone is not support.",
+      "evidence": []
+    },
+    {
+      "feature_id": "TLC-FC-17-CASCADE-TRANSMISSION-014",
+      "disposition": "unimplemented",
+      "reason": "No feature-specific implementation or acceptance proof has been delivered in tllib; catalog metadata alone is not support.",
+      "evidence": []
+    },
+    {
+      "feature_id": "TLC-FC-17-CASCADE-TRANSMISSION-015",
+      "disposition": "unimplemented",
+      "reason": "No feature-specific implementation or acceptance proof has been delivered in tllib; catalog metadata alone is not support.",
+      "evidence": []
+    },
+    {
+      "feature_id": "TLC-FC-17-CASCADE-TRANSMISSION-016",
+      "disposition": "unimplemented",
+      "reason": "No feature-specific implementation or acceptance proof has been delivered in tllib; catalog metadata alone is not support.",
+      "evidence": []
+    },
+    {
+      "feature_id": "TLC-FC-17-CASCADE-TRANSMISSION-017",
+      "disposition": "unimplemented",
+      "reason": "No feature-specific implementation or acceptance proof has been delivered in tllib; catalog metadata alone is not support.",
+      "evidence": []
+    },
+    {
+      "feature_id": "TLC-FC-17-CASCADE-TRANSMISSION-018",
+      "disposition": "unimplemented",
+      "reason": "No feature-specific implementation or acceptance proof has been delivered in tllib; catalog metadata alone is not support.",
+      "evidence": []
+    },
+    {
+      "feature_id": "TLC-FC-17-CASCADE-TRANSMISSION-019",
+      "disposition": "unimplemented",
+      "reason": "No feature-specific implementation or acceptance proof has been delivered in tllib; catalog metadata alone is not support.",
+      "evidence": []
+    },
+    {
+      "feature_id": "TLC-FC-17-CASCADE-TRANSMISSION-020",
+      "disposition": "unimplemented",
+      "reason": "No feature-specific implementation or acceptance proof has been delivered in tllib; catalog metadata alone is not support.",
+      "evidence": []
+    },
+    {
+      "feature_id": "TLC-FC-17-CASCADE-TRANSMISSION-021",
+      "disposition": "unimplemented",
+      "reason": "No feature-specific implementation or acceptance proof has been delivered in tllib; catalog metadata alone is not support.",
+      "evidence": []
+    },
+    {
+      "feature_id": "TLC-FC-17-CASCADE-TRANSMISSION-022",
+      "disposition": "unimplemented",
+      "reason": "No feature-specific implementation or acceptance proof has been delivered in tllib; catalog metadata alone is not support.",
+      "evidence": []
+    },
+    {
+      "feature_id": "TLC-FC-17-CASCADE-TRANSMISSION-023",
+      "disposition": "unimplemented",
+      "reason": "No feature-specific implementation or acceptance proof has been delivered in tllib; catalog metadata alone is not support.",
+      "evidence": []
+    },
+    {
+      "feature_id": "TLC-FC-17-CASCADE-TRANSMISSION-024",
+      "disposition": "unimplemented",
+      "reason": "No feature-specific implementation or acceptance proof has been delivered in tllib; catalog metadata alone is not support.",
+      "evidence": []
+    },
+    {
+      "feature_id": "TLC-FC-17-CASCADE-TRANSMISSION-025",
+      "disposition": "unimplemented",
+      "reason": "No feature-specific implementation or acceptance proof has been delivered in tllib; catalog metadata alone is not support.",
+      "evidence": []
+    },
+    {
+      "feature_id": "TLC-FC-17-CASCADE-TRANSMISSION-026",
+      "disposition": "unimplemented",
+      "reason": "No feature-specific implementation or acceptance proof has been delivered in tllib; catalog metadata alone is not support.",
+      "evidence": []
+    },
+    {
+      "feature_id": "TLC-FC-17-CASCADE-TRANSMISSION-027",
+      "disposition": "unimplemented",
+      "reason": "No feature-specific implementation or acceptance proof has been delivered in tllib; catalog metadata alone is not support.",
+      "evidence": []
+    },
+    {
+      "feature_id": "TLC-FC-17-CASCADE-TRANSMISSION-028",
+      "disposition": "unimplemented",
+      "reason": "No feature-specific implementation or acceptance proof has been delivered in tllib; catalog metadata alone is not support.",
+      "evidence": []
+    },
+    {
+      "feature_id": "TLC-FC-17-CASCADE-TRANSMISSION-029",
+      "disposition": "unimplemented",
+      "reason": "No feature-specific implementation or acceptance proof has been delivered in tllib; catalog metadata alone is not support.",
+      "evidence": []
+    },
+    {
+      "feature_id": "TLC-FC-17-CASCADE-TRANSMISSION-030",
+      "disposition": "unimplemented",
+      "reason": "No feature-specific implementation or acceptance proof has been delivered in tllib; catalog metadata alone is not support.",
+      "evidence": []
+    },
+    {
+      "feature_id": "TLC-FC-17-CASCADE-TRANSMISSION-031",
+      "disposition": "unimplemented",
+      "reason": "No feature-specific implementation or acceptance proof has been delivered in tllib; catalog metadata alone is not support.",
+      "evidence": []
+    },
+    {
+      "feature_id": "TLC-FC-17-CASCADE-TRANSMISSION-032",
+      "disposition": "unimplemented",
+      "reason": "No feature-specific implementation or acceptance proof has been delivered in tllib; catalog metadata alone is not support.",
+      "evidence": []
+    },
+    {
+      "feature_id": "TLC-FC-17-CASCADE-TRANSMISSION-033",
+      "disposition": "unimplemented",
+      "reason": "No feature-specific implementation or acceptance proof has been delivered in tllib; catalog metadata alone is not support.",
+      "evidence": []
+    },
+    {
+      "feature_id": "TLC-FC-17-CASCADE-TRANSMISSION-034",
+      "disposition": "unimplemented",
+      "reason": "No feature-specific implementation or acceptance proof has been delivered in tllib; catalog metadata alone is not support.",
+      "evidence": []
+    },
+    {
+      "feature_id": "TLC-FC-17-CASCADE-TRANSMISSION-035",
+      "disposition": "unimplemented",
+      "reason": "No feature-specific implementation or acceptance proof has been delivered in tllib; catalog metadata alone is not support.",
+      "evidence": []
+    },
+    {
+      "feature_id": "TLC-FC-17-CASCADE-TRANSMISSION-036",
+      "disposition": "unimplemented",
+      "reason": "No feature-specific implementation or acceptance proof has been delivered in tllib; catalog metadata alone is not support.",
+      "evidence": []
+    },
+    {
+      "feature_id": "TLC-FC-17-CASCADE-TRANSMISSION-037",
+      "disposition": "unimplemented",
+      "reason": "No feature-specific implementation or acceptance proof has been delivered in tllib; catalog metadata alone is not support.",
+      "evidence": []
+    },
+    {
+      "feature_id": "TLC-FC-17-CASCADE-TRANSMISSION-038",
+      "disposition": "unimplemented",
+      "reason": "No feature-specific implementation or acceptance proof has been delivered in tllib; catalog metadata alone is not support.",
+      "evidence": []
+    },
+    {
+      "feature_id": "TLC-FC-17-CASCADE-TRANSMISSION-039",
+      "disposition": "unimplemented",
+      "reason": "No feature-specific implementation or acceptance proof has been delivered in tllib; catalog metadata alone is not support.",
+      "evidence": []
+    },
+    {
+      "feature_id": "TLC-FC-17-CASCADE-TRANSMISSION-040",
+      "disposition": "unimplemented",
+      "reason": "No feature-specific implementation or acceptance proof has been delivered in tllib; catalog metadata alone is not support.",
+      "evidence": []
+    },
+    {
+      "feature_id": "TLC-FC-17-CASCADE-TRANSMISSION-041",
+      "disposition": "unimplemented",
+      "reason": "No feature-specific implementation or acceptance proof has been delivered in tllib; catalog metadata alone is not support.",
+      "evidence": []
+    },
+    {
+      "feature_id": "TLC-FC-17-CASCADE-TRANSMISSION-042",
+      "disposition": "unimplemented",
+      "reason": "No feature-specific implementation or acceptance proof has been delivered in tllib; catalog metadata alone is not support.",
+      "evidence": []
+    },
+    {
+      "feature_id": "TLC-FC-17-CASCADE-TRANSMISSION-043",
+      "disposition": "unimplemented",
+      "reason": "No feature-specific implementation or acceptance proof has been delivered in tllib; catalog metadata alone is not support.",
+      "evidence": []
+    },
+    {
+      "feature_id": "TLC-FC-17-CASCADE-TRANSMISSION-044",
+      "disposition": "unimplemented",
+      "reason": "No feature-specific implementation or acceptance proof has been delivered in tllib; catalog metadata alone is not support.",
+      "evidence": []
+    },
+    {
+      "feature_id": "TLC-FC-17-CASCADE-TRANSMISSION-045",
+      "disposition": "unimplemented",
+      "reason": "No feature-specific implementation or acceptance proof has been delivered in tllib; catalog metadata alone is not support.",
+      "evidence": []
+    },
+    {
+      "feature_id": "TLC-FC-17-CASCADE-TRANSMISSION-046",
+      "disposition": "unimplemented",
+      "reason": "No feature-specific implementation or acceptance proof has been delivered in tllib; catalog metadata alone is not support.",
+      "evidence": []
+    },
+    {
+      "feature_id": "TLC-FC-17-CASCADE-TRANSMISSION-047",
+      "disposition": "unimplemented",
+      "reason": "No feature-specific implementation or acceptance proof has been delivered in tllib; catalog metadata alone is not support.",
+      "evidence": []
+    },
+    {
+      "feature_id": "TLC-FC-17-CASCADE-TRANSMISSION-048",
+      "disposition": "unimplemented",
+      "reason": "No feature-specific implementation or acceptance proof has been delivered in tllib; catalog metadata alone is not support.",
+      "evidence": []
+    },
+    {
+      "feature_id": "TLC-FC-17-CASCADE-TRANSMISSION-049",
+      "disposition": "unimplemented",
+      "reason": "No feature-specific implementation or acceptance proof has been delivered in tllib; catalog metadata alone is not support.",
+      "evidence": []
+    },
+    {
+      "feature_id": "TLC-FC-17-CASCADE-TRANSMISSION-050",
+      "disposition": "unimplemented",
+      "reason": "No feature-specific implementation or acceptance proof has been delivered in tllib; catalog metadata alone is not support.",
+      "evidence": []
+    },
+    {
+      "feature_id": "TLC-FC-17-CASCADE-TRANSMISSION-051",
+      "disposition": "unimplemented",
+      "reason": "No feature-specific implementation or acceptance proof has been delivered in tllib; catalog metadata alone is not support.",
+      "evidence": []
+    },
+    {
+      "feature_id": "TLC-FC-17-CASCADE-TRANSMISSION-052",
+      "disposition": "unimplemented",
+      "reason": "No feature-specific implementation or acceptance proof has been delivered in tllib; catalog metadata alone is not support.",
+      "evidence": []
+    },
+    {
+      "feature_id": "TLC-FC-17-CASCADE-TRANSMISSION-053",
+      "disposition": "unimplemented",
+      "reason": "No feature-specific implementation or acceptance proof has been delivered in tllib; catalog metadata alone is not support.",
+      "evidence": []
+    },
+    {
+      "feature_id": "TLC-FC-17-CASCADE-TRANSMISSION-054",
+      "disposition": "unimplemented",
+      "reason": "No feature-specific implementation or acceptance proof has been delivered in tllib; catalog metadata alone is not support.",
+      "evidence": []
+    },
+    {
+      "feature_id": "TLC-FC-17-CASCADE-TRANSMISSION-055",
+      "disposition": "unimplemented",
+      "reason": "No feature-specific implementation or acceptance proof has been delivered in tllib; catalog metadata alone is not support.",
+      "evidence": []
+    },
+    {
+      "feature_id": "TLC-FC-17-CASCADE-TRANSMISSION-056",
+      "disposition": "unimplemented",
+      "reason": "No feature-specific implementation or acceptance proof has been delivered in tllib; catalog metadata alone is not support.",
+      "evidence": []
+    },
+    {
+      "feature_id": "TLC-FC-17-CASCADE-TRANSMISSION-057",
+      "disposition": "unimplemented",
+      "reason": "No feature-specific implementation or acceptance proof has been delivered in tllib; catalog metadata alone is not support.",
+      "evidence": []
+    },
+    {
+      "feature_id": "TLC-FC-17-CASCADE-TRANSMISSION-058",
+      "disposition": "unimplemented",
+      "reason": "No feature-specific implementation or acceptance proof has been delivered in tllib; catalog metadata alone is not support.",
+      "evidence": []
+    },
+    {
+      "feature_id": "TLC-FC-17-CASCADE-TRANSMISSION-059",
+      "disposition": "unimplemented",
+      "reason": "No feature-specific implementation or acceptance proof has been delivered in tllib; catalog metadata alone is not support.",
+      "evidence": []
+    },
+    {
+      "feature_id": "TLC-FC-17-CASCADE-TRANSMISSION-060",
+      "disposition": "unimplemented",
+      "reason": "No feature-specific implementation or acceptance proof has been delivered in tllib; catalog metadata alone is not support.",
+      "evidence": []
+    },
+    {
+      "feature_id": "TLC-FC-17-CASCADE-TRANSMISSION-061",
+      "disposition": "unimplemented",
+      "reason": "No feature-specific implementation or acceptance proof has been delivered in tllib; catalog metadata alone is not support.",
+      "evidence": []
+    },
+    {
+      "feature_id": "TLC-FC-17-CASCADE-TRANSMISSION-062",
+      "disposition": "unimplemented",
+      "reason": "No feature-specific implementation or acceptance proof has been delivered in tllib; catalog metadata alone is not support.",
+      "evidence": []
+    },
+    {
+      "feature_id": "TLC-FC-17-CASCADE-TRANSMISSION-063",
+      "disposition": "unimplemented",
+      "reason": "No feature-specific implementation or acceptance proof has been delivered in tllib; catalog metadata alone is not support.",
+      "evidence": []
+    },
+    {
+      "feature_id": "TLC-FC-17-CASCADE-TRANSMISSION-064",
+      "disposition": "unimplemented",
+      "reason": "No feature-specific implementation or acceptance proof has been delivered in tllib; catalog metadata alone is not support.",
+      "evidence": []
+    },
+    {
+      "feature_id": "TLC-FC-18-EVALUATION-001",
+      "disposition": "unimplemented",
+      "reason": "No feature-specific implementation or acceptance proof has been delivered in tllib; catalog metadata alone is not support.",
+      "evidence": []
+    },
+    {
+      "feature_id": "TLC-FC-18-EVALUATION-002",
+      "disposition": "unimplemented",
+      "reason": "No feature-specific implementation or acceptance proof has been delivered in tllib; catalog metadata alone is not support.",
+      "evidence": []
+    },
+    {
+      "feature_id": "TLC-FC-18-EVALUATION-003",
+      "disposition": "unimplemented",
+      "reason": "No feature-specific implementation or acceptance proof has been delivered in tllib; catalog metadata alone is not support.",
+      "evidence": []
+    },
+    {
+      "feature_id": "TLC-FC-18-EVALUATION-004",
+      "disposition": "unimplemented",
+      "reason": "No feature-specific implementation or acceptance proof has been delivered in tllib; catalog metadata alone is not support.",
+      "evidence": []
+    },
+    {
+      "feature_id": "TLC-FC-18-EVALUATION-005",
+      "disposition": "unimplemented",
+      "reason": "No feature-specific implementation or acceptance proof has been delivered in tllib; catalog metadata alone is not support.",
+      "evidence": []
+    },
+    {
+      "feature_id": "TLC-FC-18-EVALUATION-006",
+      "disposition": "unimplemented",
+      "reason": "No feature-specific implementation or acceptance proof has been delivered in tllib; catalog metadata alone is not support.",
+      "evidence": []
+    },
+    {
+      "feature_id": "TLC-FC-18-EVALUATION-007",
+      "disposition": "unimplemented",
+      "reason": "No feature-specific implementation or acceptance proof has been delivered in tllib; catalog metadata alone is not support.",
+      "evidence": []
+    },
+    {
+      "feature_id": "TLC-FC-18-EVALUATION-008",
+      "disposition": "unimplemented",
+      "reason": "No feature-specific implementation or acceptance proof has been delivered in tllib; catalog metadata alone is not support.",
+      "evidence": []
+    },
+    {
+      "feature_id": "TLC-FC-18-EVALUATION-009",
+      "disposition": "unimplemented",
+      "reason": "No feature-specific implementation or acceptance proof has been delivered in tllib; catalog metadata alone is not support.",
+      "evidence": []
+    },
+    {
+      "feature_id": "TLC-FC-18-EVALUATION-010",
+      "disposition": "unimplemented",
+      "reason": "No feature-specific implementation or acceptance proof has been delivered in tllib; catalog metadata alone is not support.",
+      "evidence": []
+    },
+    {
+      "feature_id": "TLC-FC-18-EVALUATION-011",
+      "disposition": "unimplemented",
+      "reason": "No feature-specific implementation or acceptance proof has been delivered in tllib; catalog metadata alone is not support.",
+      "evidence": []
+    },
+    {
+      "feature_id": "TLC-FC-18-EVALUATION-012",
+      "disposition": "unimplemented",
+      "reason": "No feature-specific implementation or acceptance proof has been delivered in tllib; catalog metadata alone is not support.",
+      "evidence": []
+    },
+    {
+      "feature_id": "TLC-FC-18-EVALUATION-013",
+      "disposition": "unimplemented",
+      "reason": "No feature-specific implementation or acceptance proof has been delivered in tllib; catalog metadata alone is not support.",
+      "evidence": []
+    },
+    {
+      "feature_id": "TLC-FC-18-EVALUATION-014",
+      "disposition": "unimplemented",
+      "reason": "No feature-specific implementation or acceptance proof has been delivered in tllib; catalog metadata alone is not support.",
+      "evidence": []
+    },
+    {
+      "feature_id": "TLC-FC-18-EVALUATION-015",
+      "disposition": "unimplemented",
+      "reason": "No feature-specific implementation or acceptance proof has been delivered in tllib; catalog metadata alone is not support.",
+      "evidence": []
+    },
+    {
+      "feature_id": "TLC-FC-18-EVALUATION-016",
+      "disposition": "unimplemented",
+      "reason": "No feature-specific implementation or acceptance proof has been delivered in tllib; catalog metadata alone is not support.",
+      "evidence": []
+    },
+    {
+      "feature_id": "TLC-FC-18-EVALUATION-017",
+      "disposition": "unimplemented",
+      "reason": "No feature-specific implementation or acceptance proof has been delivered in tllib; catalog metadata alone is not support.",
+      "evidence": []
+    },
+    {
+      "feature_id": "TLC-FC-18-EVALUATION-018",
+      "disposition": "unimplemented",
+      "reason": "No feature-specific implementation or acceptance proof has been delivered in tllib; catalog metadata alone is not support.",
+      "evidence": []
+    },
+    {
+      "feature_id": "TLC-FC-18-EVALUATION-019",
+      "disposition": "unimplemented",
+      "reason": "No feature-specific implementation or acceptance proof has been delivered in tllib; catalog metadata alone is not support.",
+      "evidence": []
+    },
+    {
+      "feature_id": "TLC-FC-18-EVALUATION-020",
+      "disposition": "unimplemented",
+      "reason": "No feature-specific implementation or acceptance proof has been delivered in tllib; catalog metadata alone is not support.",
+      "evidence": []
+    },
+    {
+      "feature_id": "TLC-FC-19-REGULATION-001",
+      "disposition": "unimplemented",
+      "reason": "No feature-specific implementation or acceptance proof has been delivered in tllib; catalog metadata alone is not support.",
+      "evidence": []
+    },
+    {
+      "feature_id": "TLC-FC-19-REGULATION-002",
+      "disposition": "unimplemented",
+      "reason": "No feature-specific implementation or acceptance proof has been delivered in tllib; catalog metadata alone is not support.",
+      "evidence": []
+    },
+    {
+      "feature_id": "TLC-FC-19-REGULATION-003",
+      "disposition": "unimplemented",
+      "reason": "No feature-specific implementation or acceptance proof has been delivered in tllib; catalog metadata alone is not support.",
+      "evidence": []
+    },
+    {
+      "feature_id": "TLC-FC-19-REGULATION-004",
+      "disposition": "unimplemented",
+      "reason": "No feature-specific implementation or acceptance proof has been delivered in tllib; catalog metadata alone is not support.",
+      "evidence": []
+    },
+    {
+      "feature_id": "TLC-FC-19-REGULATION-005",
+      "disposition": "unimplemented",
+      "reason": "No feature-specific implementation or acceptance proof has been delivered in tllib; catalog metadata alone is not support.",
+      "evidence": []
+    },
+    {
+      "feature_id": "TLC-FC-19-REGULATION-006",
+      "disposition": "unimplemented",
+      "reason": "No feature-specific implementation or acceptance proof has been delivered in tllib; catalog metadata alone is not support.",
+      "evidence": []
+    },
+    {
+      "feature_id": "TLC-FC-19-REGULATION-007",
+      "disposition": "unimplemented",
+      "reason": "No feature-specific implementation or acceptance proof has been delivered in tllib; catalog metadata alone is not support.",
+      "evidence": []
+    },
+    {
+      "feature_id": "TLC-FC-19-REGULATION-008",
+      "disposition": "unimplemented",
+      "reason": "No feature-specific implementation or acceptance proof has been delivered in tllib; catalog metadata alone is not support.",
+      "evidence": []
+    },
+    {
+      "feature_id": "TLC-FC-19-REGULATION-009",
+      "disposition": "unimplemented",
+      "reason": "No feature-specific implementation or acceptance proof has been delivered in tllib; catalog metadata alone is not support.",
+      "evidence": []
+    },
+    {
+      "feature_id": "TLC-FC-19-REGULATION-010",
+      "disposition": "unimplemented",
+      "reason": "No feature-specific implementation or acceptance proof has been delivered in tllib; catalog metadata alone is not support.",
+      "evidence": []
+    },
+    {
+      "feature_id": "TLC-FC-19-REGULATION-011",
+      "disposition": "unimplemented",
+      "reason": "No feature-specific implementation or acceptance proof has been delivered in tllib; catalog metadata alone is not support.",
+      "evidence": []
+    },
+    {
+      "feature_id": "TLC-FC-19-REGULATION-012",
+      "disposition": "unimplemented",
+      "reason": "No feature-specific implementation or acceptance proof has been delivered in tllib; catalog metadata alone is not support.",
+      "evidence": []
+    },
+    {
+      "feature_id": "TLC-FC-19-REGULATION-013",
+      "disposition": "unimplemented",
+      "reason": "No feature-specific implementation or acceptance proof has been delivered in tllib; catalog metadata alone is not support.",
+      "evidence": []
+    },
+    {
+      "feature_id": "TLC-FC-19-REGULATION-014",
+      "disposition": "unimplemented",
+      "reason": "No feature-specific implementation or acceptance proof has been delivered in tllib; catalog metadata alone is not support.",
+      "evidence": []
+    },
+    {
+      "feature_id": "TLC-FC-19-REGULATION-015",
+      "disposition": "unimplemented",
+      "reason": "No feature-specific implementation or acceptance proof has been delivered in tllib; catalog metadata alone is not support.",
+      "evidence": []
+    },
+    {
+      "feature_id": "TLC-FC-19-REGULATION-016",
+      "disposition": "unimplemented",
+      "reason": "No feature-specific implementation or acceptance proof has been delivered in tllib; catalog metadata alone is not support.",
+      "evidence": []
+    },
+    {
+      "feature_id": "TLC-FC-19-REGULATION-017",
+      "disposition": "unimplemented",
+      "reason": "No feature-specific implementation or acceptance proof has been delivered in tllib; catalog metadata alone is not support.",
+      "evidence": []
+    },
+    {
+      "feature_id": "TLC-FC-19-REGULATION-018",
+      "disposition": "unimplemented",
+      "reason": "No feature-specific implementation or acceptance proof has been delivered in tllib; catalog metadata alone is not support.",
+      "evidence": []
+    },
+    {
+      "feature_id": "TLC-FC-19-REGULATION-019",
+      "disposition": "unimplemented",
+      "reason": "No feature-specific implementation or acceptance proof has been delivered in tllib; catalog metadata alone is not support.",
+      "evidence": []
+    },
+    {
+      "feature_id": "TLC-FC-19-REGULATION-020",
+      "disposition": "unimplemented",
+      "reason": "No feature-specific implementation or acceptance proof has been delivered in tllib; catalog metadata alone is not support.",
+      "evidence": []
+    },
+    {
+      "feature_id": "TLC-FC-20-ROBUSTNESS-001",
+      "disposition": "unimplemented",
+      "reason": "No feature-specific implementation or acceptance proof has been delivered in tllib; catalog metadata alone is not support.",
+      "evidence": []
+    },
+    {
+      "feature_id": "TLC-FC-20-ROBUSTNESS-002",
+      "disposition": "unimplemented",
+      "reason": "No feature-specific implementation or acceptance proof has been delivered in tllib; catalog metadata alone is not support.",
+      "evidence": []
+    },
+    {
+      "feature_id": "TLC-FC-20-ROBUSTNESS-003",
+      "disposition": "unimplemented",
+      "reason": "No feature-specific implementation or acceptance proof has been delivered in tllib; catalog metadata alone is not support.",
+      "evidence": []
+    },
+    {
+      "feature_id": "TLC-FC-20-ROBUSTNESS-004",
+      "disposition": "unimplemented",
+      "reason": "No feature-specific implementation or acceptance proof has been delivered in tllib; catalog metadata alone is not support.",
+      "evidence": []
+    },
+    {
+      "feature_id": "TLC-FC-20-ROBUSTNESS-005",
+      "disposition": "unimplemented",
+      "reason": "No feature-specific implementation or acceptance proof has been delivered in tllib; catalog metadata alone is not support.",
+      "evidence": []
+    },
+    {
+      "feature_id": "TLC-FC-20-ROBUSTNESS-006",
+      "disposition": "unimplemented",
+      "reason": "No feature-specific implementation or acceptance proof has been delivered in tllib; catalog metadata alone is not support.",
+      "evidence": []
+    },
+    {
+      "feature_id": "TLC-FC-20-ROBUSTNESS-007",
+      "disposition": "unimplemented",
+      "reason": "No feature-specific implementation or acceptance proof has been delivered in tllib; catalog metadata alone is not support.",
+      "evidence": []
+    },
+    {
+      "feature_id": "TLC-FC-20-ROBUSTNESS-008",
+      "disposition": "unimplemented",
+      "reason": "No feature-specific implementation or acceptance proof has been delivered in tllib; catalog metadata alone is not support.",
+      "evidence": []
+    },
+    {
+      "feature_id": "TLC-FC-20-ROBUSTNESS-009",
+      "disposition": "unimplemented",
+      "reason": "No feature-specific implementation or acceptance proof has been delivered in tllib; catalog metadata alone is not support.",
+      "evidence": []
+    },
+    {
+      "feature_id": "TLC-FC-20-ROBUSTNESS-010",
+      "disposition": "unimplemented",
+      "reason": "No feature-specific implementation or acceptance proof has been delivered in tllib; catalog metadata alone is not support.",
+      "evidence": []
+    },
+    {
+      "feature_id": "TLC-FC-20-ROBUSTNESS-011",
+      "disposition": "unimplemented",
+      "reason": "No feature-specific implementation or acceptance proof has been delivered in tllib; catalog metadata alone is not support.",
+      "evidence": []
+    },
+    {
+      "feature_id": "TLC-FC-20-ROBUSTNESS-012",
+      "disposition": "unimplemented",
+      "reason": "No feature-specific implementation or acceptance proof has been delivered in tllib; catalog metadata alone is not support.",
+      "evidence": []
+    },
+    {
+      "feature_id": "TLC-FC-20-ROBUSTNESS-013",
+      "disposition": "unimplemented",
+      "reason": "No feature-specific implementation or acceptance proof has been delivered in tllib; catalog metadata alone is not support.",
+      "evidence": []
+    },
+    {
+      "feature_id": "TLC-FC-20-ROBUSTNESS-014",
+      "disposition": "unimplemented",
+      "reason": "No feature-specific implementation or acceptance proof has been delivered in tllib; catalog metadata alone is not support.",
+      "evidence": []
+    },
+    {
+      "feature_id": "TLC-FC-20-ROBUSTNESS-015",
+      "disposition": "unimplemented",
+      "reason": "No feature-specific implementation or acceptance proof has been delivered in tllib; catalog metadata alone is not support.",
+      "evidence": []
+    },
+    {
+      "feature_id": "TLC-FC-20-ROBUSTNESS-016",
+      "disposition": "unimplemented",
+      "reason": "No feature-specific implementation or acceptance proof has been delivered in tllib; catalog metadata alone is not support.",
+      "evidence": []
+    },
+    {
+      "feature_id": "TLC-FC-20-ROBUSTNESS-017",
+      "disposition": "unimplemented",
+      "reason": "No feature-specific implementation or acceptance proof has been delivered in tllib; catalog metadata alone is not support.",
+      "evidence": []
+    },
+    {
+      "feature_id": "TLC-FC-20-ROBUSTNESS-018",
+      "disposition": "unimplemented",
+      "reason": "No feature-specific implementation or acceptance proof has been delivered in tllib; catalog metadata alone is not support.",
+      "evidence": []
+    },
+    {
+      "feature_id": "TLC-FC-20-ROBUSTNESS-019",
+      "disposition": "unimplemented",
+      "reason": "No feature-specific implementation or acceptance proof has been delivered in tllib; catalog metadata alone is not support.",
+      "evidence": []
+    },
+    {
+      "feature_id": "TLC-FC-20-ROBUSTNESS-020",
+      "disposition": "unimplemented",
+      "reason": "No feature-specific implementation or acceptance proof has been delivered in tllib; catalog metadata alone is not support.",
+      "evidence": []
+    },
+    {
+      "feature_id": "TLC-FC-20-ROBUSTNESS-021",
+      "disposition": "unimplemented",
+      "reason": "No feature-specific implementation or acceptance proof has been delivered in tllib; catalog metadata alone is not support.",
+      "evidence": []
+    },
+    {
+      "feature_id": "TLC-FC-20-ROBUSTNESS-022",
+      "disposition": "unimplemented",
+      "reason": "No feature-specific implementation or acceptance proof has been delivered in tllib; catalog metadata alone is not support.",
+      "evidence": []
+    },
+    {
+      "feature_id": "TLC-FC-20-ROBUSTNESS-023",
+      "disposition": "unimplemented",
+      "reason": "No feature-specific implementation or acceptance proof has been delivered in tllib; catalog metadata alone is not support.",
+      "evidence": []
+    },
+    {
+      "feature_id": "TLC-FC-20-ROBUSTNESS-024",
+      "disposition": "unimplemented",
+      "reason": "No feature-specific implementation or acceptance proof has been delivered in tllib; catalog metadata alone is not support.",
+      "evidence": []
+    },
+    {
+      "feature_id": "TLC-FC-20-ROBUSTNESS-025",
+      "disposition": "unimplemented",
+      "reason": "No feature-specific implementation or acceptance proof has been delivered in tllib; catalog metadata alone is not support.",
+      "evidence": []
+    },
+    {
+      "feature_id": "TLC-FC-20-ROBUSTNESS-026",
+      "disposition": "unimplemented",
+      "reason": "No feature-specific implementation or acceptance proof has been delivered in tllib; catalog metadata alone is not support.",
+      "evidence": []
+    },
+    {
+      "feature_id": "TLC-FC-20-ROBUSTNESS-027",
+      "disposition": "unimplemented",
+      "reason": "No feature-specific implementation or acceptance proof has been delivered in tllib; catalog metadata alone is not support.",
+      "evidence": []
+    },
+    {
+      "feature_id": "TLC-FC-20-ROBUSTNESS-028",
+      "disposition": "unimplemented",
+      "reason": "No feature-specific implementation or acceptance proof has been delivered in tllib; catalog metadata alone is not support.",
+      "evidence": []
+    },
+    {
+      "feature_id": "TLC-FC-20-ROBUSTNESS-029",
+      "disposition": "unimplemented",
+      "reason": "No feature-specific implementation or acceptance proof has been delivered in tllib; catalog metadata alone is not support.",
+      "evidence": []
+    },
+    {
+      "feature_id": "TLC-FC-20-ROBUSTNESS-030",
+      "disposition": "unimplemented",
+      "reason": "No feature-specific implementation or acceptance proof has been delivered in tllib; catalog metadata alone is not support.",
+      "evidence": []
+    },
+    {
+      "feature_id": "TLC-FC-20-ROBUSTNESS-031",
+      "disposition": "unimplemented",
+      "reason": "No feature-specific implementation or acceptance proof has been delivered in tllib; catalog metadata alone is not support.",
+      "evidence": []
+    },
+    {
+      "feature_id": "TLC-FC-20-ROBUSTNESS-032",
+      "disposition": "unimplemented",
+      "reason": "No feature-specific implementation or acceptance proof has been delivered in tllib; catalog metadata alone is not support.",
+      "evidence": []
+    },
+    {
+      "feature_id": "TLC-FC-20-ROBUSTNESS-033",
+      "disposition": "unimplemented",
+      "reason": "No feature-specific implementation or acceptance proof has been delivered in tllib; catalog metadata alone is not support.",
+      "evidence": []
+    },
+    {
+      "feature_id": "TLC-FC-20-ROBUSTNESS-034",
+      "disposition": "unimplemented",
+      "reason": "No feature-specific implementation or acceptance proof has been delivered in tllib; catalog metadata alone is not support.",
+      "evidence": []
+    },
+    {
+      "feature_id": "TLC-FC-20-ROBUSTNESS-035",
+      "disposition": "unimplemented",
+      "reason": "No feature-specific implementation or acceptance proof has been delivered in tllib; catalog metadata alone is not support.",
+      "evidence": []
+    },
+    {
+      "feature_id": "TLC-FC-21-FAIRNESS-001",
+      "disposition": "unimplemented",
+      "reason": "No feature-specific implementation or acceptance proof has been delivered in tllib; catalog metadata alone is not support.",
+      "evidence": []
+    },
+    {
+      "feature_id": "TLC-FC-21-FAIRNESS-002",
+      "disposition": "unimplemented",
+      "reason": "No feature-specific implementation or acceptance proof has been delivered in tllib; catalog metadata alone is not support.",
+      "evidence": []
+    },
+    {
+      "feature_id": "TLC-FC-21-FAIRNESS-003",
+      "disposition": "unimplemented",
+      "reason": "No feature-specific implementation or acceptance proof has been delivered in tllib; catalog metadata alone is not support.",
+      "evidence": []
+    },
+    {
+      "feature_id": "TLC-FC-21-FAIRNESS-004",
+      "disposition": "unimplemented",
+      "reason": "No feature-specific implementation or acceptance proof has been delivered in tllib; catalog metadata alone is not support.",
+      "evidence": []
+    },
+    {
+      "feature_id": "TLC-FC-21-FAIRNESS-005",
+      "disposition": "unimplemented",
+      "reason": "No feature-specific implementation or acceptance proof has been delivered in tllib; catalog metadata alone is not support.",
+      "evidence": []
+    },
+    {
+      "feature_id": "TLC-FC-21-FAIRNESS-006",
+      "disposition": "unimplemented",
+      "reason": "No feature-specific implementation or acceptance proof has been delivered in tllib; catalog metadata alone is not support.",
+      "evidence": []
+    },
+    {
+      "feature_id": "TLC-FC-21-FAIRNESS-007",
+      "disposition": "unimplemented",
+      "reason": "No feature-specific implementation or acceptance proof has been delivered in tllib; catalog metadata alone is not support.",
+      "evidence": []
+    },
+    {
+      "feature_id": "TLC-FC-21-FAIRNESS-008",
+      "disposition": "unimplemented",
+      "reason": "No feature-specific implementation or acceptance proof has been delivered in tllib; catalog metadata alone is not support.",
+      "evidence": []
+    },
+    {
+      "feature_id": "TLC-FC-21-FAIRNESS-009",
+      "disposition": "unimplemented",
+      "reason": "No feature-specific implementation or acceptance proof has been delivered in tllib; catalog metadata alone is not support.",
+      "evidence": []
+    },
+    {
+      "feature_id": "TLC-FC-21-FAIRNESS-010",
+      "disposition": "unimplemented",
+      "reason": "No feature-specific implementation or acceptance proof has been delivered in tllib; catalog metadata alone is not support.",
+      "evidence": []
+    },
+    {
+      "feature_id": "TLC-FC-21-FAIRNESS-011",
+      "disposition": "unimplemented",
+      "reason": "No feature-specific implementation or acceptance proof has been delivered in tllib; catalog metadata alone is not support.",
+      "evidence": []
+    },
+    {
+      "feature_id": "TLC-FC-21-FAIRNESS-012",
+      "disposition": "unimplemented",
+      "reason": "No feature-specific implementation or acceptance proof has been delivered in tllib; catalog metadata alone is not support.",
+      "evidence": []
+    },
+    {
+      "feature_id": "TLC-FC-21-FAIRNESS-013",
+      "disposition": "unimplemented",
+      "reason": "No feature-specific implementation or acceptance proof has been delivered in tllib; catalog metadata alone is not support.",
+      "evidence": []
+    },
+    {
+      "feature_id": "TLC-FC-21-FAIRNESS-014",
+      "disposition": "unimplemented",
+      "reason": "No feature-specific implementation or acceptance proof has been delivered in tllib; catalog metadata alone is not support.",
+      "evidence": []
+    },
+    {
+      "feature_id": "TLC-FC-21-FAIRNESS-015",
+      "disposition": "unimplemented",
+      "reason": "No feature-specific implementation or acceptance proof has been delivered in tllib; catalog metadata alone is not support.",
+      "evidence": []
+    },
+    {
+      "feature_id": "TLC-FC-21-FAIRNESS-016",
+      "disposition": "unimplemented",
+      "reason": "No feature-specific implementation or acceptance proof has been delivered in tllib; catalog metadata alone is not support.",
+      "evidence": []
+    },
+    {
+      "feature_id": "TLC-FC-21-FAIRNESS-017",
+      "disposition": "unimplemented",
+      "reason": "No feature-specific implementation or acceptance proof has been delivered in tllib; catalog metadata alone is not support.",
+      "evidence": []
+    },
+    {
+      "feature_id": "TLC-FC-21-FAIRNESS-018",
+      "disposition": "unimplemented",
+      "reason": "No feature-specific implementation or acceptance proof has been delivered in tllib; catalog metadata alone is not support.",
+      "evidence": []
+    },
+    {
+      "feature_id": "TLC-FC-22-TEMPORALITY-001",
+      "disposition": "unimplemented",
+      "reason": "No feature-specific implementation or acceptance proof has been delivered in tllib; catalog metadata alone is not support.",
+      "evidence": []
+    },
+    {
+      "feature_id": "TLC-FC-22-TEMPORALITY-002",
+      "disposition": "unimplemented",
+      "reason": "No feature-specific implementation or acceptance proof has been delivered in tllib; catalog metadata alone is not support.",
+      "evidence": []
+    },
+    {
+      "feature_id": "TLC-FC-22-TEMPORALITY-003",
+      "disposition": "unimplemented",
+      "reason": "No feature-specific implementation or acceptance proof has been delivered in tllib; catalog metadata alone is not support.",
+      "evidence": []
+    },
+    {
+      "feature_id": "TLC-FC-22-TEMPORALITY-004",
+      "disposition": "unimplemented",
+      "reason": "No feature-specific implementation or acceptance proof has been delivered in tllib; catalog metadata alone is not support.",
+      "evidence": []
+    },
+    {
+      "feature_id": "TLC-FC-22-TEMPORALITY-005",
+      "disposition": "unimplemented",
+      "reason": "No feature-specific implementation or acceptance proof has been delivered in tllib; catalog metadata alone is not support.",
+      "evidence": []
+    },
+    {
+      "feature_id": "TLC-FC-22-TEMPORALITY-006",
+      "disposition": "unimplemented",
+      "reason": "No feature-specific implementation or acceptance proof has been delivered in tllib; catalog metadata alone is not support.",
+      "evidence": []
+    },
+    {
+      "feature_id": "TLC-FC-22-TEMPORALITY-007",
+      "disposition": "unimplemented",
+      "reason": "No feature-specific implementation or acceptance proof has been delivered in tllib; catalog metadata alone is not support.",
+      "evidence": []
+    },
+    {
+      "feature_id": "TLC-FC-22-TEMPORALITY-008",
+      "disposition": "unimplemented",
+      "reason": "No feature-specific implementation or acceptance proof has been delivered in tllib; catalog metadata alone is not support.",
+      "evidence": []
+    },
+    {
+      "feature_id": "TLC-FC-22-TEMPORALITY-009",
+      "disposition": "unimplemented",
+      "reason": "No feature-specific implementation or acceptance proof has been delivered in tllib; catalog metadata alone is not support.",
+      "evidence": []
+    },
+    {
+      "feature_id": "TLC-FC-23-MEMORY-001",
+      "disposition": "unimplemented",
+      "reason": "No feature-specific implementation or acceptance proof has been delivered in tllib; catalog metadata alone is not support.",
+      "evidence": []
+    },
+    {
+      "feature_id": "TLC-FC-23-MEMORY-002",
+      "disposition": "unimplemented",
+      "reason": "No feature-specific implementation or acceptance proof has been delivered in tllib; catalog metadata alone is not support.",
+      "evidence": []
+    },
+    {
+      "feature_id": "TLC-FC-23-MEMORY-003",
+      "disposition": "unimplemented",
+      "reason": "No feature-specific implementation or acceptance proof has been delivered in tllib; catalog metadata alone is not support.",
+      "evidence": []
+    },
+    {
+      "feature_id": "TLC-FC-23-MEMORY-004",
+      "disposition": "unimplemented",
+      "reason": "No feature-specific implementation or acceptance proof has been delivered in tllib; catalog metadata alone is not support.",
+      "evidence": []
+    },
+    {
+      "feature_id": "TLC-FC-23-MEMORY-005",
+      "disposition": "unimplemented",
+      "reason": "No feature-specific implementation or acceptance proof has been delivered in tllib; catalog metadata alone is not support.",
+      "evidence": []
+    },
+    {
+      "feature_id": "TLC-FC-23-MEMORY-006",
+      "disposition": "unimplemented",
+      "reason": "No feature-specific implementation or acceptance proof has been delivered in tllib; catalog metadata alone is not support.",
+      "evidence": []
+    },
+    {
+      "feature_id": "TLC-FC-23-MEMORY-007",
+      "disposition": "unimplemented",
+      "reason": "No feature-specific implementation or acceptance proof has been delivered in tllib; catalog metadata alone is not support.",
+      "evidence": []
+    },
+    {
+      "feature_id": "TLC-FC-23-MEMORY-008",
+      "disposition": "unimplemented",
+      "reason": "No feature-specific implementation or acceptance proof has been delivered in tllib; catalog metadata alone is not support.",
+      "evidence": []
+    },
+    {
+      "feature_id": "TLC-FC-23-MEMORY-009",
+      "disposition": "unimplemented",
+      "reason": "No feature-specific implementation or acceptance proof has been delivered in tllib; catalog metadata alone is not support.",
+      "evidence": []
+    },
+    {
+      "feature_id": "TLC-FC-23-MEMORY-010",
+      "disposition": "unimplemented",
+      "reason": "No feature-specific implementation or acceptance proof has been delivered in tllib; catalog metadata alone is not support.",
+      "evidence": []
+    },
+    {
+      "feature_id": "TLC-FC-24-CONTEXT-001",
+      "disposition": "unimplemented",
+      "reason": "No feature-specific implementation or acceptance proof has been delivered in tllib; catalog metadata alone is not support.",
+      "evidence": []
+    },
+    {
+      "feature_id": "TLC-FC-24-CONTEXT-002",
+      "disposition": "unimplemented",
+      "reason": "No feature-specific implementation or acceptance proof has been delivered in tllib; catalog metadata alone is not support.",
+      "evidence": []
+    },
+    {
+      "feature_id": "TLC-FC-24-CONTEXT-003",
+      "disposition": "unimplemented",
+      "reason": "No feature-specific implementation or acceptance proof has been delivered in tllib; catalog metadata alone is not support.",
+      "evidence": []
+    },
+    {
+      "feature_id": "TLC-FC-24-CONTEXT-004",
+      "disposition": "unimplemented",
+      "reason": "No feature-specific implementation or acceptance proof has been delivered in tllib; catalog metadata alone is not support.",
+      "evidence": []
+    },
+    {
+      "feature_id": "TLC-FC-24-CONTEXT-005",
+      "disposition": "unimplemented",
+      "reason": "No feature-specific implementation or acceptance proof has been delivered in tllib; catalog metadata alone is not support.",
+      "evidence": []
+    },
+    {
+      "feature_id": "TLC-FC-24-CONTEXT-006",
+      "disposition": "unimplemented",
+      "reason": "No feature-specific implementation or acceptance proof has been delivered in tllib; catalog metadata alone is not support.",
+      "evidence": []
+    },
+    {
+      "feature_id": "TLC-FC-24-CONTEXT-007",
+      "disposition": "unimplemented",
+      "reason": "No feature-specific implementation or acceptance proof has been delivered in tllib; catalog metadata alone is not support.",
+      "evidence": []
+    },
+    {
+      "feature_id": "TLC-FC-24-CONTEXT-008",
+      "disposition": "unimplemented",
+      "reason": "No feature-specific implementation or acceptance proof has been delivered in tllib; catalog metadata alone is not support.",
+      "evidence": []
+    },
+    {
+      "feature_id": "TLC-FC-24-CONTEXT-009",
+      "disposition": "unimplemented",
+      "reason": "No feature-specific implementation or acceptance proof has been delivered in tllib; catalog metadata alone is not support.",
+      "evidence": []
+    },
+    {
+      "feature_id": "TLC-FC-24-CONTEXT-010",
+      "disposition": "unimplemented",
+      "reason": "No feature-specific implementation or acceptance proof has been delivered in tllib; catalog metadata alone is not support.",
+      "evidence": []
+    },
+    {
+      "feature_id": "TLC-FC-24-CONTEXT-011",
+      "disposition": "unimplemented",
+      "reason": "No feature-specific implementation or acceptance proof has been delivered in tllib; catalog metadata alone is not support.",
+      "evidence": []
+    },
+    {
+      "feature_id": "TLC-FC-24-CONTEXT-012",
+      "disposition": "unimplemented",
+      "reason": "No feature-specific implementation or acceptance proof has been delivered in tllib; catalog metadata alone is not support.",
+      "evidence": []
+    },
+    {
+      "feature_id": "TLC-FC-25-CULTURE-001",
+      "disposition": "unimplemented",
+      "reason": "No feature-specific implementation or acceptance proof has been delivered in tllib; catalog metadata alone is not support.",
+      "evidence": []
+    },
+    {
+      "feature_id": "TLC-FC-25-CULTURE-002",
+      "disposition": "unimplemented",
+      "reason": "No feature-specific implementation or acceptance proof has been delivered in tllib; catalog metadata alone is not support.",
+      "evidence": []
+    },
+    {
+      "feature_id": "TLC-FC-25-CULTURE-003",
+      "disposition": "unimplemented",
+      "reason": "No feature-specific implementation or acceptance proof has been delivered in tllib; catalog metadata alone is not support.",
+      "evidence": []
+    },
+    {
+      "feature_id": "TLC-FC-25-CULTURE-004",
+      "disposition": "unimplemented",
+      "reason": "No feature-specific implementation or acceptance proof has been delivered in tllib; catalog metadata alone is not support.",
+      "evidence": []
+    },
+    {
+      "feature_id": "TLC-FC-25-CULTURE-005",
+      "disposition": "unimplemented",
+      "reason": "No feature-specific implementation or acceptance proof has been delivered in tllib; catalog metadata alone is not support.",
+      "evidence": []
+    },
+    {
+      "feature_id": "TLC-FC-25-CULTURE-006",
+      "disposition": "unimplemented",
+      "reason": "No feature-specific implementation or acceptance proof has been delivered in tllib; catalog metadata alone is not support.",
+      "evidence": []
+    },
+    {
+      "feature_id": "TLC-FC-25-CULTURE-007",
+      "disposition": "unimplemented",
+      "reason": "No feature-specific implementation or acceptance proof has been delivered in tllib; catalog metadata alone is not support.",
+      "evidence": []
+    },
+    {
+      "feature_id": "TLC-FC-25-CULTURE-008",
+      "disposition": "unimplemented",
+      "reason": "No feature-specific implementation or acceptance proof has been delivered in tllib; catalog metadata alone is not support.",
+      "evidence": []
+    },
+    {
+      "feature_id": "TLC-FC-26-IDENTITY-001",
+      "disposition": "unimplemented",
+      "reason": "No feature-specific implementation or acceptance proof has been delivered in tllib; catalog metadata alone is not support.",
+      "evidence": []
+    },
+    {
+      "feature_id": "TLC-FC-26-IDENTITY-002",
+      "disposition": "unimplemented",
+      "reason": "No feature-specific implementation or acceptance proof has been delivered in tllib; catalog metadata alone is not support.",
+      "evidence": []
+    },
+    {
+      "feature_id": "TLC-FC-26-IDENTITY-003",
+      "disposition": "unimplemented",
+      "reason": "No feature-specific implementation or acceptance proof has been delivered in tllib; catalog metadata alone is not support.",
+      "evidence": []
+    },
+    {
+      "feature_id": "TLC-FC-26-IDENTITY-004",
+      "disposition": "unimplemented",
+      "reason": "No feature-specific implementation or acceptance proof has been delivered in tllib; catalog metadata alone is not support.",
+      "evidence": []
+    },
+    {
+      "feature_id": "TLC-FC-26-IDENTITY-005",
+      "disposition": "unimplemented",
+      "reason": "No feature-specific implementation or acceptance proof has been delivered in tllib; catalog metadata alone is not support.",
+      "evidence": []
+    },
+    {
+      "feature_id": "TLC-FC-26-IDENTITY-006",
+      "disposition": "unimplemented",
+      "reason": "No feature-specific implementation or acceptance proof has been delivered in tllib; catalog metadata alone is not support.",
+      "evidence": []
+    },
+    {
+      "feature_id": "TLC-FC-26-IDENTITY-007",
+      "disposition": "unimplemented",
+      "reason": "No feature-specific implementation or acceptance proof has been delivered in tllib; catalog metadata alone is not support.",
+      "evidence": []
+    },
+    {
+      "feature_id": "TLC-FC-26-IDENTITY-008",
+      "disposition": "unimplemented",
+      "reason": "No feature-specific implementation or acceptance proof has been delivered in tllib; catalog metadata alone is not support.",
+      "evidence": []
+    },
+    {
+      "feature_id": "TLC-FC-26-IDENTITY-009",
+      "disposition": "unimplemented",
+      "reason": "No feature-specific implementation or acceptance proof has been delivered in tllib; catalog metadata alone is not support.",
+      "evidence": []
+    },
+    {
+      "feature_id": "TLC-FC-26-IDENTITY-010",
+      "disposition": "unimplemented",
+      "reason": "No feature-specific implementation or acceptance proof has been delivered in tllib; catalog metadata alone is not support.",
+      "evidence": []
+    },
+    {
+      "feature_id": "TLC-FC-26-IDENTITY-011",
+      "disposition": "unimplemented",
+      "reason": "No feature-specific implementation or acceptance proof has been delivered in tllib; catalog metadata alone is not support.",
+      "evidence": []
+    },
+    {
+      "feature_id": "TLC-FC-26-IDENTITY-012",
+      "disposition": "unimplemented",
+      "reason": "No feature-specific implementation or acceptance proof has been delivered in tllib; catalog metadata alone is not support.",
+      "evidence": []
+    },
+    {
+      "feature_id": "TLC-FC-26-IDENTITY-013",
+      "disposition": "unimplemented",
+      "reason": "No feature-specific implementation or acceptance proof has been delivered in tllib; catalog metadata alone is not support.",
+      "evidence": []
+    },
+    {
+      "feature_id": "TLC-FC-27-REFLEXIVITY-001",
+      "disposition": "unimplemented",
+      "reason": "No feature-specific implementation or acceptance proof has been delivered in tllib; catalog metadata alone is not support.",
+      "evidence": []
+    },
+    {
+      "feature_id": "TLC-FC-27-REFLEXIVITY-002",
+      "disposition": "unimplemented",
+      "reason": "No feature-specific implementation or acceptance proof has been delivered in tllib; catalog metadata alone is not support.",
+      "evidence": []
+    },
+    {
+      "feature_id": "TLC-FC-27-REFLEXIVITY-003",
+      "disposition": "unimplemented",
+      "reason": "No feature-specific implementation or acceptance proof has been delivered in tllib; catalog metadata alone is not support.",
+      "evidence": []
+    },
+    {
+      "feature_id": "TLC-FC-27-REFLEXIVITY-004",
+      "disposition": "unimplemented",
+      "reason": "No feature-specific implementation or acceptance proof has been delivered in tllib; catalog metadata alone is not support.",
+      "evidence": []
+    },
+    {
+      "feature_id": "TLC-FC-27-REFLEXIVITY-005",
+      "disposition": "unimplemented",
+      "reason": "No feature-specific implementation or acceptance proof has been delivered in tllib; catalog metadata alone is not support.",
+      "evidence": []
+    },
+    {
+      "feature_id": "TLC-FC-27-REFLEXIVITY-006",
+      "disposition": "unimplemented",
+      "reason": "No feature-specific implementation or acceptance proof has been delivered in tllib; catalog metadata alone is not support.",
+      "evidence": []
+    },
+    {
+      "feature_id": "TLC-FC-27-REFLEXIVITY-007",
+      "disposition": "unimplemented",
+      "reason": "No feature-specific implementation or acceptance proof has been delivered in tllib; catalog metadata alone is not support.",
+      "evidence": []
+    },
+    {
+      "feature_id": "TLC-FC-27-REFLEXIVITY-008",
+      "disposition": "unimplemented",
+      "reason": "No feature-specific implementation or acceptance proof has been delivered in tllib; catalog metadata alone is not support.",
+      "evidence": []
+    },
+    {
+      "feature_id": "TLC-FC-27-REFLEXIVITY-009",
+      "disposition": "unimplemented",
+      "reason": "No feature-specific implementation or acceptance proof has been delivered in tllib; catalog metadata alone is not support.",
+      "evidence": []
+    },
+    {
+      "feature_id": "TLC-FC-28-FINALITY-AND-EVOLUTIONARY-TELEOLOGY-001",
+      "disposition": "unimplemented",
+      "reason": "No feature-specific implementation or acceptance proof has been delivered in tllib; catalog metadata alone is not support.",
+      "evidence": []
+    },
+    {
+      "feature_id": "TLC-FC-28-FINALITY-AND-EVOLUTIONARY-TELEOLOGY-002",
+      "disposition": "unimplemented",
+      "reason": "No feature-specific implementation or acceptance proof has been delivered in tllib; catalog metadata alone is not support.",
+      "evidence": []
+    },
+    {
+      "feature_id": "TLC-FC-28-FINALITY-AND-EVOLUTIONARY-TELEOLOGY-003",
+      "disposition": "unimplemented",
+      "reason": "No feature-specific implementation or acceptance proof has been delivered in tllib; catalog metadata alone is not support.",
+      "evidence": []
+    },
+    {
+      "feature_id": "TLC-FC-28-FINALITY-AND-EVOLUTIONARY-TELEOLOGY-004",
+      "disposition": "unimplemented",
+      "reason": "No feature-specific implementation or acceptance proof has been delivered in tllib; catalog metadata alone is not support.",
+      "evidence": []
+    },
+    {
+      "feature_id": "TLC-FC-28-FINALITY-AND-EVOLUTIONARY-TELEOLOGY-005",
+      "disposition": "unimplemented",
+      "reason": "No feature-specific implementation or acceptance proof has been delivered in tllib; catalog metadata alone is not support.",
+      "evidence": []
+    },
+    {
+      "feature_id": "TLC-FC-28-FINALITY-AND-EVOLUTIONARY-TELEOLOGY-006",
+      "disposition": "unimplemented",
+      "reason": "No feature-specific implementation or acceptance proof has been delivered in tllib; catalog metadata alone is not support.",
+      "evidence": []
+    },
+    {
+      "feature_id": "TLC-FC-28-FINALITY-AND-EVOLUTIONARY-TELEOLOGY-007",
+      "disposition": "unimplemented",
+      "reason": "No feature-specific implementation or acceptance proof has been delivered in tllib; catalog metadata alone is not support.",
+      "evidence": []
+    },
+    {
+      "feature_id": "TLC-FC-28-FINALITY-AND-EVOLUTIONARY-TELEOLOGY-008",
+      "disposition": "unimplemented",
+      "reason": "No feature-specific implementation or acceptance proof has been delivered in tllib; catalog metadata alone is not support.",
+      "evidence": []
+    },
+    {
+      "feature_id": "TLC-FC-28-FINALITY-AND-EVOLUTIONARY-TELEOLOGY-009",
+      "disposition": "unimplemented",
+      "reason": "No feature-specific implementation or acceptance proof has been delivered in tllib; catalog metadata alone is not support.",
+      "evidence": []
+    },
+    {
+      "feature_id": "TLC-FC-28-FINALITY-AND-EVOLUTIONARY-TELEOLOGY-010",
+      "disposition": "unimplemented",
+      "reason": "No feature-specific implementation or acceptance proof has been delivered in tllib; catalog metadata alone is not support.",
+      "evidence": []
+    },
+    {
+      "feature_id": "TLC-FC-28-FINALITY-AND-EVOLUTIONARY-TELEOLOGY-011",
+      "disposition": "unimplemented",
+      "reason": "No feature-specific implementation or acceptance proof has been delivered in tllib; catalog metadata alone is not support.",
+      "evidence": []
+    },
+    {
+      "feature_id": "TLC-FC-28-FINALITY-AND-EVOLUTIONARY-TELEOLOGY-012",
+      "disposition": "unimplemented",
+      "reason": "No feature-specific implementation or acceptance proof has been delivered in tllib; catalog metadata alone is not support.",
+      "evidence": []
+    },
+    {
+      "feature_id": "TLC-FC-28-FINALITY-AND-EVOLUTIONARY-TELEOLOGY-013",
+      "disposition": "unimplemented",
+      "reason": "No feature-specific implementation or acceptance proof has been delivered in tllib; catalog metadata alone is not support.",
+      "evidence": []
+    },
+    {
+      "feature_id": "TLC-FC-28-FINALITY-AND-EVOLUTIONARY-TELEOLOGY-014",
+      "disposition": "unimplemented",
+      "reason": "No feature-specific implementation or acceptance proof has been delivered in tllib; catalog metadata alone is not support.",
+      "evidence": []
+    },
+    {
+      "feature_id": "TLC-FC-28-FINALITY-AND-EVOLUTIONARY-TELEOLOGY-015",
+      "disposition": "unimplemented",
+      "reason": "No feature-specific implementation or acceptance proof has been delivered in tllib; catalog metadata alone is not support.",
+      "evidence": []
+    },
+    {
+      "feature_id": "TLC-FC-28-FINALITY-AND-EVOLUTIONARY-TELEOLOGY-016",
+      "disposition": "unimplemented",
+      "reason": "No feature-specific implementation or acceptance proof has been delivered in tllib; catalog metadata alone is not support.",
+      "evidence": []
+    },
+    {
+      "feature_id": "TLC-FC-28-FINALITY-AND-EVOLUTIONARY-TELEOLOGY-017",
+      "disposition": "unimplemented",
+      "reason": "No feature-specific implementation or acceptance proof has been delivered in tllib; catalog metadata alone is not support.",
+      "evidence": []
+    },
+    {
+      "feature_id": "TLC-FC-28-FINALITY-AND-EVOLUTIONARY-TELEOLOGY-018",
+      "disposition": "unimplemented",
+      "reason": "No feature-specific implementation or acceptance proof has been delivered in tllib; catalog metadata alone is not support.",
+      "evidence": []
+    },
+    {
+      "feature_id": "TLC-FC-28-FINALITY-AND-EVOLUTIONARY-TELEOLOGY-019",
+      "disposition": "unimplemented",
+      "reason": "No feature-specific implementation or acceptance proof has been delivered in tllib; catalog metadata alone is not support.",
+      "evidence": []
+    },
+    {
+      "feature_id": "TLC-FC-28-FINALITY-AND-EVOLUTIONARY-TELEOLOGY-020",
+      "disposition": "unimplemented",
+      "reason": "No feature-specific implementation or acceptance proof has been delivered in tllib; catalog metadata alone is not support.",
+      "evidence": []
+    },
+    {
+      "feature_id": "TLC-FC-28-FINALITY-AND-EVOLUTIONARY-TELEOLOGY-021",
+      "disposition": "unimplemented",
+      "reason": "No feature-specific implementation or acceptance proof has been delivered in tllib; catalog metadata alone is not support.",
+      "evidence": []
+    },
+    {
+      "feature_id": "TLC-FC-28-FINALITY-AND-EVOLUTIONARY-TELEOLOGY-022",
+      "disposition": "unimplemented",
+      "reason": "No feature-specific implementation or acceptance proof has been delivered in tllib; catalog metadata alone is not support.",
+      "evidence": []
+    },
+    {
+      "feature_id": "TLC-FC-29-GENERATIONAL-PROPAGATION-001",
+      "disposition": "unimplemented",
+      "reason": "No feature-specific implementation or acceptance proof has been delivered in tllib; catalog metadata alone is not support.",
+      "evidence": []
+    },
+    {
+      "feature_id": "TLC-FC-29-GENERATIONAL-PROPAGATION-002",
+      "disposition": "unimplemented",
+      "reason": "No feature-specific implementation or acceptance proof has been delivered in tllib; catalog metadata alone is not support.",
+      "evidence": []
+    },
+    {
+      "feature_id": "TLC-FC-29-GENERATIONAL-PROPAGATION-003",
+      "disposition": "unimplemented",
+      "reason": "No feature-specific implementation or acceptance proof has been delivered in tllib; catalog metadata alone is not support.",
+      "evidence": []
+    },
+    {
+      "feature_id": "TLC-FC-29-GENERATIONAL-PROPAGATION-004",
+      "disposition": "unimplemented",
+      "reason": "No feature-specific implementation or acceptance proof has been delivered in tllib; catalog metadata alone is not support.",
+      "evidence": []
+    },
+    {
+      "feature_id": "TLC-FC-29-GENERATIONAL-PROPAGATION-005",
+      "disposition": "unimplemented",
+      "reason": "No feature-specific implementation or acceptance proof has been delivered in tllib; catalog metadata alone is not support.",
+      "evidence": []
+    },
+    {
+      "feature_id": "TLC-FC-29-GENERATIONAL-PROPAGATION-006",
+      "disposition": "unimplemented",
+      "reason": "No feature-specific implementation or acceptance proof has been delivered in tllib; catalog metadata alone is not support.",
+      "evidence": []
+    },
+    {
+      "feature_id": "TLC-FC-29-GENERATIONAL-PROPAGATION-007",
+      "disposition": "unimplemented",
+      "reason": "No feature-specific implementation or acceptance proof has been delivered in tllib; catalog metadata alone is not support.",
+      "evidence": []
+    },
+    {
+      "feature_id": "TLC-FC-29-GENERATIONAL-PROPAGATION-008",
+      "disposition": "unimplemented",
+      "reason": "No feature-specific implementation or acceptance proof has been delivered in tllib; catalog metadata alone is not support.",
+      "evidence": []
+    },
+    {
+      "feature_id": "TLC-FC-29-GENERATIONAL-PROPAGATION-009",
+      "disposition": "unimplemented",
+      "reason": "No feature-specific implementation or acceptance proof has been delivered in tllib; catalog metadata alone is not support.",
+      "evidence": []
+    },
+    {
+      "feature_id": "TLC-FC-29-GENERATIONAL-PROPAGATION-010",
+      "disposition": "unimplemented",
+      "reason": "No feature-specific implementation or acceptance proof has been delivered in tllib; catalog metadata alone is not support.",
+      "evidence": []
+    },
+    {
+      "feature_id": "TLC-FC-29-GENERATIONAL-PROPAGATION-011",
+      "disposition": "unimplemented",
+      "reason": "No feature-specific implementation or acceptance proof has been delivered in tllib; catalog metadata alone is not support.",
+      "evidence": []
+    },
+    {
+      "feature_id": "TLC-FC-29-GENERATIONAL-PROPAGATION-012",
+      "disposition": "unimplemented",
+      "reason": "No feature-specific implementation or acceptance proof has been delivered in tllib; catalog metadata alone is not support.",
+      "evidence": []
+    },
+    {
+      "feature_id": "TLC-FC-29-GENERATIONAL-PROPAGATION-013",
+      "disposition": "unimplemented",
+      "reason": "No feature-specific implementation or acceptance proof has been delivered in tllib; catalog metadata alone is not support.",
+      "evidence": []
+    },
+    {
+      "feature_id": "TLC-FC-29-GENERATIONAL-PROPAGATION-014",
+      "disposition": "unimplemented",
+      "reason": "No feature-specific implementation or acceptance proof has been delivered in tllib; catalog metadata alone is not support.",
+      "evidence": []
+    },
+    {
+      "feature_id": "TLC-FC-29-GENERATIONAL-PROPAGATION-015",
+      "disposition": "unimplemented",
+      "reason": "No feature-specific implementation or acceptance proof has been delivered in tllib; catalog metadata alone is not support.",
+      "evidence": []
+    },
+    {
+      "feature_id": "TLC-FC-29-GENERATIONAL-PROPAGATION-016",
+      "disposition": "unimplemented",
+      "reason": "No feature-specific implementation or acceptance proof has been delivered in tllib; catalog metadata alone is not support.",
+      "evidence": []
+    },
+    {
+      "feature_id": "TLC-FC-29-GENERATIONAL-PROPAGATION-017",
+      "disposition": "unimplemented",
+      "reason": "No feature-specific implementation or acceptance proof has been delivered in tllib; catalog metadata alone is not support.",
+      "evidence": []
+    },
+    {
+      "feature_id": "TLC-FC-29-GENERATIONAL-PROPAGATION-018",
+      "disposition": "unimplemented",
+      "reason": "No feature-specific implementation or acceptance proof has been delivered in tllib; catalog metadata alone is not support.",
+      "evidence": []
+    },
+    {
+      "feature_id": "TLC-FC-29-GENERATIONAL-PROPAGATION-019",
+      "disposition": "unimplemented",
+      "reason": "No feature-specific implementation or acceptance proof has been delivered in tllib; catalog metadata alone is not support.",
+      "evidence": []
+    },
+    {
+      "feature_id": "TLC-FC-29-GENERATIONAL-PROPAGATION-020",
+      "disposition": "unimplemented",
+      "reason": "No feature-specific implementation or acceptance proof has been delivered in tllib; catalog metadata alone is not support.",
+      "evidence": []
+    },
+    {
+      "feature_id": "TLC-FC-29-GENERATIONAL-PROPAGATION-021",
+      "disposition": "unimplemented",
+      "reason": "No feature-specific implementation or acceptance proof has been delivered in tllib; catalog metadata alone is not support.",
+      "evidence": []
+    },
+    {
+      "feature_id": "TLC-FC-29-GENERATIONAL-PROPAGATION-022",
+      "disposition": "unimplemented",
+      "reason": "No feature-specific implementation or acceptance proof has been delivered in tllib; catalog metadata alone is not support.",
+      "evidence": []
+    },
+    {
+      "feature_id": "TLC-FC-29-GENERATIONAL-PROPAGATION-023",
+      "disposition": "unimplemented",
+      "reason": "No feature-specific implementation or acceptance proof has been delivered in tllib; catalog metadata alone is not support.",
+      "evidence": []
+    },
+    {
+      "feature_id": "TLC-FC-29-GENERATIONAL-PROPAGATION-024",
+      "disposition": "unimplemented",
+      "reason": "No feature-specific implementation or acceptance proof has been delivered in tllib; catalog metadata alone is not support.",
+      "evidence": []
+    },
+    {
+      "feature_id": "TLC-FC-29-GENERATIONAL-PROPAGATION-025",
+      "disposition": "unimplemented",
+      "reason": "No feature-specific implementation or acceptance proof has been delivered in tllib; catalog metadata alone is not support.",
+      "evidence": []
+    },
+    {
+      "feature_id": "TLC-FC-29-GENERATIONAL-PROPAGATION-026",
+      "disposition": "unimplemented",
+      "reason": "No feature-specific implementation or acceptance proof has been delivered in tllib; catalog metadata alone is not support.",
+      "evidence": []
+    },
+    {
+      "feature_id": "TLC-FC-29-GENERATIONAL-PROPAGATION-027",
+      "disposition": "unimplemented",
+      "reason": "No feature-specific implementation or acceptance proof has been delivered in tllib; catalog metadata alone is not support.",
+      "evidence": []
+    },
+    {
+      "feature_id": "TLC-FC-29-GENERATIONAL-PROPAGATION-028",
+      "disposition": "unimplemented",
+      "reason": "No feature-specific implementation or acceptance proof has been delivered in tllib; catalog metadata alone is not support.",
+      "evidence": []
+    },
+    {
+      "feature_id": "TLC-FC-30-EXPANSION-001",
+      "disposition": "unimplemented",
+      "reason": "No feature-specific implementation or acceptance proof has been delivered in tllib; catalog metadata alone is not support.",
+      "evidence": []
+    },
+    {
+      "feature_id": "TLC-FC-30-EXPANSION-002",
+      "disposition": "unimplemented",
+      "reason": "No feature-specific implementation or acceptance proof has been delivered in tllib; catalog metadata alone is not support.",
+      "evidence": []
+    },
+    {
+      "feature_id": "TLC-FC-30-EXPANSION-003",
+      "disposition": "unimplemented",
+      "reason": "No feature-specific implementation or acceptance proof has been delivered in tllib; catalog metadata alone is not support.",
+      "evidence": []
+    },
+    {
+      "feature_id": "TLC-FC-30-EXPANSION-004",
+      "disposition": "unimplemented",
+      "reason": "No feature-specific implementation or acceptance proof has been delivered in tllib; catalog metadata alone is not support.",
+      "evidence": []
+    },
+    {
+      "feature_id": "TLC-FC-30-EXPANSION-005",
+      "disposition": "unimplemented",
+      "reason": "No feature-specific implementation or acceptance proof has been delivered in tllib; catalog metadata alone is not support.",
+      "evidence": []
+    },
+    {
+      "feature_id": "TLC-FC-30-EXPANSION-006",
+      "disposition": "unimplemented",
+      "reason": "No feature-specific implementation or acceptance proof has been delivered in tllib; catalog metadata alone is not support.",
+      "evidence": []
+    },
+    {
+      "feature_id": "TLC-FC-30-EXPANSION-007",
+      "disposition": "unimplemented",
+      "reason": "No feature-specific implementation or acceptance proof has been delivered in tllib; catalog metadata alone is not support.",
+      "evidence": []
+    },
+    {
+      "feature_id": "TLC-FC-30-EXPANSION-008",
+      "disposition": "unimplemented",
+      "reason": "No feature-specific implementation or acceptance proof has been delivered in tllib; catalog metadata alone is not support.",
+      "evidence": []
+    },
+    {
+      "feature_id": "TLC-FC-30-EXPANSION-009",
+      "disposition": "unimplemented",
+      "reason": "No feature-specific implementation or acceptance proof has been delivered in tllib; catalog metadata alone is not support.",
+      "evidence": []
+    },
+    {
+      "feature_id": "TLC-FC-30-EXPANSION-010",
+      "disposition": "unimplemented",
+      "reason": "No feature-specific implementation or acceptance proof has been delivered in tllib; catalog metadata alone is not support.",
+      "evidence": []
+    },
+    {
+      "feature_id": "TLC-FC-30-EXPANSION-011",
+      "disposition": "unimplemented",
+      "reason": "No feature-specific implementation or acceptance proof has been delivered in tllib; catalog metadata alone is not support.",
+      "evidence": []
+    },
+    {
+      "feature_id": "TLC-FC-30-EXPANSION-012",
+      "disposition": "unimplemented",
+      "reason": "No feature-specific implementation or acceptance proof has been delivered in tllib; catalog metadata alone is not support.",
+      "evidence": []
+    },
+    {
+      "feature_id": "TLC-FC-30-EXPANSION-013",
+      "disposition": "unimplemented",
+      "reason": "No feature-specific implementation or acceptance proof has been delivered in tllib; catalog metadata alone is not support.",
+      "evidence": []
+    },
+    {
+      "feature_id": "TLC-FC-30-EXPANSION-014",
+      "disposition": "blocked-by-spec",
+      "reason": "Scientific definition unresolved (tllib #231 / tllib-specs #231); no execution allowed.",
+      "evidence": []
+    },
+    {
+      "feature_id": "TLC-FC-30-EXPANSION-015",
+      "disposition": "unimplemented",
+      "reason": "No feature-specific implementation or acceptance proof has been delivered in tllib; catalog metadata alone is not support.",
+      "evidence": []
+    },
+    {
+      "feature_id": "TLC-FC-30-EXPANSION-016",
+      "disposition": "unimplemented",
+      "reason": "No feature-specific implementation or acceptance proof has been delivered in tllib; catalog metadata alone is not support.",
+      "evidence": []
+    },
+    {
+      "feature_id": "TLC-FC-30-EXPANSION-017",
+      "disposition": "unimplemented",
+      "reason": "No feature-specific implementation or acceptance proof has been delivered in tllib; catalog metadata alone is not support.",
+      "evidence": []
+    },
+    {
+      "feature_id": "TLC-FC-30-EXPANSION-018",
+      "disposition": "unimplemented",
+      "reason": "No feature-specific implementation or acceptance proof has been delivered in tllib; catalog metadata alone is not support.",
+      "evidence": []
+    },
+    {
+      "feature_id": "TLC-FC-30-EXPANSION-019",
+      "disposition": "unimplemented",
+      "reason": "No feature-specific implementation or acceptance proof has been delivered in tllib; catalog metadata alone is not support.",
+      "evidence": []
+    },
+    {
+      "feature_id": "TLC-FC-30-EXPANSION-020",
+      "disposition": "unimplemented",
+      "reason": "No feature-specific implementation or acceptance proof has been delivered in tllib; catalog metadata alone is not support.",
+      "evidence": []
+    },
+    {
+      "feature_id": "TLC-FC-30-EXPANSION-021",
+      "disposition": "unimplemented",
+      "reason": "No feature-specific implementation or acceptance proof has been delivered in tllib; catalog metadata alone is not support.",
+      "evidence": []
+    },
+    {
+      "feature_id": "TLC-FC-30-EXPANSION-022",
+      "disposition": "unimplemented",
+      "reason": "No feature-specific implementation or acceptance proof has been delivered in tllib; catalog metadata alone is not support.",
+      "evidence": []
+    },
+    {
+      "feature_id": "TLC-FC-30-EXPANSION-023",
+      "disposition": "unimplemented",
+      "reason": "No feature-specific implementation or acceptance proof has been delivered in tllib; catalog metadata alone is not support.",
+      "evidence": []
+    },
+    {
+      "feature_id": "TLC-FC-30-EXPANSION-024",
+      "disposition": "unimplemented",
+      "reason": "No feature-specific implementation or acceptance proof has been delivered in tllib; catalog metadata alone is not support.",
+      "evidence": []
+    },
+    {
+      "feature_id": "TLC-FC-30-EXPANSION-025",
+      "disposition": "unimplemented",
+      "reason": "No feature-specific implementation or acceptance proof has been delivered in tllib; catalog metadata alone is not support.",
+      "evidence": []
+    },
+    {
+      "feature_id": "TLC-FC-30-EXPANSION-026",
+      "disposition": "unimplemented",
+      "reason": "No feature-specific implementation or acceptance proof has been delivered in tllib; catalog metadata alone is not support.",
+      "evidence": []
+    },
+    {
+      "feature_id": "TLC-FC-30-EXPANSION-027",
+      "disposition": "unimplemented",
+      "reason": "No feature-specific implementation or acceptance proof has been delivered in tllib; catalog metadata alone is not support.",
+      "evidence": []
+    },
+    {
+      "feature_id": "TLC-FC-30-EXPANSION-028",
+      "disposition": "unimplemented",
+      "reason": "No feature-specific implementation or acceptance proof has been delivered in tllib; catalog metadata alone is not support.",
+      "evidence": []
+    },
+    {
+      "feature_id": "TLC-FC-30-EXPANSION-029",
+      "disposition": "unimplemented",
+      "reason": "No feature-specific implementation or acceptance proof has been delivered in tllib; catalog metadata alone is not support.",
+      "evidence": []
+    },
+    {
+      "feature_id": "TLC-FC-31-INSTITUTIONALIZATION-001",
+      "disposition": "unimplemented",
+      "reason": "No feature-specific implementation or acceptance proof has been delivered in tllib; catalog metadata alone is not support.",
+      "evidence": []
+    },
+    {
+      "feature_id": "TLC-FC-31-INSTITUTIONALIZATION-002",
+      "disposition": "unimplemented",
+      "reason": "No feature-specific implementation or acceptance proof has been delivered in tllib; catalog metadata alone is not support.",
+      "evidence": []
+    },
+    {
+      "feature_id": "TLC-FC-31-INSTITUTIONALIZATION-003",
+      "disposition": "unimplemented",
+      "reason": "No feature-specific implementation or acceptance proof has been delivered in tllib; catalog metadata alone is not support.",
+      "evidence": []
+    },
+    {
+      "feature_id": "TLC-FC-31-INSTITUTIONALIZATION-004",
+      "disposition": "unimplemented",
+      "reason": "No feature-specific implementation or acceptance proof has been delivered in tllib; catalog metadata alone is not support.",
+      "evidence": []
+    },
+    {
+      "feature_id": "TLC-FC-31-INSTITUTIONALIZATION-005",
+      "disposition": "unimplemented",
+      "reason": "No feature-specific implementation or acceptance proof has been delivered in tllib; catalog metadata alone is not support.",
+      "evidence": []
+    },
+    {
+      "feature_id": "TLC-FC-31-INSTITUTIONALIZATION-006",
+      "disposition": "unimplemented",
+      "reason": "No feature-specific implementation or acceptance proof has been delivered in tllib; catalog metadata alone is not support.",
+      "evidence": []
+    },
+    {
+      "feature_id": "TLC-FC-31-INSTITUTIONALIZATION-007",
+      "disposition": "unimplemented",
+      "reason": "No feature-specific implementation or acceptance proof has been delivered in tllib; catalog metadata alone is not support.",
+      "evidence": []
+    },
+    {
+      "feature_id": "TLC-FC-31-INSTITUTIONALIZATION-008",
+      "disposition": "unimplemented",
+      "reason": "No feature-specific implementation or acceptance proof has been delivered in tllib; catalog metadata alone is not support.",
+      "evidence": []
+    },
+    {
+      "feature_id": "TLC-FC-31-INSTITUTIONALIZATION-009",
+      "disposition": "unimplemented",
+      "reason": "No feature-specific implementation or acceptance proof has been delivered in tllib; catalog metadata alone is not support.",
+      "evidence": []
+    },
+    {
+      "feature_id": "TLC-FC-31-INSTITUTIONALIZATION-010",
+      "disposition": "unimplemented",
+      "reason": "No feature-specific implementation or acceptance proof has been delivered in tllib; catalog metadata alone is not support.",
+      "evidence": []
+    },
+    {
+      "feature_id": "TLC-FC-31-INSTITUTIONALIZATION-011",
+      "disposition": "unimplemented",
+      "reason": "No feature-specific implementation or acceptance proof has been delivered in tllib; catalog metadata alone is not support.",
+      "evidence": []
+    },
+    {
+      "feature_id": "TLC-FC-31-INSTITUTIONALIZATION-012",
+      "disposition": "unimplemented",
+      "reason": "No feature-specific implementation or acceptance proof has been delivered in tllib; catalog metadata alone is not support.",
+      "evidence": []
+    },
+    {
+      "feature_id": "TLC-FC-31-INSTITUTIONALIZATION-013",
+      "disposition": "unimplemented",
+      "reason": "No feature-specific implementation or acceptance proof has been delivered in tllib; catalog metadata alone is not support.",
+      "evidence": []
+    },
+    {
+      "feature_id": "TLC-FC-31-INSTITUTIONALIZATION-014",
+      "disposition": "unimplemented",
+      "reason": "No feature-specific implementation or acceptance proof has been delivered in tllib; catalog metadata alone is not support.",
+      "evidence": []
+    },
+    {
+      "feature_id": "TLC-FC-31-INSTITUTIONALIZATION-015",
+      "disposition": "unimplemented",
+      "reason": "No feature-specific implementation or acceptance proof has been delivered in tllib; catalog metadata alone is not support.",
+      "evidence": []
+    },
+    {
+      "feature_id": "TLC-FC-31-INSTITUTIONALIZATION-016",
+      "disposition": "unimplemented",
+      "reason": "No feature-specific implementation or acceptance proof has been delivered in tllib; catalog metadata alone is not support.",
+      "evidence": []
+    },
+    {
+      "feature_id": "TLC-FC-31-INSTITUTIONALIZATION-017",
+      "disposition": "unimplemented",
+      "reason": "No feature-specific implementation or acceptance proof has been delivered in tllib; catalog metadata alone is not support.",
+      "evidence": []
+    },
+    {
+      "feature_id": "TLC-FC-31-INSTITUTIONALIZATION-018",
+      "disposition": "unimplemented",
+      "reason": "No feature-specific implementation or acceptance proof has been delivered in tllib; catalog metadata alone is not support.",
+      "evidence": []
+    },
+    {
+      "feature_id": "TLC-FC-31-INSTITUTIONALIZATION-019",
+      "disposition": "unimplemented",
+      "reason": "No feature-specific implementation or acceptance proof has been delivered in tllib; catalog metadata alone is not support.",
+      "evidence": []
+    },
+    {
+      "feature_id": "TLC-FC-31-INSTITUTIONALIZATION-020",
+      "disposition": "unimplemented",
+      "reason": "No feature-specific implementation or acceptance proof has been delivered in tllib; catalog metadata alone is not support.",
+      "evidence": []
+    },
+    {
+      "feature_id": "TLC-FC-31-INSTITUTIONALIZATION-021",
+      "disposition": "unimplemented",
+      "reason": "No feature-specific implementation or acceptance proof has been delivered in tllib; catalog metadata alone is not support.",
+      "evidence": []
+    },
+    {
+      "feature_id": "TLC-FC-31-INSTITUTIONALIZATION-022",
+      "disposition": "unimplemented",
+      "reason": "No feature-specific implementation or acceptance proof has been delivered in tllib; catalog metadata alone is not support.",
+      "evidence": []
+    },
+    {
+      "feature_id": "TLC-FC-31-INSTITUTIONALIZATION-023",
+      "disposition": "unimplemented",
+      "reason": "No feature-specific implementation or acceptance proof has been delivered in tllib; catalog metadata alone is not support.",
+      "evidence": []
+    },
+    {
+      "feature_id": "TLC-FC-31-INSTITUTIONALIZATION-024",
+      "disposition": "unimplemented",
+      "reason": "No feature-specific implementation or acceptance proof has been delivered in tllib; catalog metadata alone is not support.",
+      "evidence": []
+    },
+    {
+      "feature_id": "TLC-FC-31-INSTITUTIONALIZATION-025",
+      "disposition": "unimplemented",
+      "reason": "No feature-specific implementation or acceptance proof has been delivered in tllib; catalog metadata alone is not support.",
+      "evidence": []
+    },
+    {
+      "feature_id": "TLC-FC-31-INSTITUTIONALIZATION-026",
+      "disposition": "unimplemented",
+      "reason": "No feature-specific implementation or acceptance proof has been delivered in tllib; catalog metadata alone is not support.",
+      "evidence": []
+    },
+    {
+      "feature_id": "TLC-FC-31-INSTITUTIONALIZATION-027",
+      "disposition": "unimplemented",
+      "reason": "No feature-specific implementation or acceptance proof has been delivered in tllib; catalog metadata alone is not support.",
+      "evidence": []
+    },
+    {
+      "feature_id": "TLC-FC-31-INSTITUTIONALIZATION-028",
+      "disposition": "unimplemented",
+      "reason": "No feature-specific implementation or acceptance proof has been delivered in tllib; catalog metadata alone is not support.",
+      "evidence": []
+    },
+    {
+      "feature_id": "TLC-FC-31-INSTITUTIONALIZATION-029",
+      "disposition": "unimplemented",
+      "reason": "No feature-specific implementation or acceptance proof has been delivered in tllib; catalog metadata alone is not support.",
+      "evidence": []
+    },
+    {
+      "feature_id": "TLC-FC-31-INSTITUTIONALIZATION-030",
+      "disposition": "unimplemented",
+      "reason": "No feature-specific implementation or acceptance proof has been delivered in tllib; catalog metadata alone is not support.",
+      "evidence": []
+    },
+    {
+      "feature_id": "TLC-FC-31-INSTITUTIONALIZATION-031",
+      "disposition": "unimplemented",
+      "reason": "No feature-specific implementation or acceptance proof has been delivered in tllib; catalog metadata alone is not support.",
+      "evidence": []
+    },
+    {
+      "feature_id": "TLC-FC-31-INSTITUTIONALIZATION-032",
+      "disposition": "unimplemented",
+      "reason": "No feature-specific implementation or acceptance proof has been delivered in tllib; catalog metadata alone is not support.",
+      "evidence": []
+    },
+    {
+      "feature_id": "TLC-FC-31-INSTITUTIONALIZATION-033",
+      "disposition": "unimplemented",
+      "reason": "No feature-specific implementation or acceptance proof has been delivered in tllib; catalog metadata alone is not support.",
+      "evidence": []
+    },
+    {
+      "feature_id": "TLC-FC-31-INSTITUTIONALIZATION-034",
+      "disposition": "unimplemented",
+      "reason": "No feature-specific implementation or acceptance proof has been delivered in tllib; catalog metadata alone is not support.",
+      "evidence": []
+    },
+    {
+      "feature_id": "TLC-FC-31-INSTITUTIONALIZATION-035",
+      "disposition": "unimplemented",
+      "reason": "No feature-specific implementation or acceptance proof has been delivered in tllib; catalog metadata alone is not support.",
+      "evidence": []
+    },
+    {
+      "feature_id": "TLC-FC-31-INSTITUTIONALIZATION-036",
+      "disposition": "unimplemented",
+      "reason": "No feature-specific implementation or acceptance proof has been delivered in tllib; catalog metadata alone is not support.",
+      "evidence": []
+    },
+    {
+      "feature_id": "TLC-FC-31-INSTITUTIONALIZATION-037",
+      "disposition": "unimplemented",
+      "reason": "No feature-specific implementation or acceptance proof has been delivered in tllib; catalog metadata alone is not support.",
+      "evidence": []
+    },
+    {
+      "feature_id": "TLC-FC-32-DRIFT-AND-CORRECTION-001",
+      "disposition": "unimplemented",
+      "reason": "No feature-specific implementation or acceptance proof has been delivered in tllib; catalog metadata alone is not support.",
+      "evidence": []
+    },
+    {
+      "feature_id": "TLC-FC-32-DRIFT-AND-CORRECTION-002",
+      "disposition": "unimplemented",
+      "reason": "No feature-specific implementation or acceptance proof has been delivered in tllib; catalog metadata alone is not support.",
+      "evidence": []
+    },
+    {
+      "feature_id": "TLC-FC-32-DRIFT-AND-CORRECTION-003",
+      "disposition": "unimplemented",
+      "reason": "No feature-specific implementation or acceptance proof has been delivered in tllib; catalog metadata alone is not support.",
+      "evidence": []
+    },
+    {
+      "feature_id": "TLC-FC-32-DRIFT-AND-CORRECTION-004",
+      "disposition": "unimplemented",
+      "reason": "No feature-specific implementation or acceptance proof has been delivered in tllib; catalog metadata alone is not support.",
+      "evidence": []
+    },
+    {
+      "feature_id": "TLC-FC-32-DRIFT-AND-CORRECTION-005",
+      "disposition": "unimplemented",
+      "reason": "No feature-specific implementation or acceptance proof has been delivered in tllib; catalog metadata alone is not support.",
+      "evidence": []
+    },
+    {
+      "feature_id": "TLC-FC-32-DRIFT-AND-CORRECTION-006",
+      "disposition": "unimplemented",
+      "reason": "No feature-specific implementation or acceptance proof has been delivered in tllib; catalog metadata alone is not support.",
+      "evidence": []
+    },
+    {
+      "feature_id": "TLC-FC-32-DRIFT-AND-CORRECTION-007",
+      "disposition": "unimplemented",
+      "reason": "No feature-specific implementation or acceptance proof has been delivered in tllib; catalog metadata alone is not support.",
+      "evidence": []
+    },
+    {
+      "feature_id": "TLC-FC-32-DRIFT-AND-CORRECTION-008",
+      "disposition": "unimplemented",
+      "reason": "No feature-specific implementation or acceptance proof has been delivered in tllib; catalog metadata alone is not support.",
+      "evidence": []
+    },
+    {
+      "feature_id": "TLC-FC-32-DRIFT-AND-CORRECTION-009",
+      "disposition": "unimplemented",
+      "reason": "No feature-specific implementation or acceptance proof has been delivered in tllib; catalog metadata alone is not support.",
+      "evidence": []
+    },
+    {
+      "feature_id": "TLC-FC-32-DRIFT-AND-CORRECTION-010",
+      "disposition": "unimplemented",
+      "reason": "No feature-specific implementation or acceptance proof has been delivered in tllib; catalog metadata alone is not support.",
+      "evidence": []
+    },
+    {
+      "feature_id": "TLC-FC-32-DRIFT-AND-CORRECTION-011",
+      "disposition": "unimplemented",
+      "reason": "No feature-specific implementation or acceptance proof has been delivered in tllib; catalog metadata alone is not support.",
+      "evidence": []
+    },
+    {
+      "feature_id": "TLC-FC-32-DRIFT-AND-CORRECTION-012",
+      "disposition": "unimplemented",
+      "reason": "No feature-specific implementation or acceptance proof has been delivered in tllib; catalog metadata alone is not support.",
+      "evidence": []
+    },
+    {
+      "feature_id": "TLC-FC-32-DRIFT-AND-CORRECTION-013",
+      "disposition": "unimplemented",
+      "reason": "No feature-specific implementation or acceptance proof has been delivered in tllib; catalog metadata alone is not support.",
+      "evidence": []
+    },
+    {
+      "feature_id": "TLC-FC-32-DRIFT-AND-CORRECTION-014",
+      "disposition": "unimplemented",
+      "reason": "No feature-specific implementation or acceptance proof has been delivered in tllib; catalog metadata alone is not support.",
+      "evidence": []
+    },
+    {
+      "feature_id": "TLC-FC-32-DRIFT-AND-CORRECTION-015",
+      "disposition": "unimplemented",
+      "reason": "No feature-specific implementation or acceptance proof has been delivered in tllib; catalog metadata alone is not support.",
+      "evidence": []
+    },
+    {
+      "feature_id": "TLC-FC-32-DRIFT-AND-CORRECTION-016",
+      "disposition": "unimplemented",
+      "reason": "No feature-specific implementation or acceptance proof has been delivered in tllib; catalog metadata alone is not support.",
+      "evidence": []
+    },
+    {
+      "feature_id": "TLC-FC-32-DRIFT-AND-CORRECTION-017",
+      "disposition": "unimplemented",
+      "reason": "No feature-specific implementation or acceptance proof has been delivered in tllib; catalog metadata alone is not support.",
+      "evidence": []
+    },
+    {
+      "feature_id": "TLC-FC-32-DRIFT-AND-CORRECTION-018",
+      "disposition": "unimplemented",
+      "reason": "No feature-specific implementation or acceptance proof has been delivered in tllib; catalog metadata alone is not support.",
+      "evidence": []
+    },
+    {
+      "feature_id": "TLC-FC-33-LOW-DATA-ARCHITECTURE-001",
+      "disposition": "unimplemented",
+      "reason": "No feature-specific implementation or acceptance proof has been delivered in tllib; catalog metadata alone is not support.",
+      "evidence": []
+    },
+    {
+      "feature_id": "TLC-FC-33-LOW-DATA-ARCHITECTURE-002",
+      "disposition": "unimplemented",
+      "reason": "No feature-specific implementation or acceptance proof has been delivered in tllib; catalog metadata alone is not support.",
+      "evidence": []
+    },
+    {
+      "feature_id": "TLC-FC-33-LOW-DATA-ARCHITECTURE-003",
+      "disposition": "unimplemented",
+      "reason": "No feature-specific implementation or acceptance proof has been delivered in tllib; catalog metadata alone is not support.",
+      "evidence": []
+    },
+    {
+      "feature_id": "TLC-FC-33-LOW-DATA-ARCHITECTURE-004",
+      "disposition": "unimplemented",
+      "reason": "No feature-specific implementation or acceptance proof has been delivered in tllib; catalog metadata alone is not support.",
+      "evidence": []
+    },
+    {
+      "feature_id": "TLC-FC-33-LOW-DATA-ARCHITECTURE-005",
+      "disposition": "unimplemented",
+      "reason": "No feature-specific implementation or acceptance proof has been delivered in tllib; catalog metadata alone is not support.",
+      "evidence": []
+    },
+    {
+      "feature_id": "TLC-FC-33-LOW-DATA-ARCHITECTURE-006",
+      "disposition": "unimplemented",
+      "reason": "No feature-specific implementation or acceptance proof has been delivered in tllib; catalog metadata alone is not support.",
+      "evidence": []
+    },
+    {
+      "feature_id": "TLC-FC-33-LOW-DATA-ARCHITECTURE-007",
+      "disposition": "unimplemented",
+      "reason": "No feature-specific implementation or acceptance proof has been delivered in tllib; catalog metadata alone is not support.",
+      "evidence": []
+    },
+    {
+      "feature_id": "TLC-FC-33-LOW-DATA-ARCHITECTURE-008",
+      "disposition": "unimplemented",
+      "reason": "No feature-specific implementation or acceptance proof has been delivered in tllib; catalog metadata alone is not support.",
+      "evidence": []
+    },
+    {
+      "feature_id": "TLC-FC-33-LOW-DATA-ARCHITECTURE-009",
+      "disposition": "unimplemented",
+      "reason": "No feature-specific implementation or acceptance proof has been delivered in tllib; catalog metadata alone is not support.",
+      "evidence": []
+    },
+    {
+      "feature_id": "TLC-FC-33-LOW-DATA-ARCHITECTURE-010",
+      "disposition": "unimplemented",
+      "reason": "No feature-specific implementation or acceptance proof has been delivered in tllib; catalog metadata alone is not support.",
+      "evidence": []
+    },
+    {
+      "feature_id": "TLC-FC-33-LOW-DATA-ARCHITECTURE-011",
+      "disposition": "unimplemented",
+      "reason": "No feature-specific implementation or acceptance proof has been delivered in tllib; catalog metadata alone is not support.",
+      "evidence": []
+    },
+    {
+      "feature_id": "TLC-FC-33-LOW-DATA-ARCHITECTURE-012",
+      "disposition": "unimplemented",
+      "reason": "No feature-specific implementation or acceptance proof has been delivered in tllib; catalog metadata alone is not support.",
+      "evidence": []
+    },
+    {
+      "feature_id": "TLC-FC-33-LOW-DATA-ARCHITECTURE-013",
+      "disposition": "unimplemented",
+      "reason": "No feature-specific implementation or acceptance proof has been delivered in tllib; catalog metadata alone is not support.",
+      "evidence": []
+    },
+    {
+      "feature_id": "TLC-FC-33-LOW-DATA-ARCHITECTURE-014",
+      "disposition": "unimplemented",
+      "reason": "No feature-specific implementation or acceptance proof has been delivered in tllib; catalog metadata alone is not support.",
+      "evidence": []
+    },
+    {
+      "feature_id": "TLC-FC-33-LOW-DATA-ARCHITECTURE-015",
+      "disposition": "unimplemented",
+      "reason": "No feature-specific implementation or acceptance proof has been delivered in tllib; catalog metadata alone is not support.",
+      "evidence": []
+    },
+    {
+      "feature_id": "TLC-FC-33-LOW-DATA-ARCHITECTURE-016",
+      "disposition": "unimplemented",
+      "reason": "No feature-specific implementation or acceptance proof has been delivered in tllib; catalog metadata alone is not support.",
+      "evidence": []
+    },
+    {
+      "feature_id": "TLC-FC-33-LOW-DATA-ARCHITECTURE-017",
+      "disposition": "unimplemented",
+      "reason": "No feature-specific implementation or acceptance proof has been delivered in tllib; catalog metadata alone is not support.",
+      "evidence": []
+    },
+    {
+      "feature_id": "TLC-FC-33-LOW-DATA-ARCHITECTURE-018",
+      "disposition": "unimplemented",
+      "reason": "No feature-specific implementation or acceptance proof has been delivered in tllib; catalog metadata alone is not support.",
+      "evidence": []
+    },
+    {
+      "feature_id": "TLC-FC-33-LOW-DATA-ARCHITECTURE-019",
+      "disposition": "unimplemented",
+      "reason": "No feature-specific implementation or acceptance proof has been delivered in tllib; catalog metadata alone is not support.",
+      "evidence": []
+    },
+    {
+      "feature_id": "TLC-FC-33-LOW-DATA-ARCHITECTURE-020",
+      "disposition": "unimplemented",
+      "reason": "No feature-specific implementation or acceptance proof has been delivered in tllib; catalog metadata alone is not support.",
+      "evidence": []
+    },
+    {
+      "feature_id": "TLC-FC-33-LOW-DATA-ARCHITECTURE-021",
+      "disposition": "unimplemented",
+      "reason": "No feature-specific implementation or acceptance proof has been delivered in tllib; catalog metadata alone is not support.",
+      "evidence": []
+    },
+    {
+      "feature_id": "TLC-FC-33-LOW-DATA-ARCHITECTURE-022",
+      "disposition": "unimplemented",
+      "reason": "No feature-specific implementation or acceptance proof has been delivered in tllib; catalog metadata alone is not support.",
+      "evidence": []
+    },
+    {
+      "feature_id": "TLC-FC-33-LOW-DATA-ARCHITECTURE-023",
+      "disposition": "unimplemented",
+      "reason": "No feature-specific implementation or acceptance proof has been delivered in tllib; catalog metadata alone is not support.",
+      "evidence": []
+    },
+    {
+      "feature_id": "TLC-FC-33-LOW-DATA-ARCHITECTURE-024",
+      "disposition": "unimplemented",
+      "reason": "No feature-specific implementation or acceptance proof has been delivered in tllib; catalog metadata alone is not support.",
+      "evidence": []
+    },
+    {
+      "feature_id": "TLC-FC-33-LOW-DATA-ARCHITECTURE-025",
+      "disposition": "unimplemented",
+      "reason": "No feature-specific implementation or acceptance proof has been delivered in tllib; catalog metadata alone is not support.",
+      "evidence": []
+    },
+    {
+      "feature_id": "TLC-FC-33-LOW-DATA-ARCHITECTURE-026",
+      "disposition": "unimplemented",
+      "reason": "No feature-specific implementation or acceptance proof has been delivered in tllib; catalog metadata alone is not support.",
+      "evidence": []
+    },
+    {
+      "feature_id": "TLC-FC-33-LOW-DATA-ARCHITECTURE-027",
+      "disposition": "unimplemented",
+      "reason": "No feature-specific implementation or acceptance proof has been delivered in tllib; catalog metadata alone is not support.",
+      "evidence": []
+    },
+    {
+      "feature_id": "TLC-FC-33-LOW-DATA-ARCHITECTURE-028",
+      "disposition": "unimplemented",
+      "reason": "No feature-specific implementation or acceptance proof has been delivered in tllib; catalog metadata alone is not support.",
+      "evidence": []
+    },
+    {
+      "feature_id": "TLC-FC-33-LOW-DATA-ARCHITECTURE-029",
+      "disposition": "unimplemented",
+      "reason": "No feature-specific implementation or acceptance proof has been delivered in tllib; catalog metadata alone is not support.",
+      "evidence": []
+    },
+    {
+      "feature_id": "TLC-FC-33-LOW-DATA-ARCHITECTURE-030",
+      "disposition": "unimplemented",
+      "reason": "No feature-specific implementation or acceptance proof has been delivered in tllib; catalog metadata alone is not support.",
+      "evidence": []
+    },
+    {
+      "feature_id": "TLC-FC-33-LOW-DATA-ARCHITECTURE-031",
+      "disposition": "unimplemented",
+      "reason": "No feature-specific implementation or acceptance proof has been delivered in tllib; catalog metadata alone is not support.",
+      "evidence": []
+    },
+    {
+      "feature_id": "TLC-FC-33-LOW-DATA-ARCHITECTURE-032",
+      "disposition": "unimplemented",
+      "reason": "No feature-specific implementation or acceptance proof has been delivered in tllib; catalog metadata alone is not support.",
+      "evidence": []
+    },
+    {
+      "feature_id": "TLC-FC-34-TRANSMISSION-LIFECYCLE-001",
+      "disposition": "unimplemented",
+      "reason": "No feature-specific implementation or acceptance proof has been delivered in tllib; catalog metadata alone is not support.",
+      "evidence": []
+    },
+    {
+      "feature_id": "TLC-FC-34-TRANSMISSION-LIFECYCLE-002",
+      "disposition": "unimplemented",
+      "reason": "No feature-specific implementation or acceptance proof has been delivered in tllib; catalog metadata alone is not support.",
+      "evidence": []
+    },
+    {
+      "feature_id": "TLC-FC-34-TRANSMISSION-LIFECYCLE-003",
+      "disposition": "unimplemented",
+      "reason": "No feature-specific implementation or acceptance proof has been delivered in tllib; catalog metadata alone is not support.",
+      "evidence": []
+    },
+    {
+      "feature_id": "TLC-FC-34-TRANSMISSION-LIFECYCLE-004",
+      "disposition": "unimplemented",
+      "reason": "No feature-specific implementation or acceptance proof has been delivered in tllib; catalog metadata alone is not support.",
+      "evidence": []
+    },
+    {
+      "feature_id": "TLC-FC-34-TRANSMISSION-LIFECYCLE-005",
+      "disposition": "unimplemented",
+      "reason": "No feature-specific implementation or acceptance proof has been delivered in tllib; catalog metadata alone is not support.",
+      "evidence": []
+    },
+    {
+      "feature_id": "TLC-FC-34-TRANSMISSION-LIFECYCLE-006",
+      "disposition": "unimplemented",
+      "reason": "No feature-specific implementation or acceptance proof has been delivered in tllib; catalog metadata alone is not support.",
+      "evidence": []
+    },
+    {
+      "feature_id": "TLC-FC-34-TRANSMISSION-LIFECYCLE-007",
+      "disposition": "unimplemented",
+      "reason": "No feature-specific implementation or acceptance proof has been delivered in tllib; catalog metadata alone is not support.",
+      "evidence": []
+    },
+    {
+      "feature_id": "TLC-FC-34-TRANSMISSION-LIFECYCLE-008",
+      "disposition": "unimplemented",
+      "reason": "No feature-specific implementation or acceptance proof has been delivered in tllib; catalog metadata alone is not support.",
+      "evidence": []
+    },
+    {
+      "feature_id": "TLC-FC-34-TRANSMISSION-LIFECYCLE-009",
+      "disposition": "unimplemented",
+      "reason": "No feature-specific implementation or acceptance proof has been delivered in tllib; catalog metadata alone is not support.",
+      "evidence": []
+    },
+    {
+      "feature_id": "TLC-FC-34-TRANSMISSION-LIFECYCLE-010",
+      "disposition": "unimplemented",
+      "reason": "No feature-specific implementation or acceptance proof has been delivered in tllib; catalog metadata alone is not support.",
+      "evidence": []
+    },
+    {
+      "feature_id": "TLC-FC-34-TRANSMISSION-LIFECYCLE-011",
+      "disposition": "unimplemented",
+      "reason": "No feature-specific implementation or acceptance proof has been delivered in tllib; catalog metadata alone is not support.",
+      "evidence": []
+    },
+    {
+      "feature_id": "TLC-FC-34-TRANSMISSION-LIFECYCLE-012",
+      "disposition": "unimplemented",
+      "reason": "No feature-specific implementation or acceptance proof has been delivered in tllib; catalog metadata alone is not support.",
+      "evidence": []
+    },
+    {
+      "feature_id": "TLC-FC-34-TRANSMISSION-LIFECYCLE-013",
+      "disposition": "unimplemented",
+      "reason": "No feature-specific implementation or acceptance proof has been delivered in tllib; catalog metadata alone is not support.",
+      "evidence": []
+    },
+    {
+      "feature_id": "TLC-FC-34-TRANSMISSION-LIFECYCLE-014",
+      "disposition": "unimplemented",
+      "reason": "No feature-specific implementation or acceptance proof has been delivered in tllib; catalog metadata alone is not support.",
+      "evidence": []
+    },
+    {
+      "feature_id": "TLC-FC-34-TRANSMISSION-LIFECYCLE-015",
+      "disposition": "unimplemented",
+      "reason": "No feature-specific implementation or acceptance proof has been delivered in tllib; catalog metadata alone is not support.",
+      "evidence": []
+    },
+    {
+      "feature_id": "TLC-FC-34-TRANSMISSION-LIFECYCLE-016",
+      "disposition": "unimplemented",
+      "reason": "No feature-specific implementation or acceptance proof has been delivered in tllib; catalog metadata alone is not support.",
+      "evidence": []
+    },
+    {
+      "feature_id": "TLC-FC-34-TRANSMISSION-LIFECYCLE-017",
+      "disposition": "unimplemented",
+      "reason": "No feature-specific implementation or acceptance proof has been delivered in tllib; catalog metadata alone is not support.",
+      "evidence": []
+    },
+    {
+      "feature_id": "TLC-FC-34-TRANSMISSION-LIFECYCLE-018",
+      "disposition": "unimplemented",
+      "reason": "No feature-specific implementation or acceptance proof has been delivered in tllib; catalog metadata alone is not support.",
+      "evidence": []
+    },
+    {
+      "feature_id": "TLC-FC-34-TRANSMISSION-LIFECYCLE-019",
+      "disposition": "unimplemented",
+      "reason": "No feature-specific implementation or acceptance proof has been delivered in tllib; catalog metadata alone is not support.",
+      "evidence": []
+    },
+    {
+      "feature_id": "TLC-FC-34-TRANSMISSION-LIFECYCLE-020",
+      "disposition": "unimplemented",
+      "reason": "No feature-specific implementation or acceptance proof has been delivered in tllib; catalog metadata alone is not support.",
+      "evidence": []
+    },
+    {
+      "feature_id": "TLC-FC-34-TRANSMISSION-LIFECYCLE-021",
+      "disposition": "unimplemented",
+      "reason": "No feature-specific implementation or acceptance proof has been delivered in tllib; catalog metadata alone is not support.",
+      "evidence": []
+    },
+    {
+      "feature_id": "TLC-FC-34-TRANSMISSION-LIFECYCLE-022",
+      "disposition": "unimplemented",
+      "reason": "No feature-specific implementation or acceptance proof has been delivered in tllib; catalog metadata alone is not support.",
+      "evidence": []
+    },
+    {
+      "feature_id": "TLC-FC-34-TRANSMISSION-LIFECYCLE-023",
+      "disposition": "unimplemented",
+      "reason": "No feature-specific implementation or acceptance proof has been delivered in tllib; catalog metadata alone is not support.",
+      "evidence": []
+    },
+    {
+      "feature_id": "TLC-FC-34-TRANSMISSION-LIFECYCLE-024",
+      "disposition": "unimplemented",
+      "reason": "No feature-specific implementation or acceptance proof has been delivered in tllib; catalog metadata alone is not support.",
+      "evidence": []
+    },
+    {
+      "feature_id": "TLC-FC-34-TRANSMISSION-LIFECYCLE-025",
+      "disposition": "unimplemented",
+      "reason": "No feature-specific implementation or acceptance proof has been delivered in tllib; catalog metadata alone is not support.",
+      "evidence": []
+    },
+    {
+      "feature_id": "TLC-FC-34-TRANSMISSION-LIFECYCLE-026",
+      "disposition": "unimplemented",
+      "reason": "No feature-specific implementation or acceptance proof has been delivered in tllib; catalog metadata alone is not support.",
+      "evidence": []
+    },
+    {
+      "feature_id": "TLC-FC-34-TRANSMISSION-LIFECYCLE-027",
+      "disposition": "unimplemented",
+      "reason": "No feature-specific implementation or acceptance proof has been delivered in tllib; catalog metadata alone is not support.",
+      "evidence": []
+    },
+    {
+      "feature_id": "TLC-FC-34-TRANSMISSION-LIFECYCLE-028",
+      "disposition": "unimplemented",
+      "reason": "No feature-specific implementation or acceptance proof has been delivered in tllib; catalog metadata alone is not support.",
+      "evidence": []
+    },
+    {
+      "feature_id": "TLC-FC-34-TRANSMISSION-LIFECYCLE-029",
+      "disposition": "unimplemented",
+      "reason": "No feature-specific implementation or acceptance proof has been delivered in tllib; catalog metadata alone is not support.",
+      "evidence": []
+    },
+    {
+      "feature_id": "TLC-FC-34-TRANSMISSION-LIFECYCLE-030",
+      "disposition": "unimplemented",
+      "reason": "No feature-specific implementation or acceptance proof has been delivered in tllib; catalog metadata alone is not support.",
+      "evidence": []
+    },
+    {
+      "feature_id": "TLC-FC-34-TRANSMISSION-LIFECYCLE-031",
+      "disposition": "unimplemented",
+      "reason": "No feature-specific implementation or acceptance proof has been delivered in tllib; catalog metadata alone is not support.",
+      "evidence": []
+    },
+    {
+      "feature_id": "TLC-FC-34-TRANSMISSION-LIFECYCLE-032",
+      "disposition": "unimplemented",
+      "reason": "No feature-specific implementation or acceptance proof has been delivered in tllib; catalog metadata alone is not support.",
+      "evidence": []
+    },
+    {
+      "feature_id": "TLC-FC-34-TRANSMISSION-LIFECYCLE-033",
+      "disposition": "unimplemented",
+      "reason": "No feature-specific implementation or acceptance proof has been delivered in tllib; catalog metadata alone is not support.",
+      "evidence": []
+    },
+    {
+      "feature_id": "TLC-FC-34-TRANSMISSION-LIFECYCLE-034",
+      "disposition": "unimplemented",
+      "reason": "No feature-specific implementation or acceptance proof has been delivered in tllib; catalog metadata alone is not support.",
+      "evidence": []
+    },
+    {
+      "feature_id": "TLC-FC-34-TRANSMISSION-LIFECYCLE-035",
+      "disposition": "unimplemented",
+      "reason": "No feature-specific implementation or acceptance proof has been delivered in tllib; catalog metadata alone is not support.",
+      "evidence": []
+    },
+    {
+      "feature_id": "TLC-FC-34-TRANSMISSION-LIFECYCLE-036",
+      "disposition": "unimplemented",
+      "reason": "No feature-specific implementation or acceptance proof has been delivered in tllib; catalog metadata alone is not support.",
+      "evidence": []
+    },
+    {
+      "feature_id": "TLC-FC-34-TRANSMISSION-LIFECYCLE-037",
+      "disposition": "unimplemented",
+      "reason": "No feature-specific implementation or acceptance proof has been delivered in tllib; catalog metadata alone is not support.",
+      "evidence": []
+    },
+    {
+      "feature_id": "TLC-FC-34-TRANSMISSION-LIFECYCLE-038",
+      "disposition": "unimplemented",
+      "reason": "No feature-specific implementation or acceptance proof has been delivered in tllib; catalog metadata alone is not support.",
+      "evidence": []
+    },
+    {
+      "feature_id": "TLC-FC-34-TRANSMISSION-LIFECYCLE-039",
+      "disposition": "unimplemented",
+      "reason": "No feature-specific implementation or acceptance proof has been delivered in tllib; catalog metadata alone is not support.",
+      "evidence": []
+    },
+    {
+      "feature_id": "TLC-FC-34-TRANSMISSION-LIFECYCLE-040",
+      "disposition": "unimplemented",
+      "reason": "No feature-specific implementation or acceptance proof has been delivered in tllib; catalog metadata alone is not support.",
+      "evidence": []
+    },
+    {
+      "feature_id": "TLC-FC-34-TRANSMISSION-LIFECYCLE-041",
+      "disposition": "unimplemented",
+      "reason": "No feature-specific implementation or acceptance proof has been delivered in tllib; catalog metadata alone is not support.",
+      "evidence": []
+    },
+    {
+      "feature_id": "TLC-FC-34-TRANSMISSION-LIFECYCLE-042",
+      "disposition": "unimplemented",
+      "reason": "No feature-specific implementation or acceptance proof has been delivered in tllib; catalog metadata alone is not support.",
+      "evidence": []
+    },
+    {
+      "feature_id": "TLC-FC-34-TRANSMISSION-LIFECYCLE-043",
+      "disposition": "unimplemented",
+      "reason": "No feature-specific implementation or acceptance proof has been delivered in tllib; catalog metadata alone is not support.",
+      "evidence": []
+    },
+    {
+      "feature_id": "TLC-FC-34-TRANSMISSION-LIFECYCLE-044",
+      "disposition": "unimplemented",
+      "reason": "No feature-specific implementation or acceptance proof has been delivered in tllib; catalog metadata alone is not support.",
+      "evidence": []
+    },
+    {
+      "feature_id": "TLC-FC-34-TRANSMISSION-LIFECYCLE-045",
+      "disposition": "unimplemented",
+      "reason": "No feature-specific implementation or acceptance proof has been delivered in tllib; catalog metadata alone is not support.",
+      "evidence": []
+    },
+    {
+      "feature_id": "TLC-FC-34-TRANSMISSION-LIFECYCLE-046",
+      "disposition": "unimplemented",
+      "reason": "No feature-specific implementation or acceptance proof has been delivered in tllib; catalog metadata alone is not support.",
+      "evidence": []
+    },
+    {
+      "feature_id": "TLC-FC-34-TRANSMISSION-LIFECYCLE-047",
+      "disposition": "unimplemented",
+      "reason": "No feature-specific implementation or acceptance proof has been delivered in tllib; catalog metadata alone is not support.",
+      "evidence": []
+    },
+    {
+      "feature_id": "TLC-FC-34-TRANSMISSION-LIFECYCLE-048",
+      "disposition": "unimplemented",
+      "reason": "No feature-specific implementation or acceptance proof has been delivered in tllib; catalog metadata alone is not support.",
+      "evidence": []
+    },
+    {
+      "feature_id": "TLC-FC-34-TRANSMISSION-LIFECYCLE-049",
+      "disposition": "unimplemented",
+      "reason": "No feature-specific implementation or acceptance proof has been delivered in tllib; catalog metadata alone is not support.",
+      "evidence": []
+    },
+    {
+      "feature_id": "TLC-FC-34-TRANSMISSION-LIFECYCLE-050",
+      "disposition": "unimplemented",
+      "reason": "No feature-specific implementation or acceptance proof has been delivered in tllib; catalog metadata alone is not support.",
+      "evidence": []
+    },
+    {
+      "feature_id": "TLC-FC-34-TRANSMISSION-LIFECYCLE-051",
+      "disposition": "unimplemented",
+      "reason": "No feature-specific implementation or acceptance proof has been delivered in tllib; catalog metadata alone is not support.",
+      "evidence": []
+    },
+    {
+      "feature_id": "TLC-FC-34-TRANSMISSION-LIFECYCLE-052",
+      "disposition": "unimplemented",
+      "reason": "No feature-specific implementation or acceptance proof has been delivered in tllib; catalog metadata alone is not support.",
+      "evidence": []
+    },
+    {
+      "feature_id": "TLC-FC-34-TRANSMISSION-LIFECYCLE-053",
+      "disposition": "unimplemented",
+      "reason": "No feature-specific implementation or acceptance proof has been delivered in tllib; catalog metadata alone is not support.",
+      "evidence": []
+    },
+    {
+      "feature_id": "TLC-FC-34-TRANSMISSION-LIFECYCLE-054",
+      "disposition": "unimplemented",
+      "reason": "No feature-specific implementation or acceptance proof has been delivered in tllib; catalog metadata alone is not support.",
+      "evidence": []
+    },
+    {
+      "feature_id": "TLC-FC-34-TRANSMISSION-LIFECYCLE-055",
+      "disposition": "unimplemented",
+      "reason": "No feature-specific implementation or acceptance proof has been delivered in tllib; catalog metadata alone is not support.",
+      "evidence": []
+    },
+    {
+      "feature_id": "TLC-FC-34-TRANSMISSION-LIFECYCLE-056",
+      "disposition": "unimplemented",
+      "reason": "No feature-specific implementation or acceptance proof has been delivered in tllib; catalog metadata alone is not support.",
+      "evidence": []
+    },
+    {
+      "feature_id": "TLC-FC-34-TRANSMISSION-LIFECYCLE-057",
+      "disposition": "unimplemented",
+      "reason": "No feature-specific implementation or acceptance proof has been delivered in tllib; catalog metadata alone is not support.",
+      "evidence": []
+    },
+    {
+      "feature_id": "TLC-FC-34-TRANSMISSION-LIFECYCLE-058",
+      "disposition": "unimplemented",
+      "reason": "No feature-specific implementation or acceptance proof has been delivered in tllib; catalog metadata alone is not support.",
+      "evidence": []
+    },
+    {
+      "feature_id": "TLC-FC-34-TRANSMISSION-LIFECYCLE-059",
+      "disposition": "unimplemented",
+      "reason": "No feature-specific implementation or acceptance proof has been delivered in tllib; catalog metadata alone is not support.",
+      "evidence": []
+    },
+    {
+      "feature_id": "TLC-FC-34-TRANSMISSION-LIFECYCLE-060",
+      "disposition": "unimplemented",
+      "reason": "No feature-specific implementation or acceptance proof has been delivered in tllib; catalog metadata alone is not support.",
+      "evidence": []
+    },
+    {
+      "feature_id": "TLC-FC-34-TRANSMISSION-LIFECYCLE-061",
+      "disposition": "unimplemented",
+      "reason": "No feature-specific implementation or acceptance proof has been delivered in tllib; catalog metadata alone is not support.",
+      "evidence": []
+    },
+    {
+      "feature_id": "TLC-FC-34-TRANSMISSION-LIFECYCLE-062",
+      "disposition": "unimplemented",
+      "reason": "No feature-specific implementation or acceptance proof has been delivered in tllib; catalog metadata alone is not support.",
+      "evidence": []
+    },
+    {
+      "feature_id": "TLC-FC-34-TRANSMISSION-LIFECYCLE-063",
+      "disposition": "unimplemented",
+      "reason": "No feature-specific implementation or acceptance proof has been delivered in tllib; catalog metadata alone is not support.",
+      "evidence": []
+    },
+    {
+      "feature_id": "TLC-FC-34-TRANSMISSION-LIFECYCLE-064",
+      "disposition": "unimplemented",
+      "reason": "No feature-specific implementation or acceptance proof has been delivered in tllib; catalog metadata alone is not support.",
+      "evidence": []
+    },
+    {
+      "feature_id": "TLC-FC-34-TRANSMISSION-LIFECYCLE-065",
+      "disposition": "unimplemented",
+      "reason": "No feature-specific implementation or acceptance proof has been delivered in tllib; catalog metadata alone is not support.",
+      "evidence": []
+    },
+    {
+      "feature_id": "TLC-FC-34-TRANSMISSION-LIFECYCLE-066",
+      "disposition": "unimplemented",
+      "reason": "No feature-specific implementation or acceptance proof has been delivered in tllib; catalog metadata alone is not support.",
+      "evidence": []
+    },
+    {
+      "feature_id": "TLC-FC-34-TRANSMISSION-LIFECYCLE-067",
+      "disposition": "unimplemented",
+      "reason": "No feature-specific implementation or acceptance proof has been delivered in tllib; catalog metadata alone is not support.",
+      "evidence": []
+    },
+    {
+      "feature_id": "TLC-FC-34-TRANSMISSION-LIFECYCLE-068",
+      "disposition": "unimplemented",
+      "reason": "No feature-specific implementation or acceptance proof has been delivered in tllib; catalog metadata alone is not support.",
+      "evidence": []
+    },
+    {
+      "feature_id": "TLC-FC-34-TRANSMISSION-LIFECYCLE-069",
+      "disposition": "unimplemented",
+      "reason": "No feature-specific implementation or acceptance proof has been delivered in tllib; catalog metadata alone is not support.",
+      "evidence": []
+    },
+    {
+      "feature_id": "TLC-FC-34-TRANSMISSION-LIFECYCLE-070",
+      "disposition": "unimplemented",
+      "reason": "No feature-specific implementation or acceptance proof has been delivered in tllib; catalog metadata alone is not support.",
+      "evidence": []
+    },
+    {
+      "feature_id": "TLC-FC-34-TRANSMISSION-LIFECYCLE-071",
+      "disposition": "unimplemented",
+      "reason": "No feature-specific implementation or acceptance proof has been delivered in tllib; catalog metadata alone is not support.",
+      "evidence": []
+    },
+    {
+      "feature_id": "TLC-FC-34-TRANSMISSION-LIFECYCLE-072",
+      "disposition": "unimplemented",
+      "reason": "No feature-specific implementation or acceptance proof has been delivered in tllib; catalog metadata alone is not support.",
+      "evidence": []
+    },
+    {
+      "feature_id": "TLC-FC-34-TRANSMISSION-LIFECYCLE-073",
+      "disposition": "unimplemented",
+      "reason": "No feature-specific implementation or acceptance proof has been delivered in tllib; catalog metadata alone is not support.",
+      "evidence": []
+    },
+    {
+      "feature_id": "TLC-FC-34-TRANSMISSION-LIFECYCLE-074",
+      "disposition": "unimplemented",
+      "reason": "No feature-specific implementation or acceptance proof has been delivered in tllib; catalog metadata alone is not support.",
+      "evidence": []
+    },
+    {
+      "feature_id": "TLC-FC-34-TRANSMISSION-LIFECYCLE-075",
+      "disposition": "unimplemented",
+      "reason": "No feature-specific implementation or acceptance proof has been delivered in tllib; catalog metadata alone is not support.",
+      "evidence": []
+    },
+    {
+      "feature_id": "TLC-FC-34-TRANSMISSION-LIFECYCLE-076",
+      "disposition": "unimplemented",
+      "reason": "No feature-specific implementation or acceptance proof has been delivered in tllib; catalog metadata alone is not support.",
+      "evidence": []
+    },
+    {
+      "feature_id": "TLC-FC-34-TRANSMISSION-LIFECYCLE-077",
+      "disposition": "unimplemented",
+      "reason": "No feature-specific implementation or acceptance proof has been delivered in tllib; catalog metadata alone is not support.",
+      "evidence": []
+    },
+    {
+      "feature_id": "TLC-FC-34-TRANSMISSION-LIFECYCLE-078",
+      "disposition": "unimplemented",
+      "reason": "No feature-specific implementation or acceptance proof has been delivered in tllib; catalog metadata alone is not support.",
+      "evidence": []
+    },
+    {
+      "feature_id": "TLC-FC-34-TRANSMISSION-LIFECYCLE-079",
+      "disposition": "unimplemented",
+      "reason": "No feature-specific implementation or acceptance proof has been delivered in tllib; catalog metadata alone is not support.",
+      "evidence": []
+    },
+    {
+      "feature_id": "TLC-FC-34-TRANSMISSION-LIFECYCLE-080",
+      "disposition": "unimplemented",
+      "reason": "No feature-specific implementation or acceptance proof has been delivered in tllib; catalog metadata alone is not support.",
+      "evidence": []
+    },
+    {
+      "feature_id": "TLC-FC-34-TRANSMISSION-LIFECYCLE-081",
+      "disposition": "unimplemented",
+      "reason": "No feature-specific implementation or acceptance proof has been delivered in tllib; catalog metadata alone is not support.",
+      "evidence": []
+    },
+    {
+      "feature_id": "TLC-FC-34-TRANSMISSION-LIFECYCLE-082",
+      "disposition": "unimplemented",
+      "reason": "No feature-specific implementation or acceptance proof has been delivered in tllib; catalog metadata alone is not support.",
+      "evidence": []
+    },
+    {
+      "feature_id": "TLC-FC-34-TRANSMISSION-LIFECYCLE-083",
+      "disposition": "unimplemented",
+      "reason": "No feature-specific implementation or acceptance proof has been delivered in tllib; catalog metadata alone is not support.",
+      "evidence": []
+    },
+    {
+      "feature_id": "TLC-FC-34-TRANSMISSION-LIFECYCLE-084",
+      "disposition": "unimplemented",
+      "reason": "No feature-specific implementation or acceptance proof has been delivered in tllib; catalog metadata alone is not support.",
+      "evidence": []
+    },
+    {
+      "feature_id": "TLC-FC-34-TRANSMISSION-LIFECYCLE-085",
+      "disposition": "unimplemented",
+      "reason": "No feature-specific implementation or acceptance proof has been delivered in tllib; catalog metadata alone is not support.",
+      "evidence": []
+    },
+    {
+      "feature_id": "TLC-FC-34-TRANSMISSION-LIFECYCLE-086",
+      "disposition": "unimplemented",
+      "reason": "No feature-specific implementation or acceptance proof has been delivered in tllib; catalog metadata alone is not support.",
+      "evidence": []
+    },
+    {
+      "feature_id": "TLC-FC-34-TRANSMISSION-LIFECYCLE-087",
+      "disposition": "unimplemented",
+      "reason": "No feature-specific implementation or acceptance proof has been delivered in tllib; catalog metadata alone is not support.",
+      "evidence": []
+    },
+    {
+      "feature_id": "TLC-FC-34-TRANSMISSION-LIFECYCLE-088",
+      "disposition": "unimplemented",
+      "reason": "No feature-specific implementation or acceptance proof has been delivered in tllib; catalog metadata alone is not support.",
+      "evidence": []
+    },
+    {
+      "feature_id": "TLC-FC-34-TRANSMISSION-LIFECYCLE-089",
+      "disposition": "unimplemented",
+      "reason": "No feature-specific implementation or acceptance proof has been delivered in tllib; catalog metadata alone is not support.",
+      "evidence": []
+    },
+    {
+      "feature_id": "TLC-FC-34-TRANSMISSION-LIFECYCLE-090",
+      "disposition": "unimplemented",
+      "reason": "No feature-specific implementation or acceptance proof has been delivered in tllib; catalog metadata alone is not support.",
+      "evidence": []
+    },
+    {
+      "feature_id": "TLC-FC-34-TRANSMISSION-LIFECYCLE-091",
+      "disposition": "unimplemented",
+      "reason": "No feature-specific implementation or acceptance proof has been delivered in tllib; catalog metadata alone is not support.",
+      "evidence": []
+    },
+    {
+      "feature_id": "TLC-FC-34-TRANSMISSION-LIFECYCLE-092",
+      "disposition": "unimplemented",
+      "reason": "No feature-specific implementation or acceptance proof has been delivered in tllib; catalog metadata alone is not support.",
+      "evidence": []
+    },
+    {
+      "feature_id": "TLC-FC-34-TRANSMISSION-LIFECYCLE-093",
+      "disposition": "unimplemented",
+      "reason": "No feature-specific implementation or acceptance proof has been delivered in tllib; catalog metadata alone is not support.",
+      "evidence": []
+    },
+    {
+      "feature_id": "TLC-FC-34-TRANSMISSION-LIFECYCLE-094",
+      "disposition": "unimplemented",
+      "reason": "No feature-specific implementation or acceptance proof has been delivered in tllib; catalog metadata alone is not support.",
+      "evidence": []
+    },
+    {
+      "feature_id": "TLC-FC-34-TRANSMISSION-LIFECYCLE-095",
+      "disposition": "unimplemented",
+      "reason": "No feature-specific implementation or acceptance proof has been delivered in tllib; catalog metadata alone is not support.",
+      "evidence": []
+    },
+    {
+      "feature_id": "TLC-FC-34-TRANSMISSION-LIFECYCLE-096",
+      "disposition": "unimplemented",
+      "reason": "No feature-specific implementation or acceptance proof has been delivered in tllib; catalog metadata alone is not support.",
+      "evidence": []
+    },
+    {
+      "feature_id": "TLC-FC-34-TRANSMISSION-LIFECYCLE-097",
+      "disposition": "unimplemented",
+      "reason": "No feature-specific implementation or acceptance proof has been delivered in tllib; catalog metadata alone is not support.",
+      "evidence": []
+    },
+    {
+      "feature_id": "TLC-FC-34-TRANSMISSION-LIFECYCLE-098",
+      "disposition": "unimplemented",
+      "reason": "No feature-specific implementation or acceptance proof has been delivered in tllib; catalog metadata alone is not support.",
+      "evidence": []
+    },
+    {
+      "feature_id": "TLC-FC-34-TRANSMISSION-LIFECYCLE-099",
+      "disposition": "unimplemented",
+      "reason": "No feature-specific implementation or acceptance proof has been delivered in tllib; catalog metadata alone is not support.",
+      "evidence": []
+    },
+    {
+      "feature_id": "TLC-FC-34-TRANSMISSION-LIFECYCLE-100",
+      "disposition": "unimplemented",
+      "reason": "No feature-specific implementation or acceptance proof has been delivered in tllib; catalog metadata alone is not support.",
+      "evidence": []
+    },
+    {
+      "feature_id": "TLC-FC-34-TRANSMISSION-LIFECYCLE-101",
+      "disposition": "unimplemented",
+      "reason": "No feature-specific implementation or acceptance proof has been delivered in tllib; catalog metadata alone is not support.",
+      "evidence": []
+    },
+    {
+      "feature_id": "TLC-FC-34-TRANSMISSION-LIFECYCLE-102",
+      "disposition": "unimplemented",
+      "reason": "No feature-specific implementation or acceptance proof has been delivered in tllib; catalog metadata alone is not support.",
+      "evidence": []
+    },
+    {
+      "feature_id": "TLC-FC-34-TRANSMISSION-LIFECYCLE-103",
+      "disposition": "unimplemented",
+      "reason": "No feature-specific implementation or acceptance proof has been delivered in tllib; catalog metadata alone is not support.",
+      "evidence": []
+    },
+    {
+      "feature_id": "TLC-FC-34-TRANSMISSION-LIFECYCLE-104",
+      "disposition": "unimplemented",
+      "reason": "No feature-specific implementation or acceptance proof has been delivered in tllib; catalog metadata alone is not support.",
+      "evidence": []
+    },
+    {
+      "feature_id": "TLC-FC-34-TRANSMISSION-LIFECYCLE-105",
+      "disposition": "unimplemented",
+      "reason": "No feature-specific implementation or acceptance proof has been delivered in tllib; catalog metadata alone is not support.",
+      "evidence": []
+    },
+    {
+      "feature_id": "TLC-FC-34-TRANSMISSION-LIFECYCLE-106",
+      "disposition": "unimplemented",
+      "reason": "No feature-specific implementation or acceptance proof has been delivered in tllib; catalog metadata alone is not support.",
+      "evidence": []
+    },
+    {
+      "feature_id": "TLC-FC-34-TRANSMISSION-LIFECYCLE-107",
+      "disposition": "unimplemented",
+      "reason": "No feature-specific implementation or acceptance proof has been delivered in tllib; catalog metadata alone is not support.",
+      "evidence": []
+    },
+    {
+      "feature_id": "TLC-FC-34-TRANSMISSION-LIFECYCLE-108",
+      "disposition": "unimplemented",
+      "reason": "No feature-specific implementation or acceptance proof has been delivered in tllib; catalog metadata alone is not support.",
+      "evidence": []
+    },
+    {
+      "feature_id": "TLC-FC-34-TRANSMISSION-LIFECYCLE-109",
+      "disposition": "unimplemented",
+      "reason": "No feature-specific implementation or acceptance proof has been delivered in tllib; catalog metadata alone is not support.",
+      "evidence": []
+    },
+    {
+      "feature_id": "TLC-FC-35-FIDELITY-TO-INVARIANT-CORE-001",
+      "disposition": "unimplemented",
+      "reason": "No feature-specific implementation or acceptance proof has been delivered in tllib; catalog metadata alone is not support.",
+      "evidence": []
+    },
+    {
+      "feature_id": "TLC-FC-35-FIDELITY-TO-INVARIANT-CORE-002",
+      "disposition": "unimplemented",
+      "reason": "No feature-specific implementation or acceptance proof has been delivered in tllib; catalog metadata alone is not support.",
+      "evidence": []
+    },
+    {
+      "feature_id": "TLC-FC-35-FIDELITY-TO-INVARIANT-CORE-003",
+      "disposition": "unimplemented",
+      "reason": "No feature-specific implementation or acceptance proof has been delivered in tllib; catalog metadata alone is not support.",
+      "evidence": []
+    },
+    {
+      "feature_id": "TLC-FC-35-FIDELITY-TO-INVARIANT-CORE-004",
+      "disposition": "unimplemented",
+      "reason": "No feature-specific implementation or acceptance proof has been delivered in tllib; catalog metadata alone is not support.",
+      "evidence": []
+    },
+    {
+      "feature_id": "TLC-FC-35-FIDELITY-TO-INVARIANT-CORE-005",
+      "disposition": "unimplemented",
+      "reason": "No feature-specific implementation or acceptance proof has been delivered in tllib; catalog metadata alone is not support.",
+      "evidence": []
+    },
+    {
+      "feature_id": "TLC-FC-35-FIDELITY-TO-INVARIANT-CORE-006",
+      "disposition": "unimplemented",
+      "reason": "No feature-specific implementation or acceptance proof has been delivered in tllib; catalog metadata alone is not support.",
+      "evidence": []
+    },
+    {
+      "feature_id": "TLC-FC-35-FIDELITY-TO-INVARIANT-CORE-007",
+      "disposition": "unimplemented",
+      "reason": "No feature-specific implementation or acceptance proof has been delivered in tllib; catalog metadata alone is not support.",
+      "evidence": []
+    },
+    {
+      "feature_id": "TLC-FC-35-FIDELITY-TO-INVARIANT-CORE-008",
+      "disposition": "unimplemented",
+      "reason": "No feature-specific implementation or acceptance proof has been delivered in tllib; catalog metadata alone is not support.",
+      "evidence": []
+    },
+    {
+      "feature_id": "TLC-FC-35-FIDELITY-TO-INVARIANT-CORE-009",
+      "disposition": "unimplemented",
+      "reason": "No feature-specific implementation or acceptance proof has been delivered in tllib; catalog metadata alone is not support.",
+      "evidence": []
+    },
+    {
+      "feature_id": "TLC-FC-35-FIDELITY-TO-INVARIANT-CORE-010",
+      "disposition": "unimplemented",
+      "reason": "No feature-specific implementation or acceptance proof has been delivered in tllib; catalog metadata alone is not support.",
+      "evidence": []
+    },
+    {
+      "feature_id": "TLC-FC-35-FIDELITY-TO-INVARIANT-CORE-011",
+      "disposition": "unimplemented",
+      "reason": "No feature-specific implementation or acceptance proof has been delivered in tllib; catalog metadata alone is not support.",
+      "evidence": []
+    },
+    {
+      "feature_id": "TLC-FC-35-FIDELITY-TO-INVARIANT-CORE-012",
+      "disposition": "unimplemented",
+      "reason": "No feature-specific implementation or acceptance proof has been delivered in tllib; catalog metadata alone is not support.",
+      "evidence": []
+    },
+    {
+      "feature_id": "TLC-FC-35-FIDELITY-TO-INVARIANT-CORE-013",
+      "disposition": "unimplemented",
+      "reason": "No feature-specific implementation or acceptance proof has been delivered in tllib; catalog metadata alone is not support.",
+      "evidence": []
+    },
+    {
+      "feature_id": "TLC-FC-35-FIDELITY-TO-INVARIANT-CORE-014",
+      "disposition": "unimplemented",
+      "reason": "No feature-specific implementation or acceptance proof has been delivered in tllib; catalog metadata alone is not support.",
+      "evidence": []
+    },
+    {
+      "feature_id": "TLC-FC-35-FIDELITY-TO-INVARIANT-CORE-015",
+      "disposition": "unimplemented",
+      "reason": "No feature-specific implementation or acceptance proof has been delivered in tllib; catalog metadata alone is not support.",
+      "evidence": []
+    },
+    {
+      "feature_id": "TLC-FC-35-FIDELITY-TO-INVARIANT-CORE-016",
+      "disposition": "unimplemented",
+      "reason": "No feature-specific implementation or acceptance proof has been delivered in tllib; catalog metadata alone is not support.",
+      "evidence": []
+    },
+    {
+      "feature_id": "TLC-FC-35-FIDELITY-TO-INVARIANT-CORE-017",
+      "disposition": "unimplemented",
+      "reason": "No feature-specific implementation or acceptance proof has been delivered in tllib; catalog metadata alone is not support.",
+      "evidence": []
+    },
+    {
+      "feature_id": "TLC-FC-35-FIDELITY-TO-INVARIANT-CORE-018",
+      "disposition": "unimplemented",
+      "reason": "No feature-specific implementation or acceptance proof has been delivered in tllib; catalog metadata alone is not support.",
+      "evidence": []
+    }
+  ]
+}

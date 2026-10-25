@@ -1,0 +1,66 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://github.com/Tradition-Learning-Community/tllib/blob/main/specs.lock.schema.json",
+  "title": "tllib immutable specs lock v1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "repository",
+    "commit",
+    "handoff_catalog_path",
+    "catalog_sha256",
+    "catalog_schema_version",
+    "model_version",
+    "verification"
+  ],
+  "properties": {
+    "schema_version": {
+      "const": "1.0"
+    },
+    "repository": {
+      "const": "Tradition-Learning-Community/tllib-specs"
+    },
+    "commit": {
+      "type": "string",
+      "pattern": "^[0-9a-f]{40}$"
+    },
+    "handoff_catalog_path": {
+      "const": "handoff/catalog.json"
+    },
+    "catalog_sha256": {
+      "type": "string",
+      "pattern": "^[0-9a-f]{64}$"
+    },
+    "catalog_schema_version": {
+      "const": "1.0"
+    },
+    "model_version": {
+      "const": "1.0.0"
+    },
+    "verification": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "name",
+        "version",
+        "hash_algorithm",
+        "git_object_integrity"
+      ],
+      "properties": {
+        "name": {
+          "const": "tllib-offline-handoff-verifier"
+        },
+        "version": {
+          "const": "1.0.0"
+        },
+        "hash_algorithm": {
+          "const": "sha256"
+        },
+        "git_object_integrity": {
+          "const": "required"
+        }
+      }
+    }
+  }
+}
