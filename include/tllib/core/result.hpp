@@ -14,6 +14,7 @@ struct Error {
   std::optional<std::string> feature_id;
   std::optional<std::string> provenance;
   std::map<std::string,std::string> context{};
+  std::optional<std::string> stable_code{};
 };
 template <class T> class [[nodiscard]] Result {
   static_assert(!std::is_reference_v<T> && !std::is_void_v<T>);
