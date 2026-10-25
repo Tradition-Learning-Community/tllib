@@ -10,6 +10,10 @@ int main() {
   assert(!core::FeatureId::parse("tlc-fc-00-master-005"));
   assert(!core::FeatureId::parse("TLC-FC-00--MASTER-005"));
   assert(!core::FeatureId::parse("TLC-FC-00-MASTER-5"));
+  assert(core::FeatureId::parse("TLC-FC-00-MASTER--005")); // matches source JSON schema
+  assert(core::parse_package_status("pilot") && !core::parse_package_status("random"));
+  assert(core::parse_scientific_status("external_provider_required") && !core::parse_scientific_status("unknown"));
+  assert(core::parse_execution_status("conditionally_executable") && !core::parse_execution_status("running"));
   assert(core::DomainId::parse("low-data-architecture"));
   assert(!core::DomainId::parse("Low--Data"));
   assert(core::Version::parse("1.0.0") && !core::Version::parse("01.0.0"));
@@ -21,6 +25,7 @@ int main() {
   assert(!shared::validate(shared::ScientificReference{"../outside.md",{}, {}, {}, {}, {}}));
   assert(!shared::validate(shared::ScientificReference{"/absolute/source.yaml",{}, {}, {}, {}, {}}));
   assert(!shared::validate(shared::ScientificReference{"safe//bad",{}, {}, {}, {}, {}}));
+  assert(!shared::validate(shared::ScientificReference{"safe/",{}, {}, {}, {}, {}}));
   assert(!shared::validate(shared::ScientificReference{"safe/./bad",{}, {}, {}, {}, {}}));
   assert(!shared::validate(shared::ScientificReference{"safe/file",{}, {}, {}, {},shared::LineRange{7,5}}));
   for(auto id:shared::contract_ids) assert(id.starts_with("TLC-HC-"));
@@ -28,6 +33,10 @@ int main() {
   shared::ReferenceCollection col; col.kind=shared::CollectionKind::ordered_set;col.ordering="preserved";col.duplicates="forbidden";col.members={ref};col.maximum=2;
   assert(shared::validate(col));
   col.members.push_back(ref);assert(!shared::validate(col));col.members.pop_back();
+  shared::ReferenceCollection map_collection;map_collection.kind=shared::CollectionKind::ordered_map;
+  map_collection.members={ref};map_collection.keys={"first"};map_collection.key_contract="opaque_key";
+  assert(shared::validate(map_collection));
+  map_collection.keys.push_back("extra");assert(!shared::validate(map_collection));
   shared::UnresolvedItem item{"UNR-001","scientific_unresolved",ref,"operation",shared::UnresolvedStatus::preserved_unresolved};
   assert(shared::validate(item));
   assert(!shared::unresolved_status("resolved_by_default"));
