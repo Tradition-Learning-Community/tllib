@@ -11,6 +11,7 @@ from collections import Counter
 import hashlib
 import json
 import os
+import platform
 from pathlib import Path, PurePosixPath
 import re
 import subprocess
@@ -442,7 +443,8 @@ def junit_passes(test_results: Path | None) -> set[str]:
     return {name for name, passed in observed.items() if passed}
 
 def report(lock: dict, index: dict, decisions_path: Path, enforce_release: bool,
-           test_results: Path | None = None) -> tuple[dict, str, int]:
+           test_results: Path | None = None, software_commit: str | None = None
+           ) -> tuple[dict, str, int]:
     decisions, diagnostics = read_decisions(decisions_path, index, lock)
     passed_runner_tests = junit_passes(test_results)
     implementation_root = decisions_path.resolve().parent.parent
@@ -518,6 +520,11 @@ def report(lock: dict, index: dict, decisions_path: Path, enforce_release: bool,
         "specs_commit": lock["commit"],
         "catalog_sha256": lock["catalog_sha256"],
         "model_version": lock["model_version"],
+        "tool_version": "1.0.0",
+        "tllib_commit": software_commit,
+        "test_platform": {"system": sys.platform, "architecture": platform.machine()},
+        "source_scientific_statuses": dict(sorted(Counter(f["statuses"]["scientific"] for f in index["features"].values()).items())),
+        "source_execution_statuses": dict(sorted(Counter(f["statuses"]["execution"] for f in index["features"].values()).items())),
         "feature_count": len(index["features"]),
         "decisions_count": len(decisions),
         "summary": {c: counts[c] for c in CATEGORIES},
@@ -563,7 +570,8 @@ def main(argv: list[str] | None = None) -> int:
             write_generated(generated(lock, index), root, args.command == "check-generated")
         if args.command in ("report", "release-gate"):
             machine, markdown, status = report(lock, index, root / "conformance/decisions.json",
-                                               args.command == "release-gate", args.test_results)
+                                               args.command == "release-gate", args.test_results,
+                                               git(root, "rev-parse", "HEAD"))
             output = args.output or root / "build/specs-report"
             output.mkdir(parents=True, exist_ok=True)
             (output / "coverage.json").write_bytes(canonical(machine))
