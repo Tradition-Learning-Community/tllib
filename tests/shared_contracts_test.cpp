@@ -71,6 +71,10 @@ int main() {
   tr.categories[0].push_back(ref);assert(!shared::validate(tr));tr.categories[0].pop_back();
   shared::DescriptorEnvelope envelope{*fid.value_if(),"declaration",{{"objects",col}},{item},{},tr};
   assert(shared::validate(envelope));
+  assert(!envelope.scientific_status && !envelope.execution_status); // empty status is valid (HC-ENV-001)
+  envelope.package_status=core::PackageStatus::pilot;
+  envelope.scientific_status=core::ScientificStatus::partially_defined;
+  envelope.execution_status=core::ExecutionStatus::structural_only;
   auto result=shared::validate(envelope);assert(result && result.value_if()->canonical()==envelope.canonical());
   static_assert(std::is_same_v<decltype(std::declval<core::Result<shared::DescriptorEnvelope>&>().value_if()),const shared::DescriptorEnvelope*>);
   envelope.unresolved.push_back(item);assert(!shared::validate(envelope));
