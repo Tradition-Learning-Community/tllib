@@ -33,6 +33,16 @@ int main() {
   shared::ReferenceCollection col; col.kind=shared::CollectionKind::ordered_set;col.ordering="preserved";col.duplicates="forbidden";col.members={ref};col.maximum=2;
   assert(shared::validate(col));
   col.members.push_back(ref);assert(!shared::validate(col));col.members.pop_back();
+  // HC-RCOL-003: source order and duplicate-free identity references.
+  shared::ReferenceCollection relation_refs;relation_refs.kind=shared::CollectionKind::ordered_set;
+  relation_refs.ordering="preserved";relation_refs.duplicates="forbidden";
+  relation_refs.members={std::string("TLC-SR-MASTER-007"),std::string("TLC-SR-MASTER-008")};
+  assert(shared::validate(relation_refs));
+  const auto serialized_refs=relation_refs.canonical();
+  std::swap(relation_refs.members[0],relation_refs.members[1]);
+  assert(shared::validate(relation_refs));assert(serialized_refs!=relation_refs.canonical());
+  relation_refs.members.push_back(std::string("TLC-SR-MASTER-008"));
+  assert(!shared::validate(relation_refs));
   shared::ReferenceCollection map_collection;map_collection.kind=shared::CollectionKind::ordered_map;
   map_collection.members={ref};map_collection.keys={"first"};map_collection.key_contract="opaque_key";
   assert(shared::validate(map_collection));
