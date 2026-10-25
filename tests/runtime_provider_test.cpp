@@ -62,6 +62,8 @@ static runtime::FeatureImplementation feature_impl(const char* name,core::Execut
   auto f=runtime::FeatureImplementation{feature(name),domain("cohort"),{1,0,0},snapshot(),
     status,"handoff/features/fixture/contract.json","fixture.op",{},{},std::move(handler),
     [](std::string_view s){return s=="in";},[](std::string_view s){return s=="out";},false};
+  f.package_status=core::PackageStatus::finalized;
+  f.scientific_status=core::ScientificStatus::partially_defined;
   if(status==core::ExecutionStatus::conditionally_executable)
     f.capabilities.push_back({capability("fixture.cap"),{1,0,0},"fixture.input","fixture.output"});
   return f;
@@ -122,6 +124,10 @@ int main() {
 
   runtime::FeatureRegistry::Builder rb(snapshot());
   auto structural=feature_impl("TLC-FC-16-COHORT-001",core::ExecutionStatus::structural_only);
+  auto unstated=structural;unstated.scientific_status.reset();
+  assert(is_error(rb.add(unstated),"INVALID_FEATURE_DESCRIPTOR"));
+  auto invalid_enum=structural;invalid_enum.execution_status=static_cast<core::ExecutionStatus>(99);
+  assert(is_error(rb.add(invalid_enum),"INVALID_FEATURE_DESCRIPTOR"));
   assert(rb.add(structural));
   assert(is_error(rb.add(structural),"DUPLICATE_FEATURE"));
   assert(is_error(rb.add(feature_impl("TLC-FC-16-COHORT-003",core::ExecutionStatus::conditionally_executable)),"INVALID_FEATURE_DESCRIPTOR"));
