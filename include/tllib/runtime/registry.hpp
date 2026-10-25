@@ -100,6 +100,8 @@ class FeatureRegistry {
       if(feature.provenance.empty() || feature.operation_id.empty())
         return fail("INVALID_FEATURE_DESCRIPTOR","Feature requires source provenance and operation");
       if(features_.contains(feature.id.str()))return fail("DUPLICATE_FEATURE","Duplicate TLC-FC registration");
+      if(static_cast<unsigned>(feature.execution_status)>static_cast<unsigned>(core::ExecutionStatus::unsupported))
+        return fail("INVALID_FEATURE_DESCRIPTOR","Unknown execution status");
       const bool runnable=feature.execution_status==core::ExecutionStatus::executable ||
         feature.execution_status==core::ExecutionStatus::conditionally_executable;
       if(runnable && (!feature.handler || !feature.input_validator || !feature.output_validator))
@@ -202,6 +204,7 @@ class FeatureRegistry {
     } guard{slot.active,!f.concurrent_safe};
     try {
       if(!f.input_validator(request.payload))return fail("INVALID_FEATURE_INPUT","Input failed feature validation");
+      if(auto e=context.check()){e->feature_id=f.id.str();e->provenance=snapshot_.str();return *e;}
       ProviderAccess access(f.id,f.operation_id,snapshot_.str(),request.correlation_id,f.capabilities,provided,context);
       auto result=f.handler->execute(request,access,context);
       if(auto e=context.after_external_call()) {
