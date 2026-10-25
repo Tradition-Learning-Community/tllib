@@ -4,6 +4,7 @@
 #include <chrono>
 #include <future>
 #include <memory>
+#include <stdexcept>
 #include <string>
 #include <thread>
 using namespace tllib;
@@ -138,7 +139,6 @@ int main() {
   assert(is_error(registry.value_if()->dispatch(unknown,pr,ctx),"FEATURE_NOT_REGISTERED"));
   runtime::Invocation struc{structural.id,"fixture.op","in","corr"};
   assert(is_error(registry.value_if()->dispatch(struc,pr,ctx),"STRUCTURAL_ONLY"));
-  assert(is_error(registry.value_if()->dispatch(req,*cancelled_provider.value_if(),ctx),"PROVIDER_REQUIRED")==false);
   auto executed=registry.value_if()->dispatch(req,pr,ctx);
   assert(executed && *executed.value_if()=="out" && fake->calls==2);
   auto ignored=req;ignored.operation_id="unknown.operation";
@@ -171,6 +171,32 @@ int main() {
   assert(missing_builder.add(dep2));
   assert(is_error(missing_builder.freeze(),"CYCLIC_DEPENDENCY"));
 
+  // Concurrent calls to a provider not declared thread-safe are rejected before invoking it.
+  class BlockingProvider final : public providers::Provider {
+   public:
+    BlockingProvider(std::promise<void>& signal,std::shared_future<void> release)
+      :signal_(signal),release_(std::move(release)){}
+    core::Result<providers::ProviderResponse> invoke(const providers::ProviderRequest&,
+        const runtime::ExecutionContext&) const override {
+      signal_.set_value();release_.wait();
+      return providers::ProviderResponse{"fixture.output","provider_out"};
+    }
+   private:
+    std::promise<void>& signal_;
+    std::shared_future<void> release_;
+  };
+  std::promise<void> entered,leave;
+  auto released=leave.get_future().share();
+  providers::ProviderRegistry::Builder concurrent_builder;
+  assert(concurrent_builder.add(provider_registration(std::make_shared<BlockingProvider>(entered,released))));
+  auto concurrent_provider=concurrent_builder.freeze();assert(concurrent_provider);
+  std::thread running([&]{
+    auto response=concurrent_provider.value_if()->invoke(direct,{1,0,0},ctx);
+    assert(response && response.value_if()->payload=="provider_out");
+  });
+  assert(entered.get_future().wait_for(2s)==std::future_status::ready);
+  assert(is_error(concurrent_provider.value_if()->invoke(direct,{1,0,0},ctx),"PROVIDER_BUSY"));
+  leave.set_value();running.join();
   // Frozen registry is shareable for independent, non-concurrent calls.
   assert(registry.value_if()->dispatch(plain_request,pr,ctx));
   // In-process callbacks never run under a mutex, and non-concurrent providers reject overlap.
