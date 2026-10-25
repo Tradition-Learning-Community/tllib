@@ -13,10 +13,10 @@ class FeatureId {
     text.remove_prefix(7);
     if (text.size() < 8 || !digit(text[0]) || !digit(text[1]) || text[2] != '-') return error();
     const auto sep = text.rfind('-');
-    if (sep == std::string_view::npos || sep < 4 || sep + 4 != text.size() || text[sep-1] == '-' || text[3] < 'A' || text[3] > 'Z') return error();
+    if (sep == std::string_view::npos || sep < 4 || sep + 4 != text.size() || text[3] < 'A' || text[3] > 'Z') return error();
     for (std::size_t i=3; i<sep; ++i) {
       const char c=text[i];
-      if (!((c>='A' && c<='Z') || (c>='0' && c<='9') || (c=='-' && text[i-1]!='-'))) return error();
+      if (!((c>='A' && c<='Z') || (c>='0' && c<='9') || c=='-')) return error();
     }
     for (std::size_t i=sep+1; i<text.size(); ++i) if (!digit(text[i])) return error();
     return FeatureId("TLC-FC-"+std::string(text));
@@ -82,4 +82,19 @@ class Fingerprint {
 enum class PackageStatus { draft, pilot, validated, finalized, deprecated, superseded };
 enum class ScientificStatus { defined, partially_defined, preserved_unresolved, external_provider_required, not_applicable };
 enum class ExecutionStatus { structural_only, executable, conditionally_executable, unsupported };
+inline Result<PackageStatus> parse_package_status(std::string_view s) {
+  constexpr std::array<std::string_view,6> names={"draft","pilot","validated","finalized","deprecated","superseded"};
+  for(std::size_t i=0;i<names.size();++i)if(s==names[i])return static_cast<PackageStatus>(i);
+  return invalid("Unknown package status");
+}
+inline Result<ScientificStatus> parse_scientific_status(std::string_view s) {
+  constexpr std::array<std::string_view,5> names={"defined","partially_defined","preserved_unresolved","external_provider_required","not_applicable"};
+  for(std::size_t i=0;i<names.size();++i)if(s==names[i])return static_cast<ScientificStatus>(i);
+  return invalid("Unknown scientific status");
+}
+inline Result<ExecutionStatus> parse_execution_status(std::string_view s) {
+  constexpr std::array<std::string_view,4> names={"structural_only","executable","conditionally_executable","unsupported"};
+  for(std::size_t i=0;i<names.size();++i)if(s==names[i])return static_cast<ExecutionStatus>(i);
+  return invalid("Unknown execution status");
+}
 } // namespace tllib::core
