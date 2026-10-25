@@ -353,6 +353,8 @@ def generated(lock: dict, index: dict) -> dict[str, bytes]:
         "#include <array>",
         "#include <string_view>",
         "namespace tllib::generated {",
+        f'inline constexpr std::string_view specs_commit = "{lock["commit"]}";',
+        f'inline constexpr std::string_view catalog_sha256 = "{lock["catalog_sha256"]}";',
         "struct FeatureMetadata {",
         "  std::string_view feature_id, domain, package_status, scientific_status, execution_status;",
         "};",
