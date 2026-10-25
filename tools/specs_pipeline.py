@@ -119,6 +119,7 @@ def git(repo: Path, *args: str) -> str:
     return result.stdout.strip()
 
 def verify_lock(lock_path: Path, repo: Path) -> tuple[dict, Handoff, dict]:
+    require(lock_path.stat().st_size <= 65536, "FILE_TOO_LARGE", str(lock_path), "<= 65536 bytes", lock_path.stat().st_size)
     lock = parse_json(lock_path.read_bytes(), str(lock_path))
     require(set(lock) == {"schema_version", "repository", "commit", "handoff_catalog_path",
             "catalog_sha256", "catalog_schema_version", "model_version", "verification"},
@@ -175,6 +176,7 @@ def validate_catalog(lock: dict, handoff: Handoff, catalog: dict) -> dict:
     summary = catalog.get("summary")
     require(isinstance(summary, dict), "INVALID_CATALOG", "summary", "object", summary)
     for item in domains:
+        require(isinstance(item, dict), "INVALID_DOMAIN", "handoff/catalog.json", "domain object", item)
         name = item.get("domain")
         require(isinstance(name, str) and bool(DOMAIN.fullmatch(name)) and name not in domains_by_name,
                 "INVALID_DOMAIN", "handoff/catalog.json", "unique valid domain", name)
@@ -182,6 +184,7 @@ def validate_catalog(lock: dict, handoff: Handoff, catalog: dict) -> dict:
         require(type(count) is int and count >= 0, "INVALID_DOMAIN", name, "nonnegative count", count)
         domains_by_name[name] = item
     for item in shared:
+        require(isinstance(item, dict), "INVALID_CONTRACT", "handoff/catalog.json", "contract object", item)
         cid = item.get("shared_contract_id")
         require(isinstance(cid, str) and bool(SHARED.fullmatch(cid)) and cid not in shared_by_id,
                 "INVALID_CONTRACT", "handoff/catalog.json", "unique shared contract ID", cid)
@@ -206,6 +209,7 @@ def validate_catalog(lock: dict, handoff: Handoff, catalog: dict) -> dict:
         visit(cid)
     by_domain = Counter()
     for item in features:
+        require(isinstance(item, dict), "INVALID_FEATURE_ID", "handoff/catalog.json", "feature object", item)
         fid, domain = item.get("feature_id"), item.get("domain")
         require(isinstance(fid, str) and bool(FEATURE.fullmatch(fid)) and fid not in features_by_id,
                 "INVALID_FEATURE_ID", "handoff/catalog.json", "unique TLC-FC", fid)
@@ -383,6 +387,8 @@ def write_generated(outputs: dict[str, bytes], root: Path, check: bool) -> None:
             path.write_bytes(contents)
 
 def read_decisions(path: Path, index: dict, lock: dict) -> tuple[dict, list[dict]]:
+    require(path.stat().st_size <= 8 * 1024 * 1024, "FILE_TOO_LARGE", str(path),
+            "<= 8 MiB", path.stat().st_size)
     source = parse_json(path.read_bytes(), str(path))
     entries = source.get("features")
     require(source.get("specs_commit") == lock["commit"], "DECISION_SNAPSHOT_MISMATCH",
@@ -391,6 +397,7 @@ def read_decisions(path: Path, index: dict, lock: dict) -> tuple[dict, list[dict
             "INVALID_DECISIONS", str(path), "versioned feature list", source.get("schema_version"))
     mapped, diagnostics = {}, []
     for entry in entries:
+        require(isinstance(entry, dict), "INVALID_DECISIONS", str(path), "object", entry)
         fid = entry.get("feature_id")
         require(isinstance(fid, str) and bool(FEATURE.fullmatch(fid)) and fid not in mapped,
                 "INVALID_DECISIONS", str(path), "unique TLC-FC", fid)
@@ -571,13 +578,15 @@ def main(argv: list[str] | None = None) -> int:
             return status
         print(f"{args.command}: verified {len(index['features'])} features, {len(index['domains'])} domains, {len(index['shared'])} shared contracts at {lock['commit']}")
         return 0
-    except (PipelineError, OSError, subprocess.TimeoutExpired) as exc:
+    except (PipelineError, OSError, subprocess.TimeoutExpired, ValueError,
+            TypeError, KeyError, AttributeError, IndexError) as exc:
         if isinstance(exc, PipelineError):
             print(json.dumps({"code": exc.code, "path": exc.path, "expected": exc.expected,
                               "observed": exc.observed}, ensure_ascii=False, sort_keys=True),
                   file=sys.stderr)
         else:
-            print(json.dumps({"code": "IO_ERROR", "message": str(exc)}, sort_keys=True), file=sys.stderr)
+            code = "IO_ERROR" if isinstance(exc, (OSError, subprocess.TimeoutExpired)) else "INVALID_HANDOFF"
+            print(json.dumps({"code": code, "message": str(exc)}, sort_keys=True), file=sys.stderr)
         return 2
 
 if __name__ == "__main__":
