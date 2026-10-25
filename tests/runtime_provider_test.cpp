@@ -156,6 +156,17 @@ int main() {
   assert(is_error(registry.value_if()->dispatch(req,*empty.value_if(),ctx),"PROVIDER_REQUIRED"));
   auto plain_request=runtime::Invocation{plain.id,"fixture.op","in","corr"};
   assert(registry.value_if()->dispatch(plain_request,*empty.value_if(),ctx));
+  // A conditionally executable feature may depend on validated inputs alone.
+  auto locally_conditional=feature_impl("TLC-FC-16-COHORT-013",
+    core::ExecutionStatus::conditionally_executable,std::make_shared<EchoHandler>());
+  locally_conditional.capabilities.clear();
+  runtime::FeatureRegistry::Builder local_builder(snapshot());
+  assert(local_builder.add(locally_conditional));
+  auto local_registry=local_builder.freeze();
+  runtime::Invocation local_request{locally_conditional.id,"fixture.op","in","corr"};
+  assert(local_registry.value_if()->dispatch(local_request,*empty.value_if(),ctx));
+  local_request.payload="wrong";
+  assert(is_error(local_registry.value_if()->dispatch(local_request,*empty.value_if(),ctx),"INVALID_FEATURE_INPUT"));
   auto wrong_output=feature_impl("TLC-FC-16-COHORT-006",core::ExecutionStatus::executable,std::make_shared<EchoHandler>());
   wrong_output.output_validator=[](std::string_view){return false;};
   runtime::FeatureRegistry::Builder bad_output_builder(snapshot());assert(bad_output_builder.add(wrong_output));
