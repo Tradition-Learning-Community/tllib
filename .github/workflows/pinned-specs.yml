@@ -57,6 +57,12 @@ jobs:
           cmp "$RUNNER_TEMP/gen1/acceptance_cases.json" "$RUNNER_TEMP/gen2/acceptance_cases.json"
       - name: Run negative and synthetic pipeline tests
         run: python3 -m unittest discover -s tests/specs -p 'test_*.py' -v
+      - name: Check release gate return status matches the actual unsupported features
+        run: |
+          status=0
+          python3 tools/specs_pipeline.py release-gate --specs pinned-specs --output build/specs-release || status=$?
+          expected="$(python3 -c "import json; data=json.load(open('build/specs-release/coverage.json')); print(0 if data['gate']=='passed' else 1)")"
+          test "$status" -eq "$expected"
       - name: Publish machine-readable and human-readable coverage
         if: always()
         uses: actions/upload-artifact@v4
@@ -66,4 +72,5 @@ jobs:
             build/specs-report/coverage.json
             build/specs-report/coverage.md
             build/specs-report/acceptance_cases.json
+            build/specs-release/coverage.json
           if-no-files-found: ignore
