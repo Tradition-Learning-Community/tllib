@@ -3,8 +3,7 @@
 Références : #254, #255, #240, #241, #244, #14.
 Snapshot actuellement mentionné dans le backlog :
 `07439babd59c657354e3200ed24c55e2e3eeb72c`.
-Ce document **ne crée pas** un `specs.lock.json` exécutable et ne
-déclare pas ce snapshot accepté par le futur validateur tllib.
+Le verrou exécutable est désormais publié à la racine sous `specs.lock.json`. Le vérificateur offline, la génération et le rapport se trouvent dans `tools/specs_pipeline.py` ; voir [SPECS-PIPELINE-IMPLEMENTATION.md](SPECS-PIPELINE-IMPLEMENTATION.md). Le snapshot est vérifié en CI contre son checkout Git immuable.
 
 ## Frontière d'autorité
 
@@ -20,7 +19,7 @@ contrats partagés référencés > manifest > README > examples >
 traceability. Aucune équation ou provider n'est généré.
 Le runtime ne lit aucun fichier du dépôt specs.
 
-## Schema minimal proposé pour specs.lock.json
+## Schema implémenté pour specs.lock.json
 
 - `schema_version` du lock tllib ;
 - `repository` = `Tradition-Learning-Community/tllib-specs` ;
@@ -72,3 +71,7 @@ des fonctionnalités calculent un résultat.
 Blocage isolé : tllib#231 / tllib-specs#231 concerne uniquement
 TLC-FC-30-EXPANSION-014, domaine #40, lot #177. Aucun argument
 ou règle scientifique ne peut être ajouté pour lever ce blocage.
+
+## Statut d'implémentation
+
+Les issues #254/#255/#241 livrent désormais le verrou, l'outil offline et son rapport catalogue-complet. Le gate de décision exige une classification explicite pour chaque TLC-FC ; le gate de release refuse toute fonctionnalité non prouvée. La fermeture de ces fondations ne prouve **aucune** nouvelle implémentation scientifique. [Détails et commandes](SPECS-PIPELINE-IMPLEMENTATION.md).
