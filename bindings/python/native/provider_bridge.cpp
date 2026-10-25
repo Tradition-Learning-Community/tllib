@@ -149,7 +149,20 @@ PyObject* set_error(const Error& error){
   if(!error_class){PyErr_SetString(PyExc_RuntimeError,"Native provider error class unavailable");return nullptr;}
   PyObject* instance=PyObject_CallFunction(error_class,"s",error.message.c_str());
   if(!instance)return nullptr;
-  const std::string code=error.stable_code.value_or("INTERNAL_ERROR");
+  const auto generic_code=[](tllib::core::ErrorCode category)->std::string {
+    switch(category){
+      case tllib::core::ErrorCode::invalid_argument:return "INVALID_ARGUMENT";
+      case tllib::core::ErrorCode::invalid_identifier:return "INVALID_IDENTIFIER";
+      case tllib::core::ErrorCode::unsupported_version:return "UNSUPPORTED_VERSION";
+      case tllib::core::ErrorCode::invalid_shape:return "INVALID_SHAPE";
+      case tllib::core::ErrorCode::out_of_range:return "OUT_OF_RANGE";
+      case tllib::core::ErrorCode::invalid_domain:return "INVALID_DOMAIN";
+      case tllib::core::ErrorCode::unavailable_capability:return "UNAVAILABLE_CAPABILITY";
+      case tllib::core::ErrorCode::internal_error:return "INTERNAL_ERROR";
+    }
+    return "INTERNAL_ERROR";
+  };
+  const std::string code=error.stable_code.value_or(generic_code(error.code));
   auto attr=[&](const char* key,PyObject* obj)->bool {
     if(!obj)return false;
     const int status=PyObject_SetAttrString(instance,key,obj);
