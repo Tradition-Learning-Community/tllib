@@ -15,6 +15,7 @@ from pathlib import Path, PurePosixPath
 import re
 import subprocess
 import sys
+import xml.etree.ElementTree as ET
 
 EXPECTED_REPOSITORY = "Tradition-Learning-Community/tllib-specs"
 CATEGORIES = ("covered", "blocked-by-spec", "provider-required", "structural", "unimplemented", "invalid")
@@ -405,8 +406,34 @@ def read_decisions(path: Path, index: dict, lock: dict) -> tuple[dict, list[dict
                             "observed": "not present in catalog"})
     return mapped, diagnostics
 
-def report(lock: dict, index: dict, decisions_path: Path, enforce_release: bool) -> tuple[dict, str, int]:
+def junit_passes(test_results: Path | None) -> set[str]:
+    """Only test runner output, never a decision's asserted result, proves a pass."""
+    if test_results is None:
+        return set()
+    require(test_results.is_file() and test_results.stat().st_size <= 16 * 1024 * 1024,
+            "INVALID_TEST_RESULTS", str(test_results), "bounded existing JUnit XML", "absent/oversize")
+    data = test_results.read_bytes()
+    require(b"<!DOCTYPE" not in data.upper() and b"<!ENTITY" not in data.upper(),
+            "INVALID_TEST_RESULTS", str(test_results), "no entity/DTD", "DTD/entity")
+    try:
+        root = ET.fromstring(data)
+    except ET.ParseError as exc:
+        raise PipelineError("INVALID_TEST_RESULTS", str(test_results), "valid JUnit XML", str(exc)) from exc
+    observed: dict[str, bool] = {}
+    for node in root.iter("testcase"):
+        name = node.get("name")
+        require(isinstance(name, str) and bool(name) and name not in observed,
+                "INVALID_TEST_RESULTS", str(test_results), "unique JUnit testcase name", name)
+        bad = (node.get("status") in ("skipped", "failed", "error") or
+               any(child.tag in ("failure", "error", "skipped") for child in node))
+        observed[name] = not bad
+    return {name for name, passed in observed.items() if passed}
+
+def report(lock: dict, index: dict, decisions_path: Path, enforce_release: bool,
+           test_results: Path | None = None) -> tuple[dict, str, int]:
     decisions, diagnostics = read_decisions(decisions_path, index, lock)
+    passed_runner_tests = junit_passes(test_results)
+    implementation_root = decisions_path.resolve().parent.parent
     coverage = []
     counts = Counter()
     for fid, entry in sorted(index["features"].items()):
@@ -417,18 +444,37 @@ def report(lock: dict, index: dict, decisions_path: Path, enforce_release: bool)
         acceptance_ids = index["acceptance"][fid]
         accepted_ids = set(acceptance_ids)
         if disposition in ("covered", "structural"):
-            passed = {e.get("test_id") for e in evidence if isinstance(e, dict) and
-                      e.get("result") == "passed" and isinstance(e.get("artifact"), str) and
-                      e["artifact"].startswith("tests/") and safe_name(e["artifact"])}
+            passed: set[str] = set()
+            for proof in evidence:
+                if not isinstance(proof, dict) or not isinstance(proof.get("test_id"), str):
+                    continue
+                if proof["test_id"] not in accepted_ids or proof.get("result") != "passed":
+                    continue
+                artifact, test_name = proof.get("artifact"), proof.get("ctest_name")
+                if not isinstance(artifact, str) or not artifact.startswith("tests/"):
+                    continue
+                if not isinstance(test_name, str) or test_name not in passed_runner_tests:
+                    continue
+                safe_name(artifact)
+                source = implementation_root / artifact
+                if not source.is_file() or source.is_symlink() or not source.resolve().is_relative_to(implementation_root):
+                    continue
+                passed.add(proof["test_id"])
             if not accepted_ids or not accepted_ids.issubset(passed):
                 diagnostics.append({"code": "MISSING_ACCEPTANCE_PROOF", "feature_id": fid,
                                     "path": entry["path"] + "/acceptance.json",
                                     "expected": sorted(accepted_ids), "observed": sorted(passed)})
                 disposition = "invalid"
-            if disposition == "structural" and entry["statuses"]["execution"] != "structural_only":
+            if decision and decision["disposition"] == "structural" and entry["statuses"]["execution"] != "structural_only":
                 diagnostics.append({"code": "INVALID_STRUCTURAL_DECISION", "feature_id": fid,
                                     "path": "conformance/decisions.json",
                                     "expected": "structural_only", "observed": entry["statuses"]["execution"]})
+                disposition = "invalid"
+            if decision and decision["disposition"] == "covered" and entry["statuses"]["execution"] in ("structural_only", "unsupported"):
+                diagnostics.append({"code": "INVALID_EXECUTION_DECISION", "feature_id": fid,
+                                    "path": "conformance/decisions.json",
+                                    "expected": "executable or conditionally_executable",
+                                    "observed": entry["statuses"]["execution"]})
                 disposition = "invalid"
         else:
             require(not evidence, "INVALID_DECISIONS", fid, "no fabricated evidence", evidence)
@@ -438,6 +484,10 @@ def report(lock: dict, index: dict, decisions_path: Path, enforce_release: bool)
                                 "expected": "conditional execution or provider-bound scientific status",
                                 "observed": entry["statuses"]})
             disposition = "invalid"
+        if disposition == "invalid" and not any(d.get("feature_id") == fid for d in diagnostics):
+            diagnostics.append({"code": "INVALID_DECISION", "feature_id": fid,
+                                "path": "conformance/decisions.json",
+                                "expected": "valid explicit decision", "observed": reason})
         counts[disposition] += 1
         coverage.append({"feature_id": fid, "domain": entry["domain"],
                          "scientific_status": entry["statuses"]["scientific"],
@@ -491,6 +541,7 @@ def main(argv: list[str] | None = None) -> int:
     parser.add_argument("--specs", type=Path, required=True, help="Explicit pinned tllib-specs checkout (no fetch)")
     parser.add_argument("--root", type=Path, default=Path(__file__).resolve().parents[1])
     parser.add_argument("--output", type=Path, help="Report output directory; never inside handoff")
+    parser.add_argument("--test-results", type=Path, help="Local JUnit XML from actually executed trusted CTest tests")
     args = parser.parse_args(argv)
     try:
         root = args.root.resolve(strict=True)
@@ -500,7 +551,7 @@ def main(argv: list[str] | None = None) -> int:
             write_generated(generated(lock, index), root, args.command == "check-generated")
         if args.command in ("report", "release-gate"):
             machine, markdown, status = report(lock, index, root / "conformance/decisions.json",
-                                               args.command == "release-gate")
+                                               args.command == "release-gate", args.test_results)
             output = args.output or root / "build/specs-report"
             output.mkdir(parents=True, exist_ok=True)
             (output / "coverage.json").write_bytes(canonical(machine))
