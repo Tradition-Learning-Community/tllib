@@ -4,6 +4,7 @@
 #include <tllib/runtime/execution_context.hpp>
 #include <chrono>
 #include <memory>
+#include <new>
 #include <optional>
 #include <stdexcept>
 #include <string>
@@ -320,11 +321,25 @@ PyObject* invoke(PyObject*,PyObject* args){
   Py_DECREF(contract);Py_DECREF(bytes);
   return pair;
 }
+// No C++ exception may cross the CPython extension boundary.
+using NativeEntry=PyObject* (*)(PyObject*,PyObject*);
+PyObject* guarded(NativeEntry entry,PyObject* self,PyObject* args){
+  try{return entry(self,args);}
+  catch(const std::bad_alloc&){return PyErr_NoMemory();}
+  catch(...){
+    PyErr_SetString(PyExc_RuntimeError,"Native provider bridge failed");
+    return nullptr;
+  }
+}
+PyObject* safe_create_registry(PyObject* self,PyObject* args){return guarded(create_registry,self,args);}
+PyObject* safe_invoke(PyObject* self,PyObject* args){return guarded(invoke,self,args);}
+PyObject* safe_new_source(PyObject* self,PyObject* args){return guarded(new_source,self,args);}
+PyObject* safe_request_stop(PyObject* self,PyObject* args){return guarded(request_stop,self,args);}
 PyMethodDef methods[]={
-  {"create_provider_registry",create_registry,METH_VARARGS,"Freeze explicit native provider registrations."},
-  {"invoke_provider",invoke,METH_VARARGS,"Invoke native provider with structured errors."},
-  {"new_cancellation_source",new_source,METH_NOARGS,"Create cooperative cancellation source."},
-  {"request_stop",request_stop,METH_VARARGS,"Request cooperative cancellation."},
+  {"create_provider_registry",safe_create_registry,METH_VARARGS,"Freeze explicit native provider registrations."},
+  {"invoke_provider",safe_invoke,METH_VARARGS,"Invoke native provider with structured errors."},
+  {"new_cancellation_source",safe_new_source,METH_NOARGS,"Create cooperative cancellation source."},
+  {"request_stop",safe_request_stop,METH_VARARGS,"Request cooperative cancellation."},
   {nullptr,nullptr,0,nullptr}
 };
 PyModuleDef definition={PyModuleDef_HEAD_INIT,"_native","Narrow native provider bridge; no science.",-1,methods,nullptr,nullptr,nullptr,nullptr};
