@@ -203,6 +203,66 @@ int main() {
   assert(entered.get_future().wait_for(2s)==std::future_status::ready);
   assert(is_error(concurrent_provider.value_if()->invoke(direct,{1,0,0},ctx),"PROVIDER_BUSY"));
   leave.set_value();running.join();
+  // The frozen registry owns providers independently of the caller's pointer.
+  std::weak_ptr<const providers::Provider> weak_owner;
+  {
+    auto own=std::make_shared<FakeProvider>();
+    weak_owner=own;
+    providers::ProviderRegistry::Builder owner_builder;
+    assert(owner_builder.add(provider_registration(own)));
+    own.reset();
+    assert(!weak_owner.expired());
+    auto owned=owner_builder.freeze();
+    assert(owned && owned.value_if()->invoke(direct,{1,0,0},ctx));
+  }
+  assert(weak_owner.expired());
+
+  // Registration of a whole domain is atomic even if its second feature fails.
+  runtime::FeatureRegistry::Builder domain_builder(snapshot());
+  auto first_domain_feature=feature_impl("TLC-FC-16-COHORT-010",
+    core::ExecutionStatus::executable,std::make_shared<EchoHandler>());
+  auto second_domain_feature=feature_impl("TLC-FC-16-COHORT-011",
+    core::ExecutionStatus::executable,std::make_shared<EchoHandler>());
+  second_domain_feature.scientific_status.reset();
+  runtime::DomainImplementation batch{domain("cohort"),
+    {first_domain_feature,second_domain_feature}};
+  assert(is_error(domain_builder.add(std::move(batch)),"INVALID_FEATURE_DESCRIPTOR"));
+  auto empty_domain=domain_builder.freeze();assert(empty_domain && empty_domain.value_if()->size()==0);
+
+  // Feature callbacks are never invoked concurrently unless explicitly opted in.
+  class BlockingHandler final : public runtime::FeatureHandler {
+   public:
+    BlockingHandler(std::promise<void>& signal,std::shared_future<void> release)
+      :signal_(signal),release_(std::move(release)){}
+    core::Result<std::string> execute(const runtime::Invocation&,
+      runtime::ProviderAccess&,const runtime::ExecutionContext&) const override {
+      signal_.set_value();release_.wait();return std::string("out");
+    }
+   private:
+    std::promise<void>& signal_;
+    std::shared_future<void> release_;
+  };
+  std::promise<void> feature_entered,feature_leave;
+  runtime::FeatureRegistry::Builder busy_builder(snapshot());
+  auto busy_feature=feature_impl("TLC-FC-16-COHORT-012",core::ExecutionStatus::executable,
+    std::make_shared<BlockingHandler>(feature_entered,feature_leave.get_future().share()));
+  assert(busy_builder.add(busy_feature));
+  auto busy_registry=busy_builder.freeze();assert(busy_registry);
+  runtime::Invocation busy_req{busy_feature.id,"fixture.op","in","corr"};
+  std::thread busy_thread([&] {
+    auto answer=busy_registry.value_if()->dispatch(busy_req,pr,ctx);
+    assert(answer && *answer.value_if()=="out");
+  });
+  assert(feature_entered.get_future().wait_for(2s)==std::future_status::ready);
+  assert(is_error(busy_registry.value_if()->dispatch(busy_req,pr,ctx),"FEATURE_BUSY"));
+  feature_leave.set_value();busy_thread.join();
+
+  runtime::CancellationSource before_feature;
+  runtime::ExecutionContext cancelled_feature{};
+  cancelled_feature.cancellation=before_feature.token();
+  before_feature.request_stop();
+  assert(is_error(registry.value_if()->dispatch(plain_request,pr,cancelled_feature),"CANCELLED"));
+
   // Frozen registry is shareable for independent, non-concurrent calls.
   assert(registry.value_if()->dispatch(plain_request,pr,ctx));
   // In-process callbacks never run under a mutex, and non-concurrent providers reject overlap.
