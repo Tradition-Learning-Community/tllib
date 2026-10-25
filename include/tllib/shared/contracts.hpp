@@ -70,6 +70,13 @@ inline Result<std::vector<std::string>> decode(std::string_view bytes, std::stri
   if(!supported_version(fields[2])) return Error{core::ErrorCode::unsupported_version,"Unsupported shared contract version",{}, {}};
   return fields;
 }
+inline Result<std::string> roundtrip(std::string_view bytes,std::string_view expected_contract) {
+  auto fields=decode(bytes,expected_contract);
+  if(!fields)return *fields.error_if();
+  Writer w(expected_contract);
+  for(std::size_t i=3;i<fields.value_if()->size();++i)w.add((*fields.value_if())[i]);
+  return std::move(w.data);
+}
 } // namespace wire
 inline bool relative_path(std::string_view path) {
   if(path.empty() || path.back()=='/' || path.front()=='/' || path.front()=='\\' || path.find('\\')!=std::string_view::npos || path.find(':')!=std::string_view::npos) return false;
@@ -214,6 +221,10 @@ struct StructuredError {
     w.add("implementation_defined");return w.data;
   }
 };
+inline core::Error to_core_error(const StructuredError& e,core::ErrorCode category=core::ErrorCode::invalid_argument) {
+  core::Error result{category,e.condition,e.feature_id?std::optional<std::string>(e.feature_id->str()):std::nullopt,{},e.context,e.code};
+  return result;
+}
 struct Traceability {
   std::array<std::vector<ScientificReference>,8> categories;
   static constexpr std::array<std::string_view,8> names={"scientific_sources","mathematical_contracts","source_irs","finalized_irs","algorithm_specifications","test_plans","acceptance_oracles","scientific_decisions"};
