@@ -1,0 +1,15 @@
+{
+  "schema_version": "1.0",
+  "repository": "Tradition-Learning-Community/tllib-specs",
+  "commit": "07439babd59c657354e3200ed24c55e2e3eeb72c",
+  "handoff_catalog_path": "handoff/catalog.json",
+  "catalog_sha256": "61ad981d2d65500af2b18aae659867dfa7e738a6cf1a0f8737956eae1624ee88",
+  "catalog_schema_version": "1.0",
+  "model_version": "1.0.0",
+  "verification": {
+    "name": "tllib-offline-handoff-verifier",
+    "version": "1.0.0",
+    "hash_algorithm": "sha256",
+    "git_object_integrity": "required"
+  }
+}
