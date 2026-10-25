@@ -1,0 +1,34 @@
+name: Native core C++20
+on:
+  pull_request:
+    paths:
+      - 'include/tllib/**'
+      - 'tests/**'
+      - 'CMakeLists.txt'
+      - '.github/workflows/native-core.yml'
+  push:
+    branches: [main]
+    paths:
+      - 'include/tllib/**'
+      - 'tests/**'
+      - 'CMakeLists.txt'
+      - '.github/workflows/native-core.yml'
+permissions:
+  contents: read
+jobs:
+  cpp20-smoke:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v5
+      - name: Configure
+        run: cmake -S . -B build/native-core -DBUILD_TESTING=ON
+      - name: Build
+        run: cmake --build build/native-core --parallel 2
+      - name: Test
+        run: ctest --test-dir build/native-core --output-on-failure
+      - name: Install and test external consumer
+        run: |
+          cmake --install build/native-core --prefix "$RUNNER_TEMP/tllib-install"
+          cmake -S tests/consumer -B build/consumer -DCMAKE_PREFIX_PATH="$RUNNER_TEMP/tllib-install"
+          cmake --build build/consumer --parallel 2
+          build/consumer/tllib_external_consumer
