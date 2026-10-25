@@ -376,9 +376,11 @@ def write_generated(outputs: dict[str, bytes], root: Path, check: bool) -> None:
             path.parent.mkdir(parents=True, exist_ok=True)
             path.write_bytes(contents)
 
-def read_decisions(path: Path, index: dict) -> tuple[dict, list[dict]]:
+def read_decisions(path: Path, index: dict, lock: dict) -> tuple[dict, list[dict]]:
     source = parse_json(path.read_bytes(), str(path))
     entries = source.get("features")
+    require(source.get("specs_commit") == lock["commit"], "DECISION_SNAPSHOT_MISMATCH",
+            str(path), lock["commit"], source.get("specs_commit"))
     require(source.get("schema_version") == "1.0" and isinstance(entries, list),
             "INVALID_DECISIONS", str(path), "versioned feature list", source.get("schema_version"))
     mapped, diagnostics = {}, []
@@ -404,7 +406,7 @@ def read_decisions(path: Path, index: dict) -> tuple[dict, list[dict]]:
     return mapped, diagnostics
 
 def report(lock: dict, index: dict, decisions_path: Path, enforce_release: bool) -> tuple[dict, str, int]:
-    decisions, diagnostics = read_decisions(decisions_path, index)
+    decisions, diagnostics = read_decisions(decisions_path, index, lock)
     coverage = []
     counts = Counter()
     for fid, entry in sorted(index["features"].items()):
