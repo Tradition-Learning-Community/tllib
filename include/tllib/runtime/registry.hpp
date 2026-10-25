@@ -113,8 +113,6 @@ class FeatureRegistry {
         return fail("INVALID_FEATURE_DESCRIPTOR","Runnable feature must supply implementation and validators");
       if(!runnable && feature.handler)
         return fail("INVALID_FEATURE_DESCRIPTOR","Non-executable feature cannot expose executable handler");
-      if(feature.execution_status==core::ExecutionStatus::conditionally_executable && feature.capabilities.empty())
-        return fail("PROVIDER_REQUIRED","Conditional feature needs declared provider capability");
       if(feature.execution_status!=core::ExecutionStatus::conditionally_executable && !feature.capabilities.empty())
         return fail("INVALID_FEATURE_DESCRIPTOR","Provider capabilities require conditional status");
       std::set<std::string> capabilities;
