@@ -190,6 +190,37 @@ class NativeProviderTests(unittest.TestCase):
         self.assertFalse(thread.is_alive())
         self.assertEqual(answers, [ProviderResponse("test.output", b"out\x00")])
 
+    def test_reentrant_provider_refused_without_deadlock(self):
+        registry_ref = []
+        errors = []
+
+        def callback(*args):
+            try:
+                registry_ref[0].invoke(REQUEST)
+            except TllibError as error:
+                errors.append(error.code)
+            return "test.output", b"out\x00"
+
+        registry = ProviderRegistry([registration(callback)])
+        registry_ref.append(registry)
+        self.assertEqual(registry.invoke(REQUEST).payload, b"out\x00")
+        self.assertEqual(errors, ["PROVIDER_BUSY"])
+        registry_ref.clear()  # avoid cyclic callback ownership on registry teardown
+
+    def test_deadline_during_callback_is_indeterminate(self):
+        entered = threading.Event()
+
+        def slow(*args):
+            entered.set()
+            time.sleep(0.04)
+            return "test.output", b"out\x00"
+
+        registry = ProviderRegistry([registration(slow)])
+        with self.assertRaises(TllibError) as indeterminate:
+            registry.invoke(REQUEST, timeout_ms=20)
+        expect_code(self, indeterminate, "OUTCOME_INDETERMINATE")
+        self.assertTrue(entered.is_set())
+
     def test_callback_lifetime_owned_by_native_registry(self):
         class Callback:
             def __call__(self, *args):
