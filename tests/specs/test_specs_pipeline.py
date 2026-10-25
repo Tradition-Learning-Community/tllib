@@ -126,6 +126,7 @@ class SyntheticCase(unittest.TestCase):
     def test_verification_generation_and_no_implicit_support(self):
         lock, index = self.validate()
         self.assertEqual(set(index["features"]), {FID})
+        self.assertEqual(index["acceptance_cases"][FID][0]["test_id"], "MASTER-001-A01")
         generated = pipeline.generated(lock, index)
         self.assertEqual(len(generated), 2)
         pipeline.write_generated(generated, self.tllib, False)
