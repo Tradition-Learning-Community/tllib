@@ -329,14 +329,12 @@ def generated(lock: dict, index: dict) -> dict[str, bytes]:
         "model_version": lock["model_version"],
         "domains": [{"id": name, "feature_count": item["feature_count"]}
                     for name, item in sorted(index["domains"].items())],
-        "shared_contracts": [{"id": cid, "version": info["version"],
-                              "acceptance_ids": index["shared_acceptance"][cid]}
+        "shared_contracts": [{"id": cid, "version": info["version"]}
                              for cid, info in sorted(index["shared"].items())],
         "features": [{"id": fid, "domain": entry["domain"],
                       "package_version": entry["package_version"],
                       "statuses": entry["statuses"],
-                      "manifest_path": entry["manifest_path"],
-                      "acceptance_ids": index["acceptance"][fid]}
+                      "manifest_path": entry["manifest_path"]}
                      for fid, entry in sorted(items.items())]
     }
     # Generated symbols are descriptive metadata only. They never register a feature.
