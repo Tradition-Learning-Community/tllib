@@ -80,6 +80,8 @@ struct FeatureImplementation {
   providers::PayloadValidator input_validator;
   providers::PayloadValidator output_validator;
   bool concurrent_safe{false};
+  std::optional<core::PackageStatus> package_status{};
+  std::optional<core::ScientificStatus> scientific_status{};
 };
 struct DomainImplementation {
   core::DomainId id;
@@ -100,8 +102,11 @@ class FeatureRegistry {
       if(feature.provenance.empty() || feature.operation_id.empty())
         return fail("INVALID_FEATURE_DESCRIPTOR","Feature requires source provenance and operation");
       if(features_.contains(feature.id.str()))return fail("DUPLICATE_FEATURE","Duplicate TLC-FC registration");
-      if(static_cast<unsigned>(feature.execution_status)>static_cast<unsigned>(core::ExecutionStatus::unsupported))
-        return fail("INVALID_FEATURE_DESCRIPTOR","Unknown execution status");
+      if(static_cast<unsigned>(feature.execution_status)>static_cast<unsigned>(core::ExecutionStatus::unsupported) ||
+         !feature.package_status || !feature.scientific_status ||
+         static_cast<unsigned>(*feature.package_status)>static_cast<unsigned>(core::PackageStatus::superseded) ||
+         static_cast<unsigned>(*feature.scientific_status)>static_cast<unsigned>(core::ScientificStatus::not_applicable))
+        return fail("INVALID_FEATURE_DESCRIPTOR","All closed scientific, package and execution states must be declared");
       const bool runnable=feature.execution_status==core::ExecutionStatus::executable ||
         feature.execution_status==core::ExecutionStatus::conditionally_executable;
       if(runnable && (!feature.handler || !feature.input_validator || !feature.output_validator))
