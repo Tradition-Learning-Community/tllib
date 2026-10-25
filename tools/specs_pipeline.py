@@ -254,6 +254,7 @@ def validate_catalog(lock: dict, handoff: Handoff, catalog: dict) -> dict:
                     p.get("package_version") == "1.0.0",
                     "DOMAIN_CATALOG_MISMATCH", domain_path, "matching paths/version", p)
     acceptance = {}
+    acceptance_cases = {}
     shared_info = {}
     for cid in sorted(shared_by_id):
         base = f"handoff/shared/{cid}"
@@ -318,8 +319,10 @@ def validate_catalog(lock: dict, handoff: Handoff, catalog: dict) -> dict:
                 "INVALID_ACCEPTANCE", base, "nonempty test IDs", test_ids[:4])
         unique(test_ids, base + "/acceptance.json")
         acceptance[fid] = sorted(test_ids)
+        acceptance_cases[fid] = sorted(tests, key=lambda item: item['test_id'])
     return {"features": features_by_id, "domains": domains_by_name, "shared": shared_by_id,
-            "acceptance": acceptance, "shared_acceptance": shared_info}
+            "acceptance": acceptance, "acceptance_cases": acceptance_cases,
+            "shared_acceptance": shared_info}
 
 def generated(lock: dict, index: dict) -> dict[str, bytes]:
     items = index["features"]
@@ -558,6 +561,12 @@ def main(argv: list[str] | None = None) -> int:
             output.mkdir(parents=True, exist_ok=True)
             (output / "coverage.json").write_bytes(canonical(machine))
             (output / "coverage.md").write_text(markdown, encoding="utf-8", newline="\n")
+            # Published acceptance test inputs/expectations are copied only as inert data.
+            cases = {"schema_version": "1.0", "specs_commit": lock["commit"],
+                     "catalog_sha256": lock["catalog_sha256"],
+                     "features": [{"feature_id": fid, "tests": tests}
+                                  for fid, tests in sorted(index["acceptance_cases"].items())]}
+            (output / "acceptance_cases.json").write_bytes(canonical(cases))
             print(f"{args.command}: {machine['feature_count']} features, {machine['decisions_count']} decisions, gate={machine['gate']}")
             return status
         print(f"{args.command}: verified {len(index['features'])} features, {len(index['domains'])} domains, {len(index['shared'])} shared contracts at {lock['commit']}")
