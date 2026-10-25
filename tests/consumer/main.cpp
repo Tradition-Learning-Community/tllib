@@ -11,6 +11,8 @@ int main() {
   auto roundtrip=tllib::shared::wire::roundtrip(ref.canonical(),"TLC-HC-SCIENTIFIC-REFERENCE");
   if(!roundtrip || *roundtrip.value_if()!=ref.canonical())return 3;
   if(tllib::generated::features.empty())return 4;
+  if(tllib::generated::specs_commit != "07439babd59c657354e3200ed24c55e2e3eeb72c")return 6;
+  if(tllib::generated::catalog_sha256.size()!=64)return 7;
   for(const auto& item:tllib::generated::features)
     if(item.feature_id=="TLC-FC-00-MASTER-005" && item.execution_status=="structural_only")return 0;
   return 5;
