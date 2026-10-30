@@ -34,7 +34,9 @@ Dépôt d'autorité : tllib pour code/outillage ; tllib-specs pour science
 - Interfaces/erreurs/ownership modifiés :
 - Provenance et comportement deterministe :
 - Précision numérique, tolérances **justifiées par contrat** :
-- Compatibilité / migration :
+- Compatibilité / migration (obligatoire pour API/ABI, wheel, format ou specs modifiés) :
+- [ ] Changement breaking ? Si oui : migration documentée, version/ABI, note de release et tests de rejet/upgrade.
+- [ ] Snapshot inchangé, ou diff offline `specs_sync.py` relu et modification du lock dans une PR séparée.
 - Sûreté / dépendances / licences :
 
 ## Preuves réellement exécutées

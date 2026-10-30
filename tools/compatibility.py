@@ -49,6 +49,42 @@ def check(root: Path) -> dict:
         value = match.group(1) if match else None
         if value != lock.get(key) or index.get(index_key) != lock.get(key):
             issues.append("SPECS_" + key.upper() + "_MISMATCH")
+    # A declared deprecation is actionable only with a versioned migration note.
+    registry_file = root / "conformance/deprecations.json"
+    registry = pipeline.parse_json(registry_file.read_bytes(), "conformance/deprecations.json")
+    entries = registry.get("entries")
+    if registry.get("schema_version") != "1.0" or not isinstance(entries, list):
+        issues.append("INVALID_DEPRECATION_REGISTRY")
+        entries = []
+    seen = set()
+    for item in entries:
+        if not isinstance(item, dict) or set(item) != {
+            "symbol", "deprecated_in", "remove_no_earlier_than", "replacement", "migration_note"
+        }:
+            issues.append("INVALID_DEPRECATION_ENTRY")
+            continue
+        symbol = item["symbol"]
+        note = item["migration_note"]
+        start, end = item["deprecated_in"], item["remove_no_earlier_than"]
+        if (
+            not isinstance(symbol, str) or not symbol.startswith("tllib.")
+            or symbol in seen or not isinstance(item["replacement"], str)
+            or not item["replacement"] or not isinstance(start, str)
+            or not isinstance(end, str) or not SEMVER.fullmatch(start)
+            or not SEMVER.fullmatch(end) or tuple(map(int, end.split(".")))
+            <= tuple(map(int, start.split(".")))
+            or not isinstance(note, str) or not note.startswith("docs/v1/")
+        ):
+            issues.append("INVALID_DEPRECATION_ENTRY")
+        else:
+            try:
+                pipeline.safe_name(note)
+                if not (root / note).is_file():
+                    issues.append("MISSING_MIGRATION_NOTE")
+            except pipeline.PipelineError:
+                issues.append("INVALID_MIGRATION_PATH")
+        if isinstance(symbol, str):
+            seen.add(symbol)
     if index.get("model_version") != lock.get("model_version"):
         issues.append("SPECS_MODEL_VERSION_MISMATCH")
     return {"schema_version": "1.0", "package_version": native,
@@ -58,6 +94,7 @@ def check(root: Path) -> dict:
             "specs": {"repository": lock.get("repository"),
                       "commit": lock.get("commit"), "catalog_sha256": lock.get("catalog_sha256"),
                       "model_version": lock.get("model_version")},
+            "deprecated_symbol_count": len(entries),
             "status": "pass" if not issues else "fail",
             "diagnostics": sorted(set(issues))}
 

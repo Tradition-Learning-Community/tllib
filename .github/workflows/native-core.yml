@@ -4,23 +4,36 @@ on:
     paths:
       - 'include/tllib/**'
       - 'bindings/python/**'
-      - 'tests/**'
+      - 'tests/*.cpp'
+      - 'tests/consumer/**'
+      - 'tests/parity/**'
+      - 'tests/python/**'
       - 'CMakeLists.txt'
+      - 'CMakePresets.json'
+      - 'cmake/**'
       - '.github/workflows/native-core.yml'
   push:
     branches: [main]
     paths:
       - 'include/tllib/**'
-      - 'tests/**'
+      - 'bindings/python/**'
+      - 'tests/*.cpp'
+      - 'tests/consumer/**'
+      - 'tests/parity/**'
+      - 'tests/python/**'
       - 'CMakeLists.txt'
+      - 'CMakePresets.json'
+      - 'cmake/**'
       - '.github/workflows/native-core.yml'
 permissions:
   contents: read
 jobs:
   cpp20-smoke:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04
     steps:
-      - uses: actions/checkout@v5
+      - uses: actions/checkout@fbc6f3992d24b796d5a048ff273f7fcc4a7b6c09 # v5
+        with:
+          persist-credentials: false
       - name: Configure
         run: cmake -S . -B build/native-core -DBUILD_TESTING=ON
       - name: Build
@@ -35,10 +48,12 @@ jobs:
           build/consumer/tllib_external_consumer
 
   python-provider-bridge:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04
     steps:
-      - uses: actions/checkout@v5
-      - uses: actions/setup-python@v6
+      - uses: actions/checkout@fbc6f3992d24b796d5a048ff273f7fcc4a7b6c09 # v5
+        with:
+          persist-credentials: false
+      - uses: actions/setup-python@ece7cb06caefa5fff74198d8649806c4678c61a1 # v6
         with:
           python-version: '3.12'
       - name: Configure optional Python bridge
@@ -47,3 +62,19 @@ jobs:
         run: cmake --build build/python-provider --parallel 2
       - name: Python-to-C++ provider integration
         run: ctest --test-dir build/python-provider -R 'tllib_python_(provider_bridge|identity_parity)' --output-on-failure
+
+  native-sanitizers:
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@fbc6f3992d24b796d5a048ff273f7fcc4a7b6c09 # v5
+        with:
+          persist-credentials: false
+      - name: Build and execute C++20 ASan plus UBSan with no suppressed failures
+        run: |
+          cmake -S . -B build/sanitizers -DBUILD_TESTING=ON -DCMAKE_BUILD_TYPE=Debug \
+            -DCMAKE_CXX_FLAGS="-fsanitize=address,undefined -fno-omit-frame-pointer" \
+            -DCMAKE_EXE_LINKER_FLAGS="-fsanitize=address,undefined"
+          cmake --build build/sanitizers --parallel 2
+          ASAN_OPTIONS=detect_leaks=1:halt_on_error=1 \
+            UBSAN_OPTIONS=print_stacktrace=1:halt_on_error=1 \
+            ctest --test-dir build/sanitizers --output-on-failure

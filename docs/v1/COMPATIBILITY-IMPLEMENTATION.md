@@ -33,3 +33,10 @@ python3 -m unittest discover -s tests/specs -p 'test_compatibility.py' -v
 the software/specs version pair; mismatches fail CI. It does not pretend
 that all feature implementations or formats are mature. Release artifacts
 and actual platform support remain gated separately by #11 and #260.
+
+The `conformance/deprecations.json` ledger starts with **zero** entries:
+no public API has been invented as deprecated. When a symbol becomes
+deprecated, the registry requires its precise symbol, initial SemVer,
+a strictly later earliest removal version, replacement and an existing
+safe `docs/v1/*` migration note. Broken ledgers fail the same compatibility
+gate, with synthetic negative tests.

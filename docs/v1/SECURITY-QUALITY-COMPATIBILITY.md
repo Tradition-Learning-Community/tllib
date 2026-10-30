@@ -1,8 +1,8 @@
 # V1 — Qualité scientifique, sécurité et compatibilité
 
 Références : #13, #14, #249, #243, #12, #241, ADR-008/009.
-Statut : politique de conception ; pas de tests ni d'attestations
-prétendument réalisés.
+Statut : politiques transversales et contrôles de fondation exécutés en phase B ;
+aucune conformité scientifique des domaines ni artefact de release V1 présumé.
 
 ## Science reproductible et falsifiable
 
@@ -56,16 +56,14 @@ diff et revue avant d'être consommée.
 
 ## CI progressive sans sur-ingénierie précoce
 
-Phase **pré-implémentation** : markdown/lint de documents ciblés
-si utile, liens et métadonnées, pas de job de build factice.
-Quand #246/#249 existent : smoke natif/CTest ciblés.
-Quand #257 existe : installation smoke Python.
-Lorsque catalogue/runtime/conformance existent : validations par
-impact et tests full catalogue sur main/release. Docs-only ne
-doit pas compiler le runtime ; dépendances transverses du core
-déclenchent les tests consommateurs ; jobs release prouvent tous
-les artefacts réellement promis. Ne pas annoncer nightly/fuzz/
-benchmarks verts avant construction et exécution.
+PR Linux de fondations : contrôle Ruff/clang-format des sources touchées,
+clang-tidy sur une unité réelle, CTest natif et consommateur CMake,
+wheel CPython 3.12, providers et parité, et ASan/UBSan pour les sources
+natives. Tests synthétiques négatifs et vérification complète du
+snapshot verrouillé quand les fichiers de pipeline changent.
+Les changements documentaires seuls ne compilent pas le runtime.
+La qualification d'autres OS et les gates complets de publication
+restent séparés (#11) et ne sont pas présumés exécutés.
 
 ## Critères de clôture
 
@@ -73,4 +71,6 @@ benchmarks verts avant construction et exécution.
 #14 : matrice de compatibilité testable + exemples de migration.
 #243 : workflows démontrant précisément la couverture annoncée.
 #249 : commandes CTest/format/analyse réellement exécutées.
-Toutes ces issues **restent ouvertes** jusqu'aux preuves attendues.
+La clôture de chaque issue repose uniquement sur les exécutions et
+preuves enregistrées dans les PR de phase B, sans étendre les garanties
+aux domaines scientifiques non implémentés.
