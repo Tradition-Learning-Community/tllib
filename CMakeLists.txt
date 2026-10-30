@@ -20,7 +20,7 @@ configure_package_config_file(cmake/tllibConfig.cmake.in
   ${CMAKE_CURRENT_BINARY_DIR}/tllibConfig.cmake
   INSTALL_DESTINATION ${CMAKE_INSTALL_LIBDIR}/cmake/tllib)
 write_basic_package_version_file(${CMAKE_CURRENT_BINARY_DIR}/tllibConfigVersion.cmake
-  VERSION ${PROJECT_VERSION} COMPATIBILITY SameMajorVersion)
+  VERSION ${PROJECT_VERSION} COMPATIBILITY SameMinorVersion)
 install(FILES ${CMAKE_CURRENT_BINARY_DIR}/tllibConfig.cmake
   ${CMAKE_CURRENT_BINARY_DIR}/tllibConfigVersion.cmake
   DESTINATION ${CMAKE_INSTALL_LIBDIR}/cmake/tllib)
@@ -69,7 +69,7 @@ if(BUILD_TESTING)
   add_test(NAME tllib_runtime_provider_test COMMAND tllib_runtime_provider_test)
 endif()
 
-# Narrow CPython provider port bridge. No nanobind/pybind11 decision (#256).
+# Existing CPython provider bridge retained; nanobind selected for future APIs (ADR-004).
 option(TLLIB_BUILD_PYTHON_PROVIDER_BRIDGE "Build opt-in Python provider adapter" OFF)
 if(TLLIB_BUILD_PYTHON_PROVIDER_BRIDGE)
   find_package(Python3 3.9 REQUIRED COMPONENTS Interpreter Development.Module)
@@ -87,7 +87,7 @@ if(TLLIB_BUILD_PYTHON_PROVIDER_BRIDGE)
     LIBRARY_OUTPUT_DIRECTORY "${CMAKE_CURRENT_BINARY_DIR}/python/tllib")
   install(TARGETS _native LIBRARY DESTINATION tllib RUNTIME DESTINATION tllib)
   if(NOT SKBUILD)
-  install(FILES
+    install(FILES
       "${CMAKE_CURRENT_SOURCE_DIR}/bindings/python/tllib/__init__.py"
       "${CMAKE_CURRENT_SOURCE_DIR}/bindings/python/tllib/__init__.pyi"
       "${CMAKE_CURRENT_SOURCE_DIR}/bindings/python/tllib/py.typed"
