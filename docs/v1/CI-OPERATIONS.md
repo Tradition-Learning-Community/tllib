@@ -12,7 +12,8 @@ restent candidats non qualifiés ([matrice](PLATFORMS-2027.md)).
 | `docs/**` seulement | Aucun job de compilation natif ; preuve de routage `test_ci_scopes.py` | CMake, wheel, conformité, sanitizers |
 | `include/tllib/**`, `tests/*.cpp`, `CMakeLists.txt` | `native-core` (CTest/consommateur, providers, ASan/UBSan), `python-wheel`, `quality` | Pas de matrice OS non qualifiée |
 | `bindings/python/**`, `tests/python/**` | `native-core`, `python-wheel`, `quality` | Pas de release PyPI |
-| `tools/specs_pipeline.py`, `tools/specs_sync.py`, `tests/specs/**`, lock/catalogue | `pinned-specs` et `quality` | Pas d'implémentation de domaines |
+| `tools/specs_pipeline.py`, `tools/specs_sync.py`, `tests/specs/**` | `pinned-specs` et `quality` | Pas d'implémentation de domaines |
+| `specs.lock.json`, `generated/specs/**`, `conformance/**` | `pinned-specs` | Pas de compilation C++ par ces seuls changements |
 | `spikes/binders/**` | `binder-spike` ; étude isolée | Pas d'adoption automatique du binder |
 | `.github/workflows/X.yml` | Le workflow X lui-même, grâce à son path filter | Aucun contournement silencieux du contrôle correspondant |
 
