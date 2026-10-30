@@ -18,7 +18,15 @@ def single(name):
         else: raise AssertionError("Invalid identity unexpectedly accepted")
     obj=module.Value("sample")
     assert obj.text=="sample"
+    assert module.state_name(module.State.ready) == 'ready'
+    assert module.state_name(module.State.blocked) == 'blocked'
     assert module.State.ready != module.State.blocked
+    details=module.error_details('invalid')
+    assert details['code']=='INVALID_IDENTIFIER'
+    assert isinstance(details['message'],str)
+    assert details['feature_id'] is None
+    assert details['specs_provenance'] is None
+    assert details['context']=={}
     del obj
     gc.collect()
     seen=[]
@@ -38,10 +46,13 @@ def single(name):
         start=time.perf_counter_ns()
         for _ in range(count):function()
         return (time.perf_counter_ns()-start)/count
+    # The timed callback does not append data to the correctness-only list.
+    def timed_callback(label,payload):
+        return ('opaque.output',b'ok')
     measurements={
        "canonical_call_ns":measure(lambda:module.canonical(canonical),20000),
        "numpy_buffer_call_ns":measure(lambda:module.buffer_address(values),20000),
-       "callback_call_ns":measure(lambda:module.call_provider(callback),10000),
+       "callback_call_ns":measure(lambda:module.call_provider(timed_callback),10000),
        "maxrss_kib_linux":resource.getrusage(resource.RUSAGE_SELF).ru_maxrss,
     }
     print(json.dumps({name:measurements}))
