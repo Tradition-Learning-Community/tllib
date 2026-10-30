@@ -56,7 +56,7 @@ aux mêmes invariants (et pas nécessairement même disposition mémoire),
 erreurs/limites et formes validées. Les conversions Python/C++ ne
 doivent pas dégrader silencieusement des valeurs.
 
-## Choix du binder : décision conditionnelle, pas préférence déguisée
+## Choix du binder : décision exécutée sur spike (#256)
 
 **nanobind est candidat de référence** à soumettre au spike #256 ;
 **pybind11 est le comparateur obligatoire**. Le verdict final exige
@@ -67,8 +67,7 @@ reproductibles sur les plateformes promises ; corriger les bugs de
 lifetime avant toute décision. Le choix est documenté dans ADR-004.
 Aucun faux benchmark ni adoption définitive sans ce test.
 
-`scikit-build-core` pilote CMake pour les wheels, après validation du
-binder. Un consommateur C++ ne doit jamais importer Python.
+`scikit-build-core` pilote CMake pour les wheels natives depuis la PR #275. Un consommateur C++ ne doit jamais importer Python.
 Ne pas annoncer free-threaded ni stable ABI (abi3/abi3t) avant essais
 spécifiques sur CPython et au minimum tests TSan ou équivalents pertinents.
 
