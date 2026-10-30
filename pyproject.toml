@@ -6,7 +6,7 @@ build-backend = "scikit_build_core.build"
 name = "tllib"
 version = "0.1.0"
 description = "Tradition Learning C++20 runtime and typed Python facade (foundation only)"
-requires-python = ">=3.9"
+requires-python = ">=3.12,<3.13"
 license = "Apache-2.0"
 license-files = ["LICENSE", "NOTICE"]
 authors = [{name = "Tradition Learning Community ASBL"}]

@@ -4,6 +4,9 @@ on:
     paths:
       - 'specs.lock.json'
       - 'tools/specs_pipeline.py'
+      - 'tools/specs_sync.py'
+      - 'tools/compatibility.py'
+      - 'tools/specs_sync.py'
       - 'tests/specs/**'
       - 'conformance/**'
       - 'generated/specs/**'
@@ -14,6 +17,8 @@ on:
     paths:
       - 'specs.lock.json'
       - 'tools/specs_pipeline.py'
+      - 'tools/specs_sync.py'
+      - 'tools/compatibility.py'
       - 'tests/specs/**'
       - 'conformance/**'
       - 'generated/specs/**'
@@ -33,6 +38,8 @@ jobs:
           ref: 07439babd59c657354e3200ed24c55e2e3eeb72c
           path: pinned-specs
           persist-credentials: false
+      - name: Check CMake, wheel and specs metadata version pair
+        run: python3 tools/compatibility.py
       - name: Validate offline lock and complete handoff
         run: python3 tools/specs_pipeline.py verify --specs pinned-specs
       - name: Check checked-in generated structural files for zero drift
@@ -55,6 +62,16 @@ jobs:
           cmp "$RUNNER_TEMP/gen1/coverage.json" "$RUNNER_TEMP/gen2/coverage.json"
           cmp "$RUNNER_TEMP/gen1/coverage.md" "$RUNNER_TEMP/gen2/coverage.md"
           cmp "$RUNNER_TEMP/gen1/acceptance_cases.json" "$RUNNER_TEMP/gen2/acceptance_cases.json"
+      - name: Verify offline snapshot synchronization is deterministic and lock untouched
+        run: |
+          mkdir -p "$RUNNER_TEMP/migration1" "$RUNNER_TEMP/migration2"
+          cp specs.lock.json "$RUNNER_TEMP/candidate.lock.json"
+          cp specs.lock.json "$RUNNER_TEMP/lock.before"
+          python3 tools/specs_sync.py --reference-specs pinned-specs --candidate-specs pinned-specs --candidate-lock "$RUNNER_TEMP/candidate.lock.json" --output "$RUNNER_TEMP/migration1"
+          python3 tools/specs_sync.py --reference-specs pinned-specs --candidate-specs pinned-specs --candidate-lock "$RUNNER_TEMP/candidate.lock.json" --output "$RUNNER_TEMP/migration2"
+          cmp "$RUNNER_TEMP/migration1/migration.json" "$RUNNER_TEMP/migration2/migration.json"
+          cmp "$RUNNER_TEMP/migration1/migration.md" "$RUNNER_TEMP/migration2/migration.md"
+          cmp "$RUNNER_TEMP/lock.before" specs.lock.json
       - name: Run negative and synthetic pipeline tests
         run: python3 -m unittest discover -s tests/specs -p 'test_*.py' -v
       - name: Check release gate return status matches the actual unsupported features
