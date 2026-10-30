@@ -1,0 +1,34 @@
+name: Binder comparison spike
+on:
+  pull_request:
+    paths:
+      - 'spikes/binders/**'
+      - '.github/workflows/binder-spike.yml'
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  binder-comparison:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v5
+      - uses: actions/setup-python@v6
+        with:
+          python-version: '3.12'
+      - name: Install explicit spike-only dependencies and log versions
+        run: |
+          python -m pip install 'nanobind>=2,<3' 'pybind11>=2.13,<4' 'numpy>=1.26'
+          python -m pip freeze | grep -E '^(nanobind|pybind11|numpy)=='
+      - name: Configure both identical C++20 binding surfaces
+        run: |
+          cmake -S spikes/binders -B build/spike -DCMAKE_BUILD_TYPE=Release -Dnanobind_DIR="$(python -m nanobind --cmake_dir)" -Dpybind11_DIR="$(python -m pybind11 --cmakedir)"
+      - name: Measure build wall time and extension size
+        run: python spikes/binders/build_and_measure.py build/spike
+      - name: Validate value, Result error, enums, NumPy no-copy and callbacks; measure calls/RSS
+        run: PYTHONPATH=build/spike python spikes/binders/smoke.py
+      - uses: actions/upload-artifact@v4
+        with:
+          name: tllib-binder-spike-linux-py312
+          path: |
+            spikes/binders/build-results.json
+            spikes/binders/runtime-results.json
