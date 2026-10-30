@@ -24,7 +24,7 @@ Le module relâche le GIL pendant la traversée du registre C++, puis le réacqu
 
 Une cancellation **avant** l'appel entraîne `CANCELLED`. Une deadline expirée **avant** l'appel entraîne `TIMEOUT`. Une demande après début d'exécution, ou une deadline échue pendant le callback, entraîne `OUTCOME_INDETERMINATE` après son retour, **sans** feindre une interruption d'un travail bloquant. Aucune relance automatique.
 
-Le pont est destiné à l'interpréteur CPython principal dans ce jalon. L'usage des sous-interpréteurs, les builds free-threaded et les ABI stables ne sont **pas** déclarés compatibles avant les tests de #256. Ce code n'isole pas un provider non fiable : les callbacks exécutent du Python in-process.
+Le pont est destiné à l'interpréteur CPython principal dans ce jalon. L'usage des sous-interpréteurs, les builds free-threaded et les ABI stables ne sont **pas** déclarés compatibles avant les tests spécifiques de la phase B. Ce code n'isole pas un provider non fiable : les callbacks exécutent du Python in-process.
 
 ## Construction et tests
 
