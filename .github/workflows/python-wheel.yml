@@ -41,6 +41,7 @@ jobs:
           "$RUNNER_TEMP/tllib-clean/bin/python" -m unittest discover -s "$GITHUB_WORKSPACE/tests/python" -p 'test_provider_bridge.py' -v
           "$RUNNER_TEMP/tllib-clean/bin/python" -m pip install "numpy>=1.26"
           "$RUNNER_TEMP/tllib-clean/bin/python" -m unittest discover -s "$GITHUB_WORKSPACE/tests/python" -p 'test_buffers.py' -v
+          "$RUNNER_TEMP/tllib-clean/bin/python" -m unittest discover -s "$GITHUB_WORKSPACE/tests/python" -p 'test_parity.py' -v
       - name: Editable development installation
         shell: bash
         run: |

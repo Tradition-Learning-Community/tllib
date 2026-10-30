@@ -100,6 +100,18 @@ if(TLLIB_BUILD_PYTHON_PROVIDER_BRIDGE)
       "${CMAKE_CURRENT_BINARY_DIR}/python/tllib/${_file}" COPYONLY)
   endforeach()
   if(BUILD_TESTING)
+    add_executable(tllib_identity_parity_cli tests/parity/identity_cli.cpp)
+    target_link_libraries(tllib_identity_parity_cli PRIVATE tllib::core)
+    if(MSVC)
+      target_compile_options(tllib_identity_parity_cli PRIVATE /W4 /WX)
+    else()
+      target_compile_options(tllib_identity_parity_cli PRIVATE -Wall -Wextra -Wpedantic -Werror)
+    endif()
+    add_test(NAME tllib_python_identity_parity
+      COMMAND "${Python3_EXECUTABLE}" -m unittest discover
+        -s "${CMAKE_CURRENT_SOURCE_DIR}/tests/python" -p "test_parity.py" -v)
+    set_tests_properties(tllib_python_identity_parity PROPERTIES
+      ENVIRONMENT "PYTHONPATH=${CMAKE_CURRENT_BINARY_DIR}/python;TLLIB_PARITY_EXECUTABLE=$<TARGET_FILE:tllib_identity_parity_cli>;TLLIB_PARITY_MANIFEST=${CMAKE_CURRENT_SOURCE_DIR}/tests/parity/manifest.json")
     add_test(NAME tllib_python_provider_bridge
       COMMAND "${Python3_EXECUTABLE}" -m unittest discover
         -s "${CMAKE_CURRENT_SOURCE_DIR}/tests/python"

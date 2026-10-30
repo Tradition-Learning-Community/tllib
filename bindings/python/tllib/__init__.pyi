@@ -1,12 +1,40 @@
 from typing import Callable, Iterable, TypeAlias
 from dataclasses import dataclass
+from enum import Enum
 
 __version__: str
 class TllibError(Exception):
     code: str
+    category: str
     feature_id: str | None
     specs_provenance: str | None
     context: dict[str, str]
+
+class ValidationError(TllibError): ...
+class FeatureUnavailableError(TllibError): ...
+class ProviderRequiredError(TllibError): ...
+class ProviderExecutionError(TllibError): ...
+class IncompatibleSpecsError(TllibError): ...
+class CancelledError(TllibError): ...
+class IndeterminateOutcomeError(TllibError): ...
+
+@dataclass(frozen=True)
+class FeatureId:
+    value: str
+    def __str__(self) -> str: ...
+
+@dataclass(frozen=True)
+class DomainId:
+    value: str
+    def __str__(self) -> str: ...
+
+class ExecutionStatus(str, Enum):
+    STRUCTURAL_ONLY = "structural_only"
+    EXECUTABLE = "executable"
+    CONDITIONALLY_EXECUTABLE = "conditionally_executable"
+    UNSUPPORTED = "unsupported"
+
+def parse_execution_status(value: str) -> ExecutionStatus: ...
 ProviderCallback: TypeAlias = Callable[[str, str, bytes, str, str], tuple[str, bytes]]
 PayloadValidator: TypeAlias = Callable[[bytes], bool]
 

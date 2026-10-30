@@ -1,0 +1,81 @@
+{
+  "schema": "tllib.foundation.parity.v1",
+  "native_snapshot": "07439babd59c657354e3200ed24c55e2e3eeb72c",
+  "cases": [
+    {
+      "kind": "feature",
+      "value": "TLC-FC-00-MASTER-005",
+      "expected": "OK\tTLC-FC-00-MASTER-005"
+    },
+    {
+      "kind": "feature",
+      "value": "TLC-FC-16-COHORT-002",
+      "expected": "OK\tTLC-FC-16-COHORT-002"
+    },
+    {
+      "kind": "feature",
+      "value": "not-a-feature",
+      "expected": "ERROR\tINVALID_IDENTIFIER"
+    },
+    {
+      "kind": "feature",
+      "value": "TLC-FC-16-COHORT-00A",
+      "expected": "ERROR\tINVALID_IDENTIFIER"
+    },
+    {
+      "kind": "feature",
+      "value": "",
+      "expected": "ERROR\tINVALID_IDENTIFIER"
+    },
+    {
+      "kind": "domain",
+      "value": "cohort",
+      "expected": "OK\tcohort"
+    },
+    {
+      "kind": "domain",
+      "value": "low-data-architecture",
+      "expected": "OK\tlow-data-architecture"
+    },
+    {
+      "kind": "domain",
+      "value": "",
+      "expected": "ERROR\tINVALID_IDENTIFIER"
+    },
+    {
+      "kind": "domain",
+      "value": "Wrong_CASE",
+      "expected": "ERROR\tINVALID_IDENTIFIER"
+    },
+    {
+      "kind": "execution_status",
+      "value": "structural_only",
+      "expected": "OK\tstructural_only"
+    },
+    {
+      "kind": "execution_status",
+      "value": "executable",
+      "expected": "OK\texecutable"
+    },
+    {
+      "kind": "execution_status",
+      "value": "conditionally_executable",
+      "expected": "OK\tconditionally_executable"
+    },
+    {
+      "kind": "execution_status",
+      "value": "unsupported",
+      "expected": "OK\tunsupported"
+    },
+    {
+      "kind": "execution_status",
+      "value": "covered",
+      "expected": "ERROR\tINVALID_ARGUMENT"
+    },
+    {
+      "kind": "execution_status",
+      "value": "",
+      "expected": "ERROR\tINVALID_ARGUMENT"
+    }
+  ]
+}
