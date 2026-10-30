@@ -1,9 +1,7 @@
 """Synthetic migration decisions; no real scientific data altered."""
 import json
 from pathlib import Path
-import subprocess
 import sys
-import tempfile
 import unittest
 
 sys.path.insert(0, str(Path(__file__).resolve().parents[2]))
