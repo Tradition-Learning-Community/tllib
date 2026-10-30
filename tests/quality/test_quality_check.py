@@ -22,9 +22,7 @@ class QualityScopeTests(unittest.TestCase):
         self.git("config", "user.name", "test")
         (self.repo / "docs").mkdir()
         (self.repo / "docs/page.md").write_text("original\n", encoding="utf-8")
-        (self.repo / "sample.cpp").write_text(
-            "int main() { return 0; }\n", encoding="utf-8"
-        )
+        (self.repo / "sample.cpp").write_text("int main() { return 0; }\n", encoding="utf-8")
         self.git("add", ".")
         self.git("commit", "-m", "baseline")
 
@@ -43,15 +41,11 @@ class QualityScopeTests(unittest.TestCase):
         self.assertEqual(quality.modified(self.repo, "HEAD^"), [])
 
     def test_changed_cpp_line_range_is_detected(self) -> None:
-        (self.repo / "sample.cpp").write_text(
-            "int main() { return 1; }\n", encoding="utf-8"
-        )
+        (self.repo / "sample.cpp").write_text("int main() { return 1; }\n", encoding="utf-8")
         self.git("add", ".")
         self.git("commit", "-m", "native changed")
         self.assertEqual(quality.modified(self.repo, "HEAD^"), [("M", "sample.cpp")])
-        self.assertEqual(
-            quality.changed_lines(self.repo, "HEAD^", "sample.cpp"), ["--lines=1:1"]
-        )
+        self.assertEqual(quality.changed_lines(self.repo, "HEAD^", "sample.cpp"), ["--lines=1:1"])
 
     def test_hunk_parser(self) -> None:
         self.assertEqual(quality.HUNK.match("@@ -3,2 +8,5 @@").groups(), ("8", "5"))
