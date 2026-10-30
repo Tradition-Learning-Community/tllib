@@ -63,8 +63,7 @@ class ProviderResponse:
 class BufferInfo:
     """Metadata observed while a Python exporter was held through Py_buffer.
 
-    The diagnostic address never extends the exporter lifetime and must not be
-    dereferenced after the call; no persistent native view is returned.
+    The metadata does not retain the exporter or reveal its native address.
     """
 
     dtype: str
@@ -72,7 +71,6 @@ class BufferInfo:
     strides: tuple[int, ...]
     layout: str
     readonly: bool
-    address: int
     nbytes: int
     zero_copy: bool
 
