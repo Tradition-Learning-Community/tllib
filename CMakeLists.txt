@@ -86,11 +86,13 @@ if(TLLIB_BUILD_PYTHON_PROVIDER_BRIDGE)
   set_target_properties(_native PROPERTIES
     LIBRARY_OUTPUT_DIRECTORY "${CMAKE_CURRENT_BINARY_DIR}/python/tllib")
   install(TARGETS _native LIBRARY DESTINATION tllib RUNTIME DESTINATION tllib)
+  if(NOT SKBUILD)
   install(FILES
-    "${CMAKE_CURRENT_SOURCE_DIR}/bindings/python/tllib/__init__.py"
-    "${CMAKE_CURRENT_SOURCE_DIR}/bindings/python/tllib/__init__.pyi"
-    "${CMAKE_CURRENT_SOURCE_DIR}/bindings/python/tllib/py.typed"
-    DESTINATION tllib)
+      "${CMAKE_CURRENT_SOURCE_DIR}/bindings/python/tllib/__init__.py"
+      "${CMAKE_CURRENT_SOURCE_DIR}/bindings/python/tllib/__init__.pyi"
+      "${CMAKE_CURRENT_SOURCE_DIR}/bindings/python/tllib/py.typed"
+      DESTINATION tllib)
+  endif()
   file(MAKE_DIRECTORY "${CMAKE_CURRENT_BINARY_DIR}/python/tllib")
   foreach(_file IN ITEMS __init__.py __init__.pyi py.typed)
     configure_file(
