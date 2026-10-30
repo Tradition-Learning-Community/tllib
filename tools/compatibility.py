@@ -11,6 +11,7 @@ import re
 import sys
 import tomllib
 
+sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
 from tools import specs_pipeline as pipeline
 
 SEMVER = re.compile(r"(0|[1-9][0-9]*)\.(0|[1-9][0-9]*)\.(0|[1-9][0-9]*)\Z")
