@@ -4,7 +4,6 @@ The tests do NOT execute any data from the handoff, or require network services.
 """
 from __future__ import annotations
 
-from collections import Counter
 import hashlib
 import json
 from pathlib import Path
