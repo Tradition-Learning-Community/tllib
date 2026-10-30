@@ -49,5 +49,5 @@ jobs:
           "$RUNNER_TEMP/tllib-editable/bin/python" -m pip install -e . --no-build-isolation
           cd "$RUNNER_TEMP"
           "$RUNNER_TEMP/tllib-editable/bin/python" -c "import tllib; assert tllib.__version__ == '0.1.0'; assert tllib.ProviderRegistry"
-          "$RUNNER_TEMP/tllib-editable/bin/python" -c 'from pathlib import Path; p=Path("bindings/python/tllib/__init__.py"); p.write_text(p.read_text()+"\\nEDITABLE_PHASE_A_MARKER = True\\n")'
+          "$RUNNER_TEMP/tllib-editable/bin/python" -c 'from pathlib import Path; p=Path(__import__("os").environ["GITHUB_WORKSPACE"]) / "bindings/python/tllib/__init__.py"; p.write_text(p.read_text()+"\\nEDITABLE_PHASE_A_MARKER = True\\n")'
           (cd "$RUNNER_TEMP" && "$RUNNER_TEMP/tllib-editable/bin/python" -c "import tllib; assert tllib.EDITABLE_PHASE_A_MARKER")
