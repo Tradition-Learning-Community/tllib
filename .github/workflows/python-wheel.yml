@@ -4,6 +4,8 @@ on:
     paths:
       - 'pyproject.toml'
       - 'CMakeLists.txt'
+      - 'cmake/**'
+      - 'include/tllib/generated/**'
       - 'bindings/python/**'
       - 'include/tllib/**'
       - 'tests/python/**'
@@ -13,6 +15,8 @@ on:
     paths:
       - 'pyproject.toml'
       - 'CMakeLists.txt'
+      - 'cmake/**'
+      - 'include/tllib/generated/**'
       - 'bindings/python/**'
       - 'include/tllib/**'
       - 'tests/python/**'
@@ -21,9 +25,11 @@ permissions:
   contents: read
 jobs:
   wheel:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04
     steps:
       - uses: actions/checkout@v5
+        with:
+          persist-credentials: false
       - uses: actions/setup-python@v6
         with:
           python-version: '3.12'
