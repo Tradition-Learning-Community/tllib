@@ -15,6 +15,8 @@ class CompatibilityTests(unittest.TestCase):
         self.root = Path(self.tmp.name)
         (self.root / "include/tllib/generated").mkdir(parents=True)
         (self.root / "generated/specs").mkdir(parents=True)
+        (self.root / "conformance").mkdir(parents=True)
+        (self.root / "docs/v1").mkdir(parents=True)
         self.commit = "a"*40
         self.catalog_hash = "b"*64
         self.put("CMakeLists.txt", "project(tllib VERSION 0.1.0 LANGUAGES CXX)\nCOMPATIBILITY SameMinorVersion\n")
@@ -24,6 +26,7 @@ class CompatibilityTests(unittest.TestCase):
                  f'inline constexpr std::string_view catalog_sha256 = "{self.catalog_hash}";\n')
         self.put("specs.lock.json", json.dumps({"repository":"Tradition-Learning-Community/tllib-specs",
             "commit":self.commit,"catalog_sha256":self.catalog_hash,"model_version":"1.0.0"}))
+        self.put("conformance/deprecations.json", json.dumps({"schema_version": "1.0", "entries": []}))
         self.put("generated/specs/feature_index.json", json.dumps({
             "specs_commit":self.commit,"catalog_sha256":self.catalog_hash,"model_version":"1.0.0"}))
     def put(self, name, content):
@@ -45,6 +48,24 @@ class CompatibilityTests(unittest.TestCase):
             with self.subTest(path=p):
                 self.assertIn(expected,compat.check(self.root)["diagnostics"])
             self.put(p,old)
+    def test_deprecation_requires_documented_migration_and_later_version(self):
+        entry = {
+            "symbol": "tllib.legacy",
+            "deprecated_in": "0.1.0",
+            "remove_no_earlier_than": "0.2.0",
+            "replacement": "tllib.new_api",
+            "migration_note": "docs/v1/LEGACY-MIGRATION.md",
+        }
+        path = "conformance/deprecations.json"
+        self.put(path, json.dumps({"schema_version": "1.0", "entries": [entry]}))
+        self.assertIn("MISSING_MIGRATION_NOTE", compat.check(self.root)["diagnostics"])
+        self.put("docs/v1/LEGACY-MIGRATION.md", "Synthetic migration fixture only.\n")
+        self.assertEqual(compat.check(self.root)["deprecated_symbol_count"], 1)
+        self.assertEqual(compat.check(self.root)["status"], "pass")
+        entry["remove_no_earlier_than"] = "0.1.0"
+        self.put(path, json.dumps({"schema_version": "1.0", "entries": [entry]}))
+        self.assertIn("INVALID_DEPRECATION_ENTRY", compat.check(self.root)["diagnostics"])
+
     def test_unlocked_catalog_mismatch_blocks(self):
         self.put("generated/specs/feature_index.json",json.dumps({"specs_commit":self.commit,
             "catalog_sha256":"0"*64,"model_version":"1.0.0"}))
