@@ -7,12 +7,12 @@ ce jalon. Les besoins validés par #250 et #253 sont CPU 1D/2D.
 Python **pendant l'appel natif uniquement**. Il valide dtype (`int32`,
 `float64` natifs), forme, strides, contiguïté C ou Fortran, alignement
 et étendue physique. Le retour `BufferInfo` immuable contient les
-métadonnées et un pointeur **diagnostique seulement** : ce nombre ne garantit
-aucune vie mémoire après le retour, ne doit pas être déréférencé et ne
-représente pas une vue C++ conservée. Le `PyBuffer_Release` s'exécute avant
-le retour. Le partage d'adresse prouve l'inspection sans copie, pas une
-promotion d'ownership. Les tests vérifient les références `memoryview`
-qui possèdent légalement leur exporter.
+métadonnées **sans exposer de pointeur natif** ; aucune vue persistante
+n'est retournée. Le `PyBuffer_Release` s'exécute avant le retour.
+Un test natif de comparaison d'alias de buffers, sans divulguer d'adresse,
+prouve l'inspection sans copie. Il ne constitue pas une promotion
+d'ownership. Les tests vérifient les références `memoryview` qui
+possèdent légalement leur exporter.
 
 Les vues non contiguës et les dtype non natifs sont **refusés** par code
 structuré, jamais copiés silencieusement. L'utilisateur effectue si besoin
