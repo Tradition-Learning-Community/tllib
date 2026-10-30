@@ -37,4 +37,4 @@ Les wrappers C++ ne relâchent le GIL que sur chemins natifs prouvés sûrs ; ca
 
 ## Critère de clôture #258
 
-Ce document fixe les conventions de tous les domaines. #258 ne sera clos qu'après création de stubs, mapping Error/Result effectif et harness commun avec au moins un cas de parité prouvé. Aucun domaine ne doit concevoir son propre mapping.
+Ce document fixe les conventions de tous les domaines. les stubs, le mapping Error/Result effectif et le harness commun ont été testés en PR #277. Aucun test de domaine scientifique n'est revendiqué. Aucun domaine ne doit concevoir son propre mapping.
