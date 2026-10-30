@@ -37,7 +37,16 @@ class IdentityParity(unittest.TestCase):
         manifest=os.environ.get("TLLIB_PARITY_MANIFEST")
         if not executable or not manifest:
             self.skipTest("CMake sets both paths when running installed parity CTest")
-        cases=json.loads(Path(manifest).read_text(encoding="utf-8"))["cases"]
+        manifest_data=json.loads(Path(manifest).read_text(encoding="utf-8"))
+        cases=manifest_data["cases"]
+        symbols=manifest_data["symbols"]
+        self.assertEqual(set(symbols),{case["kind"] for case in cases})
+        for kind,mapping in symbols.items():
+            with self.subTest(mapping=kind):
+                self.assertTrue(mapping["native"].startswith("tllib::core::"))
+                self.assertTrue(mapping["python"].startswith("tllib."))
+                self.assertTrue(hasattr(tllib,mapping["python"].split(".")[1]))
+                self.assertIn(mapping["kind"],("structural_identity","structural_status"))
         self.assertGreater(len(cases), 10)
         for case in cases:
             with self.subTest(kind=case["kind"], value=case["value"]):

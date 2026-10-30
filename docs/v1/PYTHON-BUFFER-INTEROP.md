@@ -26,3 +26,12 @@ plutôt que réécrire des conversions par domaine. DLPack est **reporté**,
 car aucune nécessité d'échange de device, capsule ou synchronisation n'est
 démontrée par le snapshot actuel. La décision sera réévaluée seulement
 après une acceptation TLC-FC demandant effectivement cet échange.
+
+## Copie volontaire vérifiée
+
+Le test `test_buffers.py` part d'une vue NumPy non contiguë refusée,
+construit une copie **explicitement** via `numpy.ascontiguousarray`,
+prouve l'absence d'aliasing avec `numpy.shares_memory` et le contrôle
+natif de pointeurs (sans divulguer d'adresse), puis constate que
+`inspect_buffer` emprunte cette nouvelle allocation sans copier
+à nouveau. Les valeurs d'entrée sont préservées.

@@ -27,3 +27,10 @@ symbole à l'ID TLC-FC, ses acceptations, ses résultats et erreurs réels
 dans un manifeste analogue, avec un oracle indépendant approuvé ; ne
 jamais copier un algorithme scientifique vers Python pour passer la parité.
 Pas de parité scientifique inventée pendant cette phase.
+
+Le manifeste machine-readable contient une table `symbols` explicite
+(`kind`, symbole C++20 natif, symbole Python public, lien optionnel
+TLC-FC) et des `cases` associés. Le harness vérifie l'existence des
+symboles Python, la couverture des kinds du manifeste, les codes d'erreurs
+et les résultats. La table est extensible aux futures fonctionnalités
+uniquement après implémentation réellement testée et acceptation normative.

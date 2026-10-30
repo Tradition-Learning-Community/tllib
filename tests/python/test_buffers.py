@@ -55,6 +55,15 @@ class BufferTests(unittest.TestCase):
         with self.assertRaises(TllibError) as sliced:
             inspect_buffer(other[:, ::2])
         self.assertEqual(sliced.exception.code, "NON_CONTIGUOUS_BUFFER")
+        explicit = np.ascontiguousarray(other[:, ::2])
+        self.assertTrue(explicit.flags.c_contiguous)
+        self.assertFalse(np.shares_memory(explicit, other))
+        self.assertFalse(_native.same_buffer_start(explicit, other[:, ::2]))
+        copied = inspect_buffer(explicit)
+        self.assertEqual(copied.shape, (2, 2))
+        self.assertEqual(copied.layout, "row_major")
+        self.assertTrue(copied.zero_copy)  # Inspection itself never creates another copy.
+        np.testing.assert_array_equal(explicit, other[:, ::2])
         with self.assertRaises(TllibError) as invalid:
             inspect_buffer(np.array([1], dtype=np.float32))
         self.assertEqual(invalid.exception.code, "UNSUPPORTED_DTYPE")

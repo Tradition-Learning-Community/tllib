@@ -77,5 +77,25 @@
       "value": "",
       "expected": "ERROR\tINVALID_ARGUMENT"
     }
-  ]
+  ],
+  "symbols": {
+    "feature": {
+      "native": "tllib::core::FeatureId::parse",
+      "python": "tllib.FeatureId",
+      "kind": "structural_identity",
+      "tlc_fc": "when applicable; case input retains original ID"
+    },
+    "domain": {
+      "native": "tllib::core::DomainId::parse",
+      "python": "tllib.DomainId",
+      "kind": "structural_identity",
+      "tlc_fc": null
+    },
+    "execution_status": {
+      "native": "tllib::core::parse_execution_status",
+      "python": "tllib.parse_execution_status",
+      "kind": "structural_status",
+      "tlc_fc": null
+    }
+  }
 }
