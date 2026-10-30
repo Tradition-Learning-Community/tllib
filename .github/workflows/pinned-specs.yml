@@ -5,6 +5,8 @@ on:
       - 'specs.lock.json'
       - 'tools/specs_pipeline.py'
       - 'tools/specs_sync.py'
+      - 'tools/compatibility.py'
+      - 'tools/specs_sync.py'
       - 'tests/specs/**'
       - 'conformance/**'
       - 'generated/specs/**'
@@ -15,6 +17,8 @@ on:
     paths:
       - 'specs.lock.json'
       - 'tools/specs_pipeline.py'
+      - 'tools/specs_sync.py'
+      - 'tools/compatibility.py'
       - 'tests/specs/**'
       - 'conformance/**'
       - 'generated/specs/**'
@@ -34,6 +38,8 @@ jobs:
           ref: 07439babd59c657354e3200ed24c55e2e3eeb72c
           path: pinned-specs
           persist-credentials: false
+      - name: Check CMake, wheel and specs metadata version pair
+        run: python3 tools/compatibility.py
       - name: Validate offline lock and complete handoff
         run: python3 tools/specs_pipeline.py verify --specs pinned-specs
       - name: Check checked-in generated structural files for zero drift
