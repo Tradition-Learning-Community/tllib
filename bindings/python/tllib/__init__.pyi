@@ -1,7 +1,12 @@
 from typing import Callable, Iterable, TypeAlias
 from dataclasses import dataclass
 
-TllibError: type[Exception]
+__version__: str
+class TllibError(Exception):
+    code: str
+    feature_id: str | None
+    specs_provenance: str | None
+    context: dict[str, str]
 ProviderCallback: TypeAlias = Callable[[str, str, bytes, str, str], tuple[str, bytes]]
 PayloadValidator: TypeAlias = Callable[[bytes], bool]
 
@@ -33,6 +38,18 @@ class ProviderRequest:
 class ProviderResponse:
     output_contract: str
     payload: bytes
+
+@dataclass(frozen=True)
+class BufferInfo:
+    dtype: str
+    shape: tuple[int, ...]
+    strides: tuple[int, ...]
+    layout: str
+    readonly: bool
+    nbytes: int
+    zero_copy: bool
+
+def inspect_buffer(value: object) -> BufferInfo: ...
 
 class CancellationSource:
     def __init__(self) -> None: ...

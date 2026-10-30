@@ -76,6 +76,8 @@ if(TLLIB_BUILD_PYTHON_PROVIDER_BRIDGE)
   Python3_add_library(_native MODULE bindings/python/native/provider_bridge.cpp WITH_SOABI)
   target_link_libraries(_native PRIVATE tllib::core Python3::Module)
   target_compile_features(_native PRIVATE cxx_std_20)
+  configure_file("${CMAKE_CURRENT_SOURCE_DIR}/cmake/python_version.hpp.in" "${CMAKE_CURRENT_BINARY_DIR}/python_version.hpp" @ONLY)
+  target_include_directories(_native PRIVATE "${CMAKE_CURRENT_BINARY_DIR}")
   if(MSVC)
     target_compile_options(_native PRIVATE /W4 /WX)
   else()
@@ -83,6 +85,14 @@ if(TLLIB_BUILD_PYTHON_PROVIDER_BRIDGE)
   endif()
   set_target_properties(_native PROPERTIES
     LIBRARY_OUTPUT_DIRECTORY "${CMAKE_CURRENT_BINARY_DIR}/python/tllib")
+  install(TARGETS _native LIBRARY DESTINATION tllib RUNTIME DESTINATION tllib)
+  if(NOT SKBUILD)
+  install(FILES
+      "${CMAKE_CURRENT_SOURCE_DIR}/bindings/python/tllib/__init__.py"
+      "${CMAKE_CURRENT_SOURCE_DIR}/bindings/python/tllib/__init__.pyi"
+      "${CMAKE_CURRENT_SOURCE_DIR}/bindings/python/tllib/py.typed"
+      DESTINATION tllib)
+  endif()
   file(MAKE_DIRECTORY "${CMAKE_CURRENT_BINARY_DIR}/python/tllib")
   foreach(_file IN ITEMS __init__.py __init__.pyi py.typed)
     configure_file(

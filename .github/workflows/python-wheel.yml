@@ -1,0 +1,53 @@
+name: Python wheel smoke
+on:
+  pull_request:
+    paths:
+      - 'pyproject.toml'
+      - 'CMakeLists.txt'
+      - 'bindings/python/**'
+      - 'include/tllib/**'
+      - 'tests/python/**'
+      - '.github/workflows/python-wheel.yml'
+  push:
+    branches: [main]
+    paths:
+      - 'pyproject.toml'
+      - 'CMakeLists.txt'
+      - 'bindings/python/**'
+      - 'include/tllib/**'
+      - 'tests/python/**'
+      - '.github/workflows/python-wheel.yml'
+permissions:
+  contents: read
+jobs:
+  wheel:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v5
+      - uses: actions/setup-python@v6
+        with:
+          python-version: '3.12'
+      - name: Install isolated packaging tools
+        run: python -m pip install 'scikit-build-core>=0.11,<1' build
+      - name: Build local wheel through CMake
+        run: python -m build --wheel --no-isolation
+      - name: Install wheel into a clean venv and run native/provider checks outside source tree
+        shell: bash
+        run: |
+          python -m venv "$RUNNER_TEMP/tllib-clean"
+          "$RUNNER_TEMP/tllib-clean/bin/python" -m pip install --no-index --no-deps dist/tllib*.whl
+          cd "$RUNNER_TEMP"
+          "$RUNNER_TEMP/tllib-clean/bin/python" -c "import tllib, importlib.metadata; assert tllib.__version__ == importlib.metadata.version('tllib') == '0.1.0'; assert tllib.ProviderRegistry and tllib._native.native_version() == tllib.__version__"
+          "$RUNNER_TEMP/tllib-clean/bin/python" -m unittest discover -s "$GITHUB_WORKSPACE/tests/python" -p 'test_provider_bridge.py' -v
+          "$RUNNER_TEMP/tllib-clean/bin/python" -m pip install "numpy>=1.26"
+          "$RUNNER_TEMP/tllib-clean/bin/python" -m unittest discover -s "$GITHUB_WORKSPACE/tests/python" -p 'test_buffers.py' -v
+      - name: Editable development installation
+        shell: bash
+        run: |
+          python -m venv "$RUNNER_TEMP/tllib-editable"
+          "$RUNNER_TEMP/tllib-editable/bin/python" -m pip install 'scikit-build-core>=0.11,<1'
+          "$RUNNER_TEMP/tllib-editable/bin/python" -m pip install -e . --no-build-isolation
+          cd "$RUNNER_TEMP"
+          "$RUNNER_TEMP/tllib-editable/bin/python" -c "import tllib; assert tllib.__version__ == '0.1.0'; assert tllib.ProviderRegistry"
+          "$RUNNER_TEMP/tllib-editable/bin/python" -c 'from pathlib import Path; p=Path(__import__("os").environ["GITHUB_WORKSPACE"]) / "bindings/python/tllib/__init__.py"; p.write_text(p.read_text()+"\nEDITABLE_PHASE_A_MARKER = True\n")'
+          (cd "$RUNNER_TEMP" && "$RUNNER_TEMP/tllib-editable/bin/python" -c "import tllib; assert tllib.EDITABLE_PHASE_A_MARKER")

@@ -11,6 +11,7 @@ from typing import Callable, Iterable, TypeAlias
 from . import _native
 
 TllibError = _native.TllibError
+__version__: str = _native.native_version()
 
 ProviderCallback: TypeAlias = Callable[[str, str, bytes, str, str], tuple[str, bytes]]
 PayloadValidator: TypeAlias = Callable[[bytes], bool]
@@ -56,6 +57,32 @@ class ProviderResponse:
     output_contract: str
     payload: bytes
 
+
+
+@dataclass(frozen=True)
+class BufferInfo:
+    """Metadata observed while a Python exporter was held through Py_buffer.
+
+    The metadata does not retain the exporter or reveal its native address.
+    """
+
+    dtype: str
+    shape: tuple[int, ...]
+    strides: tuple[int, ...]
+    layout: str
+    readonly: bool
+    nbytes: int
+    zero_copy: bool
+
+
+def inspect_buffer(value: object) -> BufferInfo:
+    """Inspect a CPU contiguous int32/float64 exporter with no data copy.
+
+    A non-contiguous, non-native-endian, unsupported dtype or unsafe layout is
+    rejected with a structured TllibError. Create an explicit copy yourself if
+    the original representation is not compatible.
+    """
+    return BufferInfo(**_native.inspect_buffer(value))
 
 class CancellationSource:
     """Explicit C++ stop source; safe to request cancellation from another thread."""
@@ -135,6 +162,8 @@ class ProviderRegistry:
 
 
 __all__ = [
+    "BufferInfo",
+    "inspect_buffer",
     "CancellationSource",
     "PayloadValidator",
     "ProviderCallback",
@@ -143,4 +172,5 @@ __all__ = [
     "ProviderRequest",
     "ProviderResponse",
     "TllibError",
+    "__version__",
 ]
