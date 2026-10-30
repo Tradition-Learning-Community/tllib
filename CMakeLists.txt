@@ -1,5 +1,5 @@
 cmake_minimum_required(VERSION 3.27)
-project(tllib VERSION 0.0.0 LANGUAGES CXX)
+project(tllib VERSION 0.1.0 LANGUAGES CXX)
 
 include(GNUInstallDirs)
 include(CMakePackageConfigHelpers)
@@ -26,6 +26,14 @@ install(FILES ${CMAKE_CURRENT_BINARY_DIR}/tllibConfig.cmake
   DESTINATION ${CMAKE_INSTALL_LIBDIR}/cmake/tllib)
 
 if(BUILD_TESTING)
+  add_executable(tllib_array_view_test tests/array_view_test.cpp)
+  target_link_libraries(tllib_array_view_test PRIVATE tllib::core)
+  if(MSVC)
+    target_compile_options(tllib_array_view_test PRIVATE /W4 /WX)
+  else()
+    target_compile_options(tllib_array_view_test PRIVATE -Wall -Wextra -Wpedantic -Werror)
+  endif()
+  add_test(NAME tllib_array_view_test COMMAND tllib_array_view_test)
   find_package(Threads REQUIRED)
   add_executable(tllib_build_smoke tests/build_smoke.cpp)
   target_link_libraries(tllib_build_smoke PRIVATE tllib::core)
