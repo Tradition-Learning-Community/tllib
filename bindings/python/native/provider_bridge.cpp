@@ -25,6 +25,13 @@ namespace r=tllib::runtime;
 constexpr const char* registry_capsule="tllib.native.ProviderRegistry";
 constexpr const char* cancellation_capsule="tllib.native.CancellationSource";
 PyObject* error_class=nullptr;
+PyObject* validation_error_class=nullptr;
+PyObject* feature_unavailable_class=nullptr;
+PyObject* provider_required_class=nullptr;
+PyObject* provider_execution_class=nullptr;
+PyObject* incompatible_specs_class=nullptr;
+PyObject* cancelled_error_class=nullptr;
+PyObject* indeterminate_outcome_class=nullptr;
 
 class OwnedCallable {
  public:
@@ -154,7 +161,31 @@ p::PayloadValidator validator(Callable callback){
 }
 PyObject* set_error(const Error& error){
   if(!error_class){PyErr_SetString(PyExc_RuntimeError,"Native provider error class unavailable");return nullptr;}
-  PyObject* instance=PyObject_CallFunction(error_class,"s",error.message.c_str());
+  const std::string stable=error.stable_code.value_or("");
+  PyObject* target=error_class;
+  const char* category="internal";
+  if(stable=="PROVIDER_REQUIRED") {target=provider_required_class;category="provider_required";}
+  else if(stable=="OUTCOME_INDETERMINATE"){target=indeterminate_outcome_class;category="indeterminate_outcome";}
+  else if(stable=="CANCELLED" || stable=="TIMEOUT"){target=cancelled_error_class;category="cancelled";}
+  else if(stable=="PROVIDER_INCOMPATIBLE" || error.code==tllib::core::ErrorCode::unsupported_version) {
+    target=incompatible_specs_class;category="incompatible_specs";
+  }
+  else if(stable.starts_with("PROVIDER_") || stable=="INVALID_PROVIDER_OUTPUT" || stable=="INVALID_PROVIDER_INPUT"){
+    target=provider_execution_class;category="provider_execution";
+  }
+  else if(error.code==tllib::core::ErrorCode::unavailable_capability) {
+    target=feature_unavailable_class;category="feature_unavailable";
+  }
+  else if(error.code==tllib::core::ErrorCode::invalid_identifier ||
+          error.code==tllib::core::ErrorCode::invalid_shape ||
+          error.code==tllib::core::ErrorCode::invalid_argument ||
+          error.code==tllib::core::ErrorCode::out_of_range ||
+          error.code==tllib::core::ErrorCode::invalid_domain) {
+    target=validation_error_class;category="validation";
+  }
+  if(!target)target=error_class;
+  PyObject* instance=PyObject_CallFunction(target,"s#",error.message.data(),
+    static_cast<Py_ssize_t>(error.message.size()));
   if(!instance)return nullptr;
   const auto generic_code=[](tllib::core::ErrorCode category)->std::string {
     switch(category){
@@ -186,13 +217,58 @@ PyObject* set_error(const Error& error){
   }
   PyObject* feature=error.feature_id?PyUnicode_FromString(error.feature_id->c_str()):Py_NewRef(Py_None);
   PyObject* provenance=error.provenance?PyUnicode_FromString(error.provenance->c_str()):Py_NewRef(Py_None);
-  const bool ok=attr("code",PyUnicode_FromString(code.c_str()))&&
-    attr("feature_id",feature)&&attr("specs_provenance",provenance)&&attr("context",ctx);
-  if(!ok){Py_DECREF(instance);return nullptr;}
-  PyErr_SetObject(error_class,instance);
+  PyObject* fields[]={
+    PyUnicode_FromString(code.c_str()),
+    feature,
+    provenance,
+    ctx,
+    PyUnicode_FromString(category)
+  };
+  const char* names[]={"code","feature_id","specs_provenance","context","category"};
+  for(std::size_t i=0;i<5;++i){
+    if(!attr(names[i],fields[i])){
+      for(std::size_t j=i+1;j<5;++j)Py_XDECREF(fields[j]);
+      Py_DECREF(instance);
+      return nullptr;
+    }
+  }
+  PyErr_SetObject(target,instance);
   Py_DECREF(instance);
   return nullptr;
 }
+
+PyObject* canonical_identity(PyObject* args, bool feature){
+  PyObject* value=nullptr;
+  if(!PyArg_ParseTuple(args,"U",&value))return nullptr;
+  Py_ssize_t n=0;
+  const char* bytes=PyUnicode_AsUTF8AndSize(value,&n);
+  if(!bytes)return nullptr;
+  const std::string_view text(bytes,static_cast<std::size_t>(n));
+  if(feature){
+    auto parsed=tllib::core::FeatureId::parse(text);
+    if(!parsed)return set_error(*parsed.error_if());
+    const auto& normalized=parsed.value_if()->str();
+    return PyUnicode_FromStringAndSize(normalized.data(),static_cast<Py_ssize_t>(normalized.size()));
+  }
+  auto parsed=tllib::core::DomainId::parse(text);
+  if(!parsed)return set_error(*parsed.error_if());
+  const auto& normalized=parsed.value_if()->str();
+  return PyUnicode_FromStringAndSize(normalized.data(),static_cast<Py_ssize_t>(normalized.size()));
+}
+PyObject* canonical_feature_id(PyObject*,PyObject* args){return canonical_identity(args,true);}
+PyObject* canonical_domain_id(PyObject*,PyObject* args){return canonical_identity(args,false);}
+PyObject* canonical_execution_status(PyObject*,PyObject* args){
+  PyObject* value=nullptr;
+  if(!PyArg_ParseTuple(args,"U",&value))return nullptr;
+  Py_ssize_t n=0;
+  const char* bytes=PyUnicode_AsUTF8AndSize(value,&n);
+  if(!bytes)return nullptr;
+  const std::string_view original(bytes,static_cast<std::size_t>(n));
+  auto parsed=tllib::core::parse_execution_status(original);
+  if(!parsed)return set_error(*parsed.error_if());
+  return PyUnicode_FromStringAndSize(original.data(),static_cast<Py_ssize_t>(original.size()));
+}
+
 void registry_destroy(PyObject* capsule){
   void* data=PyCapsule_GetPointer(capsule,registry_capsule);
   if(data)delete static_cast<p::ProviderRegistry*>(data);
@@ -339,6 +415,9 @@ PyObject* guarded(NativeEntry entry,PyObject* self,PyObject* args){
 }
 PyObject* inspect_buffer(PyObject*,PyObject*);
 PyObject* same_buffer_start(PyObject*,PyObject*);
+PyObject* safe_canonical_feature_id(PyObject* self,PyObject* args){return guarded(canonical_feature_id,self,args);}
+PyObject* safe_canonical_domain_id(PyObject* self,PyObject* args){return guarded(canonical_domain_id,self,args);}
+PyObject* safe_canonical_execution_status(PyObject* self,PyObject* args){return guarded(canonical_execution_status,self,args);}
 PyObject* safe_create_registry(PyObject* self,PyObject* args){return guarded(create_registry,self,args);}
 PyObject* safe_invoke(PyObject* self,PyObject* args){return guarded(invoke,self,args);}
 PyObject* safe_new_source(PyObject* self,PyObject* args){return guarded(new_source,self,args);}
@@ -457,6 +536,9 @@ PyObject* same_buffer_start(PyObject*,PyObject* args){
 }
 
 PyMethodDef methods[]={
+  {"canonical_feature_id",safe_canonical_feature_id,METH_VARARGS,"Parse via native C++ FeatureId Result."},
+  {"canonical_domain_id",safe_canonical_domain_id,METH_VARARGS,"Parse via native C++ DomainId Result."},
+  {"canonical_execution_status",safe_canonical_execution_status,METH_VARARGS,"Parse via native C++ ExecutionStatus Result."},
   {"inspect_buffer",safe_inspect_buffer,METH_VARARGS,"Inspect a borrowed contiguous numeric buffer; no copy."},
   {"same_buffer_start",safe_same_buffer_start,METH_VARARGS,"Diagnostic pointer equality without exposing addresses."},
   {"native_version",native_version,METH_NOARGS,"Version of the compiled C++ package."},
@@ -475,6 +557,24 @@ PyMODINIT_FUNC PyInit__native(){
   if(!error_class){Py_DECREF(module);return nullptr;}
   if(PyModule_AddObject(module,"TllibError",error_class)<0){
     Py_DECREF(error_class);Py_DECREF(module);return nullptr;
+  }
+  struct Derived {const char* name; const char* qualified; PyObject** target;};
+  const Derived derived[]={
+    {"ValidationError","tllib._native.ValidationError",&validation_error_class},
+    {"FeatureUnavailableError","tllib._native.FeatureUnavailableError",&feature_unavailable_class},
+    {"ProviderRequiredError","tllib._native.ProviderRequiredError",&provider_required_class},
+    {"ProviderExecutionError","tllib._native.ProviderExecutionError",&provider_execution_class},
+    {"IncompatibleSpecsError","tllib._native.IncompatibleSpecsError",&incompatible_specs_class},
+    {"CancelledError","tllib._native.CancelledError",&cancelled_error_class},
+    {"IndeterminateOutcomeError","tllib._native.IndeterminateOutcomeError",&indeterminate_outcome_class},
+  };
+  for(const auto& entry:derived){
+    PyObject* klass=PyErr_NewException(entry.qualified,error_class,nullptr);
+    if(!klass){Py_DECREF(module);return nullptr;}
+    if(PyModule_AddObject(module,entry.name,klass)<0){
+      Py_DECREF(klass);Py_DECREF(module);return nullptr;
+    }
+    *entry.target=klass;
   }
   return module;
 }

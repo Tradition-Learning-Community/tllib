@@ -24,7 +24,7 @@ Le module relâche le GIL pendant la traversée du registre C++, puis le réacqu
 
 Une cancellation **avant** l'appel entraîne `CANCELLED`. Une deadline expirée **avant** l'appel entraîne `TIMEOUT`. Une demande après début d'exécution, ou une deadline échue pendant le callback, entraîne `OUTCOME_INDETERMINATE` après son retour, **sans** feindre une interruption d'un travail bloquant. Aucune relance automatique.
 
-Le pont est destiné à l'interpréteur CPython principal dans ce jalon. L'usage des sous-interpréteurs, les builds free-threaded et les ABI stables ne sont **pas** déclarés compatibles avant les tests de #256. Ce code n'isole pas un provider non fiable : les callbacks exécutent du Python in-process.
+Le pont est destiné à l'interpréteur CPython principal dans ce jalon. L'usage des sous-interpréteurs, les builds free-threaded et les ABI stables ne sont **pas** déclarés compatibles avant les tests spécifiques de la phase B. Ce code n'isole pas un provider non fiable : les callbacks exécutent du Python in-process.
 
 ## Construction et tests
 
@@ -44,8 +44,11 @@ Le workflow `Native core C++20` exécute le test Python contre la **vraie extens
 ## Périmètre et dépendances laissés ouverts
 
 - #239 : adaptateur Python d'un port provider **effectif**, sans provider scientifique, avec tests d'intégration. Ce travail ne rend aucune des 694 features exécutable par défaut.
-- #256 : choix final du binder **non effectué** ; les deux prototypes nanobind/pybind11, benchmarks et décision ADR-004 restent à produire.
-- #257 : wheels et package Python complets non réalisés ici ; seul le module optionnel de développement est construit par CMake. 
-- #258 : extension de l'API Python globale, typing complet, mapping des autres objets C++ et tests de parité par domaine restent à effectuer. Le port provider est typé sans prétendre couvrir cette API générale.
+- #256 : spike nanobind/pybind11 exécuté en PR #276 ; nanobind est choisi pour
+  les futurs bindings, sans changement du pont CPython provider existant.
+- #257 : wheel CMake, installation propre et editable livrées en PR #275.
+- #258 : typage, erreurs structurées et parité **structurelle** C++/Python
+  livrés en PR #277. La parité **scientifique** de chaque domaine reste
+  à tester lors de sa future implémentation.
 
 La façade de ce jalon ne contient ni algorithme scientifique ni calcul de domaine ; les règles de validation sont apportées par les implémentations approuvées de chaque future feature.

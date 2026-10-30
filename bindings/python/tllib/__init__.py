@@ -6,12 +6,63 @@ No providers are discovered, and no scientific fallback is implemented here.
 from __future__ import annotations
 
 from dataclasses import dataclass
+from enum import Enum
 from typing import Callable, Iterable, TypeAlias
 
 from . import _native
 
 TllibError = _native.TllibError
 __version__: str = _native.native_version()
+
+
+ValidationError = _native.ValidationError
+FeatureUnavailableError = _native.FeatureUnavailableError
+ProviderRequiredError = _native.ProviderRequiredError
+ProviderExecutionError = _native.ProviderExecutionError
+IncompatibleSpecsError = _native.IncompatibleSpecsError
+CancelledError = _native.CancelledError
+IndeterminateOutcomeError = _native.IndeterminateOutcomeError
+
+
+@dataclass(frozen=True)
+class FeatureId:
+    """Immutable/hashable TLC-FC identity validated by the authoritative C++ parser."""
+
+    value: str
+
+    def __post_init__(self) -> None:
+        object.__setattr__(self, "value", _native.canonical_feature_id(self.value))
+
+    def __str__(self) -> str:
+        return self.value
+
+
+@dataclass(frozen=True)
+class DomainId:
+    """Immutable/hashable domain identity validated by C++, without normalization."""
+
+    value: str
+
+    def __post_init__(self) -> None:
+        object.__setattr__(self, "value", _native.canonical_domain_id(self.value))
+
+    def __str__(self) -> str:
+        return self.value
+
+
+class ExecutionStatus(str, Enum):
+    """Closed native execution-status vocabulary (not a compliance claim)."""
+
+    STRUCTURAL_ONLY = "structural_only"
+    EXECUTABLE = "executable"
+    CONDITIONALLY_EXECUTABLE = "conditionally_executable"
+    UNSUPPORTED = "unsupported"
+
+
+def parse_execution_status(value: str) -> ExecutionStatus:
+    """Validate with the C++ parser and return the matching Python enum."""
+    return ExecutionStatus(_native.canonical_execution_status(value))
+
 
 ProviderCallback: TypeAlias = Callable[[str, str, bytes, str, str], tuple[str, bytes]]
 PayloadValidator: TypeAlias = Callable[[bytes], bool]
@@ -163,6 +214,17 @@ class ProviderRegistry:
 
 __all__ = [
     "BufferInfo",
+    "FeatureId",
+    "DomainId",
+    "ExecutionStatus",
+    "parse_execution_status",
+    "ValidationError",
+    "FeatureUnavailableError",
+    "ProviderRequiredError",
+    "ProviderExecutionError",
+    "IncompatibleSpecsError",
+    "CancelledError",
+    "IndeterminateOutcomeError",
     "inspect_buffer",
     "CancellationSource",
     "PayloadValidator",
