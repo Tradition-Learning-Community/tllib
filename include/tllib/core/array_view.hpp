@@ -63,6 +63,8 @@ class ArrayView final {
     auto fail=[](const char* message,const char* code)->Result<ArrayView> {
       return Error{ErrorCode::invalid_shape,message,{},{},{},code};
     };
+    if(dtype!=DType::int32 && dtype!=DType::float64)
+      return fail("Unsupported dtype","UNSUPPORTED_DTYPE");
     if(shape.empty() || shape.size()>2 || shape.size()!=strides.size())
       return fail("Only rank 1 or 2 with matching strides is supported","INVALID_SHAPE");
     if(origin>alloc.size())return fail("Origin outside allocation","BUFFER_OUT_OF_RANGE");
