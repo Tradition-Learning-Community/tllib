@@ -27,7 +27,10 @@ jobs:
       - name: Validate value, Result error, enums, NumPy no-copy and callbacks; measure calls/RSS
         run: PYTHONPATH=build/spike python spikes/binders/smoke.py
       - uses: actions/upload-artifact@v4
+        if: always()
+        continue-on-error: true
         with:
+          if-no-files-found: warn
           name: tllib-binder-spike-linux-py312
           path: |
             spikes/binders/build-results.json
