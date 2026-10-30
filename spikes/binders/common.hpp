@@ -10,6 +10,7 @@ struct Value {
   explicit Value(std::string input):text(std::move(input)){}
 };
 enum class State { ready, blocked };
+inline std::string state_name(State s) {return s==State::ready?"ready":"blocked";}
 inline std::string canonical(std::string input) {
   auto parsed=tllib::core::FeatureId::parse(input);
   if(!parsed)throw std::invalid_argument("INVALID_IDENTIFIER");
