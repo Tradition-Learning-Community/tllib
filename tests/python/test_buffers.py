@@ -4,7 +4,7 @@ import gc
 import unittest
 import weakref
 
-from tllib import BufferInfo, TllibError, inspect_buffer
+from tllib import BufferInfo, TllibError, inspect_buffer, _native
 
 
 class BufferTests(unittest.TestCase):
@@ -19,7 +19,8 @@ class BufferTests(unittest.TestCase):
         self.assertEqual(metadata.layout, "row_major")
         self.assertFalse(metadata.readonly)
         self.assertTrue(metadata.zero_copy)
-        self.assertEqual(metadata.address, values.buffer_info()[0])
+        self.assertTrue(_native.same_buffer_start(values, memoryview(values)))
+        self.assertFalse(hasattr(metadata, 'address'))
         self.assertEqual(list(values), [7, 11, -2])
 
     def test_structured_rejection_of_unsafe_objects(self):
@@ -42,7 +43,7 @@ class BufferTests(unittest.TestCase):
         info = inspect_buffer(value)
         self.assertEqual(info.shape, (2, 3))
         self.assertEqual(info.strides, (12, 4))
-        self.assertEqual(info.address, value.__array_interface__["data"][0])
+        self.assertTrue(_native.same_buffer_start(value, memoryview(value)))
         self.assertTrue(info.zero_copy)
         value.flags.writeable = False
         self.assertTrue(inspect_buffer(value).readonly)
@@ -50,7 +51,7 @@ class BufferTests(unittest.TestCase):
         column = inspect_buffer(other)
         self.assertEqual(column.layout, "column_major")
         self.assertEqual(column.strides, (8, 16))
-        self.assertEqual(column.address, other.__array_interface__["data"][0])
+        self.assertTrue(_native.same_buffer_start(other, memoryview(other)))
         with self.assertRaises(TllibError) as sliced:
             inspect_buffer(other[:, ::2])
         self.assertEqual(sliced.exception.code, "NON_CONTIGUOUS_BUFFER")
