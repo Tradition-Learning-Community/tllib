@@ -58,14 +58,14 @@ doivent pas dégrader silencieusement des valeurs.
 
 ## Choix du binder : décision exécutée sur spike (#256)
 
-**nanobind est candidat de référence** à soumettre au spike #256 ;
-**pybind11 est le comparateur obligatoire**. Le verdict final exige
-un prototype à surface identique : value object, `Result/Error`,
-arrays/strides/lifetime, callbacks providers, exceptions, typing,
-build size/time, import, calls, free-threading et wheels. Résultats
-reproductibles sur les plateformes promises ; corriger les bugs de
-lifetime avant toute décision. Le choix est documenté dans ADR-004.
-Aucun faux benchmark ni adoption définitive sans ce test.
+**nanobind est retenu pour les nouvelles surfaces de bindings C++20/Python**,
+après le spike #256 (PR #276) et la comparaison pybind11 sur la même
+surface : types valeur, `Result/Error`, enum, tableaux NumPy sans copie,
+callbacks et mesures reproductibles. Le pont provider CPython natif existant
+est **conservé** : ses GIL, callbacks et durées de vie sont déjà éprouvés.
+Les mesures Linux/CPython 3.12, limites, compromis et conditions de
+réévaluation figurent dans [ADR-004](../adr/ADR-004-python-bindings.md).
+Aucune performance universelle ni compatibilité Windows/macOS n'est promise.
 
 `scikit-build-core` pilote CMake pour les wheels natives depuis la PR #275. Un consommateur C++ ne doit jamais importer Python.
 Ne pas annoncer free-threaded ni stable ABI (abi3/abi3t) avant essais
