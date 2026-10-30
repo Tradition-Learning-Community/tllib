@@ -50,7 +50,7 @@ def compare(reference: dict, candidate: dict, ref_lock: dict, cand_lock: dict,
         changes.append({"kind": kind, "id": identity, "field": field,
                         "reference": before, "candidate": after,
                         "impact": impact})
-    for key in ("model_version", "catalog_schema_version", "catalog_sha256"):
+    for key in ("commit", "model_version", "catalog_schema_version", "catalog_sha256"):
         if ref_lock[key] != cand_lock[key]:
             add("snapshot", "catalog", key, ref_lock[key], cand_lock[key],
                 "manual_review_required")
