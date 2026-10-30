@@ -4,11 +4,11 @@
 
 **Licence : [Apache-2.0](LICENSE)** · **[Gouvernance](GOVERNANCE.md)** · **[Contributions](CONTRIBUTING.md)** · **[DCO](DCO)** · **[Sécurité](SECURITY.md)**
 
-> **État actuel : pré-implémentation V1.**
+> **État actuel : fondations techniques de préparation V1.**
 >
-> L'architecture est définie et le backlog est réaligné. L'ancien prototype
-> Python-first a été retiré afin qu'il ne soit pas confondu avec l'architecture
-> V1. Le runtime C++/API Python n'est pas encore implémenté.
+> Le runtime structurel C++20, les providers et l'API Python commune existent.
+> Les packages CMake et wheel locale sont vérifiés sur Linux.
+> **Les algorithmes des 36 domaines TLC-FC ne sont pas encore implémentés.**
 
 ## Projet communautaire
 
@@ -60,11 +60,14 @@ Les issues préparatoires ne sont pas terminées par une simple décision
 documentaire ; leur clôture est conditionnée à leurs propres preuves.
 Voir [plan du backlog](docs/v1/ISSUE-PLAN.md).
 
-## Pourquoi le dépôt contient peu de code actuellement
+## Fondations techniques disponibles
 
-Le premier squelette suivait une hypothèse Python-first remplacée.
-Il a été retiré pour éviter deux architectures concurrentes ; l'historique
-Git conserve ce travail. Le premier squelette natif minimal (CMake/C++20/CTest et export CMake)
-a été fusionné par PR #266 ; la véritable API C++, le runtime,
-le runtime provider natif et le pont Python des providers ont ensuite été livrés.\nLes types, le packaging et les tests de parité structurelle sont disponibles\n(voir PR #274–#277 et les ADR). Les fonctionnalités scientifiques restent à implémenter.
-Voir [le smoke test de fondation](docs/v1/FOUNDATION-BUILD-SMOKE.md).
+Le squelette C++20/CTest et l'export CMake ont été livrés depuis la PR #266 ;
+les contrats structurels, le runtime providers, le pont CPython, les données
+natives CPU, les wheels Python, le spike des binders et les tests de parité
+structurelle ont ensuite été ajoutés (PR #270–#277).
+Voir [la documentation du build](docs/v1/FOUNDATION-BUILD-SMOKE.md),
+[ADR-004](docs/adr/ADR-004-python-bindings.md) et
+[le packaging Python](docs/v1/PYTHON-WHEEL-PACKAGING.md).
+
+Ce sont des **fondations préparatoires** et non des implémentations scientifiques.
