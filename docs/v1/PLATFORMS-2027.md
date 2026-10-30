@@ -1,56 +1,39 @@
-# V1 — Politique de support plateformes (cible 2027)
+# V1 — Official platform qualification and future targets (#260)
 
-Statut : **matrice cible à valider par builds natifs et wheels** ; elle ne
-constitue pas une déclaration de support déjà testé. Références :
-#260, #246, #243, #11, #14, ADR-002, ADR-008 et ADR-009.
+**Policy in force 2026-10-30.** A platform is promoted only when an
+actual build, test run, CMake external-consumer install and native Python
+wheel import have passed on its OS/architecture/interpreter. A GitHub
+runner is **evidence for its tested image**, not proof of a minimum compiler
+version or all future releases. `tllib` is at pre-1.0 foundation stage,
+not a scientific V1 release.
 
-## Cible par niveau
-
-| Niveau | Plateforme / architecture | Outil principal | Artefact |
+| Level now | Environment | C++ / Python | Evidence and limits |
 | --- | --- | --- | --- |
-| Tier 1 visé | Linux glibc x86-64 | GCC 13+ et Clang 17+ | bibliothèque C++ + wheels |
-| Tier 1 visé | Windows x86-64 | MSVC VS 2022 17.8+ (19.38+) | bibliothèque C++ + wheels |
-| Tier 1 visé | macOS arm64 | AppleClang 15+ | bibliothèque C++ + wheels |
-| Tier 2 candidat | Linux aarch64 | GCC 13+ / Clang 17+ | build et wheels si validés |
-| Tier 2 candidat | macOS x86-64 | AppleClang 15+ | build si support runner disponible |
-| Expérimental | Windows arm64, musl, GPU et autres CPU | sélection explicite | aucune promesse |
+| **Tier 1 foundation** | Linux Ubuntu 24.04 x86-64 | runner GCC C++20, CPython 3.12 | Existing native CTest, external CMake consumer, wheel and provider/buffer/parity tests successful in PR #274–#279; exact toolchain emitted by future CI jobs |
+| **Candidate only; NOT qualified** | Windows x86-64 | VS 2022 MSVC, CPython 3.12–3.14 | No native tests/wheel proof |
+| **Candidate only; NOT qualified** | macOS arm64 | AppleClang, CPython 3.12–3.14 | No native tests/wheel proof |
+| **Candidate only; NOT qualified** | Linux aarch64, macOS x86-64 | GCC/Clang or AppleClang | No native tests/wheel proof |
+| **Experimental, no support** | musl, Windows arm64, GPU, CPython free-threaded, PyPy, abi3/abi3t | To be individually qualified | Unsupported |
 
-Les minima sont des **bornes de conception proposées**. Chaque triplet
-plateforme/compilateur/architecture n'obtient Tier 1 qu'après passage de
-tests C++ installés, conformité, sécurité applicable et installation réelle
-du package Python. Ne pas déduire un support d'un simple `configure`.
-Aucune hypothèse d'ABI inter-compilateur C++.
+No tested minimum C++ compiler version is inferred from an `ubuntu-latest`
+image. Target minima GCC 13+, Clang 17+, VS 2022 17.8+, AppleClang 15+
+are **design candidates** until native/packaging tests qualify them.
 
-## Python
+The wheel currently declares `requires-python >=3.12,<3.13`; a later
+Python interpreter is NOT implicitly supported by its upstream release.
+The general C++ bridge can compile under other environments, but that
+is not wheel support. For future V1 release, qualify CPython 3.13 and
+3.14, Windows and macOS before promotion. EOL interpreters are not
+promoted by inertia. `abi3`, `abi3t`, subinterpreters and free-threading
+remain experimental.
 
-CPython **3.12, 3.13 et 3.14** : cibles Tier 1 prévues sur les plateformes
-Tier 1 lorsque l'écosystème de bindings/roues est effectivement testé.
-CPython **3.15** (stable depuis octobre 2026) : **candidat prioritaire**
-à qualifier et promouvoir en Tier 1 dès tests du binder, des dépendances
-et des roues ; sa disponibilité en amont n'est pas une preuve de support.
-3.11 : aucune promesse initiale de roues V1, car fin de vie prévue
-octobre 2027. Python 3.10 et versions antérieures : hors support V1.
+**CI scope:** PR fast Linux x86-64; native CMake consumer and ASan/UBSan
+when code changes; Python wheel on same Tier 1 foundation;
+pinned specs validation on tooling changes. No expensive Cartesian
+matrix per PR. Nightly / release expansion belongs to #243/#11 and
+cannot claim results not observed.
 
-CPython free-threaded (3.13t et ultérieurs) : **expérimental**, désactivé
-en release normale jusqu'à tests de concurrence, callbacks et ownership.
-`abi3` et `abi3t` : fonctionnalités optionnelles à évaluer, jamais
-promesses implicites. PyPy et autres implémentations : non supportées V1.
-
-## Révision et sortie du support
-
-- Pas de versions EOL dans la matrice de release sans exception datée,
-  motivée et publiée.
-- Une nouvelle version Python est évaluée dès sa release stable, puis
-  explicitement ajoutée seulement après les tests ; ne pas annoncer
-  automatiquement le support.
-- Chaque retrait de plateforme, d'architecture ou de version Python
-  suit #14 : dépréciation/migration et note de release.
-- CI PR : une petite combinaison représentative ; branche principale :
-  couverture Tier 1 proportionnée ; release : **tous** les artefacts promis.
-- Les runners CI, versions des toolchains et image de base sont enregistrés
-  dans les preuves de release et les attestions ; versions verrouillées
-  à la granularité réellement nécessaire.
-
-Sources de veille : https://devguide.python.org/versions/ ,
-https://peps.python.org/pep-0790/ ,
-https://gcc.gnu.org/projects/cxx-status.html .
+**Change control:** New tiers require published compilation, CTest,
+consumer install, wheel import, callback/lifetime tests, platform
+versions, ABI boundaries and release note via ADR-009/#14. Retiring
+support requires a dated deprecation and migration guide.
