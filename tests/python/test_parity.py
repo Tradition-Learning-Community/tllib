@@ -92,6 +92,13 @@ class IdentityParity(unittest.TestCase):
         self.assertIsNone(error.exception.feature_id)
         self.assertIsNone(error.exception.specs_provenance)
         self.assertEqual(error.exception.context,{})
+        with self.assertRaises(AttributeError):
+            error.exception.code="SILENTLY_MUTATED"
+        with self.assertRaises(AttributeError):
+            error.exception.category="silent"
+        with self.assertRaises(AttributeError):
+            del error.exception.code
+
 
 
 if __name__=="__main__":
