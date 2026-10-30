@@ -43,9 +43,7 @@ class WorkflowScopeTests(unittest.TestCase):
             triggered_by("tools/specs_pipeline.py"),
             ["pinned-specs.yml", "quality.yml"],
         )
-        self.assertEqual(
-            triggered_by("generated/specs/feature_index.json"), ["pinned-specs.yml"]
-        )
+        self.assertEqual(triggered_by("generated/specs/feature_index.json"), ["pinned-specs.yml"])
 
     def test_editing_workflow_triggers_its_own_check(self) -> None:
         for name in (
