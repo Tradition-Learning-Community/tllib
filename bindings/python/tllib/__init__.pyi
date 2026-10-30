@@ -39,6 +39,19 @@ class ProviderResponse:
     output_contract: str
     payload: bytes
 
+@dataclass(frozen=True)
+class BufferInfo:
+    dtype: str
+    shape: tuple[int, ...]
+    strides: tuple[int, ...]
+    layout: str
+    readonly: bool
+    address: int
+    nbytes: int
+    zero_copy: bool
+
+def inspect_buffer(value: object) -> BufferInfo: ...
+
 class CancellationSource:
     def __init__(self) -> None: ...
     def request_stop(self) -> bool: ...
