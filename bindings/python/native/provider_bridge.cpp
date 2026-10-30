@@ -1,5 +1,6 @@
 #define PY_SSIZE_T_CLEAN
 #include <Python.h>
+#include "python_version.hpp"
 #include <tllib/providers/provider.hpp>
 #include <tllib/runtime/execution_context.hpp>
 #include <chrono>
