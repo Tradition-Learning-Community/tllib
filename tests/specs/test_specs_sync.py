@@ -26,6 +26,15 @@ class SnapshotDiffTests(unittest.TestCase):
         self.assertEqual(sync.markdown(first), sync.markdown(first))
         self.assertEqual(json.dumps(first, sort_keys=True), json.dumps(first, sort_keys=True))
 
+    def test_provenance_commit_mismatch_is_never_silent(self):
+        index = {"domains": {}, "features": {}, "shared": {}}
+        candidate = dict(LOCK, commit="c" * 40)
+        report = sync.compare(index, index, LOCK, candidate, {}, {})
+        self.assertEqual(report["status"], "review_required")
+        self.assertEqual(report["changes"][0]["field"], "commit")
+        self.assertEqual(report["changes"][0]["impact"], "manual_review_required")
+        self.assertFalse(report["lock_update_permitted_automatically"])
+
     def test_additions_and_removals_never_imply_execution(self):
         added = self.inventory({"domains": {"new": {"feature_count": 1}},
                                 "features": {FID: {"statuses": {"execution": "executable"}}},
