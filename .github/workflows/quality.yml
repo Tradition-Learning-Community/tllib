@@ -50,6 +50,8 @@ jobs:
           clang-tidy-18 --version
       - name: Lint touched Python and format touched C++ lines without mass rewrite
         run: python3 tools/quality_check.py --base HEAD^
+      - name: Check impact-aware quality scope with synthetic Git changes
+        run: python3 -m unittest discover -s tests/quality -p 'test_*.py' -v
       - name: Analyze existing real C++ translation unit
         run: |
           cmake -S . -B build/quality -DBUILD_TESTING=ON -DCMAKE_EXPORT_COMPILE_COMMANDS=ON
