@@ -39,6 +39,8 @@ jobs:
           cd "$RUNNER_TEMP"
           "$RUNNER_TEMP/tllib-clean/bin/python" -c "import tllib, importlib.metadata; assert tllib.__version__ == importlib.metadata.version('tllib') == '0.1.0'; assert tllib.ProviderRegistry and tllib._native.native_version() == tllib.__version__"
           "$RUNNER_TEMP/tllib-clean/bin/python" -m unittest discover -s "$GITHUB_WORKSPACE/tests/python" -p 'test_provider_bridge.py' -v
+          "$RUNNER_TEMP/tllib-clean/bin/python" -m pip install "numpy>=1.26"
+          "$RUNNER_TEMP/tllib-clean/bin/python" -m unittest discover -s "$GITHUB_WORKSPACE/tests/python" -p 'test_buffers.py' -v
       - name: Editable development installation
         shell: bash
         run: |
