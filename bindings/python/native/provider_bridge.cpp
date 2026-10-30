@@ -217,10 +217,21 @@ PyObject* set_error(const Error& error){
   }
   PyObject* feature=error.feature_id?PyUnicode_FromString(error.feature_id->c_str()):Py_NewRef(Py_None);
   PyObject* provenance=error.provenance?PyUnicode_FromString(error.provenance->c_str()):Py_NewRef(Py_None);
-  const bool ok=attr("code",PyUnicode_FromString(code.c_str()))&&
-    attr("feature_id",feature)&&attr("specs_provenance",provenance)&&
-    attr("context",ctx)&&attr("category",PyUnicode_FromString(category));
-  if(!ok){Py_DECREF(instance);return nullptr;}
+  PyObject* fields[]={
+    PyUnicode_FromString(code.c_str()),
+    feature,
+    provenance,
+    ctx,
+    PyUnicode_FromString(category)
+  };
+  const char* names[]={"code","feature_id","specs_provenance","context","category"};
+  for(std::size_t i=0;i<5;++i){
+    if(!attr(names[i],fields[i])){
+      for(std::size_t j=i+1;j<5;++j)Py_XDECREF(fields[j]);
+      Py_DECREF(instance);
+      return nullptr;
+    }
+  }
   PyErr_SetObject(target,instance);
   Py_DECREF(instance);
   return nullptr;
