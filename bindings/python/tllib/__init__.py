@@ -14,6 +14,29 @@ from . import _native
 TllibError = _native.TllibError
 __version__: str = _native.native_version()
 
+# Native errors are constructed with one assignment per structured field.
+# Once set by C++, publicly documented fields cannot be reassigned or deleted.
+_READONLY_ERROR_FIELDS = frozenset(
+    ("code", "category", "feature_id", "specs_provenance", "context")
+)
+
+
+def _set_error_attribute(self: TllibError, name: str, value: object) -> None:
+    if name in _READONLY_ERROR_FIELDS and name in vars(self):
+        raise AttributeError(f"{name} is a read-only tllib error attribute")
+    BaseException.__setattr__(self, name, value)
+
+
+def _del_error_attribute(self: TllibError, name: str) -> None:
+    if name in _READONLY_ERROR_FIELDS and name in vars(self):
+        raise AttributeError(f"{name} is a read-only tllib error attribute")
+    BaseException.__delattr__(self, name)
+
+
+TllibError.__setattr__ = _set_error_attribute
+TllibError.__delattr__ = _del_error_attribute
+
+
 
 ValidationError = _native.ValidationError
 FeatureUnavailableError = _native.FeatureUnavailableError
