@@ -1,12 +1,16 @@
 """C++/Python structural parity: same machine-readable manifest and native results."""
+import ast
 import json
 import os
 from pathlib import Path
 import subprocess
 import unittest
 
+import tllib
 from tllib import (
     DomainId, ExecutionStatus, FeatureId, TllibError, ValidationError,
+    ProviderRequiredError, ProviderExecutionError, IncompatibleSpecsError,
+    CancelledError, IndeterminateOutcomeError,
     parse_execution_status,
 )
 
@@ -42,6 +46,27 @@ class IdentityParity(unittest.TestCase):
                 py=python_outcome(case)
                 self.assertEqual(cpp,case["expected"])
                 self.assertEqual(py,cpp)
+
+    def test_public_stubs_match_exported_symbols(self):
+        stub_path=Path(tllib.__file__).with_name("__init__.pyi")
+        self.assertTrue(stub_path.is_file(),"PEP 561 typing must ship in wheel and CMake build")
+        self.assertTrue(stub_path.with_name("py.typed").is_file())
+        tree=ast.parse(stub_path.read_text(encoding="utf-8"))
+        declared=set()
+        for node in tree.body:
+            if isinstance(node,(ast.ClassDef,ast.FunctionDef)):
+                declared.add(node.name)
+            elif isinstance(node,ast.AnnAssign) and isinstance(node.target,ast.Name):
+                declared.add(node.target.id)
+        for name in tllib.__all__:
+            with self.subTest(public=name):
+                self.assertTrue(hasattr(tllib,name))
+                self.assertIn(name,declared)
+        self.assertTrue(issubclass(ProviderRequiredError,TllibError))
+        self.assertTrue(issubclass(ProviderExecutionError,TllibError))
+        self.assertTrue(issubclass(IncompatibleSpecsError,TllibError))
+        self.assertTrue(issubclass(CancelledError,TllibError))
+        self.assertTrue(issubclass(IndeterminateOutcomeError,TllibError))
 
     def test_structural_types_are_immutable_hashable(self):
         feature=FeatureId("TLC-FC-00-MASTER-005")
