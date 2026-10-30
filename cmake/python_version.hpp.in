@@ -1,0 +1,2 @@
+#pragma once
+#define TLLIB_PACKAGE_VERSION "@PROJECT_VERSION@"
