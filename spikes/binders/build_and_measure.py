@@ -13,6 +13,7 @@ data = {
     "python": sys.version,
     "nanobind": importlib.metadata.version("nanobind"),
     "pybind11": importlib.metadata.version("pybind11"),
+    "numpy": importlib.metadata.version("numpy"),
     "cmake": subprocess.check_output(["cmake", "--version"], text=True).splitlines()[0],
     "single_trial_not_a_cross_platform_benchmark": True,
     "builds": {},
