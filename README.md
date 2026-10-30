@@ -66,5 +66,5 @@ Le premier squelette suivait une hypothèse Python-first remplacée.
 Il a été retiré pour éviter deux architectures concurrentes ; l'historique
 Git conserve ce travail. Le premier squelette natif minimal (CMake/C++20/CTest et export CMake)
 a été fusionné par PR #266 ; la véritable API C++, le runtime,
-les providers et les bindings Python restent à implémenter.
+le runtime provider natif et le pont Python des providers ont ensuite été livrés.\nLes types, le packaging et les tests de parité structurelle sont disponibles\n(voir PR #274–#277 et les ADR). Les fonctionnalités scientifiques restent à implémenter.
 Voir [le smoke test de fondation](docs/v1/FOUNDATION-BUILD-SMOKE.md).
