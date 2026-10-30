@@ -46,6 +46,33 @@ class SnapshotDiffTests(unittest.TestCase):
                             LOCK, LOCK, {}, {})
         self.assertEqual(gone["changes"][0]["impact"], "breaking_or_removal")
 
+    def test_acceptance_change_requires_explicit_human_review(self):
+        index = {"domains": {}, "features": {FID: {}}, "shared": {}}
+        path = "handoff/features/" + FID + "/acceptance.json"
+        key = "feature:" + FID + "/acceptance.json"
+        old_file = {key: {"kind": "feature", "identity": FID, "path": path, "sha256": "a" * 64}}
+        new_file = {key: {"kind": "feature", "identity": FID, "path": path, "sha256": "b" * 64}}
+        report = sync.compare(index, index, LOCK, LOCK, old_file, new_file)
+        self.assertEqual(report["status"], "review_required")
+        self.assertFalse(report["compatible"])
+        self.assertFalse(report["lock_update_permitted_automatically"])
+        self.assertEqual(report["changes"][0]["id"], FID)
+        self.assertEqual(report["changes"][0]["field"], path)
+        self.assertEqual(report["changes"][0]["impact"], "manual_review_required")
+        self.assertIn("scientific/compatibility review", report["migration_plan"][0]["action"])
+
+    def test_shared_contract_artifact_modification_is_not_automatically_compatible(self):
+        index = {"domains": {}, "features": {}, "shared": {"TLC-HC-EXAMPLE": {}}}
+        path = "handoff/shared/TLC-HC-EXAMPLE/contract.json"
+        key = "shared:TLC-HC-EXAMPLE/contract.json"
+        first = {key: {"kind": "shared", "identity": "TLC-HC-EXAMPLE",
+                       "path": path, "sha256": "a" * 64}}
+        second = {key: {"kind": "shared", "identity": "TLC-HC-EXAMPLE",
+                        "path": path, "sha256": "c" * 64}}
+        report = sync.compare(index, index, LOCK, LOCK, first, second)
+        self.assertEqual(report["status"], "review_required")
+        self.assertEqual(report["changes"][0]["impact"], "manual_review_required")
+
     def test_status_contract_acceptance_versions_and_provenance(self):
         old = {"domains": {}, "shared": {}, "features": {
             FID: {"statuses": {"execution": "structural_only"}, "package_version": "1.0.0"}}}
