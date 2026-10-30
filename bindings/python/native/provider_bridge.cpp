@@ -337,6 +337,7 @@ PyObject* guarded(NativeEntry entry,PyObject* self,PyObject* args){
     return nullptr;
   }
 }
+PyObject* inspect_buffer(PyObject*,PyObject*);
 PyObject* safe_create_registry(PyObject* self,PyObject* args){return guarded(create_registry,self,args);}
 PyObject* safe_invoke(PyObject* self,PyObject* args){return guarded(invoke,self,args);}
 PyObject* safe_new_source(PyObject* self,PyObject* args){return guarded(new_source,self,args);}
