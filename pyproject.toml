@@ -17,7 +17,7 @@ classifiers = [
 ]
 [tool.scikit-build]
 cmake.version = ">=3.27"
-wheel.packages = []
+wheel.packages = ["bindings/python/tllib"]
 sdist.include = ["CMakeLists.txt", "cmake/**", "include/**", "bindings/**", "README.md", "LICENSE", "NOTICE"]
 
 [tool.scikit-build.cmake.define]
