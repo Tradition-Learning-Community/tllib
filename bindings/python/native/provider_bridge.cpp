@@ -338,11 +338,13 @@ PyObject* guarded(NativeEntry entry,PyObject* self,PyObject* args){
   }
 }
 PyObject* inspect_buffer(PyObject*,PyObject*);
+PyObject* same_buffer_start(PyObject*,PyObject*);
 PyObject* safe_create_registry(PyObject* self,PyObject* args){return guarded(create_registry,self,args);}
 PyObject* safe_invoke(PyObject* self,PyObject* args){return guarded(invoke,self,args);}
 PyObject* safe_new_source(PyObject* self,PyObject* args){return guarded(new_source,self,args);}
 PyObject* safe_request_stop(PyObject* self,PyObject* args){return guarded(request_stop,self,args);}
 PyObject* safe_inspect_buffer(PyObject* self,PyObject* args){return guarded(inspect_buffer,self,args);}
+PyObject* safe_same_buffer_start(PyObject* self,PyObject* args){return guarded(same_buffer_start,self,args);}
 PyObject* native_version(PyObject*,PyObject*){return PyUnicode_FromString(TLLIB_PACKAGE_VERSION);}
 
 struct BufferLease final {
@@ -428,21 +430,35 @@ PyObject* inspect_buffer(PyObject*,PyObject* args) {
   };
   const char* layout=checked.value_if()->layout()==tllib::core::Layout::row_major?"row_major":
     checked.value_if()->layout()==tllib::core::Layout::column_major?"column_major":"strided";
+  const auto put_owned=[&](const char* key,PyObject*& value)->bool {
+    PyObject* owned=std::exchange(value,nullptr);
+    return put(key,owned);
+  };
   const bool ok=put("dtype",PyUnicode_FromString(dtype_name)) &&
-    put("shape",dimensions) && put("strides",steps) &&
+    put_owned("shape",dimensions) && put_owned("strides",steps) &&
     put("layout",PyUnicode_FromString(layout)) &&
     put("readonly",PyBool_FromLong(b.readonly)) &&
-    put("address",PyLong_FromUnsignedLongLong(static_cast<unsigned long long>(
-      reinterpret_cast<std::uintptr_t>(b.buf)))) &&
     put("nbytes",PyLong_FromSize_t(nbytes)) &&
     put("zero_copy",PyBool_FromLong(1));
-  if(!ok){Py_DECREF(result);return nullptr;}
+  if(!ok){Py_XDECREF(dimensions);Py_XDECREF(steps);Py_DECREF(result);return nullptr;}
   return result;
 }
 
+// Tests whether two Python exporters currently reference the same first byte,
+// without ever exposing a native process address to Python callers.
+PyObject* same_buffer_start(PyObject*,PyObject* args){
+  PyObject *a=nullptr,*b=nullptr;
+  if(!PyArg_ParseTuple(args,"OO",&a,&b))return nullptr;
+  BufferLease left(a),right(b);
+  if(!left.held || !right.held){PyErr_Clear();return set_error(Error{
+    tllib::core::ErrorCode::invalid_argument,"Object does not export a buffer",{},{},{},"NOT_A_BUFFER"});}
+  if(left.buffer.buf==right.buffer.buf)Py_RETURN_TRUE;
+  Py_RETURN_FALSE;
+}
 
 PyMethodDef methods[]={
   {"inspect_buffer",safe_inspect_buffer,METH_VARARGS,"Inspect a borrowed contiguous numeric buffer; no copy."},
+  {"same_buffer_start",safe_same_buffer_start,METH_VARARGS,"Diagnostic pointer equality without exposing addresses."},
   {"native_version",native_version,METH_NOARGS,"Version of the compiled C++ package."},
   {"create_provider_registry",safe_create_registry,METH_VARARGS,"Freeze explicit native provider registrations."},
   {"invoke_provider",safe_invoke,METH_VARARGS,"Invoke native provider with structured errors."},
