@@ -2,6 +2,11 @@
 #include <Python.h>
 #include "python_version.hpp"
 #include <tllib/providers/provider.hpp>
+#include <tllib/core/array_view.hpp>
+#include <array>
+#include <cstdint>
+#include <limits>
+#include <span>
 #include <tllib/runtime/execution_context.hpp>
 #include <chrono>
 #include <memory>
@@ -336,8 +341,107 @@ PyObject* safe_create_registry(PyObject* self,PyObject* args){return guarded(cre
 PyObject* safe_invoke(PyObject* self,PyObject* args){return guarded(invoke,self,args);}
 PyObject* safe_new_source(PyObject* self,PyObject* args){return guarded(new_source,self,args);}
 PyObject* safe_request_stop(PyObject* self,PyObject* args){return guarded(request_stop,self,args);}
+PyObject* safe_inspect_buffer(PyObject* self,PyObject* args){return guarded(inspect_buffer,self,args);}
 PyObject* native_version(PyObject*,PyObject*){return PyUnicode_FromString(TLLIB_PACKAGE_VERSION);}
+
+struct BufferLease final {
+  Py_buffer buffer{};
+  bool held=false;
+  explicit BufferLease(PyObject* source) {
+    held=PyObject_GetBuffer(source,&buffer,PyBUF_FORMAT|PyBUF_STRIDES)==0;
+  }
+  ~BufferLease(){if(held)PyBuffer_Release(&buffer);}
+  BufferLease(const BufferLease&)=delete;
+  BufferLease& operator=(const BufferLease&)=delete;
+};
+
+// Only borrows a numeric Python buffer during this synchronous call.
+// No pointer or ArrayView survives the PyBuffer_Release at function exit.
+PyObject* inspect_buffer(PyObject*,PyObject* args) {
+  PyObject* source=nullptr;
+  if(!PyArg_ParseTuple(args,"O",&source))return nullptr;
+  BufferLease lease(source);
+  const auto fail=[](const char* message,const char* code)->PyObject* {
+    return set_error(Error{tllib::core::ErrorCode::invalid_argument,message,{},{},{},code});
+  };
+  if(!lease.held) {PyErr_Clear();return fail("Object does not export a buffer","NOT_A_BUFFER");}
+  const auto& b=lease.buffer;
+  if(b.ndim<1 || b.ndim>2 || !b.shape)
+    return fail("Only 1D/2D numeric buffers are supported","INVALID_SHAPE");
+  if(b.len<0 || b.itemsize<=0)
+    return fail("Invalid buffer size","INVALID_BUFFER");
+  if(PyBuffer_IsContiguous(&lease.buffer,'A')!=1)
+    return fail("Buffer is not contiguous; explicit user copy is required","NON_CONTIGUOUS_BUFFER");
+  tllib::core::DType dtype{};
+  const std::string_view format=b.format?b.format:"";
+  const char* dtype_name=nullptr;
+  if((format=="i" || format=="@i" || format=="=i") && b.itemsize==4) {
+    dtype=tllib::core::DType::int32;dtype_name="int32";
+  }else if((format=="d" || format=="@d" || format=="=d") && b.itemsize==8) {
+    dtype=tllib::core::DType::float64;dtype_name="float64";
+  }else return fail("Unsupported or non-native numeric buffer dtype","UNSUPPORTED_DTYPE");
+  std::array<std::size_t,2> shape{};
+  std::array<std::ptrdiff_t,2> strides{};
+  for(int i=0;i<b.ndim;++i){
+    if(b.shape[i]<0)return fail("Negative dimension","INVALID_SHAPE");
+    shape[static_cast<std::size_t>(i)]=static_cast<std::size_t>(b.shape[i]);
+    if(b.strides)strides[static_cast<std::size_t>(i)]=static_cast<std::ptrdiff_t>(b.strides[i]);
+  }
+  if(!b.strides){
+    std::size_t next=static_cast<std::size_t>(b.itemsize);
+    for(int i=b.ndim-1;i>=0;--i) {
+      if(next>static_cast<std::size_t>(std::numeric_limits<std::ptrdiff_t>::max()))
+        return fail("Implicit stride overflow","SHAPE_OVERFLOW");
+      strides[static_cast<std::size_t>(i)]=static_cast<std::ptrdiff_t>(next);
+      if(shape[static_cast<std::size_t>(i)]>0 &&
+         next>std::numeric_limits<std::size_t>::max()/shape[static_cast<std::size_t>(i)])
+        return fail("Implicit stride overflow","SHAPE_OVERFLOW");
+      next*=shape[static_cast<std::size_t>(i)];
+    }
+  }
+  const std::size_t rank=static_cast<std::size_t>(b.ndim);
+  const std::size_t nbytes=static_cast<std::size_t>(b.len);
+  tllib::core::Result<tllib::core::ArrayView> checked =
+      b.readonly ? tllib::core::ArrayView::create(
+        std::span<const std::byte>(reinterpret_cast<const std::byte*>(b.buf),nbytes),
+        0,dtype,std::span(shape.data(),rank),std::span(strides.data(),rank))
+      : tllib::core::ArrayView::create_mutable(
+        std::span<std::byte>(reinterpret_cast<std::byte*>(b.buf),nbytes),
+        0,dtype,std::span(shape.data(),rank),std::span(strides.data(),rank));
+  if(!checked)return set_error(*checked.error_if());
+  PyObject* dimensions=PyTuple_New(b.ndim);
+  PyObject* steps=PyTuple_New(b.ndim);
+  if(!dimensions || !steps){Py_XDECREF(dimensions);Py_XDECREF(steps);return nullptr;}
+  for(int i=0;i<b.ndim;++i){
+    PyObject* dim=PyLong_FromSize_t(shape[static_cast<std::size_t>(i)]);
+    PyObject* step=PyLong_FromLongLong(static_cast<long long>(strides[static_cast<std::size_t>(i)]));
+    if(!dim || !step){Py_XDECREF(dim);Py_XDECREF(step);Py_DECREF(dimensions);Py_DECREF(steps);return nullptr;}
+    PyTuple_SET_ITEM(dimensions,i,dim);PyTuple_SET_ITEM(steps,i,step);
+  }
+  PyObject* result=PyDict_New();
+  if(!result){Py_DECREF(dimensions);Py_DECREF(steps);return nullptr;}
+  const auto put=[&](const char* key,PyObject* value)->bool {
+    if(!value)return false;
+    const int rc=PyDict_SetItemString(result,key,value);
+    Py_DECREF(value);return rc==0;
+  };
+  const char* layout=checked.value_if()->layout()==tllib::core::Layout::row_major?"row_major":
+    checked.value_if()->layout()==tllib::core::Layout::column_major?"column_major":"strided";
+  const bool ok=put("dtype",PyUnicode_FromString(dtype_name)) &&
+    put("shape",dimensions) && put("strides",steps) &&
+    put("layout",PyUnicode_FromString(layout)) &&
+    put("readonly",PyBool_FromLong(b.readonly)) &&
+    put("address",PyLong_FromUnsignedLongLong(static_cast<unsigned long long>(
+      reinterpret_cast<std::uintptr_t>(b.buf)))) &&
+    put("nbytes",PyLong_FromSize_t(nbytes)) &&
+    put("zero_copy",PyBool_FromLong(1));
+  if(!ok){Py_DECREF(result);return nullptr;}
+  return result;
+}
+
+
 PyMethodDef methods[]={
+  {"inspect_buffer",safe_inspect_buffer,METH_VARARGS,"Inspect a borrowed contiguous numeric buffer; no copy."},
   {"native_version",native_version,METH_NOARGS,"Version of the compiled C++ package."},
   {"create_provider_registry",safe_create_registry,METH_VARARGS,"Freeze explicit native provider registrations."},
   {"invoke_provider",safe_invoke,METH_VARARGS,"Invoke native provider with structured errors."},
