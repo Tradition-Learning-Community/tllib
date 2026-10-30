@@ -254,6 +254,25 @@ class SyntheticCase(unittest.TestCase):
         self.check_error("UNKNOWN_DOMAIN",
                          lambda: pipeline.validate_catalog(lock, handoff, altered))
 
+    def test_oversize_utf8_and_duplicate_feature_rejected(self):
+        root = pipeline.Handoff(self.specs)
+        huge = self.specs / "handoff/oversized.json"
+        huge.write_bytes(b"X" * 256)
+        self.check_error("FILE_TOO_LARGE",
+                         lambda: root.bytes("handoff/oversized.json", limit=64))
+        self.check_error("INVALID_JSON",
+                         lambda: pipeline.parse_json(b'{"name":"\\xff"}', "invalid-utf8"))
+        lock, handoff, catalog = pipeline.verify_lock(self.lock_path, self.specs)
+        altered = json.loads(json.dumps(catalog))
+        altered["features"].append(dict(altered["features"][0]))
+        self.check_error("INVALID_FEATURE_ID",
+                         lambda: pipeline.validate_catalog(lock, handoff, altered))
+        altered = json.loads(json.dumps(catalog))
+        altered["features"][0]["descriptor_sha256"] = "invalid hash"
+        self.check_error("INVALID_HASH",
+                         lambda: pipeline.validate_catalog(lock, handoff, altered))
+        huge.unlink()
+
     def test_reject_duplicate_json_and_deep_nesting(self):
         self.check_error("INVALID_JSON", lambda: pipeline.parse_json(b'{"a":1,"a":2}', "duplicate"))
         self.check_error("INVALID_JSON", lambda: pipeline.parse_json(b'{"a":NaN}', "non-finite"))
