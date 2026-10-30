@@ -46,7 +46,6 @@ class BufferInfo:
     strides: tuple[int, ...]
     layout: str
     readonly: bool
-    address: int
     nbytes: int
     zero_copy: bool
 
