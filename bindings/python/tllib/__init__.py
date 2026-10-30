@@ -11,6 +11,7 @@ from typing import Callable, Iterable, TypeAlias
 from . import _native
 
 TllibError = _native.TllibError
+__version__: str = _native.native_version()
 
 ProviderCallback: TypeAlias = Callable[[str, str, bytes, str, str], tuple[str, bytes]]
 PayloadValidator: TypeAlias = Callable[[bytes], bool]
@@ -143,4 +144,5 @@ __all__ = [
     "ProviderRequest",
     "ProviderResponse",
     "TllibError",
+    "__version__",
 ]

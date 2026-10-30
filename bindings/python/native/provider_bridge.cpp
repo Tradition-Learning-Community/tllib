@@ -335,7 +335,9 @@ PyObject* safe_create_registry(PyObject* self,PyObject* args){return guarded(cre
 PyObject* safe_invoke(PyObject* self,PyObject* args){return guarded(invoke,self,args);}
 PyObject* safe_new_source(PyObject* self,PyObject* args){return guarded(new_source,self,args);}
 PyObject* safe_request_stop(PyObject* self,PyObject* args){return guarded(request_stop,self,args);}
+PyObject* native_version(PyObject*,PyObject*){return PyUnicode_FromString(TLLIB_PACKAGE_VERSION);}
 PyMethodDef methods[]={
+  {"native_version",native_version,METH_NOARGS,"Version of the compiled C++ package."},
   {"create_provider_registry",safe_create_registry,METH_VARARGS,"Freeze explicit native provider registrations."},
   {"invoke_provider",safe_invoke,METH_VARARGS,"Invoke native provider with structured errors."},
   {"new_cancellation_source",safe_new_source,METH_NOARGS,"Create cooperative cancellation source."},

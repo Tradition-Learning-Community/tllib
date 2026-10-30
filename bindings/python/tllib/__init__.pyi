@@ -1,7 +1,12 @@
 from typing import Callable, Iterable, TypeAlias
 from dataclasses import dataclass
 
-TllibError: type[Exception]
+__version__: str
+class TllibError(Exception):
+    code: str
+    feature_id: str | None
+    specs_provenance: str | None
+    context: dict[str, str]
 ProviderCallback: TypeAlias = Callable[[str, str, bytes, str, str], tuple[str, bytes]]
 PayloadValidator: TypeAlias = Callable[[bytes], bool]
 
