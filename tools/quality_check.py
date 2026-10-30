@@ -4,6 +4,7 @@
 Requires clang-format and ruff on PATH. New Python files are fully formatted;
 edited existing Python files are linted, C++ changed lines are clang-formatted.
 """
+
 from __future__ import annotations
 
 import argparse
@@ -78,9 +79,7 @@ def main(argv: list[str] | None = None) -> int:
         else:
             ranges = changed_lines(root, args.base, path)
             if ranges:
-                failed |= not invoke(
-                    ["clang-format", "--dry-run", "--Werror", *ranges, str(full)]
-                )
+                failed |= not invoke(["clang-format", "--dry-run", "--Werror", *ranges, str(full)])
     print(f"quality: {len(files)} source files checked; failed={failed}")
     return 1 if failed else 0
 
