@@ -32,6 +32,7 @@ int main(){
   assert(!a.value_if()->byte_offset(badidx));
   const std::array<std::size_t,2> huge{std::numeric_limits<std::size_t>::max(),2};
   assert(!ArrayView::create(bytes,0,DType::float64,huge,row));
+  assert(!ArrayView::create(bytes,0,static_cast<DType>(200),shape,row));
   const std::array<std::size_t,2> badshape{3,3};
   assert(!ArrayView::create(bytes,0,DType::float64,badshape,row));
   const std::array<std::size_t,1> one{6};
