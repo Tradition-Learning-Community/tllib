@@ -58,6 +58,34 @@ class ProviderResponse:
     payload: bytes
 
 
+
+@dataclass(frozen=True)
+class BufferInfo:
+    """Metadata observed while a Python exporter was held through Py_buffer.
+
+    The diagnostic address never extends the exporter lifetime and must not be
+    dereferenced after the call; no persistent native view is returned.
+    """
+
+    dtype: str
+    shape: tuple[int, ...]
+    strides: tuple[int, ...]
+    layout: str
+    readonly: bool
+    address: int
+    nbytes: int
+    zero_copy: bool
+
+
+def inspect_buffer(value: object) -> BufferInfo:
+    """Inspect a CPU contiguous int32/float64 exporter with no data copy.
+
+    A non-contiguous, non-native-endian, unsupported dtype or unsafe layout is
+    rejected with a structured TllibError. Create an explicit copy yourself if
+    the original representation is not compatible.
+    """
+    return BufferInfo(**_native.inspect_buffer(value))
+
 class CancellationSource:
     """Explicit C++ stop source; safe to request cancellation from another thread."""
 
@@ -136,6 +164,8 @@ class ProviderRegistry:
 
 
 __all__ = [
+    "BufferInfo",
+    "inspect_buffer",
     "CancellationSource",
     "PayloadValidator",
     "ProviderCallback",
