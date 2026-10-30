@@ -262,6 +262,7 @@ class SyntheticCase(unittest.TestCase):
                          lambda: root.bytes("handoff/oversized.json", limit=64))
         self.check_error("INVALID_JSON",
                          lambda: pipeline.parse_json(b'{"name":"\\xff"}', "invalid-utf8"))
+        huge.unlink()
         lock, handoff, catalog = pipeline.verify_lock(self.lock_path, self.specs)
         altered = json.loads(json.dumps(catalog))
         altered["features"].append(dict(altered["features"][0]))
@@ -271,7 +272,6 @@ class SyntheticCase(unittest.TestCase):
         altered["features"][0]["descriptor_sha256"] = "invalid hash"
         self.check_error("INVALID_HASH",
                          lambda: pipeline.validate_catalog(lock, handoff, altered))
-        huge.unlink()
 
     def test_reject_duplicate_json_and_deep_nesting(self):
         self.check_error("INVALID_JSON", lambda: pipeline.parse_json(b'{"a":1,"a":2}', "duplicate"))
