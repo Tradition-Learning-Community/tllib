@@ -1,3 +1,5 @@
+Voir les [parcours contributeurs](../docs/v1/CONTRIBUTOR-QUICKSTART.md) et [règles de revue/fusion](../docs/v1/REVIEW-AND-MERGE.md). Remplir les champs **seulement s'ils sont applicables** : pour une correction documentaire, marquer « sans objet » pour les TLC-FC, la parité et les performances.
+
 ## Licence et provenance
 
 - [ ] Je soumets ma contribution sous la licence Apache-2.0 de `tllib` et respecte les licences des tiers.
@@ -8,7 +10,7 @@ Références : [LICENSE](../LICENSE) · [DCO](../DCO) · [GOVERNANCE](../GOVERNA
 
 ## Issue autoritaire et périmètre
 
-Closes # (uniquement si les critères sont tous réellement satisfaits)
+Issue concernée : # (ne renseigner `Closes #` que si **tous** les critères sont effectivement satisfaits)
 Depends on #
 Dépôt d'autorité : tllib pour code/outillage ; tllib-specs pour science
 
@@ -49,6 +51,13 @@ Dépôt d'autorité : tllib pour code/outillage ; tllib-specs pour science
 - Parité C++/Python si applicable :
 - Artefact externe installé si packaging :
 - Limites et tests non réalisés :
+
+## Relectures attendues
+
+- Relecteur technique / surface :
+- Revue architecture requise ? (API commune, ABI, providers, modèle mémoire) :
+- Revue scientifique requise ? (TLC-FC et acceptations publiées) :
+- Checks effectivement déclenchés et contrôles manuels pour docs-only :
 
 ## Blockers et revue
 
