@@ -1,7 +1,7 @@
 name: "Tâche logicielle V1"
 description: "Tâche autonome d'implémentation, outillage ou QA sous l'autorité de tllib"
 title: "[Task V1] "
-labels: []
+labels: ["type:task"]
 body:
   - type: markdown
     attributes:
