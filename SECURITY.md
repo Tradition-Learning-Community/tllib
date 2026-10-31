@@ -1,7 +1,8 @@
 # Security policy — tllib
 
-tllib is in pre-implementation V1 and does not yet distribute a
-production C++ runtime or Python wheel. Security reports remain
+tllib is preparing the scientific V1 release. A local CPython 3.12 wheel and
+installable C++20 foundation have been CI-tested on Linux x86-64, but **no
+scientific V1 release or production distribution is published**. Security reports remain
 important for future native memory safety, bindings, providers,
 serialization, specification ingestion and supply-chain integrity.
 
