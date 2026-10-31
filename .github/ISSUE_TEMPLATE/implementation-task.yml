@@ -1,7 +1,7 @@
 name: "Tâche logicielle V1"
 description: "Tâche autonome d'implémentation, outillage ou QA sous l'autorité de tllib"
 title: "[Task V1] "
-labels: []
+labels: ["type:task"]
 body:
   - type: markdown
     attributes:
@@ -9,11 +9,11 @@ body:
   - type: input
     id: parent
     attributes:
-      label: "Epic / dépendances"
-      description: "Numéros d'issues liés et ordre logique"
+      label: "Epic / dépendances (si applicables)"
+      description: "Numéros d'issues liés et ordre logique ; non applicable si tâche indépendante"
       placeholder: "#52, dépend de #..."
     validations:
-      required: true
+      required: false
   - type: textarea
     id: scope
     attributes:
@@ -25,9 +25,9 @@ body:
     id: normative
     attributes:
       label: "Provenance specs et TLC-FC (si applicables)"
-      description: "SHA complet tllib-specs, IDs et contract/acceptance ; sinon expliquer non applicable"
+      description: "SHA complet tllib-specs, IDs et contract/acceptance ; laisser vide pour docs, build ou bug non normatif"
     validations:
-      required: true
+      required: false
   - type: textarea
     id: acceptance
     attributes:

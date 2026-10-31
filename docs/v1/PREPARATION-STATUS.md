@@ -1,4 +1,7 @@
-# V1 — Registre des décisions et des preuves attendues
+# V1 — Registre historique des décisions et preuves attendues
+
+> **ARCHIVE DE PRÉPARATION** : ce registre décrit les critères formulés avant la livraison des phases A et B. Plusieurs issues listées ci-dessous ont été **fermées depuis** avec preuves (PR #270–#282) ; leurs statuts/risques ici ne sont donc **pas l'état GitHub actuel**. Pour l'état vérifié du 31 octobre 2026, utiliser [l'audit de phase C](PHASE-C-AUDIT-2026-10-31.md), [les parcours actuels](CONTRIBUTOR-QUICKSTART.md) et [la gouvernance appliquée](READINESS-AND-GOVERNANCE.md).
+
 
 Ce tableau distingue **politique proposée** de **livraison vérifiée**.
 Une PR documentaire n'accomplit pas les gates de build et de test.
