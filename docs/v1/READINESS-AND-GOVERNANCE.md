@@ -1,6 +1,6 @@
 # V1 — Gouvernance des issues et ouverture aux contributeurs
 
-Statut : **politique proposée pour revue** (PR de préparation, sans implémentation).
+Statut : **politique de gouvernance des contributions V1**, avec application initiale des labels de type/aire en phase C. Les milestones, protections et qualifications scientifiques individuelles sont des gates distincts encore à vérifier. Voir [l'audit du 31 octobre 2026](PHASE-C-AUDIT-2026-10-31.md).
 Autorité de gouvernance du projet : **Tradition Learning Community ASBL** (voir `GOVERNANCE.md`). tllib reste autoritaire pour le logiciel, tllib-specs pour les décisions scientifiques. Contributions sous Apache-2.0 avec DCO 1.1, droits des auteurs préservés (voir `LICENSE`, `NOTICE`, `DCO`).
 Le document ne prétend pas que les gates techniques ont déjà été exécutés.
 
@@ -16,14 +16,18 @@ une issue en cours peut retirer ces deux labels sans signifier « terminé ».
 
 Des labels sont **des états administratifs**, jamais une preuve de conformité ;
 les labels ne doivent pas être créés dans tllib-specs pour des tâches logicielles.
-Milestone recommandé : `V1 — preparation` pour les décisions/fondations
-et `V1 — implementation` pour domaines/lots, sous réserve de disponibilité
-de milestones dans GitHub. Les epics regroupent les issues, pas de travail
+Milestones cibles : `V1 — Preparation` (fondations et gouvernance),
+`V1 — Implementation` (36 domaines, 178 lots TLC-FC et performance) et
+`V1 — Release` (livrables de publication). Les noms doivent être alignés
+sur les milestones GitHub existants ; à la date de l'audit, **aucune**
+issue ouverte n'a de milestone, et le classement ne doit pas être déclaré
+terminé sans application effective. Ne pas inventer une dépendance globale
+à une release complète pour ouvrir un lot. Les epics regroupent les issues, pas de travail
 en doublon.
 
 ## Licence et contribution
 
-L'association détient la responsabilité du projet et de ses publications. Elle n'acquiert pas automatiquement les droits d'auteur de toutes les contributions ; toute cession exige un accord distinct. Le prérequis de publication d'une licence valide est suivi par #263. Avant de marquer une contribution externe prête, `LICENSE`, `NOTICE`, `DCO`, `GOVERNANCE.md` doivent être intégrés sur `main`. Ce préalable juridique est **distinct** des gates de CMake, des labels et de conformité scientifique.
+L'association détient la responsabilité du projet et de ses publications. Elle n'acquiert pas automatiquement les droits d'auteur de toutes les contributions ; toute cession exige un accord distinct. Le prérequis de publication de la licence est **terminé** : #263, PR #264. `LICENSE`, `NOTICE`, `DCO` et `GOVERNANCE.md` sont intégrés à `main`. Ce préalable juridique est **distinct** des gates de CMake, des labels et de conformité scientifique.
 
 ## Contrat d'une issue prête
 
@@ -85,3 +89,9 @@ Changements normatifs scientifiques exclusivement dans tllib-specs avec
 revue scientifique et republication. Les décisions techniques sont
 versionnées par ADR et revue d'architecture, pas inventées dans une PR
 de domaine.
+
+## État et preuve d'application (31 octobre 2026)
+
+Au début de la phase C, l'audit GitHub a recensé 225 issues ouvertes : 36 epics domaine, 178 lots, cinq epics techniques/produit, cinq tâches transversales et un blocker scientifique. La clôture justifiée des quatre epics de préparation #234, #236, #240 et #242 ramène ensuite le backlog à 221 issues ouvertes ; l'epic produit #52 reste ouvert. Toutes ont un type et au moins une aire ; **aucun** lot n'a reçu `status:ready` sans revue de sa mini-matrice. Seuls #231 et #177 portent `status:blocked` (blocage scientifique limité à TLC-FC-30-EXPANSION-014). Les milestones **ne sont pas encore appliqués** ; le gate d'acceptation de #261 reste donc ouvert. Voir [audit détaillé](PHASE-C-AUDIT-2026-10-31.md), [parcours contributeurs](CONTRIBUTOR-QUICKSTART.md) et [revue/fusion](REVIEW-AND-MERGE.md).
+
+**Décision de triage :** la fermeture d'une fondation commune ne constitue pas, à elle seule, une preuve que les entrées/sorties, acceptations et providers de chaque TLC-FC sont prêts. Documenter des critères ciblés d'acceptation par lot avant toute application de `status:ready`. Les issues sans statut restent à qualifier, pas bloquées par défaut.

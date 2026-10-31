@@ -14,9 +14,9 @@
 
 `tllib` est en **phase pré-implémentation V1**. Ne démarrer aucun domaine
 sans issue autonome `status:ready` et toutes les dépendances satisfaites.
-Les politiques de préparation sont proposées à l'adoption :
+Les règles de sélection d'une tâche, les preuves requises et les limites de support sont expliquées dans :
 [registre](docs/v1/PREPARATION-STATUS.md) et
-[gouvernance](docs/v1/READINESS-AND-GOVERNANCE.md).
+[gouvernance](docs/v1/READINESS-AND-GOVERNANCE.md), [parcours concrets](docs/v1/CONTRIBUTOR-QUICKSTART.md) et [revue/fusion](docs/v1/REVIEW-AND-MERGE.md).
 
 ## Respect et coopération
 
@@ -68,14 +68,14 @@ Une PR de domaine ne peut introduire ni politique d'architecture locale,
 ni tolérance numérique arbitraire, ni fallback provider, ni moteur
 scientifique Python alternatif.
 
-## Exécuter les tests
+## Exécuter les tests et installer les fondations
 
-Le **socle de build C++20** et son test CTest sont disponibles (PR #266).
-Depuis un checkout propre avec CMake >= 3.27, Ninja et GCC/Clang
-ou compilateur supportant C++20 : `cmake --preset dev`,
-`cmake --build --preset dev`, `ctest --preset dev`.
-Un exemple de consommateur installé figure dans
-[FOUNDATION-BUILD-SMOKE](docs/v1/FOUNDATION-BUILD-SMOKE.md).
-Il ne démontre **pas** l'implémentation du runtime, des domaines ou
-des bindings Python, et les wheels restent inexistantes.
-L'ensemble des contrôles supplémentaires (#249/#257/#243) reste ouvert.
+Les commandes de clone, build C++20, consommateur CMake installé, wheel Python native, typing, tests de parité, tooling/specgen et contrôle de conformité sont regroupées dans le [guide des parcours contributeurs](docs/v1/CONTRIBUTOR-QUICKSTART.md) ; les règles de [revue et fusion](docs/v1/REVIEW-AND-MERGE.md) sont communes.
+
+**Environnement qualifié actuellement** : Ubuntu 24.04 x86-64, C++20 et CPython 3.12. CMake >= 3.27 ; le preset `dev` requiert Ninja. Le paquet Python `tllib` (version de préparation `0.1.0`) est installable depuis une wheel CMake locale et par installation editable ; il ne s'agit **pas** d'une release scientifique V1 ni d'une wheel distribuée sur PyPI. Les autres plateformes ne sont pas présumées supportées.
+
+La CI de fondation effectue effectivement build C++/CTest, consommateur CMake externe, module CPython et parité structurelle, wheel/install propre, tests négatifs des specs, qualité et sanitizers sur les chemins modifiés. L'outil `tools/specs_pipeline.py` exige un checkout `tllib-specs` **exactement verrouillé** ; la conformité des 694 TLC-FC n'est pas acquise : 693 sont non implémentées et une feature reste bloquée par les specs. Les tests doivent être adaptés au changement ; les PR uniquement documentaires ne prétendent pas avoir exécuté CMake.
+
+Les issues de domaine et lots restent à **qualifier individuellement** via `status:ready` : aucune décision d'architecture générale ne doit être laissée aux contributeurs. Les contributions documentation/QA/tooling peuvent être proposées sans travail C++ pour des tâches suffisamment autonomes et testables.
+
+Pour signaler un problème logiciel indépendant, utiliser le formulaire **Défaut logiciel tllib**. Les questions normatives relèvent uniquement de `tllib-specs`.

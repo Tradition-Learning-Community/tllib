@@ -31,9 +31,10 @@ Les documents autoritaires sur l'architecture déjà acceptée sont :
 - `docs/v1/ARCHITECTURE.md` et `docs/v1/PRODUCT-CONTRACT.md` ;
 - `docs/adr/`.
 
-Les politiques de préparation **proposées à l'adoption**, qui ne prétendent
-pas avoir livré les tests/builds requis, sont :
+Les politiques et preuves de préparation, à lire avec leurs limites techniques explicites, sont :
 - [État et preuves des préparations](docs/v1/PREPARATION-STATUS.md) ;
+- [Parcours de contribution (C++, Python, tooling, docs/QA)](docs/v1/CONTRIBUTOR-QUICKSTART.md) ;
+- [Revue et fusion](docs/v1/REVIEW-AND-MERGE.md) ;
 - [Gouvernance et statut ready](docs/v1/READINESS-AND-GOVERNANCE.md) ;
 - [Matrice plateformes cible 2027](docs/v1/PLATFORMS-2027.md) ;
 - [Dépendances, build, export CMake](docs/v1/DEPENDENCIES-BUILD-POLICY.md) ;
@@ -56,6 +57,8 @@ Principes principaux :
 
 Epic principal : #52. Fondations : #234 à #244.
 Les 36 issues domaine et leurs 178 lots TLC-FC restent les unités de réalisation.
+La classification des issues est un outil de triage : seul le label `status:ready`
+signifie qu'une tâche autonome a satisfait toutes les conditions publiées.
 Les issues préparatoires ne sont pas terminées par une simple décision
 documentaire ; leur clôture est conditionnée à leurs propres preuves.
 Voir [plan du backlog](docs/v1/ISSUE-PLAN.md).

@@ -1,7 +1,7 @@
 name: "Blocage d'implémentation dû aux specs"
 description: "Créer un lien ciblé vers la question scientifique autoritaire dans tllib-specs"
 title: "[Blocker specs] "
-labels: []
+labels: ["type:blocker", "area:specs", "status:blocked"]
 body:
   - type: markdown
     attributes:

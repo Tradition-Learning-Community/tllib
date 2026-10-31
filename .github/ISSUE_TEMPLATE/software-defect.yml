@@ -1,7 +1,7 @@
 name: "Défaut logiciel tllib"
 description: "Signaler un bug logiciel, documentaire, de build ou d'outil dans tllib sans issue parent préalable"
 title: "[Bug] "
-labels: []
+labels: ["type:task"]
 body:
   - type: markdown
     attributes:
@@ -24,9 +24,9 @@ body:
     id: reproduce
     attributes:
       label: "Reproduction minimale"
-      description: "Étapes, commande, entrée non sensible et sortie observée"
+      description: "Étapes, commande, entrée non sensible et sortie observée ; facultatif pour erreur documentaire ou lien cassé"
     validations:
-      required: true
+      required: false
   - type: input
     id: version
     attributes:
