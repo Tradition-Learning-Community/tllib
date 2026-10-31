@@ -32,6 +32,10 @@ Chaque lot doit être qualifié selon les contrats **réellement utilisés** : t
 
 L'issue [tllib-specs#231](https://github.com/Tradition-Learning-Community/tllib-specs/issues/231) reste **ouverte** et concerne `TLC-FC-30-EXPANSION-014`. Le blocker d'implémentation [#231](https://github.com/Tradition-Learning-Community/tllib/issues/231) et le lot [#177](https://github.com/Tradition-Learning-Community/tllib/issues/177) restent donc bloqués pour cette fonctionnalité. Ni le domaine #40 ni les 35 autres domaines ne sont globalement bloqués par cette seule question.
 
+### Clôtures préparatoires effectuées pendant la phase C
+
+Après vérification de leurs dépendances et preuves natives/CI, les epics **#234 (fondation)**, **#236 (arrays)**, **#240 (specs)** et **#242 (Python)** ont été fermés avec le motif `completed` et une note de clôture justifiée dans leur body. L'état final à ce point est **221 issues ouvertes et 38 fermées** (36 domaines, 178 lots, epic produit #52, tâches #10/#11/#12/#51/#261, blocker #231). Le tableau précédent conserve l'**état initial** mesuré ; il ne doit pas être relu comme une mesure après clôture. Aucune issue scientifique de domaine ou de lot n'a été fermée.
+
 ## 2. Fondations : états vérifiables, sans fausse couverture
 
 | Capability | État et preuve |
