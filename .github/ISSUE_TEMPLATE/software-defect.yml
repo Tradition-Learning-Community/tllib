@@ -1,7 +1,7 @@
 name: "Défaut logiciel tllib"
 description: "Signaler un bug logiciel, documentaire, de build ou d'outil dans tllib sans issue parent préalable"
 title: "[Bug] "
-labels: []
+labels: ["type:task"]
 body:
   - type: markdown
     attributes:
