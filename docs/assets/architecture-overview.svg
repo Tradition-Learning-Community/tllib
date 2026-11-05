@@ -23,8 +23,8 @@
 <text x="717" y="290" fill="#4B716B" font-family="Arial,Helvetica,sans-serif" font-size="16">Registry, dispatch, contexte</text>
 <text x="717" y="312" fill="#4B716B" font-family="Arial,Helvetica,sans-serif" font-size="16">et capacités explicites</text>
 <path d="M564 278H636" stroke="#92A6BB" stroke-width="2" stroke-dasharray="5 5"/>
-<path d="M336 336V365M863 336V365M863 365H767M336 365H600V395M767 365V395" fill="none" stroke="#6388AF" stroke-width="2.5" stroke-linecap="round"/>
-<path d="m329 353 7 11 7-11m431 31 7 11 7-11" stroke="#6388AF" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+<path d="M336 336V391M863 336V391" fill="none" stroke="#6388AF" stroke-width="2.5" stroke-linecap="round"/>
+<path d="m329 379 7 11 7-11m520 0 7 11 7-11" stroke="#6388AF" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
 <g filter="url(#s)"><rect x="109" y="393" width="455" height="84" rx="16" fill="#E8F0FB" stroke="#C6D8EF"/><rect x="636" y="393" width="455" height="84" rx="16" fill="#E3F5EF" stroke="#B8E0D6"/></g>
 <text x="139" y="426" fill="#25538A" font-family="Arial,Helvetica,sans-serif" font-size="14" font-weight="700" letter-spacing="1">UTILISATION NATIVE</text>
 <text x="139" y="455" fill="#142B4B" font-family="Arial,Helvetica,sans-serif" font-size="24" font-weight="700">Applications C++</text>
