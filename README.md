@@ -1,76 +1,77 @@
-# tllib
+# tllib — Tradition Learning Library
 
-**tllib** est la bibliothèque logicielle scientifique open source de **Tradition Learning**, portée, maintenue et gouvernée par **Tradition Learning Community ASBL**.
+**Bibliothèque scientifique open source de Tradition Learning**, développée par [Tradition Learning Community ASBL](GOVERNANCE.md). Le produit vise une **API C++20 native** et une **API Python de première classe**, toutes deux alimentées par le même moteur scientifique.
 
-**Licence : [Apache-2.0](LICENSE)** · **[Gouvernance](GOVERNANCE.md)** · **[Contributions](CONTRIBUTING.md)** · **[DCO](DCO)** · **[Sécurité](SECURITY.md)**
+[![License: Apache-2.0](https://img.shields.io/badge/license-Apache--2.0-blue.svg)](LICENSE) [![C++20](https://img.shields.io/badge/core-C%2B%2B20-blue.svg)](docs/v1/ARCHITECTURE.md) [![Python](https://img.shields.io/badge/API-Python-blue.svg)](docs/v1/CONTRIBUTOR-QUICKSTART.md) [![Status](https://img.shields.io/badge/status-V1%20implementation%20pending-orange.svg)](docs/v1/COMPONENTS-AND-CONTRIBUTION.md)
 
-> **État actuel : fondations techniques de préparation V1.**
->
-> Le runtime structurel C++20, les providers et l'API Python commune existent.
-> Les packages CMake et wheel locale sont vérifiés sur Linux.
-> **Les algorithmes des 36 domaines TLC-FC ne sont pas encore implémentés.**
+> **État vérifié au 31 octobre 2026 :** les fondations C++20, runtime/providers, pont Python et packaging de qualification existent ; **les fonctionnalités scientifiques des 36 domaines restent à implémenter et à valider**. Les résultats de conformité et les artefacts V1 finaux ne sont **pas** encore acquis. Ce README décrit le travail à venir, pas une release publiée.
 
-## Projet communautaire
+## 👥 Deux façons de développer avec tllib
 
-Les scientifiques, mathématiciens, ingénieurs et développeurs peuvent contribuer sous les règles de [CONTRIBUTING.md](CONTRIBUTING.md). L'ASBL administre le projet et coordonne les versions ; chaque auteur conserve les droits sur sa contribution sauf cession écrite distincte. Le dépôt est sous Apache-2.0, qui ne transfère pas automatiquement le copyright des contributeurs. Voir [NOTICE](NOTICE) et [GOVERNANCE.md](GOVERNANCE.md). Aucun CLA ni transfert général de droits n'est exigé ; les contributions utilisent le [DCO 1.1](DCO).
+| Vous êtes… | Votre objectif | Commencer ici |
+| --- | --- | --- |
+| **Utilisateur / bénéficiaire** | Utiliser la bibliothèque depuis une application C++ ou Python, sans maintenir son moteur | [État du produit et installation de développement](docs/v1/CONTRIBUTOR-QUICKSTART.md), [contrat produit](docs/v1/PRODUCT-CONTRACT.md) |
+| **Auteur / contributeur** | Construire le noyau, les interfaces, les tests, les performances et la distribution de tllib | [Carte des 8 composants](docs/v1/COMPONENTS-AND-CONTRIBUTION.md), [guide de contribution](CONTRIBUTING.md), [issues](../../issues) |
 
-## Autorité des dépôts
+**Pas besoin de connaître à la fois C++ et Python pour contribuer.** Chaque tâche doit indiquer ses interfaces, dépendances, tests et compétences utiles.
 
-- **tllib-specs** : science, mathématiques, contrats, acceptations, statuts,
-  traçabilité et publication normative.
-- **tllib** : architecture, runtime, API C++/Python, conformité, packaging,
-  documentation et release.
+## 🧩 Les huit composants de contribution
 
-Une ambiguïté scientifique découverte pendant l'implémentation est bloquée et
-renvoyée vers `tllib-specs`. `tllib` ne complète jamais une spécification par
-invention locale.
+| Composant | Responsabilité | Compétences utiles |
+| --- | --- | --- |
+| **1. Core C++20** | Algorithmes TL, modèles, structures et **API C++ publique** | C++20, algorithmique |
+| **2. Runtime & Providers** | Registry, dispatch, contexte d'exécution, providers explicites | C++, systèmes |
+| **3. Python API & Bindings** | Façade Python, nanobind pour nouvelles surfaces, typage, parité | Python ; C++ pour certains bindings |
+| **4. Data & Interoperability** | Vues mémoire, buffers, NumPy, DLPack si justifié | Python, C++, calcul scientifique |
+| **5. Scientific Conformance** | Vérification des contrats verrouillés, acceptations, preuves | Python, tests, science |
+| **6. Performance & Optimization** | Benchmarks, profiling, coût des bindings, optimisations mesurées | C++, HPC, performance |
+| **7. Build, CI & Distribution** | CMake, tests automatisés, wheels, packaging, releases | CMake, DevOps, Python |
+| **8. Developer Experience & Documentation** | Guides contributeurs et utilisateurs, exemples, documentation des API | Rédaction, Python, C++, QA |
 
-## Architecture V1
+Ces composants sont des **responsabilités**, pas huit dépôts, huit moteurs ou huit nouvelles hiérarchies d'issues. Ils se partagent les mêmes contrats et le même backlog.
 
-Les documents autoritaires sur l'architecture déjà acceptée sont :
-- `docs/v1/ARCHITECTURE.md` et `docs/v1/PRODUCT-CONTRACT.md` ;
-- `docs/adr/`.
+```mermaid
+flowchart TB
+  S["📜 Snapshot scientifique verrouillé<br/>tllib-specs — lecture seule pour les auteurs tllib"]
+  C["⚙️ Core C++20 et API C++"]
+  R["🧭 Runtime & Providers"]
+  P["🐍 Bindings et API Python"]
+  U1["👨‍💻 Applications C++"]
+  U2["👩‍💻 Applications Python"]
+  S -->|"contrats / acceptations"| C
+  S -->|"statuts / providers"| R
+  C <--> R
+  C --> U1
+  R --> P
+  C --> P
+  P --> U2
+  X["🔬 Conformance · Data/Interop · Performance<br/>Build/CI/Distribution · Documentation"] -.-> C
+  X -.-> R
+  X -.-> P
+```
 
-Les politiques et preuves de préparation, à lire avec leurs limites techniques explicites, sont :
-- [État et preuves des préparations](docs/v1/PREPARATION-STATUS.md) ;
-- [Parcours de contribution (C++, Python, tooling, docs/QA)](docs/v1/CONTRIBUTOR-QUICKSTART.md) ;
-- [Revue et fusion](docs/v1/REVIEW-AND-MERGE.md) ;
-- [Gouvernance et statut ready](docs/v1/READINESS-AND-GOVERNANCE.md) ;
-- [Matrice plateformes cible 2027](docs/v1/PLATFORMS-2027.md) ;
-- [Dépendances, build, export CMake](docs/v1/DEPENDENCIES-BUILD-POLICY.md) ;
-- [Arrays, calcul et exactitude numérique](docs/v1/ARRAYS-NUMERICS-CONTRACT.md) ;
-- [Concurrence, bindings et Python](docs/v1/CONCURRENCY-PYTHON-API.md) ;
-- [Snapshot, lock et conformité](docs/v1/SPECS-LOCK-AND-CONFORMANCE.md) ;
-- [Sécurité, qualité et compatibilité](docs/v1/SECURITY-QUALITY-COMPATIBILITY.md).
+Voir le [guide des composants](docs/v1/COMPONENTS-AND-CONTRIBUTION.md) pour les frontières, dossiers, missions autonomes et critères de validation.
 
-Principes principaux :
-- runtime de référence en C++20 ;
-- API C++ publique ;
-- API Python de première classe sur le même runtime ;
-- Python pour tooling, génération, conformité, tests et prototypes ;
-- pas de second moteur scientifique Python concurrent ;
-- réutilisation des briques matures (NumPy, DLPack, BLAS/LAPACK lorsque
-  **justifiés par des besoins prouvés**) ;
-- V1 couvre le snapshot complet de `tllib-specs`, pas une release par domaine.
+## 🗺️ Où se trouve le travail ?
 
-## Backlog V1
+- **[#52 — V1](../../issues/52)** : coordination produit et critères de release ; **[#15–#50](../../issues?q=is%3Aissue+is%3Aopen+label%3Atype%3Adomain)** : 36 epics de domaines.
+- **[#53–#230](../../issues?q=is%3Aissue+is%3Aopen+label%3Atype%3Atlc-fc)** : 178 lots de réalisation couvrant 694 identifiants TLC-FC, sans redécoupage scientifique.
+- **[#10](../../issues/10)** documentation, **[#11](../../issues/11)** release, **[#12](../../issues/12)** performances : travaux transversaux V1 encore ouverts.
+- **[#231](../../issues/231)** : une ambiguïté normative **ciblée** affecte TLC-FC-30-EXPANSION-014 (dans #177) ; elle ne bloque pas les autres lots.
 
-Epic principal : #52. Fondations : #234 à #244.
-Les 36 issues domaine et leurs 178 lots TLC-FC restent les unités de réalisation.
-La classification des issues est un outil de triage : seul le label `status:ready`
-signifie qu'une tâche autonome a satisfait toutes les conditions publiées.
-Les issues préparatoires ne sont pas terminées par une simple décision
-documentaire ; leur clôture est conditionnée à leurs propres preuves.
-Voir [plan du backlog](docs/v1/ISSUE-PLAN.md).
+**Comprendre les statuts :** une issue ouverte n'est pas nécessairement prête ; `status:ready` n'est ajouté **qu'après qualification de cette tâche**, et ne prouve pas qu'elle est terminée. L'absence de ce label ne doit pas déclencher un audit global : on qualifie les unités choisies avant de les implémenter. Les cases `[ ]` d'acceptation se cochent avec des preuves, pas avec une décision documentaire. Voir [politique de triage](docs/v1/READINESS-AND-GOVERNANCE.md).
 
-## Fondations techniques disponibles
+## 🚀 Premiers pas pour les auteurs
 
-Le squelette C++20/CTest et l'export CMake ont été livrés depuis la PR #266 ;
-les contrats structurels, le runtime providers, le pont CPython, les données
-natives CPU, les wheels Python, le spike des binders et les tests de parité
-structurelle ont ensuite été ajoutés (PR #270–#277).
-Voir [la documentation du build](docs/v1/FOUNDATION-BUILD-SMOKE.md),
-[ADR-004](docs/adr/ADR-004-python-bindings.md) et
-[le packaging Python](docs/v1/PYTHON-WHEEL-PACKAGING.md).
+1. Choisir son [composant et un parcours adapté](docs/v1/COMPONENTS-AND-CONTRIBUTION.md) : Python seul, C++, qualité, documentation, optimisation…
+2. Ouvrir une [issue ciblée](../../issues) et vérifier son objectif, son périmètre et ses dépendances.
+3. Suivre les [commandes de build/tests](docs/v1/CONTRIBUTOR-QUICKSTART.md) **applicables à son composant**.
+4. Proposer une PR signée DCO, associée à l'issue, avec les tests effectivement exécutés et les critères d'acceptation démontrés.
 
-Ce sont des **fondations préparatoires** et non des implémentations scientifiques.
+## 🔒 Autorité scientifique et exigences
+
+Le dépôt **tllib-specs** reste l'autorité **normative**, avec un snapshot épinglé dans [`specs.lock.json`](specs.lock.json). **Nous ne le modifions pas dans ce chantier.** `tllib` implémente les décisions publiées ; il ne fabrique ni formule manquante, ni valeur arbitraire, ni moteur scientifique Python concurrent. En présence d'une ambiguïté, seul le comportement concerné reste bloqué.
+
+L'architecture acceptée est documentée dans [ARCHITECTURE.md](docs/v1/ARCHITECTURE.md), [PRODUCT-CONTRACT.md](docs/v1/PRODUCT-CONTRACT.md) et [les ADR](docs/adr/). La V1 ne sera déclarée livrée qu'après le [release gate](docs/v1/DEFINITION-OF-DONE.md).
+
+**Projet et participation :** [CONTRIBUTING](CONTRIBUTING.md) · [GOVERNANCE](GOVERNANCE.md) · [LICENSE Apache-2.0](LICENSE) · [NOTICE](NOTICE) · [DCO](DCO) · [SECURITY](SECURITY.md). Les auteurs conservent leurs droits sauf accord écrit distinct.
