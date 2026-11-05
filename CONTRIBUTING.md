@@ -27,6 +27,10 @@ Contributions publiques courtoises, critiques techniques argumentées, aucune at
 
 Le formulaire **Défaut logiciel tllib** permet de signaler un bogue autonome dans ce dépôt, sans epic ou issue parent. Pour un problème scientifique normatif, utiliser les formulaires de `tllib-specs`. Une vulnérabilité exploitable est signalée selon [SECURITY.md](SECURITY.md), pas en issue publique.
 
+## Classer les issues
+
+Les issues distinguent **le type** (`type:*`), **le composant technique** (`component:*`), **la surface concernée** (`area:*`) et **la disponibilité prouvée** (`status:ready` / `status:blocked`). Les huit composants sont expliqués dans [le guide](docs/v1/COMPONENTS-AND-CONTRIBUTION.md) ; les [filtres GitHub et règles de classification](docs/v1/ISSUE-CLASSIFICATION.md) permettent de trouver un travail adapté. Les epics et les lots scientifiques sont conservés ; leur label `component:core` désigne la responsabilité principale, non une implémentation déjà réalisée.
+
 ## Avant toute contribution
 
 1. Lire [le contrat produit](docs/v1/PRODUCT-CONTRACT.md), #52 et les ADR.
