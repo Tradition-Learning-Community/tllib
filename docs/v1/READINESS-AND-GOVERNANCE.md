@@ -4,12 +4,16 @@ Statut : **politique de gouvernance des contributions V1**, avec application ini
 Autorité de gouvernance du projet : **Tradition Learning Community ASBL** (voir `GOVERNANCE.md`). tllib reste autoritaire pour le logiciel, tllib-specs pour les décisions scientifiques. Contributions sous Apache-2.0 avec DCO 1.1, droits des auteurs préservés (voir `LICENSE`, `NOTICE`, `DCO`).
 Le document ne prétend pas que les gates techniques ont déjà été exécutés.
 
+Voir également [la classification GitHub des huit composants](ISSUE-CLASSIFICATION.md), qui complète cette politique sans modifier le découpage des issues.
+
 ## Taxonomie minimale
 
 Une issue ouverte porte exactement un label de type :
 `type:epic`, `type:domain`, `type:tlc-fc`, `type:task`, `type:blocker`.
-Une ou plusieurs aires : `area:cpp`, `area:python`, `area:runtime`,
+Une ou plusieurs aires techniques existantes : `area:cpp`, `area:python`, `area:runtime`,
 `area:specs`, `area:docs`, `area:ci`, `area:release`.
+Une ou plusieurs **responsabilités** : `component:core`, `component:runtime`, `component:python`, `component:interop`, `component:conformance`, `component:performance`, `component:build`, `component:docs`.
+Le composant principal d'un epic de domaine ou d'un lot de codage est `component:core`, sans préjuger de ses statuts d'exécution ni des autres composants requis.
 Un seul état de travail : `status:blocked` ou `status:ready` ;
 une issue en cours peut retirer ces deux labels sans signifier « terminé ».
 `good first issue` n'est attribué qu'à une tâche autonome et testable.
@@ -84,7 +88,7 @@ de domaine.
 
 ## Historique de l'audit (31 octobre 2026 — ne pas utiliser comme statut courant)
 
-Au début de la phase C, l'audit GitHub a recensé 225 issues ouvertes : 36 epics domaine, 178 lots, cinq epics techniques/produit, cinq tâches transversales et un blocker scientifique. La clôture justifiée des quatre epics de préparation #234, #236, #240 et #242 ramène ensuite le backlog à 221 issues ouvertes ; l'epic produit #52 reste ouvert. Toutes ont un type et au moins une aire ; **aucun** lot n'a reçu `status:ready` sans revue de sa mini-matrice. Seuls #231 et #177 portent `status:blocked` (blocage scientifique limité à TLC-FC-30-EXPANSION-014). Les milestones **ne sont pas encore appliqués** ; le gate d'acceptation de #261 reste donc ouvert. Voir [audit détaillé](PHASE-C-AUDIT-2026-10-31.md), [parcours contributeurs](CONTRIBUTOR-QUICKSTART.md) et [revue/fusion](REVIEW-AND-MERGE.md).
+Ce paragraphe reproduit l'état **historique** de la phase C, avant clôture de #261 et avant la taxonomie des huit composants. Au début de la phase C, l'audit GitHub a recensé 225 issues ouvertes : 36 epics domaine, 178 lots, cinq epics techniques/produit, cinq tâches transversales et un blocker scientifique. La clôture justifiée des quatre epics de préparation #234, #236, #240 et #242 ramène ensuite le backlog à 221 issues ouvertes ; l'epic produit #52 reste ouvert. Toutes ont un type et au moins une aire ; **aucun** lot n'a reçu `status:ready` sans revue de sa mini-matrice. Seuls #231 et #177 portent `status:blocked` (blocage scientifique limité à TLC-FC-30-EXPANSION-014). Les milestones n'étaient pas appliqués lors de cet audit. **Cette affirmation est historique : #261 a ensuite été clôturée sans rendre les jalons obligatoires.** Voir [audit détaillé](PHASE-C-AUDIT-2026-10-31.md), [parcours contributeurs](CONTRIBUTOR-QUICKSTART.md) et [revue/fusion](REVIEW-AND-MERGE.md).
 
 **Décision de triage :** la fermeture d'une fondation commune ne constitue pas, à elle seule, une preuve que les entrées/sorties, acceptations et providers de chaque TLC-FC sont prêts. Documenter des critères ciblés d'acceptation par lot avant toute application de `status:ready`. Les issues sans statut restent à qualifier, pas bloquées par défaut.
 
