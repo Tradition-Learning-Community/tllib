@@ -46,6 +46,58 @@ jobs:
         run: python3 tools/specs_pipeline.py verify --specs pinned-specs
       - name: Check checked-in generated structural files for zero drift
         run: python3 tools/specs_pipeline.py check-generated --specs pinned-specs
+      - name: Execute Message-002 acceptance tests and record trusted JUnit
+        run: |
+          cmake -S . -B build/message-acceptance -DBUILD_TESTING=ON -DCMAKE_BUILD_TYPE=Debug
+          cmake --build build/message-acceptance --target tllib_message_preexistence_test --parallel 2
+          ctest --test-dir build/message-acceptance -R '^tllib_message_preexistence_test        run: python3 tools/specs_pipeline.py report --specs pinned-specs --output build/specs-report --test-results build/message-acceptance/test-results.xml
+      - name: Verify two independent generations are byte-identical
+        run: |
+          mkdir -p "$RUNNER_TEMP/gen1" "$RUNNER_TEMP/gen2"
+          cp specs.lock.json "$RUNNER_TEMP/gen1/specs.lock.json"
+          cp specs.lock.json "$RUNNER_TEMP/gen2/specs.lock.json"
+          python3 tools/specs_pipeline.py generate --specs pinned-specs --root "$RUNNER_TEMP/gen1"
+          python3 tools/specs_pipeline.py generate --specs pinned-specs --root "$RUNNER_TEMP/gen2"
+          cmp "$RUNNER_TEMP/gen1/generated/specs/feature_index.json" "$RUNNER_TEMP/gen2/generated/specs/feature_index.json"
+          cmp "$RUNNER_TEMP/gen1/include/tllib/generated/feature_metadata.hpp" "$RUNNER_TEMP/gen2/include/tllib/generated/feature_metadata.hpp"
+          cmp "$RUNNER_TEMP/gen1/generated/specs/feature_index.json" generated/specs/feature_index.json
+          cmp "$RUNNER_TEMP/gen1/include/tllib/generated/feature_metadata.hpp" include/tllib/generated/feature_metadata.hpp
+          python3 tools/specs_pipeline.py report --specs pinned-specs --output "$RUNNER_TEMP/gen1" --test-results "$GITHUB_WORKSPACE/build/message-acceptance/test-results.xml"
+          python3 tools/specs_pipeline.py report --specs pinned-specs --output "$RUNNER_TEMP/gen2" --test-results "$GITHUB_WORKSPACE/build/message-acceptance/test-results.xml"
+          cmp "$RUNNER_TEMP/gen1/coverage.json" "$RUNNER_TEMP/gen2/coverage.json"
+          cmp "$RUNNER_TEMP/gen1/coverage.md" "$RUNNER_TEMP/gen2/coverage.md"
+          cmp "$RUNNER_TEMP/gen1/acceptance_cases.json" "$RUNNER_TEMP/gen2/acceptance_cases.json"
+      - name: Verify offline snapshot synchronization is deterministic and lock untouched
+        run: |
+          mkdir -p "$RUNNER_TEMP/migration1" "$RUNNER_TEMP/migration2"
+          cp specs.lock.json "$RUNNER_TEMP/candidate.lock.json"
+          cp specs.lock.json "$RUNNER_TEMP/lock.before"
+          python3 tools/specs_sync.py --reference-specs pinned-specs --candidate-specs pinned-specs --candidate-lock "$RUNNER_TEMP/candidate.lock.json" --output "$RUNNER_TEMP/migration1"
+          python3 tools/specs_sync.py --reference-specs pinned-specs --candidate-specs pinned-specs --candidate-lock "$RUNNER_TEMP/candidate.lock.json" --output "$RUNNER_TEMP/migration2"
+          cmp "$RUNNER_TEMP/migration1/migration.json" "$RUNNER_TEMP/migration2/migration.json"
+          cmp "$RUNNER_TEMP/migration1/migration.md" "$RUNNER_TEMP/migration2/migration.md"
+          cmp "$RUNNER_TEMP/lock.before" specs.lock.json
+      - name: Run negative and synthetic pipeline tests
+        run: python3 -m unittest discover -s tests/specs -p 'test_*.py' -v
+      - name: Check release gate return status matches the actual unsupported features
+        run: |
+          status=0
+          python3 tools/specs_pipeline.py release-gate --specs pinned-specs --output build/specs-release --test-results build/message-acceptance/test-results.xml || status=$?
+          expected="$(python3 -c "import json; data=json.load(open('build/specs-release/coverage.json')); print(0 if data['gate']=='passed' else 1)")"
+          test "$status" -eq "$expected"
+      - name: Publish machine-readable and human-readable coverage
+        if: always()
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4
+        with:
+          name: pinned-specs-coverage
+          path: |
+            build/specs-report/coverage.json
+            build/specs-report/coverage.md
+            build/specs-report/acceptance_cases.json
+            build/specs-release/coverage.json
+          if-no-files-found: ignore
+ --output-on-failure \
+            --output-junit "$GITHUB_WORKSPACE/build/message-acceptance/test-results.xml"
       - name: Create deterministic coverage reports and enforce complete decisions
         run: python3 tools/specs_pipeline.py report --specs pinned-specs --output build/specs-report
       - name: Verify two independent generations are byte-identical
