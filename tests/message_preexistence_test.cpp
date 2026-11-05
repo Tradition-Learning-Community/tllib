@@ -21,7 +21,7 @@ PreexistenceEvidence evidence() {
       "TLC-SO-MESSAGE-013", std::string("opaque\0payload", 14), source, {}};
   tllib::shared::Traceability provenance;
   provenance.categories[0].push_back(source);
-  return {"TLC-SO-MESSAGE-013", source, opaque, provenance,
+  return {"TLC-FC-07-MESSAGE-002", "TLC-SO-MESSAGE-013", source, opaque, provenance,
           "unevaluated_candidate", false};
 }
 
@@ -61,6 +61,10 @@ int main() {
   // MSG-002-A02: reject absent, changed or invalid source evidence atomically.
   auto missing = evidence();
   missing.object_id.clear();
+  assert(has_error(register_message_preexistence_claim(missing),
+                   "MissingPreexistenceEvidence"));
+  missing = evidence();
+  missing.feature_id = "TLC-FC-07-MESSAGE-001";
   assert(has_error(register_message_preexistence_claim(missing),
                    "MissingPreexistenceEvidence"));
   missing = evidence();
