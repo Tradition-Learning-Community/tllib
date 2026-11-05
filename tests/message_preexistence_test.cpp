@@ -105,6 +105,24 @@ int main() {
   assert(claim.evidence().opaque_statement.canonical() == original_opaque);
   assert(claim.evidence().provenance.canonical() == original_trace);
   assert(claim.evidence().opaque_statement.payload == std::string("opaque\0payload", 14));
+  // Shared descriptor contract: identity, reference, provenance and unresolved status.
+  const auto envelope = claim.descriptor();
+  assert(envelope);
+  assert(envelope.value_if()->feature_id.str() == "TLC-FC-07-MESSAGE-002");
+  assert(envelope.value_if()->representation == "unevaluated_claim");
+  assert(envelope.value_if()->package_status == tllib::core::PackageStatus::finalized);
+  assert(envelope.value_if()->scientific_status ==
+         tllib::core::ScientificStatus::external_provider_required);
+  assert(envelope.value_if()->execution_status ==
+         tllib::core::ExecutionStatus::structural_only);
+  assert(envelope.value_if()->references.size() == 1);
+  assert(envelope.value_if()->references.at("evidence").members.size() == 1);
+  assert(std::get<tllib::shared::ScientificReference>(
+             envelope.value_if()->references.at("evidence").members.front()) == original_source);
+  assert(envelope.value_if()->provenance.canonical() == original_trace);
+  assert(envelope.value_if()->unresolved.empty());
+  assert(envelope.value_if()->dependencies.empty());
+  assert(tllib::shared::validate(*envelope.value_if()));
   assert(tllib::domains::message::detail::valid_provenance(claim.evidence().provenance,
                                                            claim.evidence().source_reference));
   static_assert(!has_truth_value<UnevaluatedPreexistenceClaim>);
