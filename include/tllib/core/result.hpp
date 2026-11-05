@@ -7,7 +7,7 @@
 #include <variant>
 namespace tllib::core {
 enum class ErrorCode { invalid_argument, invalid_identifier, unsupported_version, invalid_shape,
-                       out_of_range, invalid_domain, unavailable_capability, internal_error };
+                       out_of_range, invalid_domain, unavailable_capability, internal_error, unsupported_operation };
 struct Error {
   ErrorCode code;
   std::string message;
