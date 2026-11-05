@@ -150,8 +150,11 @@ Python sert à :
 - prototypes ;
 - documentation.
 
-Le binding final est décidé après spike nanobind vs pybind11. L'architecture ne
-dépend pas de ce choix.
+Le choix du binder est désormais accepté dans [ADR-004](../adr/ADR-004-python-bindings.md) : **nanobind pour les nouvelles surfaces**, tandis que le pont CPython natif existant reste en place pour les providers. L'architecture conserve un moteur scientifique C++20 unique.
+
+## Organisation des auteurs de tllib
+
+Les huit **composants de contribution** (Core C++20 et API C++, Runtime & Providers, Python API & Bindings, Data & Interoperability, Scientific Conformance, Performance & Optimization, Build/CI/Distribution, Developer Experience & Documentation) décrivent les responsabilités humaines au sein des couches ci-dessus ; ils ne créent pas de nouveaux modules normatifs ni de moteurs séparés. Voir [la carte des composants](COMPONENTS-AND-CONTRIBUTION.md).
 
 ## CI et release
 
