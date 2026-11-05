@@ -15,10 +15,10 @@ namespace {
 PreexistenceEvidence evidence() {
   tllib::shared::ScientificReference source{"maths/07-message/message.md",
                                             std::string("TLC-SO-MESSAGE-013"),
-                                            std::string("Message"),
-                                            std::string("Preexistence"),
+                                            std::string("Nature du Message fondamental"),
+                                            std::string("Préexistence du Message"),
                                             {},
-                                            tllib::shared::LineRange{10, 20}};
+                                            tllib::shared::LineRange{58, 60}};
   tllib::shared::OpaqueValue opaque{
       "TLC-SO-MESSAGE-013", std::string("opaque\0payload", 14), source, {}};
   tllib::shared::Traceability provenance;
@@ -74,6 +74,15 @@ int main() {
   assert(has_error(register_message_preexistence_claim(missing), "MissingPreexistenceEvidence"));
   missing = evidence();
   missing.object_id = "TLC-SO-MESSAGE-014";
+  assert(has_error(register_message_preexistence_claim(missing), "MissingPreexistenceEvidence"));
+  missing = evidence();
+  missing.source_reference.line_range = tllib::shared::LineRange{58, 61};
+  assert(has_error(register_message_preexistence_claim(missing), "MissingPreexistenceEvidence"));
+  missing = evidence();
+  missing.source_reference.subsection = "Autre sous-section";
+  assert(has_error(register_message_preexistence_claim(missing), "MissingPreexistenceEvidence"));
+  missing = evidence();
+  missing.source_reference.source_path = "maths/07-message/other.md";
   assert(has_error(register_message_preexistence_claim(missing), "MissingPreexistenceEvidence"));
   missing = evidence();
   missing.source_reference.line_range.reset();
