@@ -52,10 +52,7 @@ jobs:
         run: python3 tools/quality_check.py --base HEAD^
       - name: Display exact formatter fixes when quality gate fails
         if: failure()
-        run: |
-          clang-format -i include/tllib/domains/message/preexistence.hpp tests/message_preexistence_test.cpp
-          git diff -- include/tllib/domains/message/preexistence.hpp tests/message_preexistence_test.cpp
-          ruff format --diff tools/quality_check.py tests/quality/test_quality_check.py
+        run: ruff format --diff tools/quality_check.py tests/quality/test_quality_check.py
       - name: Check impact-aware quality scope with synthetic Git changes
         run: python3 -m unittest discover -s tests/quality -p 'test_*.py' -v
       - name: Analyze existing real C++ translation unit
