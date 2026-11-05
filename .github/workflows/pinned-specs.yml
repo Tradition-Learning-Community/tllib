@@ -50,7 +50,7 @@ jobs:
         run: |
           cmake -S . -B build/message-acceptance -DBUILD_TESTING=ON -DCMAKE_BUILD_TYPE=Debug
           cmake --build build/message-acceptance --target tllib_message_preexistence_test --parallel 2
-          ctest --test-dir build/message-acceptance -R tllib_message_preexistence_test --output-on-failure --output-junit build/message-acceptance/test-results.xml
+          ctest --test-dir build/message-acceptance -R tllib_message_preexistence_test --output-on-failure --output-junit "$GITHUB_WORKSPACE/build/message-acceptance/test-results.xml"
       - name: Create deterministic coverage reports and enforce complete decisions
         run: python3 tools/specs_pipeline.py report --specs pinned-specs --output build/specs-report --test-results build/message-acceptance/test-results.xml
       - name: Verify two independent generations are byte-identical
