@@ -6,6 +6,22 @@ body:
   - type: markdown
     attributes:
       value: "Référence : docs/v1/READINESS-AND-GOVERNANCE.md. Licence Apache-2.0 et DCO v1.1. Ne pas créer de décision scientifique ici."
+  - type: dropdown
+    id: component
+    attributes:
+      label: "Composant principal (contribution)"
+      description: "Responsabilité principale, selon docs/v1/COMPONENTS-AND-CONTRIBUTION.md ; autres composants dans le périmètre"
+      options:
+        - "Core C++20 (API C++ incluse)"
+        - "Runtime & Providers"
+        - "Python API & Bindings"
+        - "Data & Interoperability"
+        - "Scientific Conformance"
+        - "Performance & Optimization"
+        - "Build, CI & Distribution"
+        - "Developer Experience & Documentation"
+    validations:
+      required: true
   - type: input
     id: parent
     attributes:
