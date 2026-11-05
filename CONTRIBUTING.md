@@ -12,8 +12,9 @@
 - Les relecteurs doivent vérifier les sign-offs et notices de licences à la revue. Il n'existe pas encore de CI DCO automatisée, et un contrôle humain ne doit pas être présenté comme automatisé.
 
 
-`tllib` est en **phase pré-implémentation V1**. Ne démarrer aucun domaine
-sans issue autonome `status:ready` et toutes les dépendances satisfaites.
+`tllib` est **prêt à entrer dans l'implémentation scientifique V1** : les fondations communes et les décisions de préparation ont été traitées. Les lots scientifiques restent à réaliser. Pour démarrer un lot, qualifier **ce lot** et ses dépendances, puis appliquer `status:ready` lorsque ses obligations sont suffisamment explicites ; il n'est pas nécessaire de requalifier tout le backlog avant de commencer.
+
+**Choisissez d'abord un [des huit composants de contribution](docs/v1/COMPONENTS-AND-CONTRIBUTION.md)** : Core C++20 (API C++ comprise), Runtime & Providers, Python API & Bindings, Data & Interoperability, Scientific Conformance, Performance & Optimization, Build/CI/Distribution, Developer Experience & Documentation. Ces composants sont des responsabilités dans le même produit, **pas des dépôts séparés**.
 Les règles de sélection d'une tâche, les preuves requises et les limites de support sont expliquées dans :
 [registre](docs/v1/PREPARATION-STATUS.md) et
 [gouvernance](docs/v1/READINESS-AND-GOVERNANCE.md), [parcours concrets](docs/v1/CONTRIBUTOR-QUICKSTART.md) et [revue/fusion](docs/v1/REVIEW-AND-MERGE.md).
@@ -39,6 +40,8 @@ Le formulaire **Défaut logiciel tllib** permet de signaler un bogue autonome da
    ne jamais inventer formule, valeur, provider ou comportement manquant.
 
 ## Parcours
+
+Voir la [carte des composants, responsabilités et dépendances](docs/v1/COMPONENTS-AND-CONTRIBUTION.md). Un contributeur Python peut travailler sur la façade, les stubs, l'interopérabilité, les tests, la conformité et les outils sans développer le Core C++ ; un contributeur C++ peut travailler sur le moteur et les tests natifs sans maintenir l'API Python. Les tâches qui touchent plusieurs surfaces prévoient une revue croisée.
 
 - **C++** : core, données, runtime, providers, domaines, performance ;
   références : [build](docs/v1/DEPENDENCIES-BUILD-POLICY.md),

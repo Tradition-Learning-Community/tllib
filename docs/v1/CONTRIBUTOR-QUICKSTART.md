@@ -1,6 +1,8 @@
-# V1 — Parcours contributeurs vérifiables (phase C)
+# Démarrer une contribution — C++20, Python et outillage
 
-Ce guide s'applique aux **fondations de préparation** de `tllib`, et non à une V1 scientifique publiée. Le runtime de référence est C++20 ; la façade Python utilise le même runtime natif. Les 36 domaines scientifiques n'ont pas encore d'algorithme implémenté. Les commandes ci-dessous sont celles des workflows GitHub Actions et des fichiers du dépôt ; les exécutions positives **observées** sont sur Ubuntu 24.04 x86-64 (GCC et CPython 3.12). Les autres environnements nécessitent leur propre qualification, voir [PLATFORMS-2027.md](PLATFORMS-2027.md). L'environnement d'édition de cette phase C ne peut pas cloner GitHub depuis le shell : aucune nouvelle validation locale indépendante n'est prétendue.
+Ce guide rassemble les commandes de travail et de vérification des **fondations techniques** de `tllib`. Le moteur de référence est en C++20 ; la façade Python utilise le même runtime natif. Les 36 domaines scientifiques restent à implémenter et à valider. Les commandes ci-dessous proviennent des fichiers et workflows du dépôt. La qualification technique documentée au 31 octobre 2026 concerne **Ubuntu 24.04 x86-64, GCC et CPython 3.12** ; les autres plateformes doivent être testées séparément, selon [la matrice cible](PLATFORMS-2027.md).
+
+Choisir d'abord son [composant de contribution](COMPONENTS-AND-CONTRIBUTION.md), puis suivre uniquement les étapes qui concernent le changement proposé. Ce guide ne vaut ni certification scientifique complète ni preuve de release V1.
 
 ## 0. Choisir une issue et vérifier son autorité
 
@@ -93,4 +95,4 @@ La dernière commande requiert les versions d'outillage documentées dans [QUALI
 4. Appliquer la revue technique et scientifique appropriée décrite dans [REVIEW-AND-MERGE.md](REVIEW-AND-MERGE.md). Les contrôles CI filtrés ne sont pas remplacés par un statut déclaré manuellement.
 5. Fermer une issue seulement lorsque tous ses critères d'acceptation sont satisfaits, en citant PR, commit et contrôles. Une PR partielle ne ferme pas le ticket.
 
-**Limites de preuve (31 octobre 2026)** : GitHub Actions a vérifié la compilation native, le consommateur CMake, la wheel CPython 3.12, la parité structurelle, les tests négatifs de specs, la conformité et la qualité sur Linux. Cela ne qualifie pas Windows/macOS ni une couverture TLC-FC réelle. Toute plateforme non testée reste indiquée « non vérifiée ».
+**Périmètre des vérifications documentées (31 octobre 2026)** : GitHub Actions a vérifié la compilation native, le consommateur CMake, la wheel CPython 3.12, la parité structurelle, les tests négatifs de specs, la conformité et la qualité sur Linux. Cela ne qualifie pas Windows/macOS ni une couverture TLC-FC réelle. Toute plateforme non testée reste indiquée « non vérifiée ».

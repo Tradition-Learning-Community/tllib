@@ -2,31 +2,12 @@
 
 ## Vue générale
 
-```text
-                    tllib-specs
-          snapshot certifié + handoff
-                         |
-                         v
-                 tools/specgen
-             validation / codegen
-                         |
-              artefacts structuraux
-                         |
-                         v
-+----------------------------------------------------+
-|                    tllib C++                       |
-| core | shared | runtime | providers | domains      |
-|                  dispatcher                        |
-+-----------------+----------------------------------+
-                  |
-          bindings Python
-                  |
-                  v
-+----------------------------------------------------+
-|                    tllib Python                    |
-| API | NumPy/DLPack interop | providers | helpers  |
-+----------------------------------------------------+
-```
+<p align="center">
+  <img src="../assets/architecture-overview.svg" alt="Architecture produit tllib : snapshot scientifique, moteur C++20, runtime, accès C++ et Python et composants transversaux" width="100%">
+</p>
+
+Le snapshot verrouillé alimente la validation et la génération d'artefacts structurels par les outils de `tllib`. Il ne devient pas une dépendance d'exécution. La même implémentation scientifique C++20 est accessible depuis les surfaces C++ et Python ; le runtime organise les capacités et l'exécution.
+
 
 ## Arborescence cible
 
@@ -150,8 +131,11 @@ Python sert à :
 - prototypes ;
 - documentation.
 
-Le binding final est décidé après spike nanobind vs pybind11. L'architecture ne
-dépend pas de ce choix.
+Le choix du binder est désormais accepté dans [ADR-004](../adr/ADR-004-python-bindings.md) : **nanobind pour les nouvelles surfaces**, tandis que le pont CPython natif existant reste en place pour les providers. L'architecture conserve un moteur scientifique C++20 unique.
+
+## Organisation des auteurs de tllib
+
+Les huit **composants de contribution** (Core C++20 et API C++, Runtime & Providers, Python API & Bindings, Data & Interoperability, Scientific Conformance, Performance & Optimization, Build/CI/Distribution, Developer Experience & Documentation) décrivent les responsabilités humaines au sein des couches ci-dessus ; ils ne créent pas de nouveaux modules normatifs ni de moteurs séparés. Voir [la carte des composants](COMPONENTS-AND-CONTRIBUTION.md).
 
 ## CI et release
 

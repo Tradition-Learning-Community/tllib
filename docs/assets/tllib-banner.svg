@@ -1,0 +1,52 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="410" viewBox="0 0 1200 410" role="img" aria-labelledby="title desc">
+<title id="title">tllib — Tradition Learning Library</title>
+<desc id="desc">Bannière de présentation : moteur C++20, runtime et providers, interfaces C++ et Python.</desc>
+<defs>
+ <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#101B35"/><stop offset="1" stop-color="#081022"/></linearGradient>
+ <linearGradient id="glow" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#31D4B2" stop-opacity=".27"/><stop offset="1" stop-color="#31D4B2" stop-opacity="0"/></linearGradient>
+ <filter id="shadow" x="-20%" y="-30%" width="140%" height="180%"><feDropShadow dx="0" dy="8" stdDeviation="13" flood-color="#020917" flood-opacity=".28"/></filter>
+</defs>
+<rect width="1200" height="410" rx="26" fill="url(#bg)"/>
+<circle cx="1070" cy="90" r="245" fill="url(#glow)"/>
+<circle cx="1110" cy="360" r="180" fill="none" stroke="#203250" stroke-width="1"/>
+<circle cx="1110" cy="360" r="130" fill="none" stroke="#203250" stroke-width="1"/>
+<path d="M42 33H1158M42 376H1158" stroke="#21304C" stroke-width="1"/>
+<rect x="57" y="59" width="7" height="24" rx="3.5" fill="#34D5B3"/>
+<text x="85" y="77" fill="#A3BAD0" font-size="15" font-family="Arial,Helvetica,sans-serif" font-weight="700" letter-spacing="2.5">TRADITION LEARNING COMMUNITY</text>
+<text x="56" y="161" fill="#FFFFFF" font-size="74" font-family="Arial,Helvetica,sans-serif" font-weight="700" letter-spacing="-4">tllib<tspan fill="#36D9B8">.</tspan></text>
+<text x="58" y="209" fill="#ECF3FC" font-size="29" font-family="Arial,Helvetica,sans-serif" font-weight="600">Tradition Learning Library</text>
+<text x="58" y="255" fill="#ADBDD2" font-size="19" font-family="Arial,Helvetica,sans-serif">Un moteur scientifique C++20.</text>
+<text x="58" y="284" fill="#ADBDD2" font-size="19" font-family="Arial,Helvetica,sans-serif">Deux interfaces publiques : C++ et Python.</text>
+<rect x="57" y="316" rx="15" width="171" height="36" fill="#1D3447" stroke="#317D79"/>
+<circle cx="76" cy="334" r="5" fill="#38D5B4"/>
+<text x="91" y="340" fill="#D8FFF5" font-size="14" font-family="Arial,Helvetica,sans-serif" font-weight="700">OPEN SOURCE</text>
+<rect x="240" y="316" rx="15" width="145" height="36" fill="#1D2944" stroke="#425575"/>
+<text x="257" y="340" fill="#D6E0F3" font-size="14" font-family="Arial,Helvetica,sans-serif" font-weight="700">C++20 / PYTHON</text>
+<rect x="397" y="316" rx="15" width="129" height="36" fill="#382D37" stroke="#695043"/>
+<circle cx="416" cy="334" r="5" fill="#F1B66D"/>
+<text x="429" y="340" fill="#FFE6C4" font-size="14" font-family="Arial,Helvetica,sans-serif" font-weight="700">V1 EN COURS</text>
+<g filter="url(#shadow)">
+ <rect x="804" y="42" width="260" height="56" rx="15" fill="#202E49" stroke="#7085A3"/>
+ <rect x="704" y="156" width="207" height="93" rx="17" fill="#F0F8FF"/>
+ <rect x="947" y="156" width="207" height="93" rx="17" fill="#E5F9F2"/>
+ <rect x="704" y="292" width="207" height="67" rx="16" fill="#243755" stroke="#6B86AB"/>
+ <rect x="947" y="292" width="207" height="67" rx="16" fill="#243755" stroke="#6B86AB"/>
+</g>
+<text x="934" y="65" fill="#C2CEE2" font-family="Arial,Helvetica,sans-serif" font-size="12" font-weight="700" text-anchor="middle" letter-spacing="1">SNAPSHOT SCIENTIFIQUE</text>
+<text x="934" y="84" fill="#FFFFFF" font-family="Arial,Helvetica,sans-serif" font-size="16" font-weight="700" text-anchor="middle">tllib-specs · verrouillé</text>
+<path d="M934 98V124H808V151M934 124H1050V151" stroke="#61D6C0" stroke-width="2.5" fill="none" stroke-linecap="round"/>
+<circle cx="808" cy="152" r="4.5" fill="#61D6C0"/><circle cx="1050" cy="152" r="4.5" fill="#61D6C0"/>
+<rect x="722" y="174" width="34" height="34" rx="10" fill="#D5E7FB"/>
+<path d="m739 180-8 11 8 11m3-22 8 11-8 11" stroke="#396AA6" stroke-width="2.5" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+<text x="765" y="190" fill="#172842" font-family="Arial,Helvetica,sans-serif" font-size="19" font-weight="700">Core C++20</text>
+<text x="765" y="213" fill="#59708F" font-family="Arial,Helvetica,sans-serif" font-size="14">Calculs · API native</text>
+<circle cx="973" cy="191" r="14" fill="#CCEFE5"/><circle cx="973" cy="191" r="5" fill="none" stroke="#15856D" stroke-width="2"/><path d="M973 173V178M973 204V209M955 191H960M986 191H991" stroke="#15856D" stroke-width="2" stroke-linecap="round"/>
+<text x="999" y="190" fill="#173F37" font-family="Arial,Helvetica,sans-serif" font-size="18" font-weight="700">Runtime</text>
+<text x="999" y="213" fill="#4B786E" font-family="Arial,Helvetica,sans-serif" font-size="14">Providers · dispatch</text>
+<path d="M808 249V292M1050 249V292M911 204H947" stroke="#6FA6BF" stroke-width="2.5" fill="none" stroke-linecap="round"/>
+<path d="m801 281 7 10 7-10m228 0 7 10 7-10" stroke="#6FA6BF" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+<text x="808" y="317" fill="#9BC8F2" font-family="Arial,Helvetica,sans-serif" font-size="12" text-anchor="middle" letter-spacing="1">INTERFACE NATIVE</text>
+<text x="808" y="342" fill="#FFFFFF" font-family="Arial,Helvetica,sans-serif" font-size="21" font-weight="700" text-anchor="middle">API C++</text>
+<text x="1050" y="317" fill="#9EE7D7" font-family="Arial,Helvetica,sans-serif" font-size="12" text-anchor="middle" letter-spacing="1">MÊME MOTEUR</text>
+<text x="1050" y="342" fill="#FFFFFF" font-family="Arial,Helvetica,sans-serif" font-size="21" font-weight="700" text-anchor="middle">API Python</text>
+</svg>

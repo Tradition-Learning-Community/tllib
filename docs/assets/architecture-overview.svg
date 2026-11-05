@@ -1,0 +1,37 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" viewBox="0 0 1200 630" role="img" aria-labelledby="title desc">
+<title id="title">Architecture de tllib : une implémentation C++20, deux interfaces</title>
+<desc id="desc">Le snapshot scientifique verrouillé guide le noyau C++20 et le runtime. L'API native C++ et les bindings Python donnent accès au même moteur. Conformance, données, performance, distribution et documentation sont transversaux.</desc>
+<defs><filter id="s" x="-15%" y="-30%" width="130%" height="170%"><feDropShadow dx="0" dy="4" stdDeviation="9" flood-color="#203455" flood-opacity=".10"/></filter></defs>
+<rect width="1200" height="630" rx="25" fill="#F4F7FB" stroke="#E2E8F2"/>
+<text x="57" y="56" fill="#152846" font-family="Arial,Helvetica,sans-serif" font-size="27" font-weight="700">Un moteur, deux interfaces</text>
+<text x="57" y="85" fill="#64748B" font-family="Arial,Helvetica,sans-serif" font-size="16">Architecture produit · C++20, runtime partagé et façade Python</text>
+<rect x="419" y="109" width="362" height="65" rx="15" fill="#162640" filter="url(#s)"/>
+<rect x="437" y="130" width="7" height="23" rx="3" fill="#42D4B7"/>
+<text x="465" y="135" fill="#BFD0E4" font-family="Arial,Helvetica,sans-serif" font-size="13" font-weight="700" letter-spacing="1">AUTORITÉ SCIENTIFIQUE</text>
+<text x="465" y="158" fill="#FFFFFF" font-family="Arial,Helvetica,sans-serif" font-size="18" font-weight="700">Snapshot tllib-specs épinglé</text>
+<path d="M600 174V202M600 202H336V225M600 202H863V225" fill="none" stroke="#539A95" stroke-width="2.5" stroke-linecap="round"/>
+<path d="m329 215 7 11 7-11m513 0 7 11 7-11" fill="none" stroke="#539A95" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+<g filter="url(#s)"><rect x="109" y="228" width="455" height="108" rx="17" fill="#FFFFFF" stroke="#CDDDEE"/><rect x="636" y="228" width="455" height="108" rx="17" fill="#FFFFFF" stroke="#B5E4D8"/></g>
+<rect x="127" y="247" width="48" height="48" rx="13" fill="#E8F1FE"/>
+<path d="m148 257-11 14 11 14m8-28 11 14-11 14" stroke="#4676B6" stroke-width="3" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+<text x="188" y="262" fill="#142B4B" font-family="Arial,Helvetica,sans-serif" font-size="21" font-weight="700">01 · Core C++20</text>
+<text x="188" y="290" fill="#4C6481" font-family="Arial,Helvetica,sans-serif" font-size="16">Algorithmes TL, types fondamentaux</text>
+<text x="188" y="312" fill="#4C6481" font-family="Arial,Helvetica,sans-serif" font-size="16">et API C++ publique</text>
+<rect x="655" y="247" width="48" height="48" rx="13" fill="#E1F7ED"/>
+<circle cx="679" cy="270" r="12" fill="none" stroke="#218879" stroke-width="3"/><path d="M679 251V255M679 285V289M660 270H664M694 270H698" stroke="#218879" stroke-width="2" stroke-linecap="round"/>
+<text x="717" y="262" fill="#163B36" font-family="Arial,Helvetica,sans-serif" font-size="21" font-weight="700">02 · Runtime &amp; Providers</text>
+<text x="717" y="290" fill="#4B716B" font-family="Arial,Helvetica,sans-serif" font-size="16">Registry, dispatch, contexte</text>
+<text x="717" y="312" fill="#4B716B" font-family="Arial,Helvetica,sans-serif" font-size="16">et capacités explicites</text>
+<path d="M564 278H636" stroke="#92A6BB" stroke-width="2" stroke-dasharray="5 5"/>
+<path d="M336 336V391M863 336V391" fill="none" stroke="#6388AF" stroke-width="2.5" stroke-linecap="round"/>
+<path d="m329 379 7 11 7-11m520 0 7 11 7-11" stroke="#6388AF" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+<g filter="url(#s)"><rect x="109" y="393" width="455" height="84" rx="16" fill="#E8F0FB" stroke="#C6D8EF"/><rect x="636" y="393" width="455" height="84" rx="16" fill="#E3F5EF" stroke="#B8E0D6"/></g>
+<text x="139" y="426" fill="#25538A" font-family="Arial,Helvetica,sans-serif" font-size="14" font-weight="700" letter-spacing="1">UTILISATION NATIVE</text>
+<text x="139" y="455" fill="#142B4B" font-family="Arial,Helvetica,sans-serif" font-size="24" font-weight="700">Applications C++</text>
+<text x="663" y="426" fill="#247365" font-family="Arial,Helvetica,sans-serif" font-size="14" font-weight="700" letter-spacing="1">BINDINGS ET API PYTHON</text>
+<text x="663" y="455" fill="#173F3B" font-family="Arial,Helvetica,sans-serif" font-size="24" font-weight="700">Applications Python</text>
+<rect x="109" y="510" width="982" height="85" rx="16" fill="#202F49"/>
+<text x="136" y="540" fill="#A3C6DC" font-family="Arial,Helvetica,sans-serif" font-size="13" font-weight="700" letter-spacing="1.1">COMPOSANTS TRANSVERSAUX</text>
+<text x="136" y="566" fill="#FFFFFF" font-family="Arial,Helvetica,sans-serif" font-size="17" font-weight="600">Data / Interop    ·    Scientific Conformance    ·    Performance</text>
+<text x="136" y="588" fill="#CBD8EA" font-family="Arial,Helvetica,sans-serif" font-size="16">Build / CI / Distribution    ·    Developer Experience / Documentation</text>
+</svg>

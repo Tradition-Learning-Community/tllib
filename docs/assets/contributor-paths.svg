@@ -1,0 +1,45 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="550" viewBox="0 0 1200 550" role="img" aria-labelledby="title desc">
+<title id="title">Parcours contributeurs tllib par compétence</title>
+<desc id="desc">Quatre parcours possibles, Python, C++20, conformité et qualité, performance et infrastructure, rejoignent le même dépôt et ses huit composants.</desc>
+<rect width="1200" height="550" rx="25" fill="#F7F9FD" stroke="#E1E8F2"/>
+<text x="59" y="60" fill="#152744" font-size="29" font-family="Arial,Helvetica,sans-serif" font-weight="700">Votre compétence a sa place.</text>
+<text x="59" y="92" fill="#5D6E87" font-size="17" font-family="Arial,Helvetica,sans-serif">Quatre portes d'entrée, un seul dépôt et des critères de validation communs.</text>
+<text x="64" y="146" fill="#73829A" font-size="13" font-family="Arial,Helvetica,sans-serif" font-weight="700" letter-spacing="1">PROFIL</text>
+<text x="409" y="146" fill="#73829A" font-size="13" font-family="Arial,Helvetica,sans-serif" font-weight="700" letter-spacing="1">CONTRIBUTIONS POSSIBLES</text>
+<text x="937" y="146" fill="#73829A" font-size="13" font-family="Arial,Helvetica,sans-serif" font-weight="700" letter-spacing="1">PREUVES</text>
+<rect x="53" y="166" width="1094" height="76" rx="15" fill="#FFFFFF" stroke="#D9E4F4"/>
+<rect x="53" y="254" width="1094" height="76" rx="15" fill="#FFFFFF" stroke="#D9E4F4"/>
+<rect x="53" y="342" width="1094" height="76" rx="15" fill="#FFFFFF" stroke="#D9E4F4"/>
+<rect x="53" y="430" width="1094" height="76" rx="15" fill="#FFFFFF" stroke="#D9E4F4"/>
+<rect x="53" y="166" width="7" height="76" rx="3" fill="#377FC6"/>
+<rect x="53" y="254" width="7" height="76" rx="3" fill="#279987"/>
+<rect x="53" y="342" width="7" height="76" rx="3" fill="#8D6EDB"/>
+<rect x="53" y="430" width="7" height="76" rx="3" fill="#D39543"/>
+<g font-family="Arial,Helvetica,sans-serif">
+<circle cx="94" cy="204" r="22" fill="#E7F1FE"/><text x="94" y="211" text-anchor="middle" font-size="20" fill="#2B6BA8" font-weight="700">Py</text>
+<circle cx="94" cy="292" r="22" fill="#E3F7EF"/><text x="94" y="299" text-anchor="middle" font-size="16" fill="#23836B" font-weight="700">C++</text>
+<circle cx="94" cy="380" r="22" fill="#F1EBFF"/><text x="94" y="387" text-anchor="middle" font-size="15" fill="#7654C2" font-weight="700">QA</text>
+<circle cx="94" cy="468" r="22" fill="#FFF1DD"/><text x="94" y="475" text-anchor="middle" font-size="18" fill="#A26B23" font-weight="700">CI</text>
+<text x="132" y="198" font-size="22" fill="#19324E" font-weight="700">Python</text><text x="132" y="224" font-size="15" fill="#61738A">Sans écrire de C++</text>
+<text x="132" y="286" font-size="22" fill="#19324E" font-weight="700">C++20</text><text x="132" y="312" font-size="15" fill="#61738A">Sans toucher à la façade Python</text>
+<text x="132" y="374" font-size="22" fill="#19324E" font-weight="700">Science &amp; QA</text><text x="132" y="400" font-size="15" fill="#61738A">Contrats, tests, vérification</text>
+<text x="132" y="462" font-size="21" fill="#19324E" font-weight="700">Systèmes &amp; perf.</text><text x="132" y="488" font-size="15" fill="#61738A">Outillage, build, optimisation</text>
+<path d="M364 204H394m-10-7 10 7-10 7M364 292H394m-10-7 10 7-10 7M364 380H394m-10-7 10 7-10 7M364 468H394m-10-7 10 7-10 7" stroke="#8BA0B6" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+<text x="409" y="197" font-size="19" fill="#1E3F63" font-weight="700">API Python · Interop · Tooling</text>
+<text x="409" y="222" font-size="15" fill="#61738A">Bindings, typage, tests, scripts et rapports</text>
+<text x="409" y="285" font-size="19" fill="#1E3F63" font-weight="700">Core · Runtime · Providers</text>
+<text x="409" y="310" font-size="15" fill="#61738A">Algorithmes, structures et tests natifs</text>
+<text x="409" y="373" font-size="19" fill="#1E3F63" font-weight="700">Conformance · Documentation</text>
+<text x="409" y="398" font-size="15" fill="#61738A">Acceptations, tests négatifs, guides</text>
+<text x="409" y="461" font-size="19" fill="#1E3F63" font-weight="700">Benchmarks · Build · Release</text>
+<text x="409" y="486" font-size="15" fill="#61738A">Mesures, CI, CMake et wheels</text>
+<rect x="915" y="187" width="205" height="34" rx="17" fill="#E8F4FF"/>
+<rect x="915" y="275" width="205" height="34" rx="17" fill="#E8F8F3"/>
+<rect x="915" y="363" width="205" height="34" rx="17" fill="#F3EDFF"/>
+<rect x="915" y="451" width="205" height="34" rx="17" fill="#FFF2E0"/>
+<text x="1017" y="209" text-anchor="middle" font-size="15" fill="#265B8E" font-weight="700">Tests Python</text>
+<text x="1017" y="297" text-anchor="middle" font-size="15" fill="#24735D" font-weight="700">CTest / tests natifs</text>
+<text x="1017" y="385" text-anchor="middle" font-size="15" fill="#7056A9" font-weight="700">Rapport vérifiable</text>
+<text x="1017" y="473" text-anchor="middle" font-size="15" fill="#936728" font-weight="700">Build / mesures</text>
+</g>
+</svg>
