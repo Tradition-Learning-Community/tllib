@@ -12,6 +12,7 @@ namespace tllib::domains::message {
 // TLC-FC-07-MESSAGE-002: a structural claim, never a scientific oracle.
 // Input data is owned by the result; opaque bytes and references are not interpreted.
 struct PreexistenceEvidence {
+  std::string feature_id;
   std::string object_id;
   shared::ScientificReference source_reference;
   shared::OpaqueValue opaque_statement;
@@ -41,6 +42,7 @@ class UnevaluatedPreexistenceClaim final {
   [[nodiscard]] std::string canonical() const {
     shared::wire::Writer writer(feature_id());
     writer.add(representation());
+    writer.add(evidence_.feature_id);
     writer.add(evidence_.object_id);
     writer.add(evidence_.source_reference.canonical());
     writer.add(evidence_.opaque_statement.canonical());
@@ -79,7 +81,8 @@ register_message_preexistence_claim(PreexistenceEvidence evidence) {
   }
 
   // The supplied source range must be present. Do not supply or reconstruct it.
-  if (evidence.object_id != "TLC-SO-MESSAGE-013" ||
+  if (evidence.feature_id != UnevaluatedPreexistenceClaim::feature_id() ||
+      evidence.object_id != "TLC-SO-MESSAGE-013" ||
       (evidence.source_reference.object_id &&
        *evidence.source_reference.object_id != evidence.object_id) ||
       !evidence.source_reference.line_range ||
