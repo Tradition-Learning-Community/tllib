@@ -64,7 +64,7 @@ bool has_error(const tllib::core::Result<UnevaluatedPreexistenceClaim>& result,
   const auto atomicity = err.context.find("failure_atomicity");
   return err.stable_code && *err.stable_code == expected &&
          err.feature_id == std::optional<std::string>("TLC-FC-07-MESSAGE-002") &&
-         err.code == (unsupported ? tllib::core::ErrorCode::unsupported_operation
+         err.code == (unsupported ? tllib::core::ErrorCode::unavailable_capability
                                  : tllib::core::ErrorCode::invalid_argument) &&
          category != err.context.end() &&
          category->second == (unsupported ? "unsupported_operation" : "invalid_input") &&
