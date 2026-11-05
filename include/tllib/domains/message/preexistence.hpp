@@ -204,7 +204,8 @@ public:
   // No scientific resolution or executable handler is implied by this metadata.
   [[nodiscard]] core::Result<shared::DescriptorEnvelope> descriptor() const {
     auto id = core::FeatureId::parse(evidence_.feature_id);
-    if (!id) return *id.error_if();
+    if (!id)
+      return *id.error_if();
     shared::ReferenceCollection sources;
     sources.kind = shared::CollectionKind::scalar;
     sources.members.push_back(evidence_.source_reference);
@@ -213,16 +214,15 @@ public:
     sources.membership = "exact";
     sources.ordering = "not_applicable";
     sources.duplicates = "not_applicable";
-    shared::DescriptorEnvelope result{
-        *id.value_if(),
-        std::string(representation()),
-        {{"evidence", std::move(sources)}},
-        {},
-        {},
-        evidence_.provenance,
-        core::PackageStatus::finalized,
-        core::ScientificStatus::external_provider_required,
-        core::ExecutionStatus::structural_only};
+    shared::DescriptorEnvelope result{*id.value_if(),
+                                      std::string(representation()),
+                                      {{"evidence", std::move(sources)}},
+                                      {},
+                                      {},
+                                      evidence_.provenance,
+                                      core::PackageStatus::finalized,
+                                      core::ScientificStatus::external_provider_required,
+                                      core::ExecutionStatus::structural_only};
     return shared::validate(std::move(result));
   }
 
