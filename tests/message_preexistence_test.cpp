@@ -18,21 +18,19 @@ template <class T>
 constexpr bool has_executable_oracle = requires(const T& value) { value.executable_oracle(); };
 
 PreexistenceEvidence evidence() {
-  tllib::shared::ScientificReference source{
-      "maths/07-message/message.md",
-      std::string("TLC-SO-MESSAGE-013"),
-      std::string("Nature du Message fondamental"),
-      std::string("Préexistence du Message"),
-      {},
-      tllib::shared::LineRange{58, 60}};
-  tllib::shared::OpaqueValue opaque{"TLC-SO-MESSAGE-013",
-                                    std::string("opaque\0payload", 14), source, {}};
+  tllib::shared::ScientificReference source{"maths/07-message/message.md",
+                                            std::string("TLC-SO-MESSAGE-013"),
+                                            std::string("Nature du Message fondamental"),
+                                            std::string("Préexistence du Message"),
+                                            {},
+                                            tllib::shared::LineRange{58, 60}};
+  tllib::shared::OpaqueValue opaque{
+      "TLC-SO-MESSAGE-013", std::string("opaque\0payload", 14), source, {}};
   tllib::shared::Traceability provenance;
   std::size_t index = 0;
-  for (std::size_t category = 0;
-       category < tllib::domains::message::detail::kEvidenceCounts.size(); ++category) {
-    for (std::size_t i = 0;
-         i < tllib::domains::message::detail::kEvidenceCounts[category]; ++i) {
+  for (std::size_t category = 0; category < tllib::domains::message::detail::kEvidenceCounts.size();
+       ++category) {
+    for (std::size_t i = 0; i < tllib::domains::message::detail::kEvidenceCounts[category]; ++i) {
       auto ref = source;
       ref.source_path = tllib::domains::message::detail::kEvidencePaths[index++];
       if (category != 0) {
@@ -56,7 +54,8 @@ PreexistenceEvidence evidence() {
 
 bool has_error(const tllib::core::Result<UnevaluatedPreexistenceClaim>& result,
                std::string_view expected, bool unsupported = false) {
-  if (result || result.value_if() || !result.error_if()) return false;
+  if (result || result.value_if() || !result.error_if())
+    return false;
   const auto& err = *result.error_if();
   const auto category = err.context.find("category");
   const auto recoverability = err.context.find("recoverability");
@@ -65,7 +64,7 @@ bool has_error(const tllib::core::Result<UnevaluatedPreexistenceClaim>& result,
   return err.stable_code && *err.stable_code == expected &&
          err.feature_id == std::optional<std::string>("TLC-FC-07-MESSAGE-002") &&
          err.code == (unsupported ? tllib::core::ErrorCode::unavailable_capability
-                                 : tllib::core::ErrorCode::invalid_argument) &&
+                                  : tllib::core::ErrorCode::invalid_argument) &&
          category != err.context.end() &&
          category->second == (unsupported ? "unsupported_operation" : "invalid_input") &&
          recoverability != err.context.end() &&
@@ -76,7 +75,8 @@ bool has_error(const tllib::core::Result<UnevaluatedPreexistenceClaim>& result,
 
 std::string with_replacement(std::string_view encoded, std::size_t index,
                              std::string_view replacement) {
-  const auto fields = tllib::shared::wire::decode(encoded, UnevaluatedPreexistenceClaim::feature_id());
+  const auto fields =
+      tllib::shared::wire::decode(encoded, UnevaluatedPreexistenceClaim::feature_id());
   assert(fields);
   tllib::shared::wire::Writer writer(UnevaluatedPreexistenceClaim::feature_id());
   for (std::size_t i = 3; i < fields.value_if()->size(); ++i) {
@@ -85,7 +85,7 @@ std::string with_replacement(std::string_view encoded, std::size_t index,
   return writer.data;
 }
 
-}  // namespace
+} // namespace
 
 int main() {
   // MSG-002-A01, A04, A05, A08: structural success, unchanged evidence, no oracle.
@@ -109,9 +109,9 @@ int main() {
                                                            claim.evidence().source_reference));
   static_assert(!has_truth_value<UnevaluatedPreexistenceClaim>);
   static_assert(!has_executable_oracle<UnevaluatedPreexistenceClaim>);
-  static_assert(std::is_same_v<
-                decltype(std::declval<const UnevaluatedPreexistenceClaim&>().evidence()),
-                const PreexistenceEvidence&>);
+  static_assert(
+      std::is_same_v<decltype(std::declval<const UnevaluatedPreexistenceClaim&>().evidence()),
+                     const PreexistenceEvidence&>);
 
   // MSG-002-A06: structurally identical evidence produces identical results.
   auto same = register_message_preexistence_claim(evidence());
@@ -136,21 +136,23 @@ int main() {
   assert(rich_result);
   auto rich_copy = UnevaluatedPreexistenceClaim::from_wire(rich_result.value_if()->canonical());
   assert(rich_copy && *rich_copy.value_if() == *rich_result.value_if());
-  assert(rich_copy.value_if()->evidence().opaque_statement.payload == rich.opaque_statement.payload);
-  assert(rich_copy.value_if()->evidence().opaque_statement.encoding == rich.opaque_statement.encoding);
+  assert(rich_copy.value_if()->evidence().opaque_statement.payload ==
+         rich.opaque_statement.payload);
+  assert(rich_copy.value_if()->evidence().opaque_statement.encoding ==
+         rich.opaque_statement.encoding);
   assert(rich_copy.value_if()->evidence().source_reference.source_commit ==
          rich.source_reference.source_commit);
 
   const auto original_wire = claim.canonical();
-  assert(has_error(UnevaluatedPreexistenceClaim::from_wire(
-                       original_wire.substr(0, original_wire.size() - 1)),
-                   "MissingPreexistenceEvidence"));
-  assert(has_error(UnevaluatedPreexistenceClaim::from_wire(
-                       with_replacement(original_wire, 10, "available")),
-                   "MissingPreexistenceEvidence"));
-  assert(has_error(UnevaluatedPreexistenceClaim::from_wire(
-                       with_replacement(original_wire, 9, "verified")),
-                   "MissingPreexistenceEvidence"));
+  assert(has_error(
+      UnevaluatedPreexistenceClaim::from_wire(original_wire.substr(0, original_wire.size() - 1)),
+      "MissingPreexistenceEvidence"));
+  assert(has_error(
+      UnevaluatedPreexistenceClaim::from_wire(with_replacement(original_wire, 10, "available")),
+      "MissingPreexistenceEvidence"));
+  assert(has_error(
+      UnevaluatedPreexistenceClaim::from_wire(with_replacement(original_wire, 9, "verified")),
+      "MissingPreexistenceEvidence"));
   assert(has_error(UnevaluatedPreexistenceClaim::from_wire(
                        with_replacement(original_wire, 3, "evaluated_claim")),
                    "MissingPreexistenceEvidence"));
@@ -202,5 +204,6 @@ int main() {
   // MSG-002-A03: no truth-value or oracle request may succeed.
   invalid = evidence();
   invalid.evaluation_requested = true;
-  assert(has_error(register_message_preexistence_claim(invalid), "OracleEvaluationRequested", true));
+  assert(
+      has_error(register_message_preexistence_claim(invalid), "OracleEvaluationRequested", true));
 }
