@@ -1,77 +1,100 @@
-# tllib — Tradition Learning Library
+<p align="center">
+  <img src="docs/assets/tllib-banner.svg" alt="tllib : moteur scientifique C++20, runtime et interfaces C++ et Python" width="100%">
+</p>
 
-**Bibliothèque scientifique open source de Tradition Learning**, développée par [Tradition Learning Community ASBL](GOVERNANCE.md). Le produit vise une **API C++20 native** et une **API Python de première classe**, toutes deux alimentées par le même moteur scientifique.
+# tllib
 
-[![License: Apache-2.0](https://img.shields.io/badge/license-Apache--2.0-blue.svg)](LICENSE) [![C++20](https://img.shields.io/badge/core-C%2B%2B20-blue.svg)](docs/v1/ARCHITECTURE.md) [![Python](https://img.shields.io/badge/API-Python-blue.svg)](docs/v1/CONTRIBUTOR-QUICKSTART.md) [![Status](https://img.shields.io/badge/status-V1%20implementation%20pending-orange.svg)](docs/v1/COMPONENTS-AND-CONTRIBUTION.md)
+**Tradition Learning Library** est la bibliothèque scientifique open source de [Tradition Learning Community ASBL](GOVERNANCE.md). Son architecture repose sur un moteur de référence **C++20**, accessible par une API C++ publique et une API Python construite sur le même moteur.
 
-> **État vérifié au 31 octobre 2026 :** les fondations C++20, runtime/providers, pont Python et packaging de qualification existent ; **les fonctionnalités scientifiques des 36 domaines restent à implémenter et à valider**. Les résultats de conformité et les artefacts V1 finaux ne sont **pas** encore acquis. Ce README décrit le travail à venir, pas une release publiée.
+[![Licence Apache-2.0](https://img.shields.io/badge/Licence-Apache--2.0-2563EB)](LICENSE)
+[![Noyau C++20](https://img.shields.io/badge/Noyau-C%2B%2B20-234D70)](docs/v1/ARCHITECTURE.md)
+[![Interface Python](https://img.shields.io/badge/Interface-Python-16856D)](docs/v1/CONTRIBUTOR-QUICKSTART.md)
+[![Développement V1](https://img.shields.io/badge/Projet-V1%20en%20d%C3%A9veloppement-D38A35)](docs/v1/DEFINITION-OF-DONE.md)
 
-## 👥 Deux façons de développer avec tllib
+> [!IMPORTANT]
+> **V1 en développement.** Les fondations natives, le runtime, les providers, l'intégration Python et les outils de conformité sont en place. Les fonctionnalités scientifiques des 36 domaines restent à réaliser et à valider. **Aucune release scientifique V1 n'est annoncée.**
+>
+> Les builds de qualification existants ne constituent pas une preuve de conformité du catalogue complet.
 
-| Vous êtes… | Votre objectif | Commencer ici |
-| --- | --- | --- |
-| **Utilisateur / bénéficiaire** | Utiliser la bibliothèque depuis une application C++ ou Python, sans maintenir son moteur | [État du produit et installation de développement](docs/v1/CONTRIBUTOR-QUICKSTART.md), [contrat produit](docs/v1/PRODUCT-CONTRACT.md) |
-| **Auteur / contributeur** | Construire le noyau, les interfaces, les tests, les performances et la distribution de tllib | [Carte des 8 composants](docs/v1/COMPONENTS-AND-CONTRIBUTION.md), [guide de contribution](CONTRIBUTING.md), [issues](https://github.com/Tradition-Learning-Community/tllib/issues) |
+## Utiliser ou construire tllib
 
-**Pas besoin de connaître à la fois C++ et Python pour contribuer.** Chaque tâche doit indiquer ses interfaces, dépendances, tests et compétences utiles.
+<table>
+  <tr>
+    <td width="50%" valign="top">
+      <h3>◈ Utiliser la bibliothèque</h3>
+      <p>Intégrer Tradition Learning dans un logiciel C++ ou Python, à travers les interfaces publiques. L'utilisateur n'a pas à maintenir le moteur scientifique.</p>
+      <p><a href="docs/v1/PRODUCT-CONTRACT.md">Contrat produit</a> · <a href="docs/v1/CONTRIBUTOR-QUICKSTART.md">Environnement actuel</a></p>
+    </td>
+    <td width="50%" valign="top">
+      <h3>◆ Contribuer au projet</h3>
+      <p>Développer des fonctionnalités, des bindings, des tests, de l'outillage, des optimisations ou de la documentation. Chaque travail possède son périmètre et ses critères de vérification.</p>
+      <p><a href="docs/v1/COMPONENTS-AND-CONTRIBUTION.md">Choisir un composant</a> · <a href="CONTRIBUTING.md">Contribuer</a></p>
+    </td>
+  </tr>
+</table>
 
-## 🧩 Les huit composants de contribution
+## Huit composants pour développer un seul produit
 
-| Composant | Responsabilité | Compétences utiles |
-| --- | --- | --- |
-| **1. Core C++20** | Algorithmes TL, modèles, structures et **API C++ publique** | C++20, algorithmique |
-| **2. Runtime & Providers** | Registry, dispatch, contexte d'exécution, providers explicites | C++, systèmes |
-| **3. Python API & Bindings** | Façade Python, nanobind pour nouvelles surfaces, typage, parité | Python ; C++ pour certains bindings |
-| **4. Data & Interoperability** | Vues mémoire, buffers, NumPy, DLPack si justifié | Python, C++, calcul scientifique |
-| **5. Scientific Conformance** | Vérification des contrats verrouillés, acceptations, preuves | Python, tests, science |
-| **6. Performance & Optimization** | Benchmarks, profiling, coût des bindings, optimisations mesurées | C++, HPC, performance |
-| **7. Build, CI & Distribution** | CMake, tests automatisés, wheels, packaging, releases | CMake, DevOps, Python |
-| **8. Developer Experience & Documentation** | Guides contributeurs et utilisateurs, exemples, documentation des API | Rédaction, Python, C++, QA |
+Le travail est réparti par responsabilité technique, non par nationalité, niveau d'expérience ou maîtrise simultanée de plusieurs langages.
 
-Ces composants sont des **responsabilités**, pas huit dépôts, huit moteurs ou huit nouvelles hiérarchies d'issues. Ils se partagent les mêmes contrats et le même backlog.
+<table>
+  <tr>
+    <td width="50%" valign="top"><strong>01 · ⚙️ Core C++20</strong><br>Calcul scientifique, types fondamentaux et <strong>API C++ publique</strong>.</td>
+    <td width="50%" valign="top"><strong>02 · 🧭 Runtime &amp; Providers</strong><br>Registry, dispatch, contextes d'exécution et providers explicites.</td>
+  </tr>
+  <tr>
+    <td valign="top"><strong>03 · 🐍 Python API &amp; Bindings</strong><br>Façade Python, bindings natifs, typage et parité.</td>
+    <td valign="top"><strong>04 · 🔢 Data &amp; Interoperability</strong><br>ArrayView, buffers, échange mémoire et interopérabilité NumPy.</td>
+  </tr>
+  <tr>
+    <td valign="top"><strong>05 · 🔬 Scientific Conformance</strong><br>Contrats verrouillés, tests d'acceptation et traçabilité.</td>
+    <td valign="top"><strong>06 · ⚡ Performance &amp; Optimization</strong><br>Benchmarks, profilage et optimisations mesurées.</td>
+  </tr>
+  <tr>
+    <td valign="top"><strong>07 · 📦 Build, CI &amp; Distribution</strong><br>CMake, pipelines, wheels et publication des versions.</td>
+    <td valign="top"><strong>08 · 📚 Developer Experience &amp; Documentation</strong><br>Documentation des API, exemples et parcours de contribution.</td>
+  </tr>
+</table>
 
-```mermaid
-flowchart TB
-  S["📜 Snapshot scientifique verrouillé<br/>tllib-specs — lecture seule pour les auteurs tllib"]
-  C["⚙️ Core C++20 et API C++"]
-  R["🧭 Runtime & Providers"]
-  P["🐍 Bindings et API Python"]
-  U1["👨‍💻 Applications C++"]
-  U2["👩‍💻 Applications Python"]
-  S -->|"contrats / acceptations"| C
-  S -->|"statuts / providers"| R
-  C <--> R
-  C --> U1
-  R --> P
-  C --> P
-  P --> U2
-  X["🔬 Conformance · Data/Interop · Performance<br/>Build/CI/Distribution · Documentation"] -.-> C
-  X -.-> R
-  X -.-> P
-```
+Un développeur Python peut intervenir sur l'API, les tests ou les outils sans écrire les algorithmes C++. Un développeur C++ peut contribuer au noyau sans prendre en charge la façade Python. Les changements qui traversent plusieurs composants font l'objet d'une revue commune.
 
-Voir le [guide des composants](docs/v1/COMPONENTS-AND-CONTRIBUTION.md) pour les frontières, dossiers, missions autonomes et critères de validation.
+**[Périmètres, dossiers, compétences et parcours →](docs/v1/COMPONENTS-AND-CONTRIBUTION.md)**
 
-## 🗺️ Où se trouve le travail ?
+## Une architecture commune
 
-- **[#52 — V1](https://github.com/Tradition-Learning-Community/tllib/issues/52)** : coordination produit et critères de release ; **[#15–#50](https://github.com/Tradition-Learning-Community/tllib/issues?q=is%3Aissue+is%3Aopen+label%3Atype%3Adomain)** : 36 epics de domaines.
-- **[#53–#230](https://github.com/Tradition-Learning-Community/tllib/issues?q=is%3Aissue+is%3Aopen+label%3Atype%3Atlc-fc)** : 178 lots de réalisation couvrant 694 identifiants TLC-FC, sans redécoupage scientifique.
-- **[#10](https://github.com/Tradition-Learning-Community/tllib/issues/10)** documentation, **[#11](https://github.com/Tradition-Learning-Community/tllib/issues/11)** release, **[#12](https://github.com/Tradition-Learning-Community/tllib/issues/12)** performances : travaux transversaux V1 encore ouverts.
-- **[#231](https://github.com/Tradition-Learning-Community/tllib/issues/231)** : une ambiguïté normative **ciblée** affecte TLC-FC-30-EXPANSION-014 (dans #177) ; elle ne bloque pas les autres lots.
+<p align="center">
+  <img src="docs/assets/architecture-overview.svg" alt="Architecture de tllib : spécifications verrouillées, noyau C++20, runtime, interfaces C++ et Python et composants transversaux" width="100%">
+</p>
 
-**Comprendre les statuts :** une issue ouverte n'est pas nécessairement prête ; `status:ready` n'est ajouté **qu'après qualification de cette tâche**, et ne prouve pas qu'elle est terminée. L'absence de ce label ne doit pas déclencher un audit global : on qualifie les unités choisies avant de les implémenter. Les cases `[ ]` d'acceptation se cochent avec des preuves, pas avec une décision documentaire. Voir [politique de triage](docs/v1/READINESS-AND-GOVERNANCE.md).
+Le code scientifique de référence réside en **C++20**. L'interface Python l'expose ; elle n'en crée pas une seconde implémentation. Le runtime coordonne l'exécution et les providers, sans découverte implicite de capacités.
 
-## 🚀 Premiers pas pour les auteurs
+[Architecture détaillée](docs/v1/ARCHITECTURE.md) · [Décisions techniques](docs/adr/) · [Interopérabilité numérique](docs/v1/ARRAYS-NUMERICS-CONTRACT.md)
 
-1. Choisir son [composant et un parcours adapté](docs/v1/COMPONENTS-AND-CONTRIBUTION.md) : Python seul, C++, qualité, documentation, optimisation…
-2. Ouvrir une [issue ciblée](https://github.com/Tradition-Learning-Community/tllib/issues) et vérifier son objectif, son périmètre et ses dépendances.
-3. Suivre les [commandes de build/tests](docs/v1/CONTRIBUTOR-QUICKSTART.md) **applicables à son composant**.
-4. Proposer une PR signée DCO, associée à l'issue, avec les tests effectivement exécutés et les critères d'acceptation démontrés.
+## Le travail à réaliser
 
-## 🔒 Autorité scientifique et exigences
+<table>
+  <tr>
+    <td align="center" width="33%"><strong>36 domaines</strong><br><a href="https://github.com/Tradition-Learning-Community/tllib/issues?q=is%3Aissue+label%3Atype%3Adomain">Epics #15–#50</a></td>
+    <td align="center" width="34%"><strong>178 lots</strong><br><a href="https://github.com/Tradition-Learning-Community/tllib/issues?q=is%3Aissue+label%3Atype%3Atlc-fc">Issues #53–#230</a></td>
+    <td align="center" width="33%"><strong>694 TLC-FC</strong><br>Identifiants du snapshot verrouillé</td>
+  </tr>
+</table>
 
-Le dépôt **tllib-specs** reste l'autorité **normative**, avec un snapshot épinglé dans [`specs.lock.json`](specs.lock.json). **Nous ne le modifions pas dans ce chantier.** `tllib` implémente les décisions publiées ; il ne fabrique ni formule manquante, ni valeur arbitraire, ni moteur scientifique Python concurrent. En présence d'une ambiguïté, seul le comportement concerné reste bloqué.
+L'[epic V1 #52](https://github.com/Tradition-Learning-Community/tllib/issues/52) coordonne l'ensemble. Trois chantiers transversaux restent ouverts : [documentation #10](https://github.com/Tradition-Learning-Community/tllib/issues/10), [distribution #11](https://github.com/Tradition-Learning-Community/tllib/issues/11) et [performance #12](https://github.com/Tradition-Learning-Community/tllib/issues/12).
 
-L'architecture acceptée est documentée dans [ARCHITECTURE.md](docs/v1/ARCHITECTURE.md), [PRODUCT-CONTRACT.md](docs/v1/PRODUCT-CONTRACT.md) et [les ADR](docs/adr/). La V1 ne sera déclarée livrée qu'après le [release gate](docs/v1/DEFINITION-OF-DONE.md).
+L'[issue #231](https://github.com/Tradition-Learning-Community/tllib/issues/231) signale une ambiguïté normative limitée à `TLC-FC-30-EXPANSION-014` dans [#177](https://github.com/Tradition-Learning-Community/tllib/issues/177). Elle ne bloque pas les autres travaux.
 
-**Projet et participation :** [CONTRIBUTING](CONTRIBUTING.md) · [GOVERNANCE](GOVERNANCE.md) · [LICENSE Apache-2.0](LICENSE) · [NOTICE](NOTICE) · [DCO](DCO) · [SECURITY](SECURITY.md). Les auteurs conservent leurs droits sauf accord écrit distinct.
+## Contribuer
+
+1. **Choisir une porte d'entrée.** [Parcours par compétence](docs/v1/COMPONENTS-AND-CONTRIBUTION.md) : C++, Python, conformité, QA, optimisation, infrastructure ou documentation.
+2. **Prendre une issue précise.** Clarifier sa portée, ses dépendances et ses preuves attendues. Le label `status:ready` est attribué à une tâche effectivement qualifiée, pas à tout le backlog.
+3. **Développer et tester.** Suivre le [quickstart C++/Python/outillage](docs/v1/CONTRIBUTOR-QUICKSTART.md) pour les commandes applicables.
+4. **Ouvrir une pull request.** Référencer l'issue, présenter les tests réellement exécutés et signer ses commits selon le [DCO](DCO).
+
+Une case d'acceptation n'est cochée qu'après production de la preuve correspondante. Une tâche n'est fermée que lorsque son périmètre est terminé.
+
+## Contrats et gouvernance
+
+Le dépôt `tllib-specs` constitue l'autorité scientifique et normative. `tllib` consomme le snapshot publié, épinglé dans [`specs.lock.json`](specs.lock.json), sans inventer de formule ou de comportement manquant. Le découpage scientifique existant est conservé.
+
+[Licence Apache-2.0](LICENSE) · [Contributions](CONTRIBUTING.md) · [Gouvernance](GOVERNANCE.md) · [DCO](DCO) · [Sécurité](SECURITY.md) · [Critères de release V1](docs/v1/DEFINITION-OF-DONE.md)
