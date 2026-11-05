@@ -2,31 +2,12 @@
 
 ## Vue générale
 
-```text
-                    tllib-specs
-          snapshot certifié + handoff
-                         |
-                         v
-                 tools/specgen
-             validation / codegen
-                         |
-              artefacts structuraux
-                         |
-                         v
-+----------------------------------------------------+
-|                    tllib C++                       |
-| core | shared | runtime | providers | domains      |
-|                  dispatcher                        |
-+-----------------+----------------------------------+
-                  |
-          bindings Python
-                  |
-                  v
-+----------------------------------------------------+
-|                    tllib Python                    |
-| API | NumPy/DLPack interop | providers | helpers  |
-+----------------------------------------------------+
-```
+<p align="center">
+  <img src="../assets/architecture-overview.svg" alt="Architecture produit tllib : snapshot scientifique, moteur C++20, runtime, accès C++ et Python et composants transversaux" width="100%">
+</p>
+
+Le snapshot verrouillé alimente la validation et la génération d'artefacts structurels par les outils de `tllib`. Il ne devient pas une dépendance d'exécution. La même implémentation scientifique C++20 est accessible depuis les surfaces C++ et Python ; le runtime organise les capacités et l'exécution.
+
 
 ## Arborescence cible
 
