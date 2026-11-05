@@ -85,12 +85,20 @@ register_message_preexistence_claim(PreexistenceEvidence evidence) {
                 "Scientific evaluation is unavailable for the preexistence claim");
   }
 
-  // The supplied source range must be present. Do not supply or reconstruct it.
+  // Match the authoritative source location in the pinned feature traceability.
+  // This validates a scientific citation; it does not interpret its statement.
+  const auto& ref = evidence.source_reference;
+  const bool authoritative_source =
+      ref.source_path == "maths/07-message/message.md" &&
+      ref.section == std::optional<std::string>("Nature du Message fondamental") &&
+      ref.subsection == std::optional<std::string>("Préexistence du Message") &&
+      ref.line_range == std::optional<shared::LineRange>(shared::LineRange{58, 60});
+
   if (evidence.feature_id != UnevaluatedPreexistenceClaim::feature_id() ||
       evidence.object_id != "TLC-SO-MESSAGE-013" ||
       (evidence.source_reference.object_id &&
        *evidence.source_reference.object_id != evidence.object_id) ||
-      !evidence.source_reference.line_range || evidence.source_reference.validate() ||
+      !authoritative_source || evidence.source_reference.validate() ||
       evidence.opaque_statement.validate() || evidence.provenance.validate() ||
       evidence.candidate_status != "unevaluated_candidate") {
     return fail("MissingPreexistenceEvidence",
