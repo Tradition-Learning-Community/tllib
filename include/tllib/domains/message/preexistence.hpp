@@ -156,7 +156,7 @@ inline core::Result<shared::Traceability> read_traceability(std::string_view byt
 
 inline core::Error evidence_error(std::string code, std::string message,
                                   bool unsupported = false) {
-  return {unsupported ? core::ErrorCode::unsupported_operation
+  return {unsupported ? core::ErrorCode::unavailable_capability
                       : core::ErrorCode::invalid_argument,
           std::move(message),
           "TLC-FC-07-MESSAGE-002",
