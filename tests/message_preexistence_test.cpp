@@ -113,8 +113,7 @@ int main() {
   assert(envelope.value_if()->package_status == tllib::core::PackageStatus::finalized);
   assert(envelope.value_if()->scientific_status ==
          tllib::core::ScientificStatus::external_provider_required);
-  assert(envelope.value_if()->execution_status ==
-         tllib::core::ExecutionStatus::structural_only);
+  assert(envelope.value_if()->execution_status == tllib::core::ExecutionStatus::structural_only);
   assert(envelope.value_if()->references.size() == 1);
   assert(envelope.value_if()->references.at("evidence").members.size() == 1);
   assert(std::get<tllib::shared::ScientificReference>(
