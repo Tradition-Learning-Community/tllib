@@ -16,7 +16,7 @@ PreexistenceEvidence evidence() {
   tllib::shared::ScientificReference source{
       "maths/07-message/message.md", std::string("TLC-SO-MESSAGE-013"),
       std::string("Message"), std::string("Preexistence"),
-      tllib::shared::LineRange{10, 20}, {}};
+      {}, tllib::shared::LineRange{10, 20}};
   tllib::shared::OpaqueValue opaque{
       "TLC-SO-MESSAGE-013", std::string("opaque\0payload", 14), source, {}};
   tllib::shared::Traceability provenance;
