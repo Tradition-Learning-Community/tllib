@@ -7,22 +7,29 @@
 #include <utility>
 
 using tllib::domains::message::PreexistenceEvidence;
-using tllib::domains::message::UnevaluatedPreexistenceClaim;
 using tllib::domains::message::register_message_preexistence_claim;
+using tllib::domains::message::UnevaluatedPreexistenceClaim;
 
 namespace {
 
 PreexistenceEvidence evidence() {
-  tllib::shared::ScientificReference source{
-      "maths/07-message/message.md", std::string("TLC-SO-MESSAGE-013"),
-      std::string("Message"), std::string("Preexistence"),
-      {}, tllib::shared::LineRange{10, 20}};
+  tllib::shared::ScientificReference source{"maths/07-message/message.md",
+                                            std::string("TLC-SO-MESSAGE-013"),
+                                            std::string("Message"),
+                                            std::string("Preexistence"),
+                                            {},
+                                            tllib::shared::LineRange{10, 20}};
   tllib::shared::OpaqueValue opaque{
       "TLC-SO-MESSAGE-013", std::string("opaque\0payload", 14), source, {}};
   tllib::shared::Traceability provenance;
   provenance.categories[0].push_back(source);
-  return {"TLC-FC-07-MESSAGE-002", "TLC-SO-MESSAGE-013", source, opaque, provenance,
-          "unevaluated_candidate", false};
+  return {"TLC-FC-07-MESSAGE-002",
+          "TLC-SO-MESSAGE-013",
+          source,
+          opaque,
+          provenance,
+          "unevaluated_candidate",
+          false};
 }
 
 bool has_error(const tllib::core::Result<UnevaluatedPreexistenceClaim>& result,
@@ -31,7 +38,7 @@ bool has_error(const tllib::core::Result<UnevaluatedPreexistenceClaim>& result,
          *result.error_if()->stable_code == code && !result.value_if();
 }
 
-}  // namespace
+} // namespace
 
 int main() {
   // MSG-002-A01/A04/A05/A08: no oracle, no truth value, exact opaque preservation.
@@ -54,48 +61,41 @@ int main() {
   // MSG-002-A06: determinism for structurally identical source evidence.
   const auto same = register_message_preexistence_claim(evidence());
   assert(same && *same.value_if() == claim && same.value_if()->canonical() == claim.canonical());
-  const auto encoded = tllib::shared::wire::roundtrip(
-      claim.canonical(), UnevaluatedPreexistenceClaim::feature_id());
+  const auto encoded =
+      tllib::shared::wire::roundtrip(claim.canonical(), UnevaluatedPreexistenceClaim::feature_id());
   assert(encoded && *encoded.value_if() == claim.canonical());
 
   // MSG-002-A02: reject absent, changed or invalid source evidence atomically.
   auto missing = evidence();
   missing.object_id.clear();
-  assert(has_error(register_message_preexistence_claim(missing),
-                   "MissingPreexistenceEvidence"));
+  assert(has_error(register_message_preexistence_claim(missing), "MissingPreexistenceEvidence"));
   missing = evidence();
   missing.feature_id = "TLC-FC-07-MESSAGE-001";
-  assert(has_error(register_message_preexistence_claim(missing),
-                   "MissingPreexistenceEvidence"));
+  assert(has_error(register_message_preexistence_claim(missing), "MissingPreexistenceEvidence"));
   missing = evidence();
   missing.object_id = "TLC-SO-MESSAGE-014";
-  assert(has_error(register_message_preexistence_claim(missing),
-                   "MissingPreexistenceEvidence"));
+  assert(has_error(register_message_preexistence_claim(missing), "MissingPreexistenceEvidence"));
   missing = evidence();
   missing.source_reference.line_range.reset();
-  assert(has_error(register_message_preexistence_claim(missing),
-                   "MissingPreexistenceEvidence"));
+  assert(has_error(register_message_preexistence_claim(missing), "MissingPreexistenceEvidence"));
   missing = evidence();
   missing.source_reference.line_range = tllib::shared::LineRange{20, 10};
-  assert(has_error(register_message_preexistence_claim(missing),
-                   "MissingPreexistenceEvidence"));
+  assert(has_error(register_message_preexistence_claim(missing), "MissingPreexistenceEvidence"));
   missing = evidence();
   missing.opaque_statement.semantic_type_id.clear();
-  assert(has_error(register_message_preexistence_claim(missing),
-                   "MissingPreexistenceEvidence"));
+  assert(has_error(register_message_preexistence_claim(missing), "MissingPreexistenceEvidence"));
   missing = evidence();
   missing.candidate_status = "verified";
-  assert(has_error(register_message_preexistence_claim(missing),
-                   "MissingPreexistenceEvidence"));
+  assert(has_error(register_message_preexistence_claim(missing), "MissingPreexistenceEvidence"));
 
   // MSG-002-A03: explicitly reject any attempted oracle evaluation.
   auto invalid_request = evidence();
   invalid_request.evaluation_requested = true;
-  assert(has_error(register_message_preexistence_claim(invalid_request),
-                   "OracleEvaluationRequested"));
+  assert(
+      has_error(register_message_preexistence_claim(invalid_request), "OracleEvaluationRequested"));
 
   // The claim exposes only structural evidence; callers cannot mutate it.
-  static_assert(std::is_same_v<decltype(std::declval<const UnevaluatedPreexistenceClaim&>()
-                                           .evidence()),
-                               const PreexistenceEvidence&>);
+  static_assert(
+      std::is_same_v<decltype(std::declval<const UnevaluatedPreexistenceClaim&>().evidence()),
+                     const PreexistenceEvidence&>);
 }
