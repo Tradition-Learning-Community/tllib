@@ -72,6 +72,9 @@ Le code scientifique de référence réside en **C++20**. L'interface Python l'e
 
 ## Le travail à réaliser
 
+**[Explorer les issues par composant, type ou statut →](docs/v1/ISSUE-CLASSIFICATION.md)**
+
+
 <table>
   <tr>
     <td align="center" width="33%"><strong>36 domaines</strong><br><a href="https://github.com/Tradition-Learning-Community/tllib/issues?q=is%3Aissue+label%3Atype%3Adomain">Epics #15–#50</a></td>

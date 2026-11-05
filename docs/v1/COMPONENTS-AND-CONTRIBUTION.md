@@ -8,6 +8,8 @@ Elle n'ajoute ni nouvelles branches scientifiques ni seconde architecture. Les d
   <img src="../assets/contributor-paths.svg" alt="Parcours de contribution : profils Python, C++20, science et QA, systèmes et performance" width="100%">
 </p>
 
+[**Rechercher les issues par composant, type et disponibilité →**](ISSUE-CLASSIFICATION.md)
+
 ## Trouver sa place
 
 | Vous maîtrisez… | Travaux possibles | Point d'entrée |
