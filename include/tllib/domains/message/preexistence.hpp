@@ -47,13 +47,16 @@ inline constexpr std::array<std::size_t, 8> kEvidenceCounts{1, 1, 1, 1, 1, 1, 1,
 
 inline bool valid_provenance(const shared::Traceability& trace,
                              const shared::ScientificReference& source) {
-  if (trace.validate()) return false;
+  if (trace.validate())
+    return false;
   std::size_t expected = 0;
   for (std::size_t category = 0; category < kEvidenceCounts.size(); ++category) {
     const auto& refs = trace.categories[category];
-    if (refs.size() != kEvidenceCounts[category]) return false;
+    if (refs.size() != kEvidenceCounts[category])
+      return false;
     for (const auto& ref : refs) {
-      if (ref.source_path != kEvidencePaths[expected++]) return false;
+      if (ref.source_path != kEvidencePaths[expected++])
+        return false;
     }
   }
   const auto& first = trace.categories[0].front();
@@ -62,29 +65,34 @@ inline bool valid_provenance(const shared::Traceability& trace,
 }
 
 inline bool parse_count(std::string_view field, std::size_t& output) {
-  if (field.empty() || (field.size() > 1 && field.front() == '0')) return false;
+  if (field.empty() || (field.size() > 1 && field.front() == '0'))
+    return false;
   const auto [end, code] = std::from_chars(field.data(), field.data() + field.size(), output);
   return code == std::errc{} && end == field.data() + field.size();
 }
 
 inline bool read_optional(const std::vector<std::string>& fields, std::size_t& pos,
                           std::optional<std::string>& result) {
-  if (pos >= fields.size()) return false;
+  if (pos >= fields.size())
+    return false;
   const auto& present = fields[pos++];
   if (present == "0") {
     result.reset();
     return true;
   }
-  if (present != "1" || pos >= fields.size()) return false;
+  if (present != "1" || pos >= fields.size())
+    return false;
   result = fields[pos++];
   return true;
 }
 
 inline core::Result<shared::ScientificReference> read_reference(std::string_view bytes) {
   const auto decoded = shared::wire::decode(bytes, "TLC-HC-SCIENTIFIC-REFERENCE");
-  if (!decoded) return *decoded.error_if();
+  if (!decoded)
+    return *decoded.error_if();
   const auto& fields = *decoded.value_if();
-  if (fields.size() < 8) return core::invalid("Truncated scientific reference");
+  if (fields.size() < 8)
+    return core::invalid("Truncated scientific reference");
   std::size_t pos = 3;
   shared::ScientificReference result;
   result.source_path = fields[pos++];
@@ -95,7 +103,8 @@ inline core::Result<shared::ScientificReference> read_reference(std::string_view
   }
   const auto has_range = fields[pos++];
   if (has_range == "1") {
-    if (fields.size() - pos < 2) return core::invalid("Truncated source range");
+    if (fields.size() - pos < 2)
+      return core::invalid("Truncated source range");
     std::size_t start = 0;
     std::size_t end = 0;
     if (!parse_count(fields[pos++], start) || !parse_count(fields[pos++], end))
@@ -113,18 +122,21 @@ inline core::Result<shared::ScientificReference> read_reference(std::string_view
 
 inline core::Result<shared::OpaqueValue> read_opaque(std::string_view bytes) {
   const auto decoded = shared::wire::decode(bytes, "TLC-HC-OPAQUE-VALUE");
-  if (!decoded) return *decoded.error_if();
+  if (!decoded)
+    return *decoded.error_if();
   const auto& fields = *decoded.value_if();
-  if (fields.size() < 7) return core::invalid("Truncated opaque evidence");
+  if (fields.size() < 7)
+    return core::invalid("Truncated opaque evidence");
   shared::OpaqueValue result;
   result.semantic_type_id = fields[3];
   result.payload = fields[4];
   auto source = read_reference(fields[5]);
-  if (!source) return *source.error_if();
+  if (!source)
+    return *source.error_if();
   result.source_reference = std::move(*source.value_if());
   std::size_t pos = 6;
-  if (!read_optional(fields, pos, result.encoding) || pos != fields.size() ||
-      result.validate() || result.canonical() != bytes) {
+  if (!read_optional(fields, pos, result.encoding) || pos != fields.size() || result.validate() ||
+      result.canonical() != bytes) {
     return core::invalid("Invalid opaque evidence");
   }
   return result;
@@ -132,19 +144,20 @@ inline core::Result<shared::OpaqueValue> read_opaque(std::string_view bytes) {
 
 inline core::Result<shared::Traceability> read_traceability(std::string_view bytes) {
   const auto decoded = shared::wire::decode(bytes, "TLC-HC-TRACEABILITY");
-  if (!decoded) return *decoded.error_if();
+  if (!decoded)
+    return *decoded.error_if();
   const auto& fields = *decoded.value_if();
   std::size_t pos = 3;
   shared::Traceability result;
   for (auto& refs : result.categories) {
     std::size_t count = 0;
-    if (pos >= fields.size() || !parse_count(fields[pos++], count) ||
-        count > fields.size() - pos) {
+    if (pos >= fields.size() || !parse_count(fields[pos++], count) || count > fields.size() - pos) {
       return core::invalid("Invalid traceability collection size");
     }
     for (std::size_t i = 0; i < count; ++i) {
       auto reference = read_reference(fields[pos++]);
-      if (!reference) return *reference.error_if();
+      if (!reference)
+        return *reference.error_if();
       refs.push_back(std::move(*reference.value_if()));
     }
   }
@@ -154,10 +167,8 @@ inline core::Result<shared::Traceability> read_traceability(std::string_view byt
   return result;
 }
 
-inline core::Error evidence_error(std::string code, std::string message,
-                                  bool unsupported = false) {
-  return {unsupported ? core::ErrorCode::unavailable_capability
-                      : core::ErrorCode::invalid_argument,
+inline core::Error evidence_error(std::string code, std::string message, bool unsupported = false) {
+  return {unsupported ? core::ErrorCode::unavailable_capability : core::ErrorCode::invalid_argument,
           std::move(message),
           "TLC-FC-07-MESSAGE-002",
           {},
@@ -168,10 +179,10 @@ inline core::Error evidence_error(std::string code, std::string message,
           std::move(code)};
 }
 
-}  // namespace detail
+} // namespace detail
 
 class UnevaluatedPreexistenceClaim final {
- public:
+public:
   [[nodiscard]] static constexpr std::string_view feature_id() noexcept {
     return "TLC-FC-07-MESSAGE-002";
   }
@@ -182,7 +193,9 @@ class UnevaluatedPreexistenceClaim final {
     return "unevaluated_claim";
   }
 
-  [[nodiscard]] const PreexistenceEvidence& evidence() const noexcept { return evidence_; }
+  [[nodiscard]] const PreexistenceEvidence& evidence() const noexcept {
+    return evidence_;
+  }
   [[nodiscard]] std::string_view candidate_status() const noexcept {
     return evidence_.candidate_status;
   }
@@ -201,19 +214,18 @@ class UnevaluatedPreexistenceClaim final {
     return writer.data;
   }
 
-  [[nodiscard]] static core::Result<UnevaluatedPreexistenceClaim> from_wire(
-      std::string_view bytes);
+  [[nodiscard]] static core::Result<UnevaluatedPreexistenceClaim> from_wire(std::string_view bytes);
 
   [[nodiscard]] bool operator==(const UnevaluatedPreexistenceClaim& other) const {
     return canonical() == other.canonical();
   }
 
- private:
+private:
   explicit UnevaluatedPreexistenceClaim(PreexistenceEvidence evidence)
       : evidence_(std::move(evidence)) {}
 
-  friend core::Result<UnevaluatedPreexistenceClaim> register_message_preexistence_claim(
-      PreexistenceEvidence evidence);
+  friend core::Result<UnevaluatedPreexistenceClaim>
+  register_message_preexistence_claim(PreexistenceEvidence evidence);
 
   PreexistenceEvidence evidence_;
 };
@@ -233,8 +245,8 @@ register_message_preexistence_claim(PreexistenceEvidence evidence) {
 
   if (evidence.feature_id != UnevaluatedPreexistenceClaim::feature_id() ||
       evidence.object_id != "TLC-SO-MESSAGE-013" ||
-      (source.object_id && *source.object_id != evidence.object_id) ||
-      !authoritative_source || source.validate() || evidence.opaque_statement.validate() ||
+      (source.object_id && *source.object_id != evidence.object_id) || !authoritative_source ||
+      source.validate() || evidence.opaque_statement.validate() ||
       evidence.opaque_statement.source_reference != source ||
       evidence.candidate_status != "unevaluated_candidate" ||
       !detail::valid_provenance(evidence.provenance, source)) {
@@ -244,30 +256,36 @@ register_message_preexistence_claim(PreexistenceEvidence evidence) {
   return UnevaluatedPreexistenceClaim(std::move(evidence));
 }
 
-inline core::Result<UnevaluatedPreexistenceClaim> UnevaluatedPreexistenceClaim::from_wire(
-    std::string_view bytes) {
+inline core::Result<UnevaluatedPreexistenceClaim>
+UnevaluatedPreexistenceClaim::from_wire(std::string_view bytes) {
   auto malformed = []() -> core::Result<UnevaluatedPreexistenceClaim> {
     return detail::evidence_error("MissingPreexistenceEvidence",
                                   "Invalid serialized preexistence evidence");
   };
   const auto decoded = shared::wire::decode(bytes, feature_id());
-  if (!decoded) return malformed();
+  if (!decoded)
+    return malformed();
   const auto& fields = *decoded.value_if();
-  if (fields.size() != 11 || fields[3] != representation() ||
-      fields[10] != verification_status()) {
+  if (fields.size() != 11 || fields[3] != representation() || fields[10] != verification_status()) {
     return malformed();
   }
 
   auto source = detail::read_reference(fields[6]);
   auto opaque = detail::read_opaque(fields[7]);
   auto provenance = detail::read_traceability(fields[8]);
-  if (!source || !opaque || !provenance) return malformed();
-  PreexistenceEvidence evidence{fields[4], fields[5], std::move(*source.value_if()),
+  if (!source || !opaque || !provenance)
+    return malformed();
+  PreexistenceEvidence evidence{fields[4],
+                                fields[5],
+                                std::move(*source.value_if()),
                                 std::move(*opaque.value_if()),
-                                std::move(*provenance.value_if()), fields[9], false};
+                                std::move(*provenance.value_if()),
+                                fields[9],
+                                false};
   auto result = register_message_preexistence_claim(std::move(evidence));
-  if (!result || result.value_if()->canonical() != bytes) return malformed();
+  if (!result || result.value_if()->canonical() != bytes)
+    return malformed();
   return result;
 }
 
-}  // namespace tllib::domains::message
+} // namespace tllib::domains::message
