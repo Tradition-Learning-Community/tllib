@@ -22,7 +22,7 @@ struct PreexistenceEvidence {
 };
 
 class UnevaluatedPreexistenceClaim final {
- public:
+public:
   [[nodiscard]] static constexpr std::string_view feature_id() noexcept {
     return "TLC-FC-07-MESSAGE-002";
   }
@@ -33,7 +33,9 @@ class UnevaluatedPreexistenceClaim final {
     return "unevaluated_claim";
   }
 
-  [[nodiscard]] const PreexistenceEvidence& evidence() const noexcept { return evidence_; }
+  [[nodiscard]] const PreexistenceEvidence& evidence() const noexcept {
+    return evidence_;
+  }
   [[nodiscard]] std::string_view candidate_status() const noexcept {
     return evidence_.candidate_status;
   }
@@ -56,7 +58,7 @@ class UnevaluatedPreexistenceClaim final {
     return canonical() == other.canonical();
   }
 
- private:
+private:
   explicit UnevaluatedPreexistenceClaim(PreexistenceEvidence evidence)
       : evidence_(std::move(evidence)) {}
 
@@ -68,11 +70,14 @@ class UnevaluatedPreexistenceClaim final {
 
 [[nodiscard]] inline core::Result<UnevaluatedPreexistenceClaim>
 register_message_preexistence_claim(PreexistenceEvidence evidence) {
-  auto fail = [](std::string stable_code, std::string message)
-      -> core::Result<UnevaluatedPreexistenceClaim> {
-    return core::Error{core::ErrorCode::invalid_argument, std::move(message),
-                       std::string(UnevaluatedPreexistenceClaim::feature_id()), {},
-                       {}, std::move(stable_code)};
+  auto fail = [](std::string stable_code,
+                 std::string message) -> core::Result<UnevaluatedPreexistenceClaim> {
+    return core::Error{core::ErrorCode::invalid_argument,
+                       std::move(message),
+                       std::string(UnevaluatedPreexistenceClaim::feature_id()),
+                       {},
+                       {},
+                       std::move(stable_code)};
   };
 
   if (evidence.evaluation_requested) {
@@ -85,10 +90,8 @@ register_message_preexistence_claim(PreexistenceEvidence evidence) {
       evidence.object_id != "TLC-SO-MESSAGE-013" ||
       (evidence.source_reference.object_id &&
        *evidence.source_reference.object_id != evidence.object_id) ||
-      !evidence.source_reference.line_range ||
-      evidence.source_reference.validate() ||
-      evidence.opaque_statement.validate() ||
-      evidence.provenance.validate() ||
+      !evidence.source_reference.line_range || evidence.source_reference.validate() ||
+      evidence.opaque_statement.validate() || evidence.provenance.validate() ||
       evidence.candidate_status != "unevaluated_candidate") {
     return fail("MissingPreexistenceEvidence",
                 "Required preexistence identity, source range or evidence is missing or invalid");
@@ -97,4 +100,4 @@ register_message_preexistence_claim(PreexistenceEvidence evidence) {
   return UnevaluatedPreexistenceClaim(std::move(evidence));
 }
 
-}  // namespace tllib::domains::message
+} // namespace tllib::domains::message
