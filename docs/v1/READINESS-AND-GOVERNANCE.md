@@ -16,14 +16,7 @@ une issue en cours peut retirer ces deux labels sans signifier « terminé ».
 
 Des labels sont **des états administratifs**, jamais une preuve de conformité ;
 les labels ne doivent pas être créés dans tllib-specs pour des tâches logicielles.
-Milestones cibles : `V1 — Preparation` (fondations et gouvernance),
-`V1 — Implementation` (36 domaines, 178 lots TLC-FC et performance) et
-`V1 — Release` (livrables de publication). Les noms doivent être alignés
-sur les milestones GitHub existants ; à la date de l'audit, **aucune**
-issue ouverte n'a de milestone, et le classement ne doit pas être déclaré
-terminé sans application effective. Ne pas inventer une dépendance globale
-à une release complète pour ouvrir un lot. Les epics regroupent les issues, pas de travail
-en doublon.
+**Milestones :** #261 a été clôturée après décision de ne **pas** rendre les jalons GitHub obligatoires. Leur absence n'empêche ni de qualifier une tâche ni de commencer le développement. Les epics et les lots existants fournissent la coordination ; ne pas recréer de gates administratifs. Les composants de contribution documentent les responsabilités, indépendamment des labels `area:*` existants.
 
 ## Licence et contribution
 
@@ -68,8 +61,7 @@ TLC-FC-30-EXPANSION-014 et son sous-travail dans #177 sont bloqués.
   fixer la convention API indépendamment du binder.
 - #259 gouverne #238, #239 et les bindings.
 - #14 et #13 sont des revues transverses ; #51 traduit le tout en parcours.
-- #261 se clôt uniquement quand labels, jalons et dépendances sont **appliqués
-  dans GitHub**, pas seulement écrits ici.
+- #261 est **clôturée** : la taxonomie est appliquée ; les jalons supplémentaires n'ont pas été retenus comme condition bloquante.
 
 ## Règles de clôture
 
@@ -90,8 +82,18 @@ revue scientifique et republication. Les décisions techniques sont
 versionnées par ADR et revue d'architecture, pas inventées dans une PR
 de domaine.
 
-## État et preuve d'application (31 octobre 2026)
+## Historique de l'audit (31 octobre 2026 — ne pas utiliser comme statut courant)
 
 Au début de la phase C, l'audit GitHub a recensé 225 issues ouvertes : 36 epics domaine, 178 lots, cinq epics techniques/produit, cinq tâches transversales et un blocker scientifique. La clôture justifiée des quatre epics de préparation #234, #236, #240 et #242 ramène ensuite le backlog à 221 issues ouvertes ; l'epic produit #52 reste ouvert. Toutes ont un type et au moins une aire ; **aucun** lot n'a reçu `status:ready` sans revue de sa mini-matrice. Seuls #231 et #177 portent `status:blocked` (blocage scientifique limité à TLC-FC-30-EXPANSION-014). Les milestones **ne sont pas encore appliqués** ; le gate d'acceptation de #261 reste donc ouvert. Voir [audit détaillé](PHASE-C-AUDIT-2026-10-31.md), [parcours contributeurs](CONTRIBUTOR-QUICKSTART.md) et [revue/fusion](REVIEW-AND-MERGE.md).
 
 **Décision de triage :** la fermeture d'une fondation commune ne constitue pas, à elle seule, une preuve que les entrées/sorties, acceptations et providers de chaque TLC-FC sont prêts. Documenter des critères ciblés d'acceptation par lot avant toute application de `status:ready`. Les issues sans statut restent à qualifier, pas bloquées par défaut.
+
+
+## Application actuelle : lancement de l'implémentation
+
+- Les issues **#15–#50** et **#53–#230** restent les directives de domaine et de lot ; aucune requalification en masse ni redécoupage des 694 TLC-FC.
+- **#52** est l'epic produit, **#10** documentation, **#11** release, **#12** performance. Les huit composants sont documentés dans [COMPONENTS-AND-CONTRIBUTION.md](COMPONENTS-AND-CONTRIBUTION.md), sans nouvelle hiérarchie concurrente.
+- `status:ready` est donné **au cas par cas**, avant le travail sur une tâche suffisamment définie ; si une information manque, préciser cette tâche, pas tout le dépôt.
+- Les deux seuls blockers déjà identifiés restent ciblés sur TLC-FC-30-EXPANSION-014 (#231 et partie de #177) ; aucune autre réalisation ne doit attendre leur résolution.
+- Les checklists des issues se cochent uniquement lorsque les livrables/tests correspondants existent ; une issue `open` ou sans statut reste ouverte sans être nécessairement bloquée.
+- Les paragraphes de « graphe de préparation » et les chiffres d'audit ci-dessus sont **historiques**, non des prérequis à recommencer.
