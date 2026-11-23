@@ -46,8 +46,13 @@ jobs:
         run: python3 tools/specs_pipeline.py verify --specs pinned-specs
       - name: Check checked-in generated structural files for zero drift
         run: python3 tools/specs_pipeline.py check-generated --specs pinned-specs
+      - name: Execute Message-002 acceptance tests and record trusted JUnit
+        run: |
+          cmake -S . -B build/message-acceptance -DBUILD_TESTING=ON -DCMAKE_BUILD_TYPE=Debug
+          cmake --build build/message-acceptance --target tllib_message_preexistence_test --parallel 2
+          ctest --test-dir build/message-acceptance -R tllib_message_preexistence_test --output-on-failure --output-junit "$GITHUB_WORKSPACE/build/message-acceptance/test-results.xml"
       - name: Create deterministic coverage reports and enforce complete decisions
-        run: python3 tools/specs_pipeline.py report --specs pinned-specs --output build/specs-report
+        run: python3 tools/specs_pipeline.py report --specs pinned-specs --output build/specs-report --test-results build/message-acceptance/test-results.xml
       - name: Verify two independent generations are byte-identical
         run: |
           mkdir -p "$RUNNER_TEMP/gen1" "$RUNNER_TEMP/gen2"
@@ -59,8 +64,8 @@ jobs:
           cmp "$RUNNER_TEMP/gen1/include/tllib/generated/feature_metadata.hpp" "$RUNNER_TEMP/gen2/include/tllib/generated/feature_metadata.hpp"
           cmp "$RUNNER_TEMP/gen1/generated/specs/feature_index.json" generated/specs/feature_index.json
           cmp "$RUNNER_TEMP/gen1/include/tllib/generated/feature_metadata.hpp" include/tllib/generated/feature_metadata.hpp
-          python3 tools/specs_pipeline.py report --specs pinned-specs --output "$RUNNER_TEMP/gen1"
-          python3 tools/specs_pipeline.py report --specs pinned-specs --output "$RUNNER_TEMP/gen2"
+          python3 tools/specs_pipeline.py report --specs pinned-specs --output "$RUNNER_TEMP/gen1" --test-results "$GITHUB_WORKSPACE/build/message-acceptance/test-results.xml"
+          python3 tools/specs_pipeline.py report --specs pinned-specs --output "$RUNNER_TEMP/gen2" --test-results "$GITHUB_WORKSPACE/build/message-acceptance/test-results.xml"
           cmp "$RUNNER_TEMP/gen1/coverage.json" "$RUNNER_TEMP/gen2/coverage.json"
           cmp "$RUNNER_TEMP/gen1/coverage.md" "$RUNNER_TEMP/gen2/coverage.md"
           cmp "$RUNNER_TEMP/gen1/acceptance_cases.json" "$RUNNER_TEMP/gen2/acceptance_cases.json"
@@ -79,7 +84,7 @@ jobs:
       - name: Check release gate return status matches the actual unsupported features
         run: |
           status=0
-          python3 tools/specs_pipeline.py release-gate --specs pinned-specs --output build/specs-release || status=$?
+          python3 tools/specs_pipeline.py release-gate --specs pinned-specs --output build/specs-release --test-results build/message-acceptance/test-results.xml || status=$?
           expected="$(python3 -c "import json; data=json.load(open('build/specs-release/coverage.json')); print(0 if data['gate']=='passed' else 1)")"
           test "$status" -eq "$expected"
       - name: Publish machine-readable and human-readable coverage

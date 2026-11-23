@@ -436,9 +436,58 @@
     },
     {
       "feature_id": "TLC-FC-07-MESSAGE-002",
-      "disposition": "unimplemented",
-      "reason": "No feature-specific implementation or acceptance proof has been delivered in tllib; catalog metadata alone is not support.",
-      "evidence": []
+      "disposition": "structural",
+      "reason": "C++20 structural claim registration preserves exact pinned source evidence, opaque content, provenance and unavailable-oracle status; all eight normative acceptance cases are exercised by the named CTest, with trusted JUnit required by the conformance report.",
+      "evidence": [
+        {
+          "test_id": "MSG-002-A01",
+          "result": "passed",
+          "artifact": "tests/message_preexistence_test.cpp",
+          "ctest_name": "tllib_message_preexistence_test"
+        },
+        {
+          "test_id": "MSG-002-A02",
+          "result": "passed",
+          "artifact": "tests/message_preexistence_test.cpp",
+          "ctest_name": "tllib_message_preexistence_test"
+        },
+        {
+          "test_id": "MSG-002-A03",
+          "result": "passed",
+          "artifact": "tests/message_preexistence_test.cpp",
+          "ctest_name": "tllib_message_preexistence_test"
+        },
+        {
+          "test_id": "MSG-002-A04",
+          "result": "passed",
+          "artifact": "tests/message_preexistence_test.cpp",
+          "ctest_name": "tllib_message_preexistence_test"
+        },
+        {
+          "test_id": "MSG-002-A05",
+          "result": "passed",
+          "artifact": "tests/message_preexistence_test.cpp",
+          "ctest_name": "tllib_message_preexistence_test"
+        },
+        {
+          "test_id": "MSG-002-A06",
+          "result": "passed",
+          "artifact": "tests/message_preexistence_test.cpp",
+          "ctest_name": "tllib_message_preexistence_test"
+        },
+        {
+          "test_id": "MSG-002-A07",
+          "result": "passed",
+          "artifact": "tests/message_preexistence_test.cpp",
+          "ctest_name": "tllib_message_preexistence_test"
+        },
+        {
+          "test_id": "MSG-002-A08",
+          "result": "passed",
+          "artifact": "tests/message_preexistence_test.cpp",
+          "ctest_name": "tllib_message_preexistence_test"
+        }
+      ]
     },
     {
       "feature_id": "TLC-FC-07-MESSAGE-003",
